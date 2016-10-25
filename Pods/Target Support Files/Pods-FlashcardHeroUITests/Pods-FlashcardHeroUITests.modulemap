@@ -1,0 +1,6 @@
+framework module Pods_FlashcardHeroUITests {
+  umbrella header "Pods-FlashcardHeroUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

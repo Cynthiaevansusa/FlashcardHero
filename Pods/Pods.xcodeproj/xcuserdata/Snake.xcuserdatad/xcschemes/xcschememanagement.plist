@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>Charts.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-FlashcardHero.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-FlashcardHeroTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-FlashcardHeroUITests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>1130841707BA34B4926DBB8E5E79F7D2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>22662FCCD8875C4A93A248ADC853877A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>909ED2F977F88D9F0901710ADCA5B6EB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BA5E448D25CC4C2EF45B62F28B79AE42</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>
