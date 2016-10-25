@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F606B3751DBEED0000744EC7 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = F606B3741DBEED0000744EC7 /* README.md */; };
 		F6FD10CD1DBEEAEB00B7E6EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FD10CC1DBEEAEB00B7E6EA /* AppDelegate.swift */; };
 		F6FD10CF1DBEEAEB00B7E6EA /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FD10CE1DBEEAEB00B7E6EA /* FirstViewController.swift */; };
 		F6FD10D11DBEEAEB00B7E6EA /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FD10D01DBEEAEB00B7E6EA /* SecondViewController.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F606B3741DBEED0000744EC7 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F6FD10C91DBEEAEB00B7E6EA /* FlashcardHero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlashcardHero.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6FD10CC1DBEEAEB00B7E6EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F6FD10CE1DBEEAEB00B7E6EA /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 		F6FD10C01DBEEAEB00B7E6EA = {
 			isa = PBXGroup;
 			children = (
+				F606B3741DBEED0000744EC7 /* README.md */,
 				F6FD10CB1DBEEAEB00B7E6EA /* FlashcardHero */,
 				F6FD10E21DBEEAEB00B7E6EA /* FlashcardHeroTests */,
 				F6FD10ED1DBEEAEB00B7E6EA /* FlashcardHeroUITests */,
@@ -267,6 +270,7 @@
 			files = (
 				F6FD10D11DBEEAEB00B7E6EA /* SecondViewController.swift in Sources */,
 				F6FD10CD1DBEEAEB00B7E6EA /* AppDelegate.swift in Sources */,
+				F606B3751DBEED0000744EC7 /* README.md in Sources */,
 				F6FD10CF1DBEEAEB00B7E6EA /* FirstViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -518,6 +522,7 @@
 				F6FD10F51DBEEAEB00B7E6EA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F6FD10F61DBEEAEB00B7E6EA /* Build configuration list for PBXNativeTarget "FlashcardHeroTests" */ = {
 			isa = XCConfigurationList;
@@ -526,6 +531,7 @@
 				F6FD10F81DBEEAEB00B7E6EA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F6FD10F91DBEEAEB00B7E6EA /* Build configuration list for PBXNativeTarget "FlashcardHeroUITests" */ = {
 			isa = XCConfigurationList;
@@ -534,6 +540,7 @@
 				F6FD10FB1DBEEAEB00B7E6EA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
