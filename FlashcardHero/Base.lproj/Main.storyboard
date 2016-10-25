@@ -28,6 +28,24 @@
             </objects>
             <point key="canvasLocation" x="750" y="-915"/>
         </scene>
+        <!--Game Selection-->
+        <scene sceneID="PLA-li-Ylw">
+            <objects>
+                <viewController id="tcL-pq-zCo" userLabel="Game Selection" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uof-dU-Nel"/>
+                        <viewControllerLayoutGuide type="bottom" id="82Y-Vs-J9P"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="NYs-sz-Caf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rge-Jk-fAk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1635" y="-917"/>
+        </scene>
         <!--Performance Statistics-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
@@ -106,10 +124,10 @@
             </objects>
             <point key="canvasLocation" x="0.0" y="0.0"/>
         </scene>
-        <!--Item-->
+        <!--Gem Manager-->
         <scene sceneID="2cE-09-nOB">
             <objects>
-                <tableViewController id="oNX-m6-fyG" sceneMemberID="viewController">
+                <tableViewController id="oNX-m6-fyG" userLabel="Gem Manager" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="8Tt-j6-VAK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -135,10 +153,28 @@
             </objects>
             <point key="canvasLocation" x="749" y="413"/>
         </scene>
-        <!--Item-->
+        <!--Quizlet Login-->
+        <scene sceneID="LbL-I8-qrO">
+            <objects>
+                <viewController id="8Z1-jP-Tmr" userLabel="Quizlet Login" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ivl-6X-cGv"/>
+                        <viewControllerLayoutGuide type="bottom" id="fX7-Dw-2t6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zgb-8b-VnJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NZg-2h-O2X" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1688" y="260"/>
+        </scene>
+        <!--Quizlet Manager-->
         <scene sceneID="vIN-C2-xTg">
             <objects>
-                <viewController id="yc8-7f-lCu" sceneMemberID="viewController">
+                <viewController id="yc8-7f-lCu" userLabel="Quizlet Manager" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="OSR-J7-axa"/>
                         <viewControllerLayoutGuide type="bottom" id="xgU-jC-Yp6"/>
