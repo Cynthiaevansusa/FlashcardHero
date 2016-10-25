@@ -9,7 +9,7 @@
 import UIKit
 import Charts
 
-class FirstViewController: UIViewController {
+class CommandCenterViewController: UIViewController {
 
     @IBOutlet weak var barChartView: BarChartView!
     

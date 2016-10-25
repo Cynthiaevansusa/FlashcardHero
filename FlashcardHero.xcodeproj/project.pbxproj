@@ -13,8 +13,8 @@
 		F606B3751DBEED0000744EC7 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = F606B3741DBEED0000744EC7 /* README.md */; };
 		F606B3771DBEF2C600744EC7 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = F606B3761DBEF2C600744EC7 /* LICENSE */; };
 		F6FD10CD1DBEEAEB00B7E6EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FD10CC1DBEEAEB00B7E6EA /* AppDelegate.swift */; };
-		F6FD10CF1DBEEAEB00B7E6EA /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FD10CE1DBEEAEB00B7E6EA /* FirstViewController.swift */; };
-		F6FD10D11DBEEAEB00B7E6EA /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FD10D01DBEEAEB00B7E6EA /* SecondViewController.swift */; };
+		F6FD10CF1DBEEAEB00B7E6EA /* CommandCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FD10CE1DBEEAEB00B7E6EA /* CommandCenterViewController.swift */; };
+		F6FD10D11DBEEAEB00B7E6EA /* PerformanceStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FD10D01DBEEAEB00B7E6EA /* PerformanceStatisticsViewController.swift */; };
 		F6FD10D41DBEEAEB00B7E6EA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6FD10D21DBEEAEB00B7E6EA /* Main.storyboard */; };
 		F6FD10D61DBEEAEB00B7E6EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F6FD10D51DBEEAEB00B7E6EA /* Assets.xcassets */; };
 		F6FD10D91DBEEAEB00B7E6EA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6FD10D71DBEEAEB00B7E6EA /* LaunchScreen.storyboard */; };
@@ -51,8 +51,8 @@
 		F606B3761DBEF2C600744EC7 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		F6FD10C91DBEEAEB00B7E6EA /* FlashcardHero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlashcardHero.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6FD10CC1DBEEAEB00B7E6EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F6FD10CE1DBEEAEB00B7E6EA /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		F6FD10D01DBEEAEB00B7E6EA /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		F6FD10CE1DBEEAEB00B7E6EA /* CommandCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandCenterViewController.swift; sourceTree = "<group>"; };
+		F6FD10D01DBEEAEB00B7E6EA /* PerformanceStatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceStatisticsViewController.swift; sourceTree = "<group>"; };
 		F6FD10D31DBEEAEB00B7E6EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F6FD10D51DBEEAEB00B7E6EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F6FD10D81DBEEAEB00B7E6EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -146,8 +146,8 @@
 			isa = PBXGroup;
 			children = (
 				F6FD10CC1DBEEAEB00B7E6EA /* AppDelegate.swift */,
-				F6FD10CE1DBEEAEB00B7E6EA /* FirstViewController.swift */,
-				F6FD10D01DBEEAEB00B7E6EA /* SecondViewController.swift */,
+				F6FD10CE1DBEEAEB00B7E6EA /* CommandCenterViewController.swift */,
+				F6FD10D01DBEEAEB00B7E6EA /* PerformanceStatisticsViewController.swift */,
 				F6FD10D21DBEEAEB00B7E6EA /* Main.storyboard */,
 				F6FD10D51DBEEAEB00B7E6EA /* Assets.xcassets */,
 				F6FD10D71DBEEAEB00B7E6EA /* LaunchScreen.storyboard */,
@@ -459,10 +459,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F6FD10D11DBEEAEB00B7E6EA /* SecondViewController.swift in Sources */,
+				F6FD10D11DBEEAEB00B7E6EA /* PerformanceStatisticsViewController.swift in Sources */,
 				F6FD10CD1DBEEAEB00B7E6EA /* AppDelegate.swift in Sources */,
 				F606B3751DBEED0000744EC7 /* README.md in Sources */,
-				F6FD10CF1DBEEAEB00B7E6EA /* FirstViewController.swift in Sources */,
+				F6FD10CF1DBEEAEB00B7E6EA /* CommandCenterViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
