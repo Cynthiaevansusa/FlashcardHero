@@ -77,6 +77,8 @@ extension QuizletClient {
         // MARK: Parameter Keys
         struct ParameterKeys {
             
+            static let ClientId = "client_id" //required with all public requests
+            
             struct Common {
                 static let Whitespace = "whitespace" //Add this parameter (whitespace=1) to indent the results for easier human reading of the raw results. This can make testing/debugging easier, and has no effect on the results. Without this parameter, Quizlet will minimize whitespace and network traffic.
                 static let Callback = "callback" //A javascript function name for use inside a web application, using the JSON-P method. callback=foo will wrap the response in the foo function: foo({...data...})

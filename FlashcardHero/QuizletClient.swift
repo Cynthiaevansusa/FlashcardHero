@@ -23,11 +23,6 @@ class QuizletClient : NSObject {
     // shared session
     var session = URLSession.shared
     
-    //Set a pointer to the shared data model
-//    var StudentInformations: [StudentInformation]{
-//        return StudentInformationsModel.sharedInstance.StudentInformations
-//    }
-    
     // MARK: Initializers
     
     override init() {
@@ -36,20 +31,15 @@ class QuizletClient : NSObject {
     
     // MARK: GET
     
-    func taskForGETMethod(parameters: [String:Any], completionHandlerForGET: @escaping (_ results: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
+    func taskForGETMethod(_ method: String, parameters: [String:Any], completionHandlerForGET: @escaping (_ results: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
         
         /* 1. Set the parameters */
         var passTheseParameters = parameters
-        //add the APIKey
-        passTheseParameters[Constants.ParameterKeys.API_key] = Constants.ApiKey as AnyObject?
-        //add the URL extra
-        passTheseParameters[Constants.ParameterKeys.Extras] = Constants.ParameterValues.MediumURL as AnyObject?
-        
-        // No API key passed in this m
-        //parametersWithApiKey[ParameterKeys.ApiKey] = Constants.ApiKey
+        //add the ClientId, required with every public request
+        passTheseParameters[Constants.ParameterKeys.ClientId] = Constants.ClientID as AnyObject?
         
         /* 2/3. Build the URL, Configure the request */
-        let request = NSMutableURLRequest(url: QuizletURLFromParameters(passTheseParameters, withPathExtension: nil))
+        let request = NSMutableURLRequest(url: QuizletURLFromParameters(passTheseParameters, withPathExtension: method))
 //        request.addValue(Secrets.QuizletAPIKey, forHTTPHeaderField: "X-Parse-Application-Id")
 //        request.addValue(Secrets.QuizletRESTAPIKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
         
@@ -86,60 +76,6 @@ class QuizletClient : NSObject {
             
             /* 5/6. Parse the data and use the data (happens in completion handler) */
             self.convertDataWithCompletionHandler(data, completionHandlerForConvertData: completionHandlerForGET)
-        }
-        
-        /* 7. Start the request */
-        task.resume()
-        
-        return task
-    }
-    
-    func taskForGETImage(filePath: String, completionHandlerForGETImage: @escaping (_ imageData: Data?, _ error: NSError?) -> Void) -> URLSessionDataTask {
-        
-        /* 1. Set the parameters */
-        //none
-        
-        var url = URL(string: filePath)
-        
-        /* 2/3. Build the URL, Configure the request */
-        let request = NSMutableURLRequest(url: url!)
-        //        request.addValue(Secrets.QuizletAPIKey, forHTTPHeaderField: "X-Parse-Application-Id")
-        //        request.addValue(Secrets.QuizletRESTAPIKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
-        
-        /* 4. Make the request */
-        print("Starting task for URL: \(request.url!)")
-        let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
-            
-            func sendError(_ error: String, code: Int) {
-                print(error)
-                let userInfo = [NSLocalizedDescriptionKey : error]
-                completionHandlerForGETImage(nil, NSError(domain: "taskForGETImage", code: code, userInfo: userInfo))
-            }
-            
-            /* GUARD: Was there an error? */
-            guard (error == nil) else {
-                sendError(error!.localizedDescription, code: 1)
-                return
-            }
-            
-            /* GUARD: Did we get a successful 2XX response? */
-            guard let statusCode = (response as? HTTPURLResponse)?.statusCode , statusCode >= 200 && statusCode <= 299 else {
-                switch (response as? HTTPURLResponse)!.statusCode {
-                default:
-                    sendError("Your request returned a status code other than 2xx! Status code \((response as? HTTPURLResponse)!.statusCode).", code: 2)
-                }
-                
-                return
-            }
-            
-            /* GUARD: Was there any data returned? */
-            guard let data = data else {
-                sendError("No data was returned by the request!", code: 3)
-                return
-            }
-            
-            /* 5/6. return data */
-            completionHandlerForGETImage(data, nil)
         }
         
         /* 7. Start the request */
