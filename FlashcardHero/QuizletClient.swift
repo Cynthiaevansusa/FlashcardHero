@@ -31,7 +31,7 @@ class QuizletClient : NSObject {
     
     // MARK: GET
     
-    func taskForGETMethod(_ method: String, parameters: [String:Any], completionHandlerForGET: @escaping (_ results: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
+    func taskForGETMethod(method: String, parameters: [String:Any], completionHandlerForGET: @escaping (_ results: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
         
         /* 1. Set the parameters */
         var passTheseParameters = parameters
@@ -40,8 +40,7 @@ class QuizletClient : NSObject {
         
         /* 2/3. Build the URL, Configure the request */
         let request = NSMutableURLRequest(url: QuizletURLFromParameters(passTheseParameters, withPathExtension: method))
-//        request.addValue(Secrets.QuizletAPIKey, forHTTPHeaderField: "X-Parse-Application-Id")
-//        request.addValue(Secrets.QuizletRESTAPIKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
+
         
         /* 4. Make the request */
         let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
