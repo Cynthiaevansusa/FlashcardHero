@@ -17,7 +17,7 @@
 		F63782D31DC2E3F50078FE7F /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63782D21DC2E3F50078FE7F /* CoreDataStack.swift */; };
 		F63782D71DC2E4440078FE7F /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63782D51DC2E4440078FE7F /* Secrets.swift */; };
 		F63782D81DC2E4440078FE7F /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63782D61DC2E4440078FE7F /* Utilities.swift */; };
-		F63782DA1DC2E6E70078FE7F /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = F63782D91DC2E6E70078FE7F /* .gitignore */; };
+		F63782DE1DC2E9050078FE7F /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = F63782DD1DC2E9050078FE7F /* .gitignore */; };
 		F6FD10CD1DBEEAEB00B7E6EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FD10CC1DBEEAEB00B7E6EA /* AppDelegate.swift */; };
 		F6FD10CF1DBEEAEB00B7E6EA /* CommandCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FD10CE1DBEEAEB00B7E6EA /* CommandCenterViewController.swift */; };
 		F6FD10D11DBEEAEB00B7E6EA /* PerformanceStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FD10D01DBEEAEB00B7E6EA /* PerformanceStatisticsViewController.swift */; };
@@ -53,14 +53,14 @@
 		4B522429A4AD6863FC708186 /* Pods_FlashcardHero.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlashcardHero.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		634008297B95E4E43B66CE0D /* Pods-FlashcardHeroUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlashcardHeroUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FlashcardHeroUITests/Pods-FlashcardHeroUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		721DBCFB513CB27DA525DB96 /* Pods-FlashcardHeroUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlashcardHeroUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FlashcardHeroUITests/Pods-FlashcardHeroUITests.release.xcconfig"; sourceTree = "<group>"; };
-		F606B3741DBEED0000744EC7 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		F606B3761DBEF2C600744EC7 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		F606B3741DBEED0000744EC7 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		F606B3761DBEF2C600744EC7 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		F63782C91DC2E1EC0078FE7F /* Documents */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Documents; path = FlashcardHero/Documents; sourceTree = "<group>"; };
 		F63782D01DC2E3C00078FE7F /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
 		F63782D21DC2E3F50078FE7F /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		F63782D51DC2E4440078FE7F /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		F63782D61DC2E4440078FE7F /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
-		F63782D91DC2E6E70078FE7F /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		F63782DD1DC2E9050078FE7F /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
 		F6FD10C91DBEEAEB00B7E6EA /* FlashcardHero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlashcardHero.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6FD10CC1DBEEAEB00B7E6EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F6FD10CE1DBEEAEB00B7E6EA /* CommandCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandCenterViewController.swift; sourceTree = "<group>"; };
@@ -175,9 +175,11 @@
 		F63782D41DC2E4290078FE7F /* Supporting */ = {
 			isa = PBXGroup;
 			children = (
-				F63782D91DC2E6E70078FE7F /* .gitignore */,
+				F63782DD1DC2E9050078FE7F /* .gitignore */,
 				F63782D51DC2E4440078FE7F /* Secrets.swift */,
 				F63782D61DC2E4440078FE7F /* Utilities.swift */,
+				F606B3761DBEF2C600744EC7 /* LICENSE */,
+				F606B3741DBEED0000744EC7 /* README.md */,
 			);
 			name = Supporting;
 			path = FlashcardHero;
@@ -186,8 +188,6 @@
 		F6FD10C01DBEEAEB00B7E6EA = {
 			isa = PBXGroup;
 			children = (
-				F606B3761DBEF2C600744EC7 /* LICENSE */,
-				F606B3741DBEED0000744EC7 /* README.md */,
 				F6FD10CB1DBEEAEB00B7E6EA /* FlashcardHero */,
 				F63782D41DC2E4290078FE7F /* Supporting */,
 				F63782C91DC2E1EC0078FE7F /* Documents */,
@@ -361,10 +361,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F6FD10D91DBEEAEB00B7E6EA /* LaunchScreen.storyboard in Resources */,
+				F63782DE1DC2E9050078FE7F /* .gitignore in Resources */,
 				F6FD10D61DBEEAEB00B7E6EA /* Assets.xcassets in Resources */,
 				F606B3771DBEF2C600744EC7 /* LICENSE in Resources */,
 				F6FD10D41DBEEAEB00B7E6EA /* Main.storyboard in Resources */,
-				F63782DA1DC2E6E70078FE7F /* .gitignore in Resources */,
 				F63782CA1DC2E1EC0078FE7F /* Documents in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
