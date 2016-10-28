@@ -13,6 +13,11 @@
 		F606B3751DBEED0000744EC7 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = F606B3741DBEED0000744EC7 /* README.md */; };
 		F606B3771DBEF2C600744EC7 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = F606B3761DBEF2C600744EC7 /* LICENSE */; };
 		F63782CA1DC2E1EC0078FE7F /* Documents in Resources */ = {isa = PBXBuildFile; fileRef = F63782C91DC2E1EC0078FE7F /* Documents */; };
+		F63782D11DC2E3C00078FE7F /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63782D01DC2E3C00078FE7F /* GCDBlackBox.swift */; };
+		F63782D31DC2E3F50078FE7F /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63782D21DC2E3F50078FE7F /* CoreDataStack.swift */; };
+		F63782D71DC2E4440078FE7F /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63782D51DC2E4440078FE7F /* Secrets.swift */; };
+		F63782D81DC2E4440078FE7F /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63782D61DC2E4440078FE7F /* Utilities.swift */; };
+		F63782DA1DC2E6E70078FE7F /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = F63782D91DC2E6E70078FE7F /* .gitignore */; };
 		F6FD10CD1DBEEAEB00B7E6EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FD10CC1DBEEAEB00B7E6EA /* AppDelegate.swift */; };
 		F6FD10CF1DBEEAEB00B7E6EA /* CommandCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FD10CE1DBEEAEB00B7E6EA /* CommandCenterViewController.swift */; };
 		F6FD10D11DBEEAEB00B7E6EA /* PerformanceStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FD10D01DBEEAEB00B7E6EA /* PerformanceStatisticsViewController.swift */; };
@@ -51,6 +56,11 @@
 		F606B3741DBEED0000744EC7 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F606B3761DBEF2C600744EC7 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		F63782C91DC2E1EC0078FE7F /* Documents */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Documents; path = FlashcardHero/Documents; sourceTree = "<group>"; };
+		F63782D01DC2E3C00078FE7F /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
+		F63782D21DC2E3F50078FE7F /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		F63782D51DC2E4440078FE7F /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
+		F63782D61DC2E4440078FE7F /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		F63782D91DC2E6E70078FE7F /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		F6FD10C91DBEEAEB00B7E6EA /* FlashcardHero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlashcardHero.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6FD10CC1DBEEAEB00B7E6EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F6FD10CE1DBEEAEB00B7E6EA /* CommandCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandCenterViewController.swift; sourceTree = "<group>"; };
@@ -157,8 +167,20 @@
 		F63782CF1DC2E2BE0078FE7F /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				F63782D21DC2E3F50078FE7F /* CoreDataStack.swift */,
 			);
 			name = CoreData;
+			sourceTree = "<group>";
+		};
+		F63782D41DC2E4290078FE7F /* Supporting */ = {
+			isa = PBXGroup;
+			children = (
+				F63782D91DC2E6E70078FE7F /* .gitignore */,
+				F63782D51DC2E4440078FE7F /* Secrets.swift */,
+				F63782D61DC2E4440078FE7F /* Utilities.swift */,
+			);
+			name = Supporting;
+			path = FlashcardHero;
 			sourceTree = "<group>";
 		};
 		F6FD10C01DBEEAEB00B7E6EA = {
@@ -167,6 +189,7 @@
 				F606B3761DBEF2C600744EC7 /* LICENSE */,
 				F606B3741DBEED0000744EC7 /* README.md */,
 				F6FD10CB1DBEEAEB00B7E6EA /* FlashcardHero */,
+				F63782D41DC2E4290078FE7F /* Supporting */,
 				F63782C91DC2E1EC0078FE7F /* Documents */,
 				F6FD10E21DBEEAEB00B7E6EA /* FlashcardHeroTests */,
 				F6FD10ED1DBEEAEB00B7E6EA /* FlashcardHeroUITests */,
@@ -190,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				F6FD10CC1DBEEAEB00B7E6EA /* AppDelegate.swift */,
+				F63782D01DC2E3C00078FE7F /* GCDBlackBox.swift */,
 				F63782CB1DC2E2380078FE7F /* Model */,
 				F63782CC1DC2E2440078FE7F /* View */,
 				F63782CD1DC2E24A0078FE7F /* Controller */,
@@ -340,6 +364,7 @@
 				F6FD10D61DBEEAEB00B7E6EA /* Assets.xcassets in Resources */,
 				F606B3771DBEF2C600744EC7 /* LICENSE in Resources */,
 				F6FD10D41DBEEAEB00B7E6EA /* Main.storyboard in Resources */,
+				F63782DA1DC2E6E70078FE7F /* .gitignore in Resources */,
 				F63782CA1DC2E1EC0078FE7F /* Documents in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -505,8 +530,12 @@
 			files = (
 				F6FD10D11DBEEAEB00B7E6EA /* PerformanceStatisticsViewController.swift in Sources */,
 				F6FD10CD1DBEEAEB00B7E6EA /* AppDelegate.swift in Sources */,
+				F63782D71DC2E4440078FE7F /* Secrets.swift in Sources */,
 				F606B3751DBEED0000744EC7 /* README.md in Sources */,
+				F63782D31DC2E3F50078FE7F /* CoreDataStack.swift in Sources */,
 				F6FD10CF1DBEEAEB00B7E6EA /* CommandCenterViewController.swift in Sources */,
+				F63782D81DC2E4440078FE7F /* Utilities.swift in Sources */,
+				F63782D11DC2E3C00078FE7F /* GCDBlackBox.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
