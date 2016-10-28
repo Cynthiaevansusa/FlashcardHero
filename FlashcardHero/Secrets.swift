@@ -10,6 +10,6 @@ import Foundation
 
 struct Secrets {
     //TODO: FILL IN YOUR CLIENT ID AND SECRET KEY
-    static let QuizletClientID = ""
-    static let QuizletSecretKey = ""
+    static let QuizletClientID = "YOURQUIZLETCLIENTID"
+    static let QuizletSecretKey = "YOURQUIZLETSECRETKEY"
 }
