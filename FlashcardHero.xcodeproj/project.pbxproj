@@ -120,6 +120,47 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		F63782CB1DC2E2380078FE7F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F63782CE1DC2E2A70078FE7F /* Network */,
+				F63782CF1DC2E2BE0078FE7F /* CoreData */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		F63782CC1DC2E2440078FE7F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F6FD10D21DBEEAEB00B7E6EA /* Main.storyboard */,
+				F6FD10D71DBEEAEB00B7E6EA /* LaunchScreen.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		F63782CD1DC2E24A0078FE7F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F6FD10CE1DBEEAEB00B7E6EA /* CommandCenterViewController.swift */,
+				F6FD10D01DBEEAEB00B7E6EA /* PerformanceStatisticsViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		F63782CE1DC2E2A70078FE7F /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Network;
+			sourceTree = "<group>";
+		};
+		F63782CF1DC2E2BE0078FE7F /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
 		F6FD10C01DBEEAEB00B7E6EA = {
 			isa = PBXGroup;
 			children = (
@@ -149,11 +190,10 @@
 			isa = PBXGroup;
 			children = (
 				F6FD10CC1DBEEAEB00B7E6EA /* AppDelegate.swift */,
-				F6FD10CE1DBEEAEB00B7E6EA /* CommandCenterViewController.swift */,
-				F6FD10D01DBEEAEB00B7E6EA /* PerformanceStatisticsViewController.swift */,
-				F6FD10D21DBEEAEB00B7E6EA /* Main.storyboard */,
+				F63782CB1DC2E2380078FE7F /* Model */,
+				F63782CC1DC2E2440078FE7F /* View */,
+				F63782CD1DC2E24A0078FE7F /* Controller */,
 				F6FD10D51DBEEAEB00B7E6EA /* Assets.xcassets */,
-				F6FD10D71DBEEAEB00B7E6EA /* LaunchScreen.storyboard */,
 				F6FD10DA1DBEEAEB00B7E6EA /* Info.plist */,
 			);
 			path = FlashcardHero;
