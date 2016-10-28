@@ -24,9 +24,17 @@ class FlashcardHeroTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        print("Starting Test")
+        let expecting = expectation(description: "asynchronous request")
         
         QuizletClient.sharedInstance.getQuizletSearchSetsBy("birds") { (results, error) in
+            
+            print("Test Completion Handler")
+            
+            expecting.fulfill()
         }
+        
+        waitForExpectations(timeout: 10.0, handler: nil)
     }
     
     func testPerformanceExample() {
