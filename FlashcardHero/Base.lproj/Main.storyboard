@@ -137,10 +137,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" id="cbo-as-LFe">
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="RTO-MN-zWE">
                             <rect key="frame" x="0.0" y="64" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" returnKeyType="search"/>
                         </searchBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="1QZ-0E-tia">
@@ -159,7 +159,8 @@
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Item" id="ar6-az-9qv"/>
                     <connections>
-                        <segue destination="17A-hW-XHp" kind="show" id="7eO-kF-Mw6"/>
+                        <outlet property="searchBar" destination="RTO-MN-zWE" id="hXi-lr-xPQ"/>
+                        <segue destination="17A-hW-XHp" kind="show" identifier="QuizletSearchResults" id="7eO-kF-Mw6"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="22l-ob-Phc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -169,7 +170,7 @@
         <!--Search Results-->
         <scene sceneID="FAn-dO-Aif">
             <objects>
-                <tableViewController id="17A-hW-XHp" userLabel="Search Results" customClass="QuizletSearchResultsViewController" customModule="FlashcardHero" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="QuizletSearchResults" id="17A-hW-XHp" userLabel="Search Results" customClass="QuizletSearchResultsViewController" customModule="FlashcardHero" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ohC-nS-Vrd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
