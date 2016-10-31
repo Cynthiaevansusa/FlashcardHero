@@ -26,7 +26,7 @@ extension QuizletClient {
      
      - Returns: An array of JSON sets
      */
-    func getQuizletSearchSetsBy(_ searchTerm: String? = nil, modifiedSince: NSDate? = nil, creator: String? = nil, imagesOnly: Bool? = nil, page: Int? = nil, perPage: Int? = nil, completionHandlerGetQuizletSearchSetsBy: @escaping (_ results: Any?, _ error: NSError?) -> Void) {
+    func getQuizletSearchSetsBy(_ searchTerm: String? = nil, modifiedSince: NSDate? = nil, creator: String? = nil, imagesOnly: Bool? = nil, page: Int? = nil, perPage: Int? = nil, completionHandlerGetQuizletSearchSetsBy: @escaping (_ results: NSArray?, _ error: NSError?) -> Void) {
         
         //Date validation
         if let modifiedSince = modifiedSince {

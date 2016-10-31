@@ -232,10 +232,10 @@
             </objects>
             <point key="canvasLocation" x="816" y="404"/>
         </scene>
-        <!--View Controller-->
+        <!--Quizlet Search-->
         <scene sceneID="ZOi-Hm-sN8">
             <objects>
-                <viewController id="Ork-Iu-8br" sceneMemberID="viewController">
+                <viewController id="Ork-Iu-8br" userLabel="Quizlet Search" customClass="QuizletSearchResultsViewController" customModule="FlashcardHero" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="JWg-0n-YVg"/>
                         <viewControllerLayoutGuide type="bottom" id="d46-ae-tqa"/>
@@ -248,7 +248,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="UaZ-r9-4vQ">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="QuizletSearchCell" id="UaZ-r9-4vQ">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UaZ-r9-4vQ" id="FoE-tb-Dii">
@@ -257,6 +257,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Ork-Iu-8br" id="KpE-RT-udf"/>
+                                    <outlet property="delegate" destination="Ork-Iu-8br" id="kok-Lw-QAi"/>
+                                </connections>
                             </tableView>
                             <searchBar contentMode="redraw" placeholder="Search Quizlet for Sets" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eu5-Sr-6v1">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
@@ -266,6 +270,9 @@
                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="barTintColor" red="0.40000000600000002" green="0.40000000600000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Ork-Iu-8br" id="smJ-bx-BFU"/>
+                                </connections>
                             </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -279,6 +286,10 @@
                             <constraint firstItem="Rdh-rR-uwh" firstAttribute="top" secondItem="eu5-Sr-6v1" secondAttribute="bottom" id="oju-P8-WLJ"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="searchBar" destination="eu5-Sr-6v1" id="4eU-QY-g5f"/>
+                        <outlet property="tableView" destination="Rdh-rR-uwh" id="enq-j2-Jxw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OyB-xu-kIP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
