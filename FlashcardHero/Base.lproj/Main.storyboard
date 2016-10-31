@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Command Center-->
+        <!--Statistics-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
-                <viewController id="9pv-A4-QxB" userLabel="Command Center" customClass="CommandCenterViewController" customModule="FlashcardHero" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="9pv-A4-QxB" userLabel="Statistics" customClass="CommandCenterViewController" customModule="FlashcardHero" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ia1-K6-d13"/>
                         <viewControllerLayoutGuide type="bottom" id="4ug-Mw-9AY"/>
@@ -29,7 +29,61 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="820" y="-907"/>
+            <point key="canvasLocation" x="2281" y="-918"/>
+        </scene>
+        <!--Headquarters-->
+        <scene sceneID="cEP-PS-eAC">
+            <objects>
+                <viewController id="yf9-Ks-dTC" userLabel="Headquarters" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="GBw-8Y-2m6"/>
+                        <viewControllerLayoutGuide type="bottom" id="Tu5-Pb-tJM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vGo-Vd-pgo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WrB-6q-ofl">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="ALp-Kp-0AF"/>
+                                </constraints>
+                                <color key="barTintColor" red="0.50196081400000003" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <items>
+                                    <navigationItem id="v4o-7R-AYD">
+                                        <nil key="title"/>
+                                        <barButtonItem key="leftBarButtonItem" title="Login" id="QGs-W1-fHU">
+                                            <color key="tintColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        </barButtonItem>
+                                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="mh8-3l-3Dd">
+                                            <rect key="frame" x="79" y="27" width="218" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <segments>
+                                                <segment title="Missions"/>
+                                                <segment title="Stats"/>
+                                                <segment title="Goals"/>
+                                            </segments>
+                                            <color key="tintColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        </segmentedControl>
+                                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="add" id="DsD-6y-FOa">
+                                            <color key="tintColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="WrB-6q-ofl" secondAttribute="trailing" id="5t2-nc-dHe"/>
+                            <constraint firstItem="WrB-6q-ofl" firstAttribute="top" secondItem="vGo-Vd-pgo" secondAttribute="top" id="CTe-dl-SiB"/>
+                            <constraint firstItem="WrB-6q-ofl" firstAttribute="leading" secondItem="vGo-Vd-pgo" secondAttribute="leading" id="xoN-bB-IZw"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="HQ" id="ad3-9p-pHl"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IRv-Wx-ZBp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="842" y="-1039"/>
         </scene>
         <!--Game Selection-->
         <scene sceneID="PLA-li-Ylw">
@@ -47,7 +101,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rge-Jk-fAk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1635" y="-917"/>
+            <point key="canvasLocation" x="1636" y="-1039"/>
         </scene>
         <!--Gems-->
         <scene sceneID="wg7-f3-ORb">
@@ -125,6 +179,59 @@
             </objects>
             <point key="canvasLocation" x="821.60000000000002" y="-239.73013493253376"/>
         </scene>
+        <!--Equipment-->
+        <scene sceneID="8Ny-D5-tew">
+            <objects>
+                <viewController title="Equipment" id="4Eo-hf-1Bb" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3en-cf-JWY"/>
+                        <viewControllerLayoutGuide type="bottom" id="NQu-CH-Q9M"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Eaf-Ed-Tgh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="an0-aT-0Mx">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="KpV-sq-lTP"/>
+                                </constraints>
+                                <color key="barTintColor" red="0.50196081400000003" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <items>
+                                    <navigationItem id="STv-sm-d1B">
+                                        <nil key="title"/>
+                                        <barButtonItem key="leftBarButtonItem" title="Login" id="lx1-OM-YS0">
+                                            <color key="tintColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        </barButtonItem>
+                                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="Hgx-R9-3Zl">
+                                            <rect key="frame" x="79" y="27" width="218" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <segments>
+                                                <segment title="Equipped"/>
+                                                <segment title="Inventory"/>
+                                            </segments>
+                                            <color key="tintColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        </segmentedControl>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="cyh-ef-Cz3">
+                                            <color key="tintColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="an0-aT-0Mx" secondAttribute="trailing" id="K83-QR-jMr"/>
+                            <constraint firstItem="an0-aT-0Mx" firstAttribute="leading" secondItem="Eaf-Ed-Tgh" secondAttribute="leading" id="PHA-KC-Rqc"/>
+                            <constraint firstItem="an0-aT-0Mx" firstAttribute="top" secondItem="Eaf-Ed-Tgh" secondAttribute="top" id="YTW-m7-a3J"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Equip" id="8XK-K1-2HU"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Uqj-5y-6JV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="816" y="404"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="ZOi-Hm-sN8">
             <objects>
@@ -192,57 +299,20 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
-                        <segue destination="oNX-m6-fyG" kind="relationship" relationship="viewControllers" id="Qq6-TT-hcE"/>
-                        <segue destination="HEG-qw-rRh" kind="relationship" relationship="viewControllers" id="qJk-l3-Zjy"/>
+                        <segue destination="yf9-Ks-dTC" kind="relationship" relationship="viewControllers" id="LAN-0K-1ly"/>
                         <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="kS1-O1-LfT"/>
+                        <segue destination="4Eo-hf-1Bb" kind="relationship" relationship="viewControllers" id="Fcn-NI-KWW"/>
+                        <segue destination="HEG-qw-rRh" kind="relationship" relationship="viewControllers" id="qJk-l3-Zjy"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="0.0" y="0.0"/>
         </scene>
-        <!--Gem Manager-->
-        <scene sceneID="2cE-09-nOB">
-            <objects>
-                <tableViewController id="oNX-m6-fyG" userLabel="Gem Manager" customClass="GemManagerViewController" customModule="FlashcardHero" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="8Tt-j6-VAK">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" id="RTO-MN-zWE">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits" returnKeyType="search"/>
-                        </searchBar>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="1QZ-0E-tia">
-                                <rect key="frame" x="0.0" y="72" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1QZ-0E-tia" id="5nl-f6-5FU">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="oNX-m6-fyG" id="OkX-Lc-aV4"/>
-                            <outlet property="delegate" destination="oNX-m6-fyG" id="M26-iO-nE0"/>
-                        </connections>
-                    </tableView>
-                    <tabBarItem key="tabBarItem" title="Item" id="ar6-az-9qv"/>
-                    <connections>
-                        <outlet property="searchBar" destination="RTO-MN-zWE" id="hXi-lr-xPQ"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="22l-ob-Phc" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="820" y="423"/>
-        </scene>
-        <!--Settings-->
+        <!--More-->
         <scene sceneID="1Vm-Q4-UDj">
             <objects>
-                <tableViewController id="HEG-qw-rRh" userLabel="Settings" sceneMemberID="viewController">
+                <tableViewController id="HEG-qw-rRh" userLabel="More" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ftC-ic-kyh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -266,7 +336,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gem-Gz-QCA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="822" y="1073"/>
+            <point key="canvasLocation" x="804" y="1093"/>
         </scene>
         <!--Quizlet Login-->
         <scene sceneID="LbL-I8-qrO">
