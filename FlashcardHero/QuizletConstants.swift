@@ -139,12 +139,27 @@ extension QuizletClient {
         }
         
         struct ResponseKeys {
-            //TODO: Get these from quizlet
-            static let Status = "stat"
-            static let Photos = "photos"
-            static let Photo = "photo"
-            static let Title = "title"
-            static let MediumURL = "url_m"
+            struct Search {
+                struct ForSets {
+                    static let TotalResults = "total_results"
+                    static let TotalPages = "total_pages"
+                    static let ImageSetCount = "image_set_count"
+                    static let Page = "page"
+                    static let Sets = "sets"
+                    
+                    struct Set {
+                        static let Id = "id"
+                        static let Url = "url"
+                        static let Title = "title"
+                        static let CreatedBy = "created_by"
+                        static let TermCount = "term_count"
+                        static let CreatedDate = "created_date"
+                        static let ModifiedDate = "modified_date"
+                        static let HasImages = "has_images"
+                        static let Subjects = "subjects"
+                    }
+                }
+            }
         }
         
     }

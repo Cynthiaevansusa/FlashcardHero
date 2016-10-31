@@ -10672,7 +10672,7 @@ Reference to another CoreData object}</string>
 			<real>14.284454345703125</real>
 			<key>Points</key>
 			<array>
-				<string>{655, 196}</string>
+				<string>{655, 180.84583}</string>
 				<string>{770.12817, 155.99998}</string>
 			</array>
 			<key>Style</key>
@@ -20096,7 +20096,7 @@ costModifierId\
 			<integer>56</integer>
 			<key>Points</key>
 			<array>
-				<string>{584.42029, 259.99991}</string>
+				<string>{584.46655, 258.84573}</string>
 				<string>{585, 293}</string>
 			</array>
 			<key>Style</key>
@@ -20698,7 +20698,7 @@ imageData\
 					<array>
 						<dict>
 							<key>Bounds</key>
-							<string>{{513, 189}, {142.00002, 14}}</string>
+							<string>{{513, 173.84583}, {142.00002, 14}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
@@ -21176,7 +21176,7 @@ imageData\
 						</dict>
 						<dict>
 							<key>Bounds</key>
-							<string>{{513, 203}, {142.00002, 56}}</string>
+							<string>{{513, 187.84583}, {142.00002, 70}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
@@ -21234,6 +21234,7 @@ imageData\
 \f1\b0 \
 title\
 description\
+...\
 
 \f2\i quizletClass}</string>
 							</dict>
@@ -21257,7 +21258,7 @@ description\
 					<array>
 						<dict>
 							<key>Bounds</key>
-							<string>{{513, 108}, {142.00002, 14}}</string>
+							<string>{{513, 92.845825}, {142.00002, 14}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
@@ -21728,7 +21729,7 @@ description\
 						</dict>
 						<dict>
 							<key>Bounds</key>
-							<string>{{513, 122}, {142.00002, 28}}</string>
+							<string>{{513, 106.84583}, {142.00002, 28}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
@@ -21870,8 +21871,8 @@ name}</string>
 			<integer>59</integer>
 			<key>Points</key>
 			<array>
-				<string>{584, 151}</string>
-				<string>{584, 189}</string>
+				<string>{584, 135.84583}</string>
+				<string>{584, 173.84583}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -22017,7 +22018,7 @@ name}</string>
 		</dict>
 	</array>
 	<key>ModificationDate</key>
-	<string>2016-10-27 01:37:35 +0000</string>
+	<string>2016-10-31 01:10:17 +0000</string>
 	<key>Modifier</key>
 	<string>Jacob Foster Davis</string>
 	<key>NotesVisible</key>

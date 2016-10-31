@@ -104,27 +104,27 @@ extension QuizletClient {
             } else {
                 //json should have returned a A dictionary with a key of "results" that contains an array of dictionaries
                 
-                if let resultsArray = results?[QuizletClient.Constants.ResponseKeys.Photos] as? [String:AnyObject] { //dig into the JSON response dictionary to get the array at key "photos"
+                if let resultsArray = results?[QuizletClient.Constants.ResponseKeys.Search.ForSets.Sets] as? NSArray { //dig into the JSON response dictionary to get the array at key "photos"
                     
                     print("Unwrapped JSON response from getQuizletSearchSetsBy:")
                     print(resultsArray)
                     
-                    if let photoArray = resultsArray[QuizletClient.Constants.ResponseKeys.Photo] as? [[String:Any]]
-                    {
-//                        print("Array of Photos from getQuizletSearchSetsBy:")
-//                        print(photoArray)
-////                        //try to put these results into a QuizletPhotoResults struct
-//                        let QuizletResultsObject = QuizletPhotoResults(fromJSONArrayOfPhotoDictionaries: photoArray)
-//                        completionHandlerGetQuizletSearchSetsBy(QuizletResultsObject, nil)
-                    
-                        
-                    } else {
-                        print("\nDATA ERROR: Could not find \(QuizletClient.Constants.ResponseKeys.Photo) in \(resultsArray)")
-                        completionHandlerGetQuizletSearchSetsBy(nil, NSError(domain: "getQuizletSearchSetsBy parsing", code: 4, userInfo: [NSLocalizedDescriptionKey: "DATA ERROR: Failed to interpret data returned from Quizlet server (getQuizletSearchSetsBy)."]))
-                    }
+//                    if let photoArray = resultsArray[QuizletClient.Constants.ResponseKeys.Photo] as? [[String:Any]]
+//                    {
+////                        print("Array of Photos from getQuizletSearchSetsBy:")
+////                        print(photoArray)
+//////                        //try to put these results into a QuizletPhotoResults struct
+////                        let QuizletResultsObject = QuizletPhotoResults(fromJSONArrayOfPhotoDictionaries: photoArray)
+                        completionHandlerGetQuizletSearchSetsBy(resultsArray, nil)
+//
+//                        
+//                    } else {
+//                        print("\nDATA ERROR: Could not find \(QuizletClient.Constants.ResponseKeys.Photo) in \(resultsArray)")
+//                        completionHandlerGetQuizletSearchSetsBy(nil, NSError(domain: "getQuizletSearchSetsBy parsing", code: 4, userInfo: [NSLocalizedDescriptionKey: "DATA ERROR: Failed to interpret data returned from Quizlet server (getQuizletSearchSetsBy)."]))
+//                    }
                     
                 } else {
-                    print("\nDATA ERROR: Could not find \(QuizletClient.Constants.ResponseKeys.Photos) in \(results)")
+                    print("\nDATA ERROR: Could not find \(QuizletClient.Constants.ResponseKeys.Search.ForSets.Sets) in \(results)")
                     completionHandlerGetQuizletSearchSetsBy(nil, NSError(domain: "getQuizletSearchSetsBy parsing", code: 4, userInfo: [NSLocalizedDescriptionKey: "DATA ERROR: Failed to interpret data returned from Quizlet server (getQuizletSearchSetsBy)."]))
                 }
             } // end of error check
