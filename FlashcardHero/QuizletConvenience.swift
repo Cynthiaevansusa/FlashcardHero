@@ -13,15 +13,18 @@ import Foundation
 extension QuizletClient {
     
     /**
-     Connects to Quizlet and downloads urls for photos near the given lat and long
+     Connects to Quizlet and performs a search for sets based on given criteria.  Search must include searchTerm or creator or both.
      
      - Parameters:
-        - lat: Latitude of desired photos
-        - long: Longitude of desired photos
-        - radius: number of miles from Lat/Long to search
+        - searchTerm: A search string
+        - modifiedSince: filter for sets modified since this date
+        - creator: filter for sets created by the given user id
+        - imagesOnly: filter for sets that contain images
+        - page: filter for which page of results to return
+        - perPage: filter for number of results per page
      
      
-     - Returns: An array of photos (as dictionaries)
+     - Returns: An array of JSON sets
      */
     func getQuizletSearchSetsBy(_ searchTerm: String? = nil, modifiedSince: NSDate? = nil, creator: String? = nil, imagesOnly: Bool? = nil, page: Int? = nil, perPage: Int? = nil, completionHandlerGetQuizletSearchSetsBy: @escaping (_ results: Any?, _ error: NSError?) -> Void) {
         

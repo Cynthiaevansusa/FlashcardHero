@@ -21,6 +21,8 @@
 		F63782E41DC2F08F0078FE7F /* QuizletClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63782E11DC2F08F0078FE7F /* QuizletClient.swift */; };
 		F63782E51DC2F08F0078FE7F /* QuizletConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63782E21DC2F08F0078FE7F /* QuizletConvenience.swift */; };
 		F63782E61DC2F08F0078FE7F /* QuizletConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63782E31DC2F08F0078FE7F /* QuizletConstants.swift */; };
+		F66B5E491DC6DA0200052B7F /* GemManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66B5E481DC6DA0200052B7F /* GemManagerViewController.swift */; };
+		F66B5E4B1DC6DA5400052B7F /* QuizletSearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66B5E4A1DC6DA5400052B7F /* QuizletSearchResultsViewController.swift */; };
 		F6FD10CD1DBEEAEB00B7E6EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FD10CC1DBEEAEB00B7E6EA /* AppDelegate.swift */; };
 		F6FD10CF1DBEEAEB00B7E6EA /* CommandCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FD10CE1DBEEAEB00B7E6EA /* CommandCenterViewController.swift */; };
 		F6FD10D11DBEEAEB00B7E6EA /* PerformanceStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FD10D01DBEEAEB00B7E6EA /* PerformanceStatisticsViewController.swift */; };
@@ -67,6 +69,8 @@
 		F63782E11DC2F08F0078FE7F /* QuizletClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizletClient.swift; sourceTree = "<group>"; };
 		F63782E21DC2F08F0078FE7F /* QuizletConvenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizletConvenience.swift; sourceTree = "<group>"; };
 		F63782E31DC2F08F0078FE7F /* QuizletConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizletConstants.swift; sourceTree = "<group>"; };
+		F66B5E481DC6DA0200052B7F /* GemManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GemManagerViewController.swift; sourceTree = "<group>"; };
+		F66B5E4A1DC6DA5400052B7F /* QuizletSearchResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizletSearchResultsViewController.swift; sourceTree = "<group>"; };
 		F6FD10C91DBEEAEB00B7E6EA /* FlashcardHero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlashcardHero.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6FD10CC1DBEEAEB00B7E6EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F6FD10CE1DBEEAEB00B7E6EA /* CommandCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandCenterViewController.swift; sourceTree = "<group>"; };
@@ -159,6 +163,8 @@
 			children = (
 				F6FD10CE1DBEEAEB00B7E6EA /* CommandCenterViewController.swift */,
 				F6FD10D01DBEEAEB00B7E6EA /* PerformanceStatisticsViewController.swift */,
+				F66B5E481DC6DA0200052B7F /* GemManagerViewController.swift */,
+				F66B5E4A1DC6DA5400052B7F /* QuizletSearchResultsViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -177,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				F63782D21DC2E3F50078FE7F /* CoreDataStack.swift */,
+				F66B5E471DC6D30500052B7F /* Quizlet */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -192,6 +199,13 @@
 			);
 			name = Supporting;
 			path = FlashcardHero;
+			sourceTree = "<group>";
+		};
+		F66B5E471DC6D30500052B7F /* Quizlet */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Quizlet;
 			sourceTree = "<group>";
 		};
 		F6FD10C01DBEEAEB00B7E6EA = {
@@ -537,7 +551,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F66B5E491DC6DA0200052B7F /* GemManagerViewController.swift in Sources */,
 				F6FD10D11DBEEAEB00B7E6EA /* PerformanceStatisticsViewController.swift in Sources */,
+				F66B5E4B1DC6DA5400052B7F /* QuizletSearchResultsViewController.swift in Sources */,
 				F63782E01DC2EDFD0078FE7F /* Secrets.swift in Sources */,
 				F6FD10CD1DBEEAEB00B7E6EA /* AppDelegate.swift in Sources */,
 				F63782E61DC2F08F0078FE7F /* QuizletConstants.swift in Sources */,
