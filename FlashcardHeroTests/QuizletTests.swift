@@ -1,5 +1,5 @@
 //
-//  FlashcardHeroTests.swift
+//  QuizletTests.swift
 //  FlashcardHeroTests
 //
 //  Created by Jacob Foster Davis on 10/24/16.
@@ -21,17 +21,46 @@ class FlashcardHeroTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
+    func testQuizletTests() {
+        testQuizletSearchTestNoCriteria()
+        testQuizletSearchTestSimple()
+        
+    }
+    
+    func testQuizletSearchTestNoCriteria() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         print("Starting Test")
-        let expecting = expectation(description: "asynchronous request")
         
+        //using nothing.  This should fail
+        let testExpectation = expectation(description: "async request")
+        QuizletClient.sharedInstance.getQuizletSearchSetsBy() { (results, error) in
+            
+            print("Reached CompletionHandler of getQuizletSearchSetsBy noCriteriaExpectation")
+            print("results: \(results)")
+            print("error: \(error)")
+            
+            if error != nil {
+                testExpectation.fulfill()
+            }
+        }
+        
+        waitForExpectations(timeout: 10.0, handler: nil)
+    }
+    
+    func testQuizletSearchTestSimple() {
+        //using a search term
+        let testExpectation = expectation(description: "async request")
         QuizletClient.sharedInstance.getQuizletSearchSetsBy("birds") { (results, error) in
             
-            print("Test Completion Handler")
+            print("Reached CompletionHandler of getQuizletSearchSetsBy")
+            print("results: \(results)")
+            print("error: \(error)")
             
-            expecting.fulfill()
+            if error == nil {
+                testExpectation.fulfill()
+            }
+            
         }
         
         waitForExpectations(timeout: 10.0, handler: nil)

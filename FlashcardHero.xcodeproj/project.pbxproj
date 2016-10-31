@@ -27,7 +27,7 @@
 		F6FD10D41DBEEAEB00B7E6EA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6FD10D21DBEEAEB00B7E6EA /* Main.storyboard */; };
 		F6FD10D61DBEEAEB00B7E6EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F6FD10D51DBEEAEB00B7E6EA /* Assets.xcassets */; };
 		F6FD10D91DBEEAEB00B7E6EA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6FD10D71DBEEAEB00B7E6EA /* LaunchScreen.storyboard */; };
-		F6FD10E41DBEEAEB00B7E6EA /* FlashcardHeroTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FD10E31DBEEAEB00B7E6EA /* FlashcardHeroTests.swift */; };
+		F6FD10E41DBEEAEB00B7E6EA /* QuizletTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FD10E31DBEEAEB00B7E6EA /* QuizletTests.swift */; };
 		F6FD10EF1DBEEAEB00B7E6EA /* FlashcardHeroUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FD10EE1DBEEAEB00B7E6EA /* FlashcardHeroUITests.swift */; };
 /* End PBXBuildFile section */
 
@@ -76,7 +76,7 @@
 		F6FD10D81DBEEAEB00B7E6EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F6FD10DA1DBEEAEB00B7E6EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F6FD10DF1DBEEAEB00B7E6EA /* FlashcardHeroTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlashcardHeroTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F6FD10E31DBEEAEB00B7E6EA /* FlashcardHeroTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashcardHeroTests.swift; sourceTree = "<group>"; };
+		F6FD10E31DBEEAEB00B7E6EA /* QuizletTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizletTests.swift; sourceTree = "<group>"; };
 		F6FD10E51DBEEAEB00B7E6EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F6FD10EA1DBEEAEB00B7E6EA /* FlashcardHeroUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlashcardHeroUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6FD10EE1DBEEAEB00B7E6EA /* FlashcardHeroUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashcardHeroUITests.swift; sourceTree = "<group>"; };
@@ -235,7 +235,7 @@
 		F6FD10E21DBEEAEB00B7E6EA /* FlashcardHeroTests */ = {
 			isa = PBXGroup;
 			children = (
-				F6FD10E31DBEEAEB00B7E6EA /* FlashcardHeroTests.swift */,
+				F6FD10E31DBEEAEB00B7E6EA /* QuizletTests.swift */,
 				F6FD10E51DBEEAEB00B7E6EA /* Info.plist */,
 			);
 			path = FlashcardHeroTests;
@@ -555,7 +555,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F6FD10E41DBEEAEB00B7E6EA /* FlashcardHeroTests.swift in Sources */,
+				F6FD10E41DBEEAEB00B7E6EA /* QuizletTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

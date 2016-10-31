@@ -57,8 +57,61 @@ class QuizletClient : NSObject {
                 return
             }
             
+            //TODO: Use the JSON resonse from Quizlet to give more specific reasons for errors.
+            
+            /* GUARD: Did we get a 4xx response? */
+            guard let statusCode400 = (response as? HTTPURLResponse)?.statusCode , statusCode400 != 400 else {
+                switch (response as? HTTPURLResponse)!.statusCode {
+                default:
+                    sendError("Your request returned a status code of: 400 (Bad Request) \((response as? HTTPURLResponse)!.statusCode).", code: 2)
+                }
+                
+                return
+            }
+            
+            /* GUARD: Did we get a 4xx response? */
+            guard let statusCode401 = (response as? HTTPURLResponse)?.statusCode , statusCode401 != 401 else {
+                switch (response as? HTTPURLResponse)!.statusCode {
+                default:
+                    sendError("Your request returned a status code of: 401 (Unauthorized) \((response as? HTTPURLResponse)!.statusCode).", code: 2)
+                }
+                
+                return
+            }
+            
+            /* GUARD: Did we get a 4xx response? */
+            guard let statusCode404 = (response as? HTTPURLResponse)?.statusCode , statusCode404 != 404 else {
+                switch (response as? HTTPURLResponse)!.statusCode {
+                default:
+                    sendError("Your request returned a status code of: 404 (Not Found) \((response as? HTTPURLResponse)!.statusCode).", code: 2)
+                }
+                
+                return
+            }
+            
+            /* GUARD: Did we get a 4xx response? */
+            guard let statusCode405 = (response as? HTTPURLResponse)?.statusCode , statusCode405 != 405 else {
+                switch (response as? HTTPURLResponse)!.statusCode {
+                default:
+                    sendError("Your request returned a status code of: 405 (Method Not Allowed) \((response as? HTTPURLResponse)!.statusCode).", code: 2)
+                }
+                
+                return
+            }
+            
+            /* GUARD: Did we get a 5xx response? */
+            guard let statusCode500 = (response as? HTTPURLResponse)?.statusCode , statusCode500 != 500 else {
+                switch (response as? HTTPURLResponse)!.statusCode {
+                default:
+                    sendError("Your request returned a status code of: 500 (Server Error) \((response as? HTTPURLResponse)!.statusCode).", code: 2)
+                }
+                
+                return
+            }
+            
+            
             /* GUARD: Did we get a successful 2XX response? */
-            guard let statusCode = (response as? HTTPURLResponse)?.statusCode , statusCode >= 200 && statusCode <= 299 else {
+            guard let statusCode2xx = (response as? HTTPURLResponse)?.statusCode , statusCode2xx >= 200 && statusCode2xx <= 299 else {
                 switch (response as? HTTPURLResponse)!.statusCode {
                 default:
                     sendError("Your request returned a status code other than 2xx! Status code \((response as? HTTPURLResponse)!.statusCode).", code: 2)
@@ -66,6 +119,8 @@ class QuizletClient : NSObject {
                 
                 return
             }
+            
+
             
             /* GUARD: Was there any data returned? */
             guard let data = data else {
