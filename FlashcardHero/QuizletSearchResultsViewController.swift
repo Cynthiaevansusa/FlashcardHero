@@ -19,6 +19,7 @@ class QuizletSearchResultsViewController: UIViewController, UISearchBarDelegate,
     
     @IBOutlet weak var toolbar: UIToolbar!
     @IBOutlet weak var doneButton: UIBarButtonItem!
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
     
     
     var searchResults = [QuizletSetSearchResult]()
@@ -92,6 +93,10 @@ class QuizletSearchResultsViewController: UIViewController, UISearchBarDelegate,
     /*******************///MARK: Toolbar
     /******************************************************/
 
+    @IBAction func cancelButtonPressed() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func doneButtonPressed() {
         self.dismiss(animated: true, completion: nil)
     }

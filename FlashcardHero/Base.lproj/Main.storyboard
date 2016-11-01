@@ -274,8 +274,13 @@
                             <toolbar clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D1k-6Q-hhI">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <items>
+                                    <barButtonItem systemItem="cancel" id="WXu-nO-phE">
+                                        <connections>
+                                            <action selector="cancelButtonPressed" destination="Ork-Iu-8br" id="STx-da-H3V"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="sIb-56-nhG"/>
-                                    <barButtonItem systemItem="done" id="6f6-57-0lP">
+                                    <barButtonItem enabled="NO" systemItem="done" id="6f6-57-0lP">
                                         <connections>
                                             <action selector="doneButtonPressed" destination="Ork-Iu-8br" id="OeA-4W-913"/>
                                         </connections>
@@ -308,6 +313,7 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <connections>
+                        <outlet property="cancelButton" destination="WXu-nO-phE" id="XD9-Yh-Mfa"/>
                         <outlet property="doneButton" destination="6f6-57-0lP" id="8fF-qf-k6Q"/>
                         <outlet property="searchBar" destination="eu5-Sr-6v1" id="4eU-QY-g5f"/>
                         <outlet property="tableView" destination="Rdh-rR-uwh" id="enq-j2-Jxw"/>
