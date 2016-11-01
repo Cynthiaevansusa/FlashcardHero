@@ -235,12 +235,12 @@
         <!--Quizlet Search-->
         <scene sceneID="ZOi-Hm-sN8">
             <objects>
-                <viewController id="Ork-Iu-8br" userLabel="Quizlet Search" customClass="QuizletSearchResultsViewController" customModule="FlashcardHero" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="overCurrentContext" id="Ork-Iu-8br" userLabel="Quizlet Search" customClass="QuizletSearchResultsViewController" customModule="FlashcardHero" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="JWg-0n-YVg"/>
                         <viewControllerLayoutGuide type="bottom" id="d46-ae-tqa"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Ys6-JA-lMh">
+                    <view key="view" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="Ys6-JA-lMh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -263,10 +263,7 @@
                                 </connections>
                             </tableView>
                             <searchBar contentMode="redraw" placeholder="Search Quizlet for Sets" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eu5-Sr-6v1">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="uDz-da-mHM"/>
-                                </constraints>
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="barTintColor" red="0.40000000600000002" green="0.40000000600000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="search"/>
@@ -275,9 +272,8 @@
                                 </connections>
                             </searchBar>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="eu5-Sr-6v1" firstAttribute="top" secondItem="JWg-0n-YVg" secondAttribute="bottom" constant="-20" id="9Yf-xb-mWL"/>
+                            <constraint firstItem="eu5-Sr-6v1" firstAttribute="top" secondItem="JWg-0n-YVg" secondAttribute="bottom" id="9Yf-xb-mWL"/>
                             <constraint firstAttribute="trailing" secondItem="eu5-Sr-6v1" secondAttribute="trailing" id="Cyp-wH-dbz"/>
                             <constraint firstItem="d46-ae-tqa" firstAttribute="top" secondItem="Rdh-rR-uwh" secondAttribute="bottom" id="cdW-h4-WN9"/>
                             <constraint firstAttribute="trailing" secondItem="Rdh-rR-uwh" secondAttribute="trailing" id="iHw-Hu-JlQ"/>
@@ -286,6 +282,7 @@
                             <constraint firstItem="Rdh-rR-uwh" firstAttribute="top" secondItem="eu5-Sr-6v1" secondAttribute="bottom" id="oju-P8-WLJ"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <connections>
                         <outlet property="searchBar" destination="eu5-Sr-6v1" id="4eU-QY-g5f"/>
                         <outlet property="tableView" destination="Rdh-rR-uwh" id="enq-j2-Jxw"/>

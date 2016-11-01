@@ -31,6 +31,13 @@ class QuizletSearchResultsViewController: UIViewController, UISearchBarDelegate,
         //searchBar.delegate = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //put focus to the search bar
+        searchBar.becomeFirstResponder()
+    }
+    
     /******************************************************/
     /*******************///MARK: TableViewDataSource Delegate
     /******************************************************/
@@ -69,6 +76,10 @@ class QuizletSearchResultsViewController: UIViewController, UISearchBarDelegate,
             searchQuizletFor(searchTerm: searchTerm)
         }
         
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     /******************************************************/
