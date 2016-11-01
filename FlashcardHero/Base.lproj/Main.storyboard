@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -244,17 +245,88 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Rdh-rR-uwh">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="120" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Rdh-rR-uwh">
                                 <rect key="frame" x="0.0" y="104" width="375" height="563"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="QuizletSearchCell" id="UaZ-r9-4vQ">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="QuizletSearchCell" rowHeight="121" id="UaZ-r9-4vQ" customClass="CustomQuizletSearchBySetsResultsCell" customModule="FlashcardHero" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="121"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UaZ-r9-4vQ" id="FoE-tb-Dii">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="second" translatesAutoresizingMaskIntoConstraints="NO" id="TDD-al-BTs">
+                                                    <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="120" id="s5L-rc-GUe"/>
+                                                        <constraint firstAttribute="height" constant="120" id="uP8-rW-0kO"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gif-VE-mo0">
+                                                    <rect key="frame" x="128" y="0.0" width="239" height="34"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="34" id="phf-Bu-naN"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="27"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E9m-Qz-5YN">
+                                                    <rect key="frame" x="128" y="36" width="239" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="Hyx-Gr-eyt"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="italicSystem" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Terms" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HHz-df-tWj">
+                                                    <rect key="frame" x="133" y="93" width="51" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="22" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="WGW-9K-evR">
+                                                    <rect key="frame" x="128" y="59" width="60" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Creator" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="1zv-aX-Uki">
+                                                    <rect key="frame" x="196" y="69" width="171" height="43"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="171" id="bkv-cM-dxz"/>
+                                                        <constraint firstAttribute="height" constant="43" id="n82-Os-ZgP"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="LaoSangamMN" family="Lao Sangam MN" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="1zv-aX-Uki" secondAttribute="bottom" id="B6X-Ve-qaV"/>
+                                                <constraint firstAttribute="bottom" secondItem="TDD-al-BTs" secondAttribute="bottom" id="ERZ-eJ-LEu"/>
+                                                <constraint firstItem="E9m-Qz-5YN" firstAttribute="top" secondItem="gif-VE-mo0" secondAttribute="bottom" constant="2" id="G3i-di-S7F"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="1zv-aX-Uki" secondAttribute="trailing" id="Iag-5K-ony"/>
+                                                <constraint firstAttribute="trailing" secondItem="gif-VE-mo0" secondAttribute="trailing" constant="8" id="Kfh-Je-J4B"/>
+                                                <constraint firstItem="E9m-Qz-5YN" firstAttribute="leading" secondItem="TDD-al-BTs" secondAttribute="trailing" constant="8" id="U35-iq-2kB"/>
+                                                <constraint firstItem="gif-VE-mo0" firstAttribute="top" secondItem="FoE-tb-Dii" secondAttribute="top" id="USD-qp-4E3"/>
+                                                <constraint firstItem="gif-VE-mo0" firstAttribute="leading" secondItem="TDD-al-BTs" secondAttribute="trailing" constant="8" id="cAI-jC-8UP"/>
+                                                <constraint firstItem="TDD-al-BTs" firstAttribute="leading" secondItem="FoE-tb-Dii" secondAttribute="leading" id="rUv-0G-sbw"/>
+                                                <constraint firstItem="E9m-Qz-5YN" firstAttribute="trailing" secondItem="FoE-tb-Dii" secondAttribute="trailingMargin" id="tgV-p6-oOu"/>
+                                                <constraint firstItem="TDD-al-BTs" firstAttribute="top" secondItem="FoE-tb-Dii" secondAttribute="top" id="xA7-k5-iSN"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="creator" destination="1zv-aX-Uki" id="Wky-N9-90Q"/>
+                                            <outlet property="customDescription" destination="E9m-Qz-5YN" id="h0w-vT-4d6"/>
+                                            <outlet property="customImageView" destination="TDD-al-BTs" id="Jgx-QT-Pbl"/>
+                                            <outlet property="termCount" destination="WGW-9K-evR" id="ChT-nL-xu9"/>
+                                            <outlet property="title" destination="gif-VE-mo0" id="Rle-7X-zVA"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -399,5 +471,6 @@
     </scenes>
     <resources>
         <image name="first" width="30" height="30"/>
+        <image name="second" width="30" height="30"/>
     </resources>
 </document>

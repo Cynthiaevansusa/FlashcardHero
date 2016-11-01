@@ -55,15 +55,11 @@ class QuizletSearchResultsViewController: UIViewController, UISearchBarDelegate,
         
         //print("From cellForRowAtIndexPath.  There are ", String(self.sharedMemes.count), " shared Memes")
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "QuizletSearchCell")!
+        let cell = tableView.dequeueReusableCell(withIdentifier: "QuizletSearchCell")! as! CustomQuizletSearchBySetsResultsCell
 //        let StudentInformation = self.StudentInformations[(indexPath as NSIndexPath).row]
 //        
-//        // Set the name and image
-        cell.textLabel?.text = String(describing: searchResults[indexPath.row].id)
-        //cell.detailTextLabel?.text = (StudentInformation.mediaURL! as String)
-//
-//        //color it crazy
-//        cell.imageView?.backgroundColor = colorButton.getRandoColor()
+//      // Set the name and image
+        cell.quizletSetSearchResult = searchResults[indexPath.row]
         
         return cell
     }
@@ -101,46 +97,53 @@ class QuizletSearchResultsViewController: UIViewController, UISearchBarDelegate,
         self.dismiss(animated: true, completion: nil)
     }
     
+    func setDoneButton(enabled: Bool) {
+        doneButton.isEnabled = enabled
+    }
+    
     /******************************************************/
     /*******************///MARK: QuizletAPI
     /******************************************************/
 
     func searchQuizletFor(searchTerm: String) {
-        QuizletClient.sharedInstance.getQuizletSearchSetsBy(searchTerm) { (results, error) in
-            
-            print("Reached CompletionHandler of getQuizletSearchSetsBy")
-            print("results: \(results)")
-            print("error: \(error)")
-            
-            
-            
-            if error == nil {
-                print("Search success")
-                
-                
-                
-                for set in results! {
-                    print(set)
-                    if let setDictionary = set as? [String:AnyObject] {
-                                                
-                        do {
-                            if let quizletResult = try QuizletSetSearchResult(fromDataSet: setDictionary) {
-                                self.searchResults.append(quizletResult)
+        GCDBlackBox.runNetworkFunctionInBackground {
+            QuizletClient.sharedInstance.getQuizletSearchSetsBy(searchTerm) { (results, error) in
+                GCDBlackBox.performUIUpdatesOnMain {
+                    
+                    print("Reached CompletionHandler of getQuizletSearchSetsBy")
+                    print("results: \(results)")
+                    print("error: \(error)")
+                    
+                    
+                    
+                    if error == nil {
+                        print("Search success")
+                        
+                        
+                        
+                        for set in results! {
+                            print(set)
+                            if let setDictionary = set as? [String:AnyObject] {
+                                                        
+                                do {
+                                    if let quizletResult = try QuizletSetSearchResult(fromDataSet: setDictionary) {
+                                        self.searchResults.append(quizletResult)
+                                    }
+                                    
+                                }
+                                catch {
+                                    print("Error when creating quizletResult")
+                                }
+                                
+                                //self.searchResults.add(setDictionary["id"]! as! Int)
                             }
                             
                         }
-                        catch {
-                            print("Error when creating quizletResult")
-                        }
-                        
-                        //self.searchResults.add(setDictionary["id"]! as! Int)
+                        print("contents of search results: \(self.searchResults)")
+                        self.tableView.reloadData()
                     }
-                    
-                }
-                print("contents of search results: \(self.searchResults)")
-                self.tableView.reloadData()
-            }
-            
-        }
+                }//end of performUIUpdatesOnMain
+            } //end of getQuizletSearchSetsBy
+        }//end of runNetworkFunctionInBackground
     }
 }
