@@ -17,7 +17,7 @@ class QuizletSearchResultsViewController: UIViewController, UISearchBarDelegate,
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
-    var searchResults = NSMutableArray()
+    var searchResults = [QuizletSetSearchResult]()
 
     
     /******************************************************/
@@ -54,7 +54,7 @@ class QuizletSearchResultsViewController: UIViewController, UISearchBarDelegate,
 //        let StudentInformation = self.StudentInformations[(indexPath as NSIndexPath).row]
 //        
 //        // Set the name and image
-        cell.textLabel?.text = String(describing: searchResults[indexPath.row])
+        cell.textLabel?.text = String(describing: searchResults[indexPath.row].id)
         //cell.detailTextLabel?.text = (StudentInformation.mediaURL! as String)
 //
 //        //color it crazy
@@ -72,6 +72,8 @@ class QuizletSearchResultsViewController: UIViewController, UISearchBarDelegate,
         
         print("Search button clicked")
         
+        clearSearchResults()
+        
         if let searchTerm = searchBar.text {
             searchQuizletFor(searchTerm: searchTerm)
         }
@@ -80,6 +82,10 @@ class QuizletSearchResultsViewController: UIViewController, UISearchBarDelegate,
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    func clearSearchResults() {
+        searchResults.removeAll()
     }
     
     /******************************************************/
@@ -98,14 +104,27 @@ class QuizletSearchResultsViewController: UIViewController, UISearchBarDelegate,
             if error == nil {
                 print("Search success")
                 
+                
+                
                 for set in results! {
                     print(set)
-                    if let setDictionary = set as? [String:Any] {
-                        self.searchResults.add(setDictionary["id"]! as! Int)
+                    if let setDictionary = set as? [String:AnyObject] {
+                                                
+                        do {
+                            if let quizletResult = try QuizletSetSearchResult(fromDataSet: setDictionary) {
+                                self.searchResults.append(quizletResult)
+                            }
+                            
+                        }
+                        catch {
+                            print("Error when creating quizletResult")
+                        }
+                        
+                        //self.searchResults.add(setDictionary["id"]! as! Int)
                     }
                     
                 }
-                print(self.searchResults)
+                print("contents of search results: \(self.searchResults)")
                 self.tableView.reloadData()
             }
             
