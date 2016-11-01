@@ -17,6 +17,10 @@ class QuizletSearchResultsViewController: UIViewController, UISearchBarDelegate,
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var toolbar: UIToolbar!
+    @IBOutlet weak var doneButton: UIBarButtonItem!
+    
+    
     var searchResults = [QuizletSetSearchResult]()
 
     
@@ -80,12 +84,16 @@ class QuizletSearchResultsViewController: UIViewController, UISearchBarDelegate,
         
     }
     
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
     func clearSearchResults() {
         searchResults.removeAll()
+    }
+    
+    /******************************************************/
+    /*******************///MARK: Toolbar
+    /******************************************************/
+
+    @IBAction func doneButtonPressed() {
+        self.dismiss(animated: true, completion: nil)
     }
     
     /******************************************************/
