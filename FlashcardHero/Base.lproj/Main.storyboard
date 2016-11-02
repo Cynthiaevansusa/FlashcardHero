@@ -222,6 +222,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="31" id="p0c-g3-AZO"/>
                                                     </constraints>
+                                                    <color key="onTintColor" red="0.50196081400000003" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 </switch>
                                             </subviews>
                                             <constraints>
