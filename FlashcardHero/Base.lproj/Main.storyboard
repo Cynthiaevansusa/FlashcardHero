@@ -141,7 +141,7 @@
                                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="xfm-b5-U0X">
                                             <color key="tintColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
-                                                <segue destination="Ork-Iu-8br" kind="presentation" id="WUE-yi-9ad"/>
+                                                <action selector="addButtonPressed" destination="8rJ-Kc-sve" id="gKx-yq-8Nc"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -270,6 +270,7 @@
                         <nil key="title"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="addButton" destination="xfm-b5-U0X" id="ERW-Ns-Ahj"/>
                         <outlet property="gemTableView" destination="RTu-0k-8dt" id="fRq-GV-DkA"/>
                     </connections>
                 </viewController>
@@ -333,7 +334,7 @@
         <!--Quizlet Search-->
         <scene sceneID="ZOi-Hm-sN8">
             <objects>
-                <viewController modalPresentationStyle="overCurrentContext" id="Ork-Iu-8br" userLabel="Quizlet Search" customClass="QuizletSearchResultsViewController" customModule="FlashcardHero" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="QuizletSearchResultsViewController" modalPresentationStyle="overCurrentContext" id="Ork-Iu-8br" userLabel="Quizlet Search" customClass="QuizletSearchResultsViewController" customModule="FlashcardHero" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="JWg-0n-YVg"/>
                         <viewControllerLayoutGuide type="bottom" id="d46-ae-tqa"/>

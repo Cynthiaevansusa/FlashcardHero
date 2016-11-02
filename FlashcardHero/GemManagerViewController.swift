@@ -18,6 +18,7 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
 
     @IBOutlet weak var gemTableView: UITableView!
     
+    @IBOutlet weak var addButton: UIBarButtonItem!
     
     /******************************************************/
     /*******************///MARK: Life Cycle
@@ -44,6 +45,13 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
 
     func addToDataModel(_ QuizletSetSearchResults: [QuizletSetSearchResult]) {
         //take the array of QuizletSetSearchResults and add to CoreData
+        
+        for searchResult in QuizletSetSearchResults {
+            let newQuizletSet = QuizletSet(withQuizletSetSearchResult: searchResult, context: self.fetchedResultsController!.managedObjectContext)
+            //setsToDisplay.append(newQuizletSet)
+        }
+        
+        print("Got sets from the search.  sets are: \(setsToDisplay)")
     }
     
     /******************************************************/
@@ -58,7 +66,7 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         //TODO: replace as! UITAbleViewCell witha  custom cell
-        let cell = tableView.dequeueReusableCell(withIdentifier: "GemManagerCell", for: indexPath as IndexPath) 
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GemManagerCell", for: indexPath as IndexPath) as! CustomGemManagerCell
         let set = self.setsToDisplay[indexPath.row]
         
         //associate the photo with this cell, which will set all parts of image view
@@ -71,6 +79,17 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
 //        }
         
         return cell
+    }
+    
+    /******************************************************/
+    /*******************///MARK: Actions
+    /******************************************************/
+
+    @IBAction func addButtonPressed() {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "QuizletSearchResultsViewController") as! QuizletSearchResultsViewController
+        vc.quizletIngestDelegate = self
+        
+        present(vc, animated: true, completion: nil)
     }
     
     /******************************************************/
