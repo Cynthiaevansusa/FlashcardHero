@@ -81,6 +81,25 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         return cell
     }
     
+    //editing is allowed
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == UITableViewCellEditingStyle.delete) {
+            if let context = fetchedResultsController?.managedObjectContext {
+                //animate deletion.  adapted from
+                // http://stackoverflow.com/questions/31365253/delete-table-row-with-animation
+                
+                context.delete(setsToDisplay[indexPath.row])
+                
+                
+                //self.tableView.reloadData()
+            }
+        }
+    }
+    
     /******************************************************/
     /*******************///MARK: Actions
     /******************************************************/

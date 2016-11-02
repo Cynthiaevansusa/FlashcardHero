@@ -128,7 +128,8 @@ extension CoreDataQuizletTableViewController: NSFetchedResultsControllerDelegate
                 print("case insert")
             case .delete:
                 //TODO: Delete from collection view
-                removeFromsetsToDisplayByID(removeThisPhoto: theQuizletSet)
+                removeFromSetsToDisplayByID(removeThisSet: theQuizletSet)
+                tableView.deleteRows(at: [indexPath!], with: UITableViewRowAnimation.automatic)
                 print("case delete")
             case .update:
                 //TODO: replace a cell in the collection view
@@ -155,10 +156,10 @@ extension CoreDataQuizletTableViewController: NSFetchedResultsControllerDelegate
         self.tableView!.reloadData()
     }
     
-    func removeFromsetsToDisplayByID(removeThisPhoto: QuizletSet) {
-        for photo in setsToDisplay {
-            if photo.id == removeThisPhoto.id {
-                setsToDisplay.removeObject(object: photo)
+    func removeFromSetsToDisplayByID(removeThisSet: QuizletSet) {
+        for set in setsToDisplay {
+            if set.id == removeThisSet.id {
+                setsToDisplay.removeObject(object: set)
             }
         }
     }
