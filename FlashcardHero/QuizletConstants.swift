@@ -28,7 +28,7 @@ extension QuizletClient {
             //MARK: Sets
             static let GETSetById = "/sets/{SET_ID}" //View complete details (including all terms) of a single set.
             static let GETSetTermsById = "/sets/{SET_ID}/terms" //View just the terms in a single set.
-            static let GETPasswordProtectedSetById = "/sets/{SET_ID}/password" // Submit a password for a password-protected set.
+            static let GETPasswordProtectedSetById = "/sets/{SET_ID}/{SET_PASSWORD}" // Submit a password for a password-protected set.
             static let GETSets = "/sets" //View complete details of multiple sets at once.
             static let GETClassSetsById = "/classes/{CLASS_ID}/sets" //View complete details of all sets in a class.
             static let GETUsersSetsByUsername = "/users/{USERNAME}/sets" //View complete details about all the user's created sets.
@@ -70,7 +70,8 @@ extension QuizletClient {
         }
         
         struct MethodArgumentKeys {
-            //none
+            static let SetId = "SET_ID"
+            static let SetPassword = "SET_PASSWORD"
         }
         
         
@@ -139,6 +140,35 @@ extension QuizletClient {
         }
         
         struct ResponseKeys {
+            struct GetSets {
+                struct SingleSet {
+                    static let Id = "id"
+                    static let Url = "url"
+                    static let Title = "title"
+                    static let CreatedBy = "created_by"
+                    static let TermCount = "term_count"
+                    static let CreatedDate = "created_date"
+                    static let ModifiedDate = "modified_date"
+                    static let HasImages = "has_images"
+                    static let Subjects = "subjects"
+                    static let Terms = "terms"
+                    
+                    struct Term {
+                        static let Id = "id" //The term unique identifier.
+                        static let Term = "term" //The actual term (front side of the card).
+                        static let Definition = "definition" //The definition of the term.
+                        static let ImageObject = "image" //An object representing the image for the term. If there is no image associated with this term object, this will be null.
+                        
+                        struct Image {
+                            static let Url = "url" //The URL linking to the associated image.
+                            static let Width = "width" //The width of the image, in pixels.
+                            static let Height = "width" //The height of the image, in pixels.
+                        }
+                    }
+                    
+                }
+            }
+            
             struct Search {
                 struct ForSets {
                     static let TotalResults = "total_results"

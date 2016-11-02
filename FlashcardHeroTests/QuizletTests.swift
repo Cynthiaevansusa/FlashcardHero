@@ -66,6 +66,24 @@ class FlashcardHeroTests: XCTestCase {
         waitForExpectations(timeout: 10.0, handler: nil)
     }
     
+    func testQuizletGetSet() {
+        //using a search term
+        let testExpectation = expectation(description: "async request")
+        QuizletClient.sharedInstance.getQuizletSetBy(6009523, termsOnly: true) { (results, error) in
+            
+            print("Reached CompletionHandler of getQuizletSearchSetsBy")
+            print("results: \(results)")
+            print("error: \(error)")
+            
+            if error == nil {
+                testExpectation.fulfill()
+            }
+            
+        }
+        
+        waitForExpectations(timeout: 10.0, handler: nil)
+    }
+    
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measure {

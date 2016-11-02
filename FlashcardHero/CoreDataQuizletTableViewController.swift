@@ -132,11 +132,16 @@ extension CoreDataQuizletTableViewController: NSFetchedResultsControllerDelegate
                     tableView.insertRows(at: [setIndexPath], with: UITableViewRowAnimation.automatic)
                 }
                 
+                //TODO: initiate download of terms?
+                
                 print("case insert")
             case .delete:
-                //TODO: Delete from table view
+                //remove the set
                 removeFromSetsToDisplayByID(removeThisSet: theQuizletSet)
                 tableView.deleteRows(at: [indexPath!], with: UITableViewRowAnimation.automatic)
+                
+                //TODO: Remove the associated terms
+                
                 print("case delete")
             case .update:
                 //nothing is needed here because when data is updated the tableView displays datas current state

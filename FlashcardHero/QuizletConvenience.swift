@@ -12,6 +12,123 @@ import Foundation
 
 extension QuizletClient {
     
+    
+    /******************************************************/
+    /*******************///MARK: FETCHING
+    /******************************************************/
+
+    /**
+     Connects to Quizlet and performs a search for sets based on given criteria.  Search must include searchTerm or creator or both.
+     
+     - Parameters:
+     - searchTerm: A search string
+     - modifiedSince: filter for sets modified since this date
+     - creator: filter for sets created by the given user id
+     - imagesOnly: filter for sets that contain images
+     - page: filter for which page of results to return
+     - perPage: filter for number of results per page
+     
+     
+     - Returns: An array of JSON sets
+     */
+    func getQuizletSetBy(_ setId: Int, termsOnly: Bool = true, usingPassword: String? = nil, modifiedSince: NSDate? = nil, completionHandlerGetQuizletSearchSetsBy: @escaping (_ results: Any?, _ error: NSError?) -> Void) {
+        
+        //Date validation
+        if let modifiedSince = modifiedSince {
+            guard (modifiedSince.timeIntervalSince1970 < NSDate().timeIntervalSince1970) else {
+                //TODO: Notify user of error
+                return
+            }
+        }
+        
+        /* 1. Specify parameters, method (if has {key}), and HTTP body (if POST) */
+        var parameters = [String:Any]()
+        var mutableMethod: String
+        //add passed parameters to parameters dictionary
+        
+        if let usingPassword = usingPassword {
+            
+            
+            //specify the method
+            mutableMethod = QuizletClient.Constants.Methods.GETPasswordProtectedSetById
+            
+            //use the given setId to mutate the method
+            mutableMethod = substituteKeyInMethod(mutableMethod, key: QuizletClient.Constants.MethodArgumentKeys.SetId, value: String(setId))!
+            
+            //use the given password to mutate the method
+            mutableMethod = substituteKeyInMethod(mutableMethod, key: QuizletClient.Constants.MethodArgumentKeys.SetPassword, value: usingPassword)!
+            
+            //add authentication
+            ///TODO: Add parameters for an authenticated session
+            
+            
+        } else {
+            //not using a password
+            //specify the method
+
+            //check for terms only is true
+            if termsOnly {
+                mutableMethod = QuizletClient.Constants.Methods.GETSetTermsById
+            } else {
+                mutableMethod = QuizletClient.Constants.Methods.GETSetById
+            }
+            
+            //use the given setId to mutate the method
+            mutableMethod = substituteKeyInMethod(mutableMethod, key: QuizletClient.Constants.MethodArgumentKeys.SetId, value: String(setId))!
+
+        }
+        
+        //modifiedSince parameter
+        if let modifiedSince = modifiedSince {
+            parameters[QuizletClient.Constants.ParameterKeys.Search.Sets.ModifiedSince] = modifiedSince.timeIntervalSince1970
+        }
+        
+        /* 2. Make the request */
+        let _ = taskForGETMethod(method: mutableMethod, parameters: parameters) { (results, error) in
+            
+            /* 3. Send the desired value(s) to completion handler */
+            if let error = error {
+                print(error)
+                completionHandlerGetQuizletSearchSetsBy(nil, error)
+            } else {
+                //json should have returned a A dictionary with a key of "results" that contains an array of dictionaries
+//                if termsOnly {
+//                    //if request is for terms only, then response will only have a terms key
+//                    let responseKeys = QuizletClient.Constants.ResponseKeys.GetSets.SingleSet.Terms
+//                } else {
+//                    //if request is for set details too, then response will have a terms key
+//                    let responseKeys = QuizletClient.Constants.ResponseKeys.GetSets.SingleSet.Terms
+//                }
+                
+                
+                if let resultsArray = results as? [String:Any] { //dig into the JSON response dictionary to get the array at key "photos"
+                    
+                    print("Unwrapped JSON response from getQuizletSearchSetsBy:")
+                    print(resultsArray)
+
+                    completionHandlerGetQuizletSearchSetsBy(resultsArray, nil)
+                   
+                    
+                } else if let resultsArray = results as? NSArray {
+                    print("Unwrapped JSON response from getQuizletSearchSetsBy:")
+                    print(resultsArray)
+                    
+                    completionHandlerGetQuizletSearchSetsBy(resultsArray, nil)
+                
+                } else {
+                    print("\nDATA ERROR: Could not find \(QuizletClient.Constants.ResponseKeys.Search.ForSets.Sets) in \(results)")
+                    completionHandlerGetQuizletSearchSetsBy(nil, NSError(domain: "getQuizletSearchSetsBy parsing", code: 4, userInfo: [NSLocalizedDescriptionKey: "DATA ERROR: Failed to interpret data returned from Quizlet server (getQuizletSearchSetsBy)."]))
+                }
+            } // end of error check
+        } // end of taskForGetMethod Closure
+    } //end getQuizletSearchNearLatLong
+    
+    
+    /******************************************************/
+    /*******************///MARK: SEARCHING
+    /******************************************************/
+
+    
     /**
      Connects to Quizlet and performs a search for sets based on given criteria.  Search must include searchTerm or creator or both.
      
@@ -132,5 +249,5 @@ extension QuizletClient {
                 }
             } // end of error check
         } // end of taskForGetMethod Closure
-    } //end getQuizletSearchNearLatLong
+    } //end getQuizletSearchSetsBy
 }
