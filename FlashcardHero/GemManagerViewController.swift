@@ -117,7 +117,7 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
     }
     
     func activeSwitchToggled(_ sender: UISwitch) {
-        
+        sender.setOn(sender.isOn, animated: true)
         print("Switch is \(sender.isOn)")
         
         //adapted from http://stackoverflow.com/questions/31707335/how-do-i-change-a-switch-in-coredata-using-dynamic-tables-swift
