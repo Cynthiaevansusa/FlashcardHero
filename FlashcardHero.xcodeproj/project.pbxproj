@@ -12,6 +12,8 @@
 		E693593D7F76E6EF4FE5CAFC /* Pods_FlashcardHero.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B522429A4AD6863FC708186 /* Pods_FlashcardHero.framework */; };
 		F606B3751DBEED0000744EC7 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = F606B3741DBEED0000744EC7 /* README.md */; };
 		F606B3771DBEF2C600744EC7 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = F606B3761DBEF2C600744EC7 /* LICENSE */; };
+		F614C3471DC9885A00E7D3C8 /* QuizletSet+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F614C3451DC9885A00E7D3C8 /* QuizletSet+CoreDataClass.swift */; };
+		F614C3481DC9885A00E7D3C8 /* QuizletSet+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F614C3461DC9885A00E7D3C8 /* QuizletSet+CoreDataProperties.swift */; };
 		F63782CA1DC2E1EC0078FE7F /* Documents in Resources */ = {isa = PBXBuildFile; fileRef = F63782C91DC2E1EC0078FE7F /* Documents */; };
 		F63782D11DC2E3C00078FE7F /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63782D01DC2E3C00078FE7F /* GCDBlackBox.swift */; };
 		F63782D31DC2E3F50078FE7F /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63782D21DC2E3F50078FE7F /* CoreDataStack.swift */; };
@@ -26,8 +28,6 @@
 		F66B5E4E1DC833C600052B7F /* QuizletSetSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66B5E4D1DC833C600052B7F /* QuizletSetSearchResult.swift */; };
 		F67D15ED1DC938B9002975C7 /* CustomQuizletSearchBySetsResultsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67D15EC1DC938B9002975C7 /* CustomQuizletSearchBySetsResultsCell.swift */; };
 		F67D15F01DC97FCC002975C7 /* FlashcardHeroModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F67D15EE1DC97FCC002975C7 /* FlashcardHeroModel.xcdatamodeld */; };
-		F67D15F31DC981CE002975C7 /* QuizletSet+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67D15F11DC981CE002975C7 /* QuizletSet+CoreDataClass.swift */; };
-		F67D15F41DC981CE002975C7 /* QuizletSet+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67D15F21DC981CE002975C7 /* QuizletSet+CoreDataProperties.swift */; };
 		F6FD10CD1DBEEAEB00B7E6EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FD10CC1DBEEAEB00B7E6EA /* AppDelegate.swift */; };
 		F6FD10CF1DBEEAEB00B7E6EA /* CommandCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FD10CE1DBEEAEB00B7E6EA /* CommandCenterViewController.swift */; };
 		F6FD10D11DBEEAEB00B7E6EA /* PerformanceStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FD10D01DBEEAEB00B7E6EA /* PerformanceStatisticsViewController.swift */; };
@@ -65,6 +65,8 @@
 		721DBCFB513CB27DA525DB96 /* Pods-FlashcardHeroUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlashcardHeroUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FlashcardHeroUITests/Pods-FlashcardHeroUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F606B3741DBEED0000744EC7 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		F606B3761DBEF2C600744EC7 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		F614C3451DC9885A00E7D3C8 /* QuizletSet+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "QuizletSet+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F614C3461DC9885A00E7D3C8 /* QuizletSet+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "QuizletSet+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F63782C91DC2E1EC0078FE7F /* Documents */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Documents; path = FlashcardHero/Documents; sourceTree = "<group>"; };
 		F63782D01DC2E3C00078FE7F /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
 		F63782D21DC2E3F50078FE7F /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -79,8 +81,6 @@
 		F66B5E4D1DC833C600052B7F /* QuizletSetSearchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizletSetSearchResult.swift; sourceTree = "<group>"; };
 		F67D15EC1DC938B9002975C7 /* CustomQuizletSearchBySetsResultsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomQuizletSearchBySetsResultsCell.swift; sourceTree = "<group>"; };
 		F67D15EF1DC97FCC002975C7 /* FlashcardHeroModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FlashcardHeroModel.xcdatamodel; sourceTree = "<group>"; };
-		F67D15F11DC981CE002975C7 /* QuizletSet+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "QuizletSet+CoreDataClass.swift"; sourceTree = "<group>"; };
-		F67D15F21DC981CE002975C7 /* QuizletSet+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "QuizletSet+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F6FD10C91DBEEAEB00B7E6EA /* FlashcardHero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlashcardHero.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6FD10CC1DBEEAEB00B7E6EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F6FD10CE1DBEEAEB00B7E6EA /* CommandCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandCenterViewController.swift; sourceTree = "<group>"; };
@@ -211,8 +211,8 @@
 		F66B5E471DC6D30500052B7F /* Quizlet */ = {
 			isa = PBXGroup;
 			children = (
-				F67D15F11DC981CE002975C7 /* QuizletSet+CoreDataClass.swift */,
-				F67D15F21DC981CE002975C7 /* QuizletSet+CoreDataProperties.swift */,
+				F614C3451DC9885A00E7D3C8 /* QuizletSet+CoreDataClass.swift */,
+				F614C3461DC9885A00E7D3C8 /* QuizletSet+CoreDataProperties.swift */,
 			);
 			name = Quizlet;
 			sourceTree = "<group>";
@@ -593,13 +593,13 @@
 				F6FD10CF1DBEEAEB00B7E6EA /* CommandCenterViewController.swift in Sources */,
 				F63782D81DC2E4440078FE7F /* Utilities.swift in Sources */,
 				F67D15ED1DC938B9002975C7 /* CustomQuizletSearchBySetsResultsCell.swift in Sources */,
-				F67D15F31DC981CE002975C7 /* QuizletSet+CoreDataClass.swift in Sources */,
+				F614C3471DC9885A00E7D3C8 /* QuizletSet+CoreDataClass.swift in Sources */,
 				F63782D11DC2E3C00078FE7F /* GCDBlackBox.swift in Sources */,
 				F63782E51DC2F08F0078FE7F /* QuizletConvenience.swift in Sources */,
 				F63782E41DC2F08F0078FE7F /* QuizletClient.swift in Sources */,
 				F67D15F01DC97FCC002975C7 /* FlashcardHeroModel.xcdatamodeld in Sources */,
 				F66B5E4E1DC833C600052B7F /* QuizletSetSearchResult.swift in Sources */,
-				F67D15F41DC981CE002975C7 /* QuizletSet+CoreDataProperties.swift in Sources */,
+				F614C3481DC9885A00E7D3C8 /* QuizletSet+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
