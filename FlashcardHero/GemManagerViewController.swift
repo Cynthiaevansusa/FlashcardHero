@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class GemManagerViewController: UITableViewController, UISearchBarDelegate {
+class GemManagerViewController: UITableViewController, UISearchBarDelegate, QuizletSetSearchResultIngesterDelegate {
 
     /******************************************************/
     /*******************///MARK: Properties
@@ -29,6 +29,13 @@ class GemManagerViewController: UITableViewController, UISearchBarDelegate {
 
     }
     
+    /******************************************************/
+    /*******************///MARK: QuizletSetSearchResultIngesterDelegate
+    /******************************************************/
+
+    func addToDataModel(_ QuizletSetSearchResults: [QuizletSetSearchResult]) {
+        //take the array of QuizletSetSearchResults and add to CoreData
+    }
     
     /******************************************************/
     /*******************///MARK: Search Button

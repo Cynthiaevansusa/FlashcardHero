@@ -9,6 +9,11 @@
 import Foundation
 import UIKit
 
+//this protocol allows the QuizletSearchResultsViewController to send results back without doing the CoreData stuff itself
+protocol QuizletSetSearchResultIngesterDelegate: class {
+    func addToDataModel(_ QuizletSetSearchResults: [QuizletSetSearchResult])
+}
+
 class QuizletSearchResultsViewController: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
 
     /******************************************************/
@@ -21,9 +26,9 @@ class QuizletSearchResultsViewController: UIViewController, UISearchBarDelegate,
     @IBOutlet weak var doneButton: UIBarButtonItem!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     
-    
     var searchResults = [QuizletSetSearchResult]()
 
+    var quizletIngestDelegate: QuizletSetSearchResultIngesterDelegate?
     
     /******************************************************/
     /*******************///MARK: Life Cycle
@@ -114,12 +119,33 @@ class QuizletSearchResultsViewController: UIViewController, UISearchBarDelegate,
     
     @IBAction func doneButtonPressed() {
         //save the selected rows as core data objects.
+        let setsToSendToCoreData = createResultsArrayFromSelected()
+        
+        //print("Done pressed.  Will pass these objects to CoreData: \(setsToSendToCoreData)")
+        if let delegate = self.quizletIngestDelegate {
+            delegate.addToDataModel(setsToSendToCoreData)
+        } else {
+            //TODO: Handle issue where there was no delegate
+        }
         
         self.dismiss(animated: true, completion: nil)
     }
     
     func setDoneButton(enabled: Bool) {
         doneButton.isEnabled = enabled
+    }
+    
+    func createResultsArrayFromSelected() -> [QuizletSetSearchResult] {
+        var arrayOfResults = [QuizletSetSearchResult]()
+        
+        //check for nil
+        if let indexPaths = tableView.indexPathsForSelectedRows {
+            for indexPath in indexPaths {
+                arrayOfResults.append(searchResults[indexPath.row])
+            }
+        }
+        
+        return arrayOfResults
     }
     
     /******************************************************/
