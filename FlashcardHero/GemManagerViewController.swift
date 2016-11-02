@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class GemManagerViewController: UITableViewController, UISearchBarDelegate, QuizletSetSearchResultIngesterDelegate {
+class GemManagerViewController: CoreDataQuizletTableViewController, UISearchBarDelegate, QuizletSetSearchResultIngesterDelegate {
 
     /******************************************************/
     /*******************///MARK: Properties
