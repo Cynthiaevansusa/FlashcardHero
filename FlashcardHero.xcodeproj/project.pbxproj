@@ -15,6 +15,7 @@
 		F614C3471DC9885A00E7D3C8 /* QuizletSet+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F614C3451DC9885A00E7D3C8 /* QuizletSet+CoreDataClass.swift */; };
 		F614C3481DC9885A00E7D3C8 /* QuizletSet+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F614C3461DC9885A00E7D3C8 /* QuizletSet+CoreDataProperties.swift */; };
 		F614C34A1DC999FC00E7D3C8 /* CoreDataQuizletTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F614C3491DC999FC00E7D3C8 /* CoreDataQuizletTableViewController.swift */; };
+		F614C34C1DC9A16A00E7D3C8 /* CustomGemManagerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F614C34B1DC9A16A00E7D3C8 /* CustomGemManagerCell.swift */; };
 		F63782CA1DC2E1EC0078FE7F /* Documents in Resources */ = {isa = PBXBuildFile; fileRef = F63782C91DC2E1EC0078FE7F /* Documents */; };
 		F63782D11DC2E3C00078FE7F /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63782D01DC2E3C00078FE7F /* GCDBlackBox.swift */; };
 		F63782D31DC2E3F50078FE7F /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63782D21DC2E3F50078FE7F /* CoreDataStack.swift */; };
@@ -69,6 +70,7 @@
 		F614C3451DC9885A00E7D3C8 /* QuizletSet+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "QuizletSet+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F614C3461DC9885A00E7D3C8 /* QuizletSet+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "QuizletSet+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F614C3491DC999FC00E7D3C8 /* CoreDataQuizletTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataQuizletTableViewController.swift; sourceTree = "<group>"; };
+		F614C34B1DC9A16A00E7D3C8 /* CustomGemManagerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomGemManagerCell.swift; sourceTree = "<group>"; };
 		F63782C91DC2E1EC0078FE7F /* Documents */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Documents; path = FlashcardHero/Documents; sourceTree = "<group>"; };
 		F63782D01DC2E3C00078FE7F /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
 		F63782D21DC2E3F50078FE7F /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				F6FD10D21DBEEAEB00B7E6EA /* Main.storyboard */,
 				F6FD10D71DBEEAEB00B7E6EA /* LaunchScreen.storyboard */,
 				F67D15EC1DC938B9002975C7 /* CustomQuizletSearchBySetsResultsCell.swift */,
+				F614C34B1DC9A16A00E7D3C8 /* CustomGemManagerCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -601,6 +604,7 @@
 				F63782E51DC2F08F0078FE7F /* QuizletConvenience.swift in Sources */,
 				F63782E41DC2F08F0078FE7F /* QuizletClient.swift in Sources */,
 				F67D15F01DC97FCC002975C7 /* FlashcardHeroModel.xcdatamodeld in Sources */,
+				F614C34C1DC9A16A00E7D3C8 /* CustomGemManagerCell.swift in Sources */,
 				F66B5E4E1DC833C600052B7F /* QuizletSetSearchResult.swift in Sources */,
 				F614C34A1DC999FC00E7D3C8 /* CoreDataQuizletTableViewController.swift in Sources */,
 				F614C3481DC9885A00E7D3C8 /* QuizletSet+CoreDataProperties.swift in Sources */,
