@@ -109,7 +109,7 @@ extension CoreDataQuizletTableViewController {
 extension CoreDataQuizletTableViewController: NSFetchedResultsControllerDelegate {
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        
+        self.tableView.beginUpdates()
     }
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
@@ -124,6 +124,11 @@ extension CoreDataQuizletTableViewController: NSFetchedResultsControllerDelegate
             case .insert:
                 //this will be done in the view controller so it can be selected
                 setsToDisplay.append(theQuizletSet)
+                //animate the insertion of new cells
+                if let index = setsToDisplay.getIndex(of: theQuizletSet) {
+                    let setIndexPath = IndexPath(row: index, section: 0)
+                    tableView.insertRows(at: [setIndexPath], with: UITableViewRowAnimation.automatic)
+                }
                 
                 print("case insert")
             case .delete:
@@ -132,8 +137,7 @@ extension CoreDataQuizletTableViewController: NSFetchedResultsControllerDelegate
                 tableView.deleteRows(at: [indexPath!], with: UITableViewRowAnimation.automatic)
                 print("case delete")
             case .update:
-                //TODO: replace a cell in the collection view
-                //setsToDisplay[indexPath!.row] = theQuizletSet
+                //nothing is needed here because when data is updated the tableView displays datas current state
                 print("case update")
             case .move:
                 //TODO: move a cell... this may not be needed
@@ -153,8 +157,10 @@ extension CoreDataQuizletTableViewController: NSFetchedResultsControllerDelegate
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         //tableView.endUpdates()
-        print("About to reload collection view data")
-        self.tableView!.reloadData()
+        self.tableView.endUpdates()
+        
+        //print("About to reload collection view data")
+        //self.tableView!.reloadData()
     }
     
     func removeFromSetsToDisplayByID(removeThisSet: QuizletSet) {

@@ -56,4 +56,12 @@ extension Array where Element: Equatable {
             print("Couldn't remove the object")
         }
     }
+    
+    func getIndex(of object: Element) -> Array.Index?{
+        if let index = index(of: object) {
+            return index
+        } else {
+            return nil
+        }
+    }
 }
