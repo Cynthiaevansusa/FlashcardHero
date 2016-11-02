@@ -21150,11 +21150,11 @@ imageData\
 									<key>Color</key>
 									<dict>
 										<key>b</key>
-										<string>0</string>
+										<string>0.25098</string>
 										<key>g</key>
-										<string>0</string>
+										<string>0.501961</string>
 										<key>r</key>
-										<string>1</string>
+										<string>0</string>
 									</dict>
 									<key>Width</key>
 									<real>2</real>
@@ -21208,11 +21208,11 @@ imageData\
 									<key>Color</key>
 									<dict>
 										<key>b</key>
-										<string>0</string>
+										<string>0.25098</string>
 										<key>g</key>
-										<string>0</string>
+										<string>0.501961</string>
 										<key>r</key>
-										<string>1</string>
+										<string>0</string>
 									</dict>
 									<key>Width</key>
 									<real>2</real>
@@ -22018,7 +22018,7 @@ name}</string>
 		</dict>
 	</array>
 	<key>ModificationDate</key>
-	<string>2016-10-31 01:10:17 +0000</string>
+	<string>2016-11-02 18:42:41 +0000</string>
 	<key>Modifier</key>
 	<string>Jacob Foster Davis</string>
 	<key>NotesVisible</key>
