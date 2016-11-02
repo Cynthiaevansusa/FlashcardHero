@@ -143,7 +143,7 @@ extension QuizletClient {
      
      - Returns: An array of JSON sets
      */
-    func getQuizletSearchSetsBy(_ searchTerm: String? = nil, modifiedSince: NSDate? = nil, creator: String? = nil, imagesOnly: Bool? = nil, page: Int? = nil, perPage: Int? = nil, completionHandlerGetQuizletSearchSetsBy: @escaping (_ results: NSArray?, _ error: NSError?) -> Void) {
+    func getQuizletSearchSetsBy(_ searchTerm: String? = nil, modifiedSince: NSDate? = nil, creator: String? = nil, imagesOnly: Bool? = nil, page: Int? = nil, perPage: Int? = nil, completionHandlerGetQuizletSearchSetsBy: @escaping (_ results: [QuizletSetSearchResult]?, _ error: NSError?) -> Void) {
         
         //Date validation
         if let modifiedSince = modifiedSince {
@@ -229,19 +229,26 @@ extension QuizletClient {
                     print("Unwrapped JSON response from getQuizletSearchSetsBy:")
                     print(resultsArray)
                     
-//                    if let photoArray = resultsArray[QuizletClient.Constants.ResponseKeys.Photo] as? [[String:Any]]
-//                    {
-////                        print("Array of Photos from getQuizletSearchSetsBy:")
-////                        print(photoArray)
-//////                        //try to put these results into a QuizletPhotoResults struct
-////                        let QuizletResultsObject = QuizletPhotoResults(fromJSONArrayOfPhotoDictionaries: photoArray)
-                        completionHandlerGetQuizletSearchSetsBy(resultsArray, nil)
-//
-//                        
-//                    } else {
-//                        print("\nDATA ERROR: Could not find \(QuizletClient.Constants.ResponseKeys.Photo) in \(resultsArray)")
-//                        completionHandlerGetQuizletSearchSetsBy(nil, NSError(domain: "getQuizletSearchSetsBy parsing", code: 4, userInfo: [NSLocalizedDescriptionKey: "DATA ERROR: Failed to interpret data returned from Quizlet server (getQuizletSearchSetsBy)."]))
-//                    }
+                    var quizletResultsToReturn = [QuizletSetSearchResult]()
+                    
+                    for set in resultsArray {
+                        //print(set)
+                        if let setDictionary = set as? [String:AnyObject] {
+                            
+                            do {
+                                if let quizletResult = try QuizletSetSearchResult(fromDataSet: setDictionary) {
+                                    quizletResultsToReturn.append(quizletResult)
+                                }
+                                
+                            }
+                            catch {
+                                //TODO: handle error
+                                print("Error when creating a quizletResult")
+                            }
+                        }
+                    }
+
+                    completionHandlerGetQuizletSearchSetsBy(quizletResultsToReturn, nil)
                     
                 } else {
                     print("\nDATA ERROR: Could not find \(QuizletClient.Constants.ResponseKeys.Search.ForSets.Sets) in \(results)")

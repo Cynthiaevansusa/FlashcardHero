@@ -165,27 +165,9 @@ class QuizletSearchResultsViewController: UIViewController, UISearchBarDelegate,
                     
                     if error == nil {
                         print("Search success")
-                        
-                        
-                        
+
                         for set in results! {
-                            //print(set)
-                            if let setDictionary = set as? [String:AnyObject] {
-                                                        
-                                do {
-                                    if let quizletResult = try QuizletSetSearchResult(fromDataSet: setDictionary) {
-                                        self.searchResults.append(quizletResult)
-                                    }
-                                    
-                                }
-                                catch {
-                                    //TODO: handle error
-                                    print("Error when creating quizletResult")
-                                }
-                                
-                                //self.searchResults.add(setDictionary["id"]! as! Int)
-                            }
-                            
+                            self.searchResults.append(set)
                         }
                         //print("contents of search results: \(self.searchResults)")
                         self.tableView.reloadData()
