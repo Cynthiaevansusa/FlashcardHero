@@ -29,7 +29,7 @@ class CustomGemManagerCell: UITableViewCell {
             }
             
             //try to set the detailTextLabel
-            if let description = quizletSet?.description {
+            if let description = quizletSet?.setDescription {
                 self.customDescription.text = description
             }
             

@@ -60,6 +60,8 @@ public class QuizletSet: NSManagedObject {
                 //description is optional or blank
                 if let setDescription = withQuizletSetSearchResult.description {
                     self.setDescription = setDescription
+                } else {
+                    self.setDescription = ""
                 }
                 //subjects are sent as an array.  For now this will be stored as a string
                 if let subjects = withQuizletSetSearchResult.subjects {
@@ -73,6 +75,8 @@ public class QuizletSet: NSManagedObject {
                         subjectString += String(describing: subject)
                     }
                     self.subjects = subjectString
+                } else {
+                    self.subjects = ""
                 }
                 
                 self.termCount = Int64(termCount)
