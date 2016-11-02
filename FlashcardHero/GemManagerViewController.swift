@@ -10,13 +10,13 @@ import Foundation
 import UIKit
 import CoreData
 
-class GemManagerViewController: CoreDataQuizletTableViewController, UISearchBarDelegate, QuizletSetSearchResultIngesterDelegate {
+class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewDataSource, QuizletSetSearchResultIngesterDelegate {
 
     /******************************************************/
     /*******************///MARK: Properties
     /******************************************************/
 
-    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var gemTableView: UITableView!
     
     
     /******************************************************/
@@ -25,9 +25,17 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UISearchBarD
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        searchBar.delegate = self
 
+        //set tableView
+        tableView = gemTableView
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        setupFetchedResultsController()
+        
+        //load data to table if there is any
+        setupTableView()
+        
     }
     
     /******************************************************/
@@ -36,6 +44,33 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UISearchBarD
 
     func addToDataModel(_ QuizletSetSearchResults: [QuizletSetSearchResult]) {
         //take the array of QuizletSetSearchResults and add to CoreData
+    }
+    
+    /******************************************************/
+    /*******************///MARK: UITableViewDataSource
+    /******************************************************/
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("There are ", String(self.setsToDisplay.count), " sets to display")
+        return self.setsToDisplay.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        //TODO: replace as! UITAbleViewCell witha  custom cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GemManagerCell", for: indexPath as IndexPath) 
+        let set = self.setsToDisplay[indexPath.row]
+        
+        //associate the photo with this cell, which will set all parts of image view
+        cell.quizletSet = set
+        
+//        if photo.isTransitioningImage {
+//            cell.startActivityIndicator()
+//        } else {
+//            cell.stopActivityIndicator()
+//        }
+        
+        return cell
     }
     
     /******************************************************/
@@ -84,28 +119,6 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UISearchBarD
 //        }
         
         
-    }
-    
-    /******************************************************/
-    /*******************///MARK: Search Button
-    /******************************************************/
-
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-        
-        segueSearch(searchBar)
-    }
-    
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        
-        
-        
-    }
-    
-    func segueSearch(_ searchBar: UISearchBar) {
-        print("searching for \(searchBar.text)")
-        
-        self.performSegue(withIdentifier: "QuizletSearchResults", sender: self)
     }
 
 }

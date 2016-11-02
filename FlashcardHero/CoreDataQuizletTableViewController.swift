@@ -41,7 +41,7 @@ class CoreDataQuizletTableViewController: UIViewController, UITableViewDelegate 
     
     
     
-    var tableView: UICollectionView!
+    var tableView: UITableView!
     var setsToDisplay = [QuizletSet]()
     
     var stack: CoreDataStack!
