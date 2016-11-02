@@ -109,6 +109,7 @@ extension CoreDataQuizletTableViewController {
 extension CoreDataQuizletTableViewController: NSFetchedResultsControllerDelegate {
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        //about to make updates.  wrapping actions with updates will allow for animation and auto reloading
         self.tableView.beginUpdates()
     }
     
@@ -124,6 +125,7 @@ extension CoreDataQuizletTableViewController: NSFetchedResultsControllerDelegate
             case .insert:
                 //this will be done in the view controller so it can be selected
                 setsToDisplay.append(theQuizletSet)
+                
                 //animate the insertion of new cells
                 if let index = setsToDisplay.getIndex(of: theQuizletSet) {
                     let setIndexPath = IndexPath(row: index, section: 0)
@@ -132,7 +134,7 @@ extension CoreDataQuizletTableViewController: NSFetchedResultsControllerDelegate
                 
                 print("case insert")
             case .delete:
-                //TODO: Delete from collection view
+                //TODO: Delete from table view
                 removeFromSetsToDisplayByID(removeThisSet: theQuizletSet)
                 tableView.deleteRows(at: [indexPath!], with: UITableViewRowAnimation.automatic)
                 print("case delete")
@@ -156,11 +158,8 @@ extension CoreDataQuizletTableViewController: NSFetchedResultsControllerDelegate
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        //tableView.endUpdates()
+        //finished with updates, allow table view to animate and reload
         self.tableView.endUpdates()
-        
-        //print("About to reload collection view data")
-        //self.tableView!.reloadData()
     }
     
     func removeFromSetsToDisplayByID(removeThisSet: QuizletSet) {
