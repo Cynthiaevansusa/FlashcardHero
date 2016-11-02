@@ -9,6 +9,10 @@
 import Foundation
 import UIKit
 
+protocol SettingCellDelegate: class {
+    func didChangeSwitchState(sender: CustomGemManagerCell, isOn: Bool)
+}
+
 class CustomGemManagerCell: UITableViewCell {
     
     //label
@@ -19,6 +23,8 @@ class CustomGemManagerCell: UITableViewCell {
     @IBOutlet weak var customDescription: UILabel!
     @IBOutlet weak var customImageView: UIImageView!
     @IBOutlet weak var activeSwitch: UISwitch!
+    
+    weak var cellDelegate: SettingCellDelegate?
     
     //QuizletSetSearchResult
     var quizletSet : QuizletSet? {
@@ -48,6 +54,11 @@ class CustomGemManagerCell: UITableViewCell {
             }
         
         }
+        
+    }
+    
+    @IBAction func handledSwitchChange(sender: UISwitch) {
+        self.cellDelegate?.didChangeSwitchState(sender: self, isOn: activeSwitch.isOn)
         
     }
 }

@@ -133,6 +133,7 @@ extension CoreDataQuizletTableViewController: NSFetchedResultsControllerDelegate
                 print("case delete")
             case .update:
                 //TODO: replace a cell in the collection view
+                //setsToDisplay[indexPath!.row] = theQuizletSet
                 print("case update")
             case .move:
                 //TODO: move a cell... this may not be needed
