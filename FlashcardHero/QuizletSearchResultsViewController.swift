@@ -44,6 +44,25 @@ class QuizletSearchResultsViewController: UIViewController, UISearchBarDelegate,
     }
     
     /******************************************************/
+    /*******************///MARK: UITableViewDelegate
+    /******************************************************/
+
+    //when a row is selected
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //check if the Done button needs be enabled
+        if !doneButton.isEnabled {
+            setDoneButton(enabled: true)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        //check to see if Done button needs to be disabled
+        if doneButton.isEnabled && tableView.indexPathsForSelectedRows == nil {
+            setDoneButton(enabled: false)
+        }
+    }
+    
+    /******************************************************/
     /*******************///MARK: TableViewDataSource Delegate
     /******************************************************/
 
@@ -111,8 +130,8 @@ class QuizletSearchResultsViewController: UIViewController, UISearchBarDelegate,
                 GCDBlackBox.performUIUpdatesOnMain {
                     
                     print("Reached CompletionHandler of getQuizletSearchSetsBy")
-                    print("results: \(results)")
-                    print("error: \(error)")
+                    //print("results: \(results)")
+                    //print("error: \(error)")
                     
                     
                     
@@ -122,7 +141,7 @@ class QuizletSearchResultsViewController: UIViewController, UISearchBarDelegate,
                         
                         
                         for set in results! {
-                            print(set)
+                            //print(set)
                             if let setDictionary = set as? [String:AnyObject] {
                                                         
                                 do {
@@ -132,6 +151,7 @@ class QuizletSearchResultsViewController: UIViewController, UISearchBarDelegate,
                                     
                                 }
                                 catch {
+                                    //TODO: handle error
                                     print("Error when creating quizletResult")
                                 }
                                 
@@ -139,8 +159,10 @@ class QuizletSearchResultsViewController: UIViewController, UISearchBarDelegate,
                             }
                             
                         }
-                        print("contents of search results: \(self.searchResults)")
+                        //print("contents of search results: \(self.searchResults)")
                         self.tableView.reloadData()
+                    } else {
+                        //TODO: handle error
                     }
                 }//end of performUIUpdatesOnMain
             } //end of getQuizletSearchSetsBy

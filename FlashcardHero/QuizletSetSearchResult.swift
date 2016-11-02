@@ -203,7 +203,7 @@ struct QuizletSetSearchResult {
                     throw QuizletSetSearchAssignmentError.badInputValues(property: "editable")
                 }
             case "has_access":
-                print("looking at has_access. value is \"\(value)\"")
+                //print("looking at has_access. value is \"\(value)\"")
                 if let value = value as? Int , value == 0 {
                     has_access = false
                 } else if let value = value as? Int , value == 1 {
