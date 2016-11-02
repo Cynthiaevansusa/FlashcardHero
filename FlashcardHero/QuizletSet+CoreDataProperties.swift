@@ -37,5 +37,6 @@ extension QuizletSet {
     @NSManaged public var title: String
     @NSManaged public var url: String
     @NSManaged public var visibility: String
+    @NSManaged public var isActive: Bool
 
 }

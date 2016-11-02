@@ -79,6 +79,8 @@ public class QuizletSet: NSManagedObject {
                 self.title = title
                 self.url = url
                 self.visibility = visibility
+                //Active starts as true
+                self.isActive = true
                 
             } else {
                 //TODO: throw an error because everything wasn't as expected

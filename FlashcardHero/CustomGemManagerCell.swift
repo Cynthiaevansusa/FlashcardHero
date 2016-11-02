@@ -18,6 +18,7 @@ class CustomGemManagerCell: UITableViewCell {
     
     @IBOutlet weak var customDescription: UILabel!
     @IBOutlet weak var customImageView: UIImageView!
+    @IBOutlet weak var activeSwitch: UISwitch!
     
     //QuizletSetSearchResult
     var quizletSet : QuizletSet? {
@@ -42,6 +43,10 @@ class CustomGemManagerCell: UITableViewCell {
                 self.creator.text = creator
             }
             
+            if let isSwitchOn = quizletSet?.isActive {
+                self.activeSwitch.isOn = isSwitchOn
+            }
+        
         }
         
     }

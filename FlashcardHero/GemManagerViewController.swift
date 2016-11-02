@@ -19,6 +19,8 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
     @IBOutlet weak var gemTableView: UITableView!
     
     @IBOutlet weak var addButton: UIBarButtonItem!
+
+    var gemInActiveFlux: QuizletSet?
     
     /******************************************************/
     /*******************///MARK: Life Cycle
@@ -71,6 +73,9 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         
         //associate the photo with this cell, which will set all parts of image view
         cell.quizletSet = set
+        //using switches in table view adapted from
+        //http://stackoverflow.com/questions/3770019/uiswitch-in-a-uitableview-cell
+        cell.activeSwitch.addTarget(self, action: #selector(GemManagerViewController.activeSwitchToggled(_:)), for: UIControlEvents.valueChanged)
         
 //        if photo.isTransitioningImage {
 //            cell.startActivityIndicator()
@@ -110,6 +115,19 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         
         present(vc, animated: true, completion: nil)
     }
+    
+    func activeSwitchToggled(_ sender: UISwitch) {
+        
+        print("Switch is \(sender.isOn)")
+        
+        //adapted from http://stackoverflow.com/questions/31707335/how-do-i-change-a-switch-in-coredata-using-dynamic-tables-swift
+        let point = sender.convert(CGPoint.zero, to: tableView)
+        let indexPath = tableView.indexPathForRow(at: point)
+        let quizletSet = fetchedResultsController?.object(at: indexPath!) as! QuizletSet
+        quizletSet.isActive = sender.isOn
+
+    }
+    
     
     /******************************************************/
     /******************* Model Operations **************/
