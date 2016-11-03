@@ -24,8 +24,21 @@
         <attribute name="title" attributeType="String" syncable="YES"/>
         <attribute name="url" attributeType="String" syncable="YES"/>
         <attribute name="visibility" attributeType="String" syncable="YES"/>
+        <relationship name="quizletTermDefinition" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="QuizletTermDefinition" inverseName="quizletSet" inverseEntity="QuizletTermDefinition" syncable="YES"/>
+    </entity>
+    <entity name="QuizletTermDefinition" representedClassName=".QuizletTermDefinition" syncable="YES">
+        <attribute name="definition" attributeType="String" syncable="YES"/>
+        <attribute name="imageData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <attribute name="imageHeight" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="imageUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imageWidth" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="rank" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="term" attributeType="String" syncable="YES"/>
+        <attribute name="termId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="quizletSet" maxCount="1" deletionRule="Nullify" destinationEntity="QuizletSet" inverseName="quizletTermDefinition" inverseEntity="QuizletSet" syncable="YES"/>
     </entity>
     <elements>
-        <element name="QuizletSet" positionX="-63" positionY="-18" width="128" height="390"/>
+        <element name="QuizletSet" positionX="-216" positionY="-207" width="128" height="403"/>
+        <element name="QuizletTermDefinition" positionX="18" positionY="171" width="128" height="180"/>
     </elements>
 </model>

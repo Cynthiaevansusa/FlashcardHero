@@ -18,6 +18,8 @@
 		F614C34C1DC9A16A00E7D3C8 /* CustomGemManagerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F614C34B1DC9A16A00E7D3C8 /* CustomGemManagerCell.swift */; };
 		F614C34E1DCA7FD100E7D3C8 /* QuizletGetSetTermsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = F614C34D1DCA7FD100E7D3C8 /* QuizletGetSetTermsResult.swift */; };
 		F614C3501DCA806F00E7D3C8 /* QuizletGetTermResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = F614C34F1DCA806F00E7D3C8 /* QuizletGetTermResult.swift */; };
+		F614C35B1DCB216800E7D3C8 /* QuizletTermDefinition+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F614C3591DCB216800E7D3C8 /* QuizletTermDefinition+CoreDataClass.swift */; };
+		F614C35C1DCB216800E7D3C8 /* QuizletTermDefinition+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F614C35A1DCB216800E7D3C8 /* QuizletTermDefinition+CoreDataProperties.swift */; };
 		F63782CA1DC2E1EC0078FE7F /* Documents in Resources */ = {isa = PBXBuildFile; fileRef = F63782C91DC2E1EC0078FE7F /* Documents */; };
 		F63782D11DC2E3C00078FE7F /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63782D01DC2E3C00078FE7F /* GCDBlackBox.swift */; };
 		F63782D31DC2E3F50078FE7F /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63782D21DC2E3F50078FE7F /* CoreDataStack.swift */; };
@@ -75,6 +77,8 @@
 		F614C34B1DC9A16A00E7D3C8 /* CustomGemManagerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomGemManagerCell.swift; sourceTree = "<group>"; };
 		F614C34D1DCA7FD100E7D3C8 /* QuizletGetSetTermsResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizletGetSetTermsResult.swift; sourceTree = "<group>"; };
 		F614C34F1DCA806F00E7D3C8 /* QuizletGetTermResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizletGetTermResult.swift; sourceTree = "<group>"; };
+		F614C3591DCB216800E7D3C8 /* QuizletTermDefinition+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "QuizletTermDefinition+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F614C35A1DCB216800E7D3C8 /* QuizletTermDefinition+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "QuizletTermDefinition+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F63782C91DC2E1EC0078FE7F /* Documents */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Documents; path = FlashcardHero/Documents; sourceTree = "<group>"; };
 		F63782D01DC2E3C00078FE7F /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
 		F63782D21DC2E3F50078FE7F /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -220,6 +224,8 @@
 		F66B5E471DC6D30500052B7F /* Quizlet */ = {
 			isa = PBXGroup;
 			children = (
+				F614C3591DCB216800E7D3C8 /* QuizletTermDefinition+CoreDataClass.swift */,
+				F614C35A1DCB216800E7D3C8 /* QuizletTermDefinition+CoreDataProperties.swift */,
 				F614C3451DC9885A00E7D3C8 /* QuizletSet+CoreDataClass.swift */,
 				F614C3461DC9885A00E7D3C8 /* QuizletSet+CoreDataProperties.swift */,
 			);
@@ -613,8 +619,10 @@
 				F63782E41DC2F08F0078FE7F /* QuizletClient.swift in Sources */,
 				F67D15F01DC97FCC002975C7 /* FlashcardHeroModel.xcdatamodeld in Sources */,
 				F614C34C1DC9A16A00E7D3C8 /* CustomGemManagerCell.swift in Sources */,
+				F614C35C1DCB216800E7D3C8 /* QuizletTermDefinition+CoreDataProperties.swift in Sources */,
 				F66B5E4E1DC833C600052B7F /* QuizletSetSearchResult.swift in Sources */,
 				F614C34A1DC999FC00E7D3C8 /* CoreDataQuizletTableViewController.swift in Sources */,
+				F614C35B1DCB216800E7D3C8 /* QuizletTermDefinition+CoreDataClass.swift in Sources */,
 				F614C3481DC9885A00E7D3C8 /* QuizletSet+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
