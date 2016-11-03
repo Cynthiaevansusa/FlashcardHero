@@ -35,10 +35,13 @@ struct QuizletSetSearchResult {
     var term_count: Int?
     var visibility : String?
     
+    //TODO: support creator
+    var creator : [String:Any]?
+    
     /******************************************************/
     /*******************///MARK: Error Checking Properties
     /******************************************************/
-    let expectedKeys : [String] = ["access_type", "can_edit", "created_by", "created_date", "creator_id",  "description", "editable", "has_access", "has_images", "id", "lang_definitions", "lang_terms", "modified_date", "password_edit", "password_use", "published_date", "subjects", "term_count", "title", "url", "visibility"]
+    let expectedKeys : [String] = ["access_type", "can_edit", "created_by", "created_date", "creator_id",  "description", "editable", "has_access", "has_images", "id", "lang_definitions", "lang_terms", "modified_date", "password_edit", "password_use", "published_date", "subjects", "term_count", "title", "url", "visibility", "creator"]
     
     enum QuizletSetSearchKeyError: Error {
         case badInputKeys(keys: [String]) //couldn't convert incoming dictionary keys to a set of Strings
@@ -304,6 +307,13 @@ struct QuizletSetSearchResult {
                     visibility = value
                 } else {
                     throw QuizletSetSearchAssignmentError.badInputValues(property: "visibility")
+                }
+            case "creator":
+                if let value = value as? [String:Any] {
+                    creator = value
+                } else {
+                    //TODO: handle image error
+                    //throw QuizletGetTermResultAssignmentError.badInputValues(property: "rank")
                 }
             default:
                 //unknown input. Should all be ints or strings
