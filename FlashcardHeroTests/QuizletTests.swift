@@ -22,8 +22,10 @@ class FlashcardHeroTests: XCTestCase {
     }
     
     func testQuizletTests() {
-        testQuizletSearchTestNoCriteria()
+        //testQuizletSearchTestNoCriteria()
         testQuizletSearchTestSimple()
+        testQuizletGetSet()
+        testQuizletGetSetTermsOnly()
         
     }
     
@@ -70,6 +72,24 @@ class FlashcardHeroTests: XCTestCase {
         //using a search term
         let testExpectation = expectation(description: "async request")
         QuizletClient.sharedInstance.getQuizletSetBy(6009523, termsOnly: false) { (results, error) in
+            
+            print("Reached CompletionHandler of getQuizletSearchSetsBy")
+            print("results: \(results)")
+            print("error: \(error)")
+            
+            if error == nil {
+                testExpectation.fulfill()
+            }
+            
+        }
+        
+        waitForExpectations(timeout: 10.0, handler: nil)
+    }
+    
+    func testQuizletGetSetTermsOnly() {
+        //using a search term
+        let testExpectation = expectation(description: "async request")
+        QuizletClient.sharedInstance.getQuizletSetBy(6009523, termsOnly: true) { (results, error) in
             
             print("Reached CompletionHandler of getQuizletSearchSetsBy")
             print("results: \(results)")

@@ -118,6 +118,8 @@ extension QuizletClient {
                         setData.removeValue(forKey: QuizletClient.Constants.ResponseKeys.GetSets.SingleSet.Terms)
                         //TODO: remove hard coding and handle following
                         setData.removeValue(forKey: "class_ids")
+                        //TODO: Add creator to the model
+                        setData.removeValue(forKey: "creator")
                         
                         //take the raw set and make an object with it
                         var setObject = QuizletSetSearchResult()
