@@ -42,7 +42,6 @@ class CoreDataQuizletTableViewController: UIViewController, UITableViewDelegate 
     
     
     var tableView: UITableView!
-    var setsToDisplay = [QuizletSet]()
     
     var stack: CoreDataStack!
     
@@ -122,27 +121,12 @@ extension CoreDataQuizletTableViewController: NSFetchedResultsControllerDelegate
                 //from apple documentation
                 self.tableView.insertRows(at: [newIndexPath!], with: UITableViewRowAnimation.automatic)
                 
-                //setsToDisplay.append(theQuizletSet)
-                
-                //animate the insertion of new cells
-                //if let index = setsToDisplay.getIndex(of: theQuizletSet) {
-                //    let setIndexPath = IndexPath(row: index, section: 0)
-                //    tableView.insertRows(at: [setIndexPath], with: UITableViewRowAnimation.automatic)
-                //}
-                
                 //TODO: initiate download of terms?
                 
                 print("case insert")
             case .delete:
                 //from apple documentation
                 self.tableView.deleteRows(at: [indexPath!], with: UITableViewRowAnimation.automatic)
-                //get the row of the set
-                
-                //remove the set
-                //removeFromSetsToDisplayByID(removeThisSet: theQuizletSet)
-                //tableView.deleteRows(at: [indexPath!], with: UITableViewRowAnimation.automatic)
-                
-                //TODO: Remove the associated terms
                 
                 print("case delete")
             case .update:
@@ -158,8 +142,6 @@ extension CoreDataQuizletTableViewController: NSFetchedResultsControllerDelegate
             //save
             stack.save()
             
-            executeSearch()
-            
             //TODO: Persist the text box
             
         } else
@@ -171,13 +153,5 @@ extension CoreDataQuizletTableViewController: NSFetchedResultsControllerDelegate
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         //finished with updates, allow table view to animate and reload
         self.tableView.endUpdates()
-    }
-    
-    func removeFromSetsToDisplayByID(removeThisSet: QuizletSet) {
-        for set in setsToDisplay {
-            if set.id == removeThisSet.id {
-                setsToDisplay.removeObject(object: set)
-            }
-        }
     }
 }

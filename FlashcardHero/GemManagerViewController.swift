@@ -36,9 +36,6 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         
         setupFetchedResultsController()
         
-        //load data to table if there is any
-        setupTableView()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,9 +56,6 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
             //setsToDisplay.append(newQuizletSet)
         }
         
-        setupTableView()
-        
-        print("Got sets from the search.  sets are: \(setsToDisplay)")
     }
     
     /******************************************************/
@@ -93,9 +87,6 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         //associate the photo with this cell, which will set all parts of image view
         cell.quizletSet = set
         cell.cellDelegate = self
-        //using switches in table view adapted from
-        //http://stackoverflow.com/questions/3770019/uiswitch-in-a-uitableview-cell
-        //cell.activeSwitch.addTarget(self, action: #selector(GemManagerViewController.activeSwitchToggled(_:)), for: UIControlEvents.valueChanged)
         
 //        if photo.isTransitioningImage {
 //            cell.startActivityIndicator()
@@ -116,14 +107,7 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
             if let context = fetchedResultsController?.managedObjectContext {
                 
                 context.delete(self.fetchedResultsController!.object(at: indexPath) as! QuizletSet)
-                //let deletingCell = tableView.cellForRow(at: indexPath) as! CustomGemManagerCell
-                //if let quizletSetObject = deletingCell.quizletSet {
-                //    context.delete(quizletSetObject)
-               // } else {
-                    //TODO: Handle deleting error
-               // }
-                
-                //self.tableView.reloadData()
+ 
             }
         }
     }
@@ -138,18 +122,7 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         
         present(vc, animated: true, completion: nil)
     }
-    
-//    func activeSwitchToggled(_ sender: UISwitch) {
-//        sender.setOn(sender.isOn, animated: true)
-//        print("Switch is \(sender.isOn)")
-//        
-//        //adapted from http://stackoverflow.com/questions/31707335/how-do-i-change-a-switch-in-coredata-using-dynamic-tables-swift
-//        let point = sender.convert(CGPoint.zero, to: tableView)
-//        let indexPath = tableView.indexPathForRow(at: point)
-//        let quizletSet = fetchedResultsController?.object(at: indexPath!) as! QuizletSet
-//        quizletSet.isActive = sender.isOn
-//
-//    }
+
     
     /******************************************************/
     /*******************///MARK: SettingCellDelegate
@@ -196,18 +169,6 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
     
     func fetchModelQuizletSets() -> [QuizletSet] {
         return fetchedResultsController!.fetchedObjects as! [QuizletSet]
-    }
-    
-    func setupTableView() {
-        //if there are stored QuizletSets in the model, load them into the collection view
-        setsToDisplay = fetchModelQuizletSets()
-        
-        //if the contents is empty, the load some contents
-//        if setsToDisplay.count < 1 {
-//            flickrGetPhotosNearPin(radius: 5.0, tryAgain: true)
-//        }
-        
-        
     }
 
 }
