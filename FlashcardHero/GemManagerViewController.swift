@@ -68,6 +68,12 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
     //when a row is selected
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         //present the collection view
+        
+        let vc = storyboard?.instantiateViewController(withIdentifier: "GemTermsCollectionViewController") as! GemTermsCollectionViewController
+        let theQuizletSet = self.fetchedResultsController!.object(at: indexPath) as! QuizletSet
+        vc.quizletSet = theQuizletSet
+        
+        present(vc, animated: true, completion: nil)
     }
     
     

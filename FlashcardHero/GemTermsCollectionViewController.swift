@@ -89,7 +89,7 @@ class GemTermsCollectionViewController: CoreDataQuizletCollectionViewController,
         // Create Fetch Request
         let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "QuizletTermDefinition")
         
-        fr.sortDescriptors = [NSSortDescriptor(key: "title", ascending: false),NSSortDescriptor(key: "id", ascending: true)]
+        fr.sortDescriptors = [NSSortDescriptor(key: "rank", ascending: false)]
         
         // So far we have a search that will match ALL notes. However, we're
         // only interested in those within the current notebook:

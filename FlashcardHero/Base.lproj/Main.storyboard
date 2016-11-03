@@ -295,7 +295,7 @@
         <!--Gem Terms Collection View Controller-->
         <scene sceneID="OJt-id-wVe">
             <objects>
-                <viewController id="ovt-QC-8IL" customClass="GemTermsCollectionViewController" customModule="FlashcardHero" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GemTermsCollectionViewController" id="ovt-QC-8IL" customClass="GemTermsCollectionViewController" customModule="FlashcardHero" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="D9D-sL-FU1"/>
                         <viewControllerLayoutGuide type="bottom" id="8M6-Fd-bZo"/>
