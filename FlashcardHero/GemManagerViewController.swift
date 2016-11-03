@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import CoreData
 
-class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewDataSource, QuizletSetSearchResultIngesterDelegate, SettingCellDelegate {
+class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewDataSource,  QuizletSetSearchResultIngesterDelegate, SettingCellDelegate {
 
     /******************************************************/
     /*******************///MARK: Properties
@@ -63,8 +63,12 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
     }
     
     /******************************************************/
-    /*******************///MARK: Retrieving Terms
+    /*******************///MARK: UITableViewDelegate
     /******************************************************/
+    //when a row is selected
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+        //present the collection view
+    }
     
     
     /******************************************************/

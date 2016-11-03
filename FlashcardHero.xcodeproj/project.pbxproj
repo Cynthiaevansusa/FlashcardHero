@@ -29,6 +29,9 @@
 		F63782E41DC2F08F0078FE7F /* QuizletClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63782E11DC2F08F0078FE7F /* QuizletClient.swift */; };
 		F63782E51DC2F08F0078FE7F /* QuizletConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63782E21DC2F08F0078FE7F /* QuizletConvenience.swift */; };
 		F63782E61DC2F08F0078FE7F /* QuizletConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63782E31DC2F08F0078FE7F /* QuizletConstants.swift */; };
+		F66B46E41DCBC5C000F2BC6E /* GemTermsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66B46E31DCBC5C000F2BC6E /* GemTermsCollectionViewController.swift */; };
+		F66B46E61DCBC60300F2BC6E /* CoreDataQuizletCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66B46E51DCBC60300F2BC6E /* CoreDataQuizletCollectionViewController.swift */; };
+		F66B46E81DCBCC9100F2BC6E /* CustomGemTermsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66B46E71DCBCC9100F2BC6E /* CustomGemTermsCollectionViewCell.swift */; };
 		F66B5E491DC6DA0200052B7F /* GemManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66B5E481DC6DA0200052B7F /* GemManagerViewController.swift */; };
 		F66B5E4B1DC6DA5400052B7F /* QuizletSearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66B5E4A1DC6DA5400052B7F /* QuizletSearchResultsViewController.swift */; };
 		F66B5E4E1DC833C600052B7F /* QuizletSetSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66B5E4D1DC833C600052B7F /* QuizletSetSearchResult.swift */; };
@@ -88,6 +91,9 @@
 		F63782E11DC2F08F0078FE7F /* QuizletClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizletClient.swift; sourceTree = "<group>"; };
 		F63782E21DC2F08F0078FE7F /* QuizletConvenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizletConvenience.swift; sourceTree = "<group>"; };
 		F63782E31DC2F08F0078FE7F /* QuizletConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizletConstants.swift; sourceTree = "<group>"; };
+		F66B46E31DCBC5C000F2BC6E /* GemTermsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GemTermsCollectionViewController.swift; sourceTree = "<group>"; };
+		F66B46E51DCBC60300F2BC6E /* CoreDataQuizletCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataQuizletCollectionViewController.swift; sourceTree = "<group>"; };
+		F66B46E71DCBCC9100F2BC6E /* CustomGemTermsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomGemTermsCollectionViewCell.swift; sourceTree = "<group>"; };
 		F66B5E481DC6DA0200052B7F /* GemManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GemManagerViewController.swift; sourceTree = "<group>"; };
 		F66B5E4A1DC6DA5400052B7F /* QuizletSearchResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizletSearchResultsViewController.swift; sourceTree = "<group>"; };
 		F66B5E4D1DC833C600052B7F /* QuizletSetSearchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizletSetSearchResult.swift; sourceTree = "<group>"; };
@@ -179,6 +185,7 @@
 				F6FD10D71DBEEAEB00B7E6EA /* LaunchScreen.storyboard */,
 				F67D15EC1DC938B9002975C7 /* CustomQuizletSearchBySetsResultsCell.swift */,
 				F614C34B1DC9A16A00E7D3C8 /* CustomGemManagerCell.swift */,
+				F66B46E71DCBCC9100F2BC6E /* CustomGemTermsCollectionViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -240,6 +247,8 @@
 				F614C3491DC999FC00E7D3C8 /* CoreDataQuizletTableViewController.swift */,
 				F66B5E481DC6DA0200052B7F /* GemManagerViewController.swift */,
 				F66B5E4A1DC6DA5400052B7F /* QuizletSearchResultsViewController.swift */,
+				F66B46E51DCBC60300F2BC6E /* CoreDataQuizletCollectionViewController.swift */,
+				F66B46E31DCBC5C000F2BC6E /* GemTermsCollectionViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -604,9 +613,11 @@
 				F6FD10D11DBEEAEB00B7E6EA /* PerformanceStatisticsViewController.swift in Sources */,
 				F66B5E4B1DC6DA5400052B7F /* QuizletSearchResultsViewController.swift in Sources */,
 				F63782E01DC2EDFD0078FE7F /* Secrets.swift in Sources */,
+				F66B46E61DCBC60300F2BC6E /* CoreDataQuizletCollectionViewController.swift in Sources */,
 				F6FD10CD1DBEEAEB00B7E6EA /* AppDelegate.swift in Sources */,
 				F63782E61DC2F08F0078FE7F /* QuizletConstants.swift in Sources */,
 				F614C3501DCA806F00E7D3C8 /* QuizletGetTermResult.swift in Sources */,
+				F66B46E81DCBCC9100F2BC6E /* CustomGemTermsCollectionViewCell.swift in Sources */,
 				F614C34E1DCA7FD100E7D3C8 /* QuizletGetSetTermsResult.swift in Sources */,
 				F606B3751DBEED0000744EC7 /* README.md in Sources */,
 				F63782D31DC2E3F50078FE7F /* CoreDataStack.swift in Sources */,
@@ -615,6 +626,7 @@
 				F67D15ED1DC938B9002975C7 /* CustomQuizletSearchBySetsResultsCell.swift in Sources */,
 				F614C3471DC9885A00E7D3C8 /* QuizletSet+CoreDataClass.swift in Sources */,
 				F63782D11DC2E3C00078FE7F /* GCDBlackBox.swift in Sources */,
+				F66B46E41DCBC5C000F2BC6E /* GemTermsCollectionViewController.swift in Sources */,
 				F63782E51DC2F08F0078FE7F /* QuizletConvenience.swift in Sources */,
 				F63782E41DC2F08F0078FE7F /* QuizletClient.swift in Sources */,
 				F67D15F01DC97FCC002975C7 /* FlashcardHeroModel.xcdatamodeld in Sources */,
