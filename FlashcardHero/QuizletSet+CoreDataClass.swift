@@ -95,4 +95,36 @@ public class QuizletSet: NSManagedObject {
         
     }
     
+    /******************************************************/
+    /*******************///MARK: Fetching Terms
+    /******************************************************/
+    //TODO: add password support
+    //fetches terms, creates QuizletTermDefinitions in the given context
+    func fetchTermsAndAddTo(context: NSManagedObjectContext) {
+        GCDBlackBox.runNetworkFunctionInBackground {
+           
+            QuizletClient.sharedInstance.getQuizletSetTermsBy(Int(self.id), termsOnly: true) { (result, error) in
+                
+                GCDBlackBox.performUIUpdatesOnMain {
+                   //results should be a QuizletSetTermsResult
+                    
+//                    print("Reached CompletionHandler of getQuizletSearchSetsBy")
+//                    print("results: \(result)")
+//                    print("error: \(error)")
+                    if let result = result {
+                        //take each term and create
+                        for term in result.terms {
+                            _ = QuizletTermDefinition(withQuizletTermResult: term, relatedSet: self, context: context)
+                        }
+                    } else {
+                        //TODO: Handle empty response
+                    }
+                    
+                    
+                }
+            
+            }
+        }
+    }
+    
 }

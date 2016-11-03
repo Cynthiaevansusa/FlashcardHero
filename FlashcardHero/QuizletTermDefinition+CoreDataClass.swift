@@ -20,12 +20,12 @@ public class QuizletTermDefinition: QuizletSet {
             self.init(entity: ent, insertInto: context)
             
             //using the FlickrPhotoResult, populate this object
-            if  let id = withQuizletTermResult.id,
+            if  let termId = withQuizletTermResult.id,
                 let term = withQuizletTermResult.term,
                 let definition = withQuizletTermResult.definition,
                 let rank = withQuizletTermResult.rank {
                 
-                self.id = Int64(id)
+                self.termId = Int64(termId)
                 self.term = term
                 self.definition = definition
                 self.rank = Int64(rank)
@@ -35,9 +35,9 @@ public class QuizletTermDefinition: QuizletSet {
                     
                     //TODO: add validation
                     //TODO: Don't hard code this
-                    self.imageHeight = image["image_height"] as! Int64
-                    self.imageUrl = image["image_url"] as? String
-                    self.imageWidth = image["image_width"] as! Int64
+                    self.imageHeight = image["height"] as! Int64
+                    self.imageUrl = image["url"] as? String
+                    self.imageWidth = image["width"] as! Int64
                 }
 
                 //add the related set

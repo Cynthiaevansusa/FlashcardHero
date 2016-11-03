@@ -52,10 +52,20 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         //take the array of QuizletSetSearchResults and add to CoreData
         
         for searchResult in QuizletSetSearchResults {
-            _ = QuizletSet(withQuizletSetSearchResult: searchResult, context: self.fetchedResultsController!.managedObjectContext)
+            //TODO: add error checking
+            
+            let newSet = QuizletSet(withQuizletSetSearchResult: searchResult, context: self.fetchedResultsController!.managedObjectContext)
+            
+            //download the terms
+            newSet.fetchTermsAndAddTo(context: self.fetchedResultsController!.managedObjectContext)
         }
         
     }
+    
+    /******************************************************/
+    /*******************///MARK: Retrieving Terms
+    /******************************************************/
+    
     
     /******************************************************/
     /*******************///MARK: UITableViewDataSource

@@ -31,7 +31,7 @@ extension QuizletClient {
      
      - Returns: An array of JSON sets
      */
-    func getQuizletSetBy(_ setId: Int, termsOnly: Bool = true, usingPassword: String? = nil, modifiedSince: NSDate? = nil, completionHandlerGetQuizletSearchSetsBy: @escaping (_ results: QuizletGetSetTermsResult?, _ error: NSError?) -> Void) {
+    func getQuizletSetTermsBy(_ setId: Int, termsOnly: Bool = true, usingPassword: String? = nil, modifiedSince: NSDate? = nil, completionHandlerGetQuizletSearchSetsBy: @escaping (_ result: QuizletGetSetTermsResult?, _ error: NSError?) -> Void) {
         
         //Date validation
         if let modifiedSince = modifiedSince {
@@ -84,7 +84,7 @@ extension QuizletClient {
         }
         
         /* 2. Make the request */
-        let _ = taskForGETMethod(method: mutableMethod, parameters: parameters) { (results, error) in
+        let _ = taskForGETMethod(method: mutableMethod, parameters: parameters) { (result, error) in
             
             /* 3. Send the desired value(s) to completion handler */
             if let error = error {
@@ -102,7 +102,7 @@ extension QuizletClient {
                 
          
                 
-                if let resultsArray = results as? [String:Any] { //dig into the JSON response dictionary to get the array at key "photos"
+                if let resultsArray = result as? [String:Any] { //dig into the JSON response dictionary to get the array at key "photos"
                     
                     print("Unwrapped JSON response from getQuizletSearchSetsBy:")
                     print(resultsArray)
@@ -167,7 +167,7 @@ extension QuizletClient {
                     
                    
                     
-                } else if let resultsArray = results as? NSArray {
+                } else if let resultsArray = result as? NSArray {
                     print("Unwrapped JSON response from getQuizletSearchSetsBy:")
                     print(resultsArray)
                     
@@ -209,7 +209,7 @@ extension QuizletClient {
                     //completionHandlerGetQuizletSearchSetsBy(resultsArray, nil)
                 
                 } else {
-                    print("\nDATA ERROR: Could not find \(QuizletClient.Constants.ResponseKeys.Search.ForSets.Sets) in \(results)")
+                    print("\nDATA ERROR: Could not find \(QuizletClient.Constants.ResponseKeys.Search.ForSets.Sets) in \(result)")
                     completionHandlerGetQuizletSearchSetsBy(nil, NSError(domain: "getQuizletSearchSetsBy parsing", code: 4, userInfo: [NSLocalizedDescriptionKey: "DATA ERROR: Failed to interpret data returned from Quizlet server (getQuizletSearchSetsBy)."]))
                 }
             } // end of error check

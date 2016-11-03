@@ -71,7 +71,7 @@ class FlashcardHeroTests: XCTestCase {
     func testQuizletGetSet() {
         //using a search term
         let testExpectation = expectation(description: "async request")
-        QuizletClient.sharedInstance.getQuizletSetBy(6009523, termsOnly: false) { (results, error) in
+        QuizletClient.sharedInstance.getQuizletSetTermsBy(6009523, termsOnly: false) { (results, error) in
             
             print("Reached CompletionHandler of getQuizletSearchSetsBy")
             print("results: \(results)")
@@ -89,7 +89,7 @@ class FlashcardHeroTests: XCTestCase {
     func testQuizletGetSetTermsOnly() {
         //using a search term
         let testExpectation = expectation(description: "async request")
-        QuizletClient.sharedInstance.getQuizletSetBy(6009523, termsOnly: true) { (results, error) in
+        QuizletClient.sharedInstance.getQuizletSetTermsBy(6009523, termsOnly: true) { (results, error) in
             
             print("Reached CompletionHandler of getQuizletSearchSetsBy")
             print("results: \(results)")
