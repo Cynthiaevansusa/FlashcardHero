@@ -69,15 +69,26 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
     /******************************************************/
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("There are ", String(self.setsToDisplay.count), " sets to display")
-        return self.setsToDisplay.count
+        //print("There are ", String(self.setsToDisplay.count), " sets to display")
+        //return self.setsToDisplay.count
+        if let fc = fetchedResultsController {
+            if (fc.sections?.count)! > 0 {
+                let sectionInfo = fc.sections?[section]
+                return (sectionInfo?.numberOfObjects)!
+            } else {
+                return 0
+            }
+        } else {
+            return 0
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         //TODO: replace as! UITAbleViewCell witha  custom cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "GemManagerCell", for: indexPath as IndexPath) as! CustomGemManagerCell
-        let set = self.setsToDisplay[indexPath.row]
+        let set = self.fetchedResultsController!.object(at: indexPath) as! QuizletSet
         
         //associate the photo with this cell, which will set all parts of image view
         cell.quizletSet = set
@@ -103,11 +114,14 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.delete) {
             if let context = fetchedResultsController?.managedObjectContext {
-                //animate deletion.  adapted from
-                // http://stackoverflow.com/questions/31365253/delete-table-row-with-animation
                 
-                context.delete(setsToDisplay[indexPath.row])
-                
+                context.delete(self.fetchedResultsController!.object(at: indexPath) as! QuizletSet)
+                //let deletingCell = tableView.cellForRow(at: indexPath) as! CustomGemManagerCell
+                //if let quizletSetObject = deletingCell.quizletSet {
+                //    context.delete(quizletSetObject)
+               // } else {
+                    //TODO: Handle deleting error
+               // }
                 
                 //self.tableView.reloadData()
             }
@@ -143,7 +157,7 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
 
     func didChangeSwitchState(sender: CustomGemManagerCell, isOn: Bool) {
         let indexPath = self.tableView.indexPath(for: sender)
-        let quizletSet = setsToDisplay[indexPath!.row]
+        let quizletSet = self.fetchedResultsController!.object(at: indexPath!) as! QuizletSet
         quizletSet.isActive = sender.activeSwitch.isOn
     }
     

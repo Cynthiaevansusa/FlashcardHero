@@ -31,7 +31,7 @@ extension QuizletClient {
      
      - Returns: An array of JSON sets
      */
-    func getQuizletSetBy(_ setId: Int, termsOnly: Bool = true, usingPassword: String? = nil, modifiedSince: NSDate? = nil, completionHandlerGetQuizletSearchSetsBy: @escaping (_ results: Any?, _ error: NSError?) -> Void) {
+    func getQuizletSetBy(_ setId: Int, termsOnly: Bool = true, usingPassword: String? = nil, modifiedSince: NSDate? = nil, completionHandlerGetQuizletSearchSetsBy: @escaping (_ results: QuizletGetSetTermsResult?, _ error: NSError?) -> Void) {
         
         //Date validation
         if let modifiedSince = modifiedSince {
@@ -100,20 +100,111 @@ extension QuizletClient {
 //                    let responseKeys = QuizletClient.Constants.ResponseKeys.GetSets.SingleSet.Terms
 //                }
                 
+         
                 
                 if let resultsArray = results as? [String:Any] { //dig into the JSON response dictionary to get the array at key "photos"
                     
                     print("Unwrapped JSON response from getQuizletSearchSetsBy:")
                     print(resultsArray)
+                    
+                    //this should be the result of a search that included terms (termsOnly = false)
+                    if !termsOnly {
+                        //this is good, create objects from the response
+                        //every key except for "terms" which holds the terms is a part of the set
+                        let termsDataArray = resultsArray[QuizletClient.Constants.ResponseKeys.GetSets.SingleSet.Terms] as? NSArray
+                        
+                        //pulled out the terms, now delete that part of the results
+                        var setData = resultsArray
+                        setData.removeValue(forKey: QuizletClient.Constants.ResponseKeys.GetSets.SingleSet.Terms)
+                        //TODO: remove hard coding and handle following
+                        setData.removeValue(forKey: "class_ids")
+                        
+                        //take the raw set and make an object with it
+                        var setObject = QuizletSetSearchResult()
+                        do {
+                            //setObject = try QuizletSetSearchResult(fromDataSet: setData)
+                            if let quizletResult = try QuizletSetSearchResult(fromDataSet: setData) {
+                                setObject = quizletResult
+                            }
+                        }
+                        catch {
+                            //TODO: handle error
+                            print("This error needs to be handled")
+                        }
+                        
+                        var termObjectsArray = [QuizletGetTermResult]()
+                        //get an array of TermResult objects
+                        if let termsDataArray = termsDataArray {
+                            for termData in termsDataArray {
+                                if let termData = termData as? [String:Any] {
+                                    do {
+                                        if let termObject = try QuizletGetTermResult(fromDataSet: termData) {
+                                            termObjectsArray.append(termObject)
+                                        }
+                                        
+                                    }
+                                    
+                                    catch {
+                                        //TODO: handle error
+                                        print("This error needs to be handled")
+                                    }
+                                }
+                            }
+                        }
+                        
+                        //create a QuizletGetSetTermsResult to hold the set and terms
+                        
+                        let returnSetTerms = QuizletGetSetTermsResult(from: termObjectsArray, set: setObject)
+                        
+                        completionHandlerGetQuizletSearchSetsBy(returnSetTerms, nil)
+                    } else {
+                        completionHandlerGetQuizletSearchSetsBy(nil, NSError(domain: "getQuizletSearchSetsBy parsing", code: 4, userInfo: [NSLocalizedDescriptionKey: "DATA ERROR: Expected server response of type NSArray because termsOnly is true."]))
+                    }
+                    
 
-                    completionHandlerGetQuizletSearchSetsBy(resultsArray, nil)
+                    
                    
                     
                 } else if let resultsArray = results as? NSArray {
                     print("Unwrapped JSON response from getQuizletSearchSetsBy:")
                     print(resultsArray)
                     
-                    completionHandlerGetQuizletSearchSetsBy(resultsArray, nil)
+                    if termsOnly {
+                        //this is good, create objects from the response
+                        //terms only
+                        let termsDataArray = resultsArray
+                        
+                        
+                        
+                        var termObjectsArray = [QuizletGetTermResult]()
+                        //get an array of TermResult objects
+                        
+                        for termData in termsDataArray {
+                            if let termData = termData as? [String:Any] {
+                                do {
+                                    if let termObject = try QuizletGetTermResult(fromDataSet: termData) {
+                                        termObjectsArray.append(termObject)
+                                    }
+                                    
+                                }
+                                    
+                                catch {
+                                    //TODO: handle error
+                                    print("This error needs to be handled")
+                                }
+                            }
+                        }
+                        
+                        //create a QuizletGetSetTermsResult to hold the set and terms
+                        
+                        let returnSetTerms = QuizletGetSetTermsResult(from: termObjectsArray, set: nil)
+                        
+                        completionHandlerGetQuizletSearchSetsBy(returnSetTerms, nil)
+                    } else {
+                        completionHandlerGetQuizletSearchSetsBy(nil, NSError(domain: "getQuizletSearchSetsBy parsing", code: 4, userInfo: [NSLocalizedDescriptionKey: "DATA ERROR: Expected server response of type NSArray because termsOnly is true."]))
+                    }
+                    
+                    //completionHandlerGetQuizletSearchSetsBy(resultsArray, nil)
                 
                 } else {
                     print("\nDATA ERROR: Could not find \(QuizletClient.Constants.ResponseKeys.Search.ForSets.Sets) in \(results)")

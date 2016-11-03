@@ -113,37 +113,41 @@ extension CoreDataQuizletTableViewController: NSFetchedResultsControllerDelegate
         self.tableView.beginUpdates()
     }
     
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
-        
-    }
-    
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         
         if let theQuizletSet = anObject as? QuizletSet {
             
             switch(type) {
             case .insert:
-                //this will be done in the view controller so it can be selected
-                setsToDisplay.append(theQuizletSet)
+                //from apple documentation
+                self.tableView.insertRows(at: [newIndexPath!], with: UITableViewRowAnimation.automatic)
+                
+                //setsToDisplay.append(theQuizletSet)
                 
                 //animate the insertion of new cells
-                if let index = setsToDisplay.getIndex(of: theQuizletSet) {
-                    let setIndexPath = IndexPath(row: index, section: 0)
-                    tableView.insertRows(at: [setIndexPath], with: UITableViewRowAnimation.automatic)
-                }
+                //if let index = setsToDisplay.getIndex(of: theQuizletSet) {
+                //    let setIndexPath = IndexPath(row: index, section: 0)
+                //    tableView.insertRows(at: [setIndexPath], with: UITableViewRowAnimation.automatic)
+                //}
                 
                 //TODO: initiate download of terms?
                 
                 print("case insert")
             case .delete:
+                //from apple documentation
+                self.tableView.deleteRows(at: [indexPath!], with: UITableViewRowAnimation.automatic)
+                //get the row of the set
+                
                 //remove the set
-                removeFromSetsToDisplayByID(removeThisSet: theQuizletSet)
-                tableView.deleteRows(at: [indexPath!], with: UITableViewRowAnimation.automatic)
+                //removeFromSetsToDisplayByID(removeThisSet: theQuizletSet)
+                //tableView.deleteRows(at: [indexPath!], with: UITableViewRowAnimation.automatic)
                 
                 //TODO: Remove the associated terms
                 
                 print("case delete")
             case .update:
+                //from apple documentation
+                
                 //nothing is needed here because when data is updated the tableView displays datas current state
                 print("case update")
             case .move:
@@ -153,6 +157,8 @@ extension CoreDataQuizletTableViewController: NSFetchedResultsControllerDelegate
             
             //save
             stack.save()
+            
+            executeSearch()
             
             //TODO: Persist the text box
             
