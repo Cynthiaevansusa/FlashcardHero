@@ -12,4 +12,43 @@ import CoreData
 
 public class QuizletTermDefinition: QuizletSet {
 
+    //TODO: have this object load the image from url when imageUrl is set or changed
+    
+    convenience init(withQuizletTermResult: QuizletGetTermResult, relatedSet: QuizletSet, context: NSManagedObjectContext){
+        
+        if let ent = NSEntityDescription.entity(forEntityName: "QuizletTermDefinition", in: context) {
+            self.init(entity: ent, insertInto: context)
+            
+            //using the FlickrPhotoResult, populate this object
+            if  let id = withQuizletTermResult.id,
+                let term = withQuizletTermResult.term,
+                let definition = withQuizletTermResult.definition,
+                let rank = withQuizletTermResult.rank {
+                
+                self.id = Int64(id)
+                self.term = term
+                self.definition = definition
+                self.rank = Int64(rank)
+                
+                //image is optional or blank
+                if let image = withQuizletTermResult.image {
+                    
+                    //TODO: add validation
+                    //TODO: Don't hard code this
+                    self.imageHeight = image["image_height"] as! Int64
+                    self.imageUrl = image["image_url"] as? String
+                    self.imageWidth = image["image_width"] as! Int64
+                }
+
+                //add the related set
+                self.quizletSet = relatedSet
+                
+            } else {
+                //TODO: throw an error because everything wasn't as expected
+            }
+        } else {
+            fatalError("Unable to find Entity name! (QuizletTermDefinition)")
+        }
+        
+    }
 }
