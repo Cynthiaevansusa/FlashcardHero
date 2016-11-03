@@ -113,7 +113,7 @@ struct QuizletSetSearchResult {
      - `QuizletSetSearchKeyError.BadInputKeys` if input keys can't be made into a set
      - `QuizletSetSearchKeyError.InputMismatchKeys` if input keys don't match `expectedKeys`
      */
-    func checkInputKeys(_ data: [String:Any]) throws -> Bool {
+    func checkInputKeys(_ data: [String:Any]) throws {
         //guard check one: Put the incoming keys into a set
         
         //let keysToCheck = [String](data.keys) as? [String]
@@ -132,16 +132,6 @@ struct QuizletSetSearchResult {
             }
         }
         
-//        guard incomingKeys == self.expectedKeys else {
-//            throw QuizletSetSearchKeyError.inputMismatchKeys(keys: incomingKeys)
-//        }
-        
-        //print("The following sets appear to match: ")
-        //print(self.expectedKeys)
-        //print(keysToCheck!)
-        
-        //Keys match
-        return true
     }
     
     /**
@@ -157,7 +147,7 @@ struct QuizletSetSearchResult {
      - `QuizletSetSearchAssignmentError.BadInputValues` if input doesn't have a key in the `expectedKeys` Set
      - `QuizletSetSearchAssignmentError.inputValueOutOfExpectedRange` if input value at a key that has an expected range is out of range
      */
-    private mutating func attemptToAssignValues(_ data: [String:Any]) throws -> Bool {
+    private mutating func attemptToAssignValues(_ data: [String:Any]) throws {
         
         //go through each item and attempt to assign it to the struct
         //print("\nAbout to assign values from the following object: ")
@@ -321,8 +311,6 @@ struct QuizletSetSearchResult {
             }
         }
         
-        //all values assigned successfully
-        return true
     } //end of attemptToAssignValues
     
 }

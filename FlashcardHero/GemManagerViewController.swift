@@ -52,8 +52,7 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         //take the array of QuizletSetSearchResults and add to CoreData
         
         for searchResult in QuizletSetSearchResults {
-            let newQuizletSet = QuizletSet(withQuizletSetSearchResult: searchResult, context: self.fetchedResultsController!.managedObjectContext)
-            //setsToDisplay.append(newQuizletSet)
+            _ = QuizletSet(withQuizletSetSearchResult: searchResult, context: self.fetchedResultsController!.managedObjectContext)
         }
         
     }

@@ -99,7 +99,7 @@ struct QuizletGetTermResult {
      - `QuizletGetTermResultKeyError.BadInputKeys` if input keys can't be made into a set
      - `QuizletGetTermResultKeyError.InputMismatchKeys` if input keys don't match `expectedKeys`
      */
-    func checkInputKeys(_ data: [String:Any]) throws -> Bool {
+    func checkInputKeys(_ data: [String:Any]) throws {
         //guard check one: Put the incoming keys into a set
 
         //compare the new set with the expectedKeys
@@ -110,10 +110,7 @@ struct QuizletGetTermResult {
                 throw QuizletGetTermResultKeyError.inputMismatchKeys(key: key)
             }
         }
-        
-        
-        //Keys match
-        return true
+
     }
     
     /**
@@ -129,7 +126,7 @@ struct QuizletGetTermResult {
      - `QuizletGetTermResultAssignmentError.BadInputValues` if input doesn't have a key in the `expectedKeys` Set
      - `QuizletGetTermResultAssignmentError.inputValueOutOfExpectedRange` if input value at a key that has an expected range is out of range
      */
-    private mutating func attemptToAssignValues(_ data: [String:Any]) throws -> Bool {
+    private mutating func attemptToAssignValues(_ data: [String:Any]) throws {
         
         //go through each item and attempt to assign it to the struct
         //print("\nAbout to assign values from the following object: ")
@@ -177,8 +174,6 @@ struct QuizletGetTermResult {
             }
         }
         
-        //all values assigned successfully
-        return true
     } //end of attemptToAssignValues
     
 }
