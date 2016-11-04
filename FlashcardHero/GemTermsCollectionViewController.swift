@@ -16,7 +16,9 @@ class GemTermsCollectionViewController: CoreDataQuizletCollectionViewController,
     
     var quizletSet: QuizletSet!
     
+    @IBOutlet weak var backButton: UIBarButtonItem!
     
+    @IBOutlet weak var refreshButton: UIBarButtonItem!
     /******************************************************/
     /*******************///MARK: Life Cycle
     /******************************************************/
@@ -31,6 +33,16 @@ class GemTermsCollectionViewController: CoreDataQuizletCollectionViewController,
         
         setupFetchedResultsController()
         
+    }
+    
+    /******************************************************/
+    /*******************///MARK: Toolbars
+    /******************************************************/
+    @IBAction func backButtonPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+
+    @IBAction func refreshButtonPressed(_ sender: Any) {
     }
     
     /******************************************************/
@@ -69,6 +81,7 @@ class GemTermsCollectionViewController: CoreDataQuizletCollectionViewController,
         //            cell.stopActivityIndicator()
         //        }
         cell.term.text = term.term
+        cell.definition.text = term.definition
         
         
         return cell
@@ -89,7 +102,7 @@ class GemTermsCollectionViewController: CoreDataQuizletCollectionViewController,
         // Create Fetch Request
         let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "QuizletTermDefinition")
         
-        fr.sortDescriptors = [NSSortDescriptor(key: "rank", ascending: false)]
+        fr.sortDescriptors = [NSSortDescriptor(key: "rank", ascending: true)]
         
         // So far we have a search that will match ALL notes. However, we're
         // only interested in those within the current notebook:

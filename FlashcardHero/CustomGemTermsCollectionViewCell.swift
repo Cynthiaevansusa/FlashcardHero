@@ -15,4 +15,7 @@ class CustomGemTermsCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var definition: UILabel!
     
+    @IBOutlet weak var imageView: UIImageView?
+    
+    
 }

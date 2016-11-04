@@ -228,6 +228,47 @@
 			path = FlashcardHero;
 			sourceTree = "<group>";
 		};
+		F66B46E91DCD03AD00F2BC6E /* CoreData Parents */ = {
+			isa = PBXGroup;
+			children = (
+				F614C3491DC999FC00E7D3C8 /* CoreDataQuizletTableViewController.swift */,
+				F66B46E51DCBC60300F2BC6E /* CoreDataQuizletCollectionViewController.swift */,
+			);
+			name = "CoreData Parents";
+			sourceTree = "<group>";
+		};
+		F66B46EA1DCD03C300F2BC6E /* Gem Manager Tab */ = {
+			isa = PBXGroup;
+			children = (
+				F66B5E481DC6DA0200052B7F /* GemManagerViewController.swift */,
+				F66B46E31DCBC5C000F2BC6E /* GemTermsCollectionViewController.swift */,
+				F66B5E4A1DC6DA5400052B7F /* QuizletSearchResultsViewController.swift */,
+			);
+			name = "Gem Manager Tab";
+			sourceTree = "<group>";
+		};
+		F66B46EB1DCD03CF00F2BC6E /* HQ Tab */ = {
+			isa = PBXGroup;
+			children = (
+				F6FD10CE1DBEEAEB00B7E6EA /* CommandCenterViewController.swift */,
+			);
+			name = "HQ Tab";
+			sourceTree = "<group>";
+		};
+		F66B46EC1DCD03DD00F2BC6E /* More Tab */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "More Tab";
+			sourceTree = "<group>";
+		};
+		F66B46ED1DCD03E700F2BC6E /* Equipment Tab */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Equipment Tab";
+			sourceTree = "<group>";
+		};
 		F66B5E471DC6D30500052B7F /* Quizlet */ = {
 			isa = PBXGroup;
 			children = (
@@ -242,13 +283,12 @@
 		F66B5E4C1DC8338300052B7F /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				F6FD10CE1DBEEAEB00B7E6EA /* CommandCenterViewController.swift */,
+				F66B46E91DCD03AD00F2BC6E /* CoreData Parents */,
+				F66B46EB1DCD03CF00F2BC6E /* HQ Tab */,
+				F66B46EA1DCD03C300F2BC6E /* Gem Manager Tab */,
+				F66B46ED1DCD03E700F2BC6E /* Equipment Tab */,
+				F66B46EC1DCD03DD00F2BC6E /* More Tab */,
 				F6FD10D01DBEEAEB00B7E6EA /* PerformanceStatisticsViewController.swift */,
-				F614C3491DC999FC00E7D3C8 /* CoreDataQuizletTableViewController.swift */,
-				F66B5E481DC6DA0200052B7F /* GemManagerViewController.swift */,
-				F66B5E4A1DC6DA5400052B7F /* QuizletSearchResultsViewController.swift */,
-				F66B46E51DCBC60300F2BC6E /* CoreDataQuizletCollectionViewController.swift */,
-				F66B46E31DCBC5C000F2BC6E /* GemTermsCollectionViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";

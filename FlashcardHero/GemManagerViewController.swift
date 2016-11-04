@@ -76,7 +76,6 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         present(vc, animated: true, completion: nil)
     }
     
-    
     /******************************************************/
     /*******************///MARK: UITableViewDataSource
     /******************************************************/
