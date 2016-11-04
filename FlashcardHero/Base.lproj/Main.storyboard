@@ -328,15 +328,6 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="iTf-hn-sY9">
-                                <rect key="frame" x="72" y="19" width="230" height="28"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="230" id="e8M-wD-Ecv"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                <color key="textColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="AJO-f0-RHL">
                                 <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -459,6 +450,12 @@
                                 <color key="textColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="iTf-hn-sY9">
+                                <rect key="frame" x="72" y="19" width="231" height="28"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <color key="textColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -468,8 +465,10 @@
                             <constraint firstItem="dvr-WF-aYx" firstAttribute="top" secondItem="AJO-f0-RHL" secondAttribute="bottom" id="Cln-wg-Oaf"/>
                             <constraint firstItem="8M6-Fd-bZo" firstAttribute="top" secondItem="dvr-WF-aYx" secondAttribute="bottom" id="DwT-Fj-pS2"/>
                             <constraint firstItem="iTf-hn-sY9" firstAttribute="top" secondItem="D9D-sL-FU1" secondAttribute="bottom" constant="-1" id="GJx-8P-dh2"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="iTf-hn-sY9" secondAttribute="trailing" constant="56" id="JgB-O6-aoq"/>
                             <constraint firstItem="iTf-hn-sY9" firstAttribute="centerX" secondItem="GZg-5E-oXW" secondAttribute="centerX" id="L7O-ET-Bdq"/>
                             <constraint firstItem="dvr-WF-aYx" firstAttribute="leading" secondItem="GZg-5E-oXW" secondAttribute="leading" id="N46-FQ-p4y"/>
+                            <constraint firstItem="iTf-hn-sY9" firstAttribute="leading" secondItem="GZg-5E-oXW" secondAttribute="leadingMargin" constant="56" id="P0s-7e-C61"/>
                             <constraint firstItem="Gqb-Nr-fSm" firstAttribute="centerX" secondItem="GZg-5E-oXW" secondAttribute="centerX" id="San-cX-LNt"/>
                             <constraint firstItem="gPA-v7-NWu" firstAttribute="leading" secondItem="GZg-5E-oXW" secondAttribute="leading" id="TIr-dn-SCw"/>
                             <constraint firstItem="gPA-v7-NWu" firstAttribute="top" secondItem="GZg-5E-oXW" secondAttribute="top" id="bUw-i1-i1W"/>
