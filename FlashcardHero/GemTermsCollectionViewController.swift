@@ -16,8 +16,11 @@ class GemTermsCollectionViewController: CoreDataQuizletCollectionViewController,
     
     var quizletSet: QuizletSet!
     
+    @IBOutlet weak var creatorName: UILabel!
+    @IBOutlet weak var setTitle: UILabel!
     @IBOutlet weak var backButton: UIBarButtonItem!
     
+    @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var refreshButton: UIBarButtonItem!
     /******************************************************/
     /*******************///MARK: Life Cycle
@@ -33,7 +36,42 @@ class GemTermsCollectionViewController: CoreDataQuizletCollectionViewController,
         
         setupFetchedResultsController()
         
+        creatorName.text = quizletSet.createdBy
+        setTitle.text = quizletSet.title
+        
     }
+    
+    /******************************************************/
+    /*******************///MARK: UICollectionView
+    /******************************************************/
+//    override func viewWillLayoutSubviews() {
+//        super.viewWillLayoutSubviews()
+//        
+//        let space: CGFloat!
+//        let dimension: CGFloat!
+//        
+//        //following layout approach adapted from
+//        if UIInterfaceOrientationIsPortrait(UIApplication.shared.statusBarOrientation) { //If portrait mode
+//            //implement flow layout
+//            space = 3.0
+//            // have 1 items across if in portrait
+//            let numberOfItems: CGFloat = 1
+//            let spacingConstant: CGFloat = numberOfItems - 1
+//            dimension = (self.view.frame.size.width - (2 * space) - (spacingConstant * space)) / numberOfItems
+//        } else { //if not in portrait mode
+//            //implement flow layout
+//            space = 1.0
+//            // have 2 items across if in not portrait
+//            let numberOfItems: CGFloat = 2
+//            let spacingConstant: CGFloat = numberOfItems - 1
+//            dimension = (self.view.frame.size.width - (2 * space) - (spacingConstant * space)) / numberOfItems
+//        }
+//        //set the flowLayout based on new values
+//        flowLayout.minimumInteritemSpacing = space
+//        flowLayout.minimumLineSpacing = space
+//        flowLayout.sectionInset = UIEdgeInsets(top: space, left: space, bottom: space*2+2, right: space)
+//        flowLayout.itemSize = CGSize(width: dimension, height: dimension)
+//    }
     
     /******************************************************/
     /*******************///MARK: Toolbars
