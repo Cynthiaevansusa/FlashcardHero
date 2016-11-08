@@ -17,7 +17,7 @@ extension QuizletTermDefinition {
     }
 
     @NSManaged public var termId: Int64
-    @NSManaged public var term: String?
+    @NSManaged public var term: String
     @NSManaged public var definition: String?
     @NSManaged public var rank: Int64
     @NSManaged public var imageHeight: Int64

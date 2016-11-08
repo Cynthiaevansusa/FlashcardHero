@@ -7,33 +7,34 @@
 //
 
 import UIKit
-import Charts
+//import Charts
 
 class CommandCenterViewController: UIViewController {
 
-    @IBOutlet weak var barChartView: BarChartView!
-    
-    var months: [String]!
+
+    @IBOutlet weak var playTrueFalseButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-        let unitsSold = [20.0, 4.0, 6.0, 3.0, 12.0, 16.0, 4.0, 18.0, 2.0, 4.0, 5.0, 4.0]
-        
-        setChart(dataPoints: months, values: unitsSold)
+
     }
+    
+    @IBAction func playTrueFalseButtonPressed(_ sender: Any) {
+        
+        let vc = storyboard?.instantiateViewController(withIdentifier: "GameTrueFalse")
+        //vc.quizletIngestDelegate = self
+        
+        present(vc!, animated: true, completion: nil)
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func setChart(dataPoints: [String], values: [Double]) {
-        barChartView.noDataText = "You need to provide data for the chart."
 
-    }
 
 
 }

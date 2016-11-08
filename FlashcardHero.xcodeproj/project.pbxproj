@@ -38,6 +38,7 @@
 		F67D15881DD18FB900D9DD5C /* CoreDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67D15871DD18FB900D9DD5C /* CoreDataViewController.swift */; };
 		F67D158B1DD190C200D9DD5C /* GameTrueFalseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67D158A1DD190C200D9DD5C /* GameTrueFalseViewController.swift */; };
 		F67D158D1DD1933000D9DD5C /* BorderedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67D158C1DD1933000D9DD5C /* BorderedButton.swift */; };
+		F67D158F1DD19DED00D9DD5C /* CoreDataTrueFalseGameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67D158E1DD19DED00D9DD5C /* CoreDataTrueFalseGameController.swift */; };
 		F67D15ED1DC938B9002975C7 /* CustomQuizletSearchBySetsResultsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67D15EC1DC938B9002975C7 /* CustomQuizletSearchBySetsResultsCell.swift */; };
 		F67D15F01DC97FCC002975C7 /* FlashcardHeroModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F67D15EE1DC97FCC002975C7 /* FlashcardHeroModel.xcdatamodeld */; };
 		F6FD10CD1DBEEAEB00B7E6EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FD10CC1DBEEAEB00B7E6EA /* AppDelegate.swift */; };
@@ -103,6 +104,7 @@
 		F67D15871DD18FB900D9DD5C /* CoreDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataViewController.swift; sourceTree = "<group>"; };
 		F67D158A1DD190C200D9DD5C /* GameTrueFalseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameTrueFalseViewController.swift; sourceTree = "<group>"; };
 		F67D158C1DD1933000D9DD5C /* BorderedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderedButton.swift; sourceTree = "<group>"; };
+		F67D158E1DD19DED00D9DD5C /* CoreDataTrueFalseGameController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataTrueFalseGameController.swift; sourceTree = "<group>"; };
 		F67D15EC1DC938B9002975C7 /* CustomQuizletSearchBySetsResultsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomQuizletSearchBySetsResultsCell.swift; sourceTree = "<group>"; };
 		F67D15EF1DC97FCC002975C7 /* FlashcardHeroModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FlashcardHeroModel.xcdatamodel; sourceTree = "<group>"; };
 		F6FD10C91DBEEAEB00B7E6EA /* FlashcardHero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlashcardHero.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -187,12 +189,12 @@
 		F63782CC1DC2E2440078FE7F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				F67D158C1DD1933000D9DD5C /* BorderedButton.swift */,
 				F6FD10D21DBEEAEB00B7E6EA /* Main.storyboard */,
 				F6FD10D71DBEEAEB00B7E6EA /* LaunchScreen.storyboard */,
 				F67D15EC1DC938B9002975C7 /* CustomQuizletSearchBySetsResultsCell.swift */,
 				F614C34B1DC9A16A00E7D3C8 /* CustomGemManagerCell.swift */,
 				F66B46E71DCBCC9100F2BC6E /* CustomGemTermsCollectionViewCell.swift */,
+				F67D158C1DD1933000D9DD5C /* BorderedButton.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -318,6 +320,7 @@
 		F67D15891DD1908300D9DD5C /* Games */ = {
 			isa = PBXGroup;
 			children = (
+				F67D158E1DD19DED00D9DD5C /* CoreDataTrueFalseGameController.swift */,
 				F67D158A1DD190C200D9DD5C /* GameTrueFalseViewController.swift */,
 			);
 			name = Games;
@@ -679,6 +682,7 @@
 				F614C34E1DCA7FD100E7D3C8 /* QuizletGetSetTermsResult.swift in Sources */,
 				F606B3751DBEED0000744EC7 /* README.md in Sources */,
 				F63782D31DC2E3F50078FE7F /* CoreDataStack.swift in Sources */,
+				F67D158F1DD19DED00D9DD5C /* CoreDataTrueFalseGameController.swift in Sources */,
 				F6FD10CF1DBEEAEB00B7E6EA /* CommandCenterViewController.swift in Sources */,
 				F63782D81DC2E4440078FE7F /* Utilities.swift in Sources */,
 				F67D15ED1DC938B9002975C7 /* CustomQuizletSearchBySetsResultsCell.swift in Sources */,

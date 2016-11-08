@@ -36,7 +36,7 @@
         <!--Headquarters-->
         <scene sceneID="cEP-PS-eAC">
             <objects>
-                <viewController id="yf9-Ks-dTC" userLabel="Headquarters" sceneMemberID="viewController">
+                <viewController id="yf9-Ks-dTC" userLabel="Headquarters" customClass="CommandCenterViewController" customModule="FlashcardHero" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GBw-8Y-2m6"/>
                         <viewControllerLayoutGuide type="bottom" id="Tu5-Pb-tJM"/>
@@ -73,6 +73,14 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j9r-kV-Dyt">
+                                <rect key="frame" x="16" y="276" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Play True False"/>
+                                <connections>
+                                    <action selector="playTrueFalseButtonPressed:" destination="yf9-Ks-dTC" eventType="touchUpInside" id="87H-4h-Dyn"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -82,10 +90,13 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="HQ" id="ad3-9p-pHl"/>
+                    <connections>
+                        <outlet property="playTrueFalseButton" destination="j9r-kV-Dyt" id="3Ou-wR-e0q"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IRv-Wx-ZBp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="842" y="-1039"/>
+            <point key="canvasLocation" x="840.79999999999995" y="-1039.4302848575712"/>
         </scene>
         <!--Game Selection-->
         <scene sceneID="PLA-li-Ylw">
@@ -118,25 +129,62 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" fixedFrame="YES" text="Term Text" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="wbd-Va-hL4" userLabel="Term Text">
-                                <rect key="frame" x="16" y="94" width="343" height="188"/>
+                                <rect key="frame" x="16" y="66" width="343" height="188"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NNh-cS-tGg">
-                                <rect key="frame" x="142" y="309" width="91" height="48"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Definition Text" lineBreakMode="middleTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="oTd-uT-4hW" userLabel="Definition Text">
+                                <rect key="frame" x="16" y="262" width="343" height="180"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="21"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NNh-cS-tGg" customClass="BorderedButton" customModule="FlashcardHero" customModuleProvider="target">
+                                <rect key="frame" x="142" y="450" width="91" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="True"/>
+                                <connections>
+                                    <action selector="trueButtonPressed:" destination="1e0-WT-vSs" eventType="touchUpInside" id="IH6-JV-JQL"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jjy-qE-pPI">
-                                <rect key="frame" x="142" y="418" width="91" height="48"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jjy-qE-pPI" customClass="BorderedButton" customModule="FlashcardHero" customModuleProvider="target">
+                                <rect key="frame" x="142" y="518" width="91" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="True"/>
+                                <state key="normal" title="False"/>
+                                <connections>
+                                    <action selector="falseButtonPressed:" destination="1e0-WT-vSs" eventType="touchUpInside" id="aJm-xu-FDx"/>
+                                </connections>
+                            </button>
+                            <label userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Feedback" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v45-xZ-zLn">
+                                <rect key="frame" x="0.0" y="66" width="375" height="601"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mnt-ig-PxO" customClass="BorderedButton" customModule="FlashcardHero" customModuleProvider="target">
+                                <rect key="frame" x="16" y="28" width="126" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Quit"/>
+                                <connections>
+                                    <action selector="quitButtonPressed:" destination="1e0-WT-vSs" eventType="touchUpInside" id="GzB-i8-eny"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="definitionText" destination="oTd-uT-4hW" id="J84-ss-Ihm"/>
+                        <outlet property="falseButton" destination="Jjy-qE-pPI" id="nxL-o9-Bha"/>
+                        <outlet property="feedbackLabel" destination="v45-xZ-zLn" id="QYX-gD-gEs"/>
+                        <outlet property="quitButton" destination="Mnt-ig-PxO" id="cmv-i3-O7g"/>
+                        <outlet property="termText" destination="wbd-Va-hL4" id="J9Q-O9-ZiN"/>
+                        <outlet property="trueButton" destination="NNh-cS-tGg" id="y8P-Bk-4J6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2rz-mx-gBa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
