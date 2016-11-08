@@ -13084,8 +13084,9 @@ quizzletTD}</string>
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
 \f0\b\fs24 \cf0 id\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\f1\b0 name\
+\f1\b0 \cf0 name\
 description}</string>
 							</dict>
 							<key>TextPlacement</key>
@@ -20587,11 +20588,11 @@ costModifierId\
 									<key>Color</key>
 									<dict>
 										<key>b</key>
-										<string>0</string>
+										<string>0.25098</string>
 										<key>g</key>
-										<string>0</string>
+										<string>0.501961</string>
 										<key>r</key>
-										<string>1</string>
+										<string>0</string>
 									</dict>
 									<key>Width</key>
 									<real>2</real>
@@ -20645,11 +20646,11 @@ costModifierId\
 									<key>Color</key>
 									<dict>
 										<key>b</key>
-										<string>0</string>
+										<string>0.25098</string>
 										<key>g</key>
-										<string>0</string>
+										<string>0.501961</string>
 										<key>r</key>
-										<string>1</string>
+										<string>0</string>
 									</dict>
 									<key>Width</key>
 									<real>2</real>
@@ -20675,8 +20676,9 @@ setId\
 isFavorite\
 imageUrl\
 imageData\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\f2\i quizletSet}</string>
+\f2\i \cf0 quizletSet}</string>
 							</dict>
 							<key>TextPlacement</key>
 							<integer>0</integer>
@@ -21235,8 +21237,9 @@ imageData\
 title\
 description\
 ...\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\f2\i quizletClass}</string>
+\f2\i \cf0 quizletClass}</string>
 							</dict>
 							<key>TextPlacement</key>
 							<integer>0</integer>
@@ -22018,7 +22021,7 @@ name}</string>
 		</dict>
 	</array>
 	<key>ModificationDate</key>
-	<string>2016-11-02 18:42:41 +0000</string>
+	<string>2016-11-08 04:32:03 +0000</string>
 	<key>Modifier</key>
 	<string>Jacob Foster Davis</string>
 	<key>NotesVisible</key>
@@ -22086,9 +22089,9 @@ name}</string>
 		<key>DrawerWidth</key>
 		<real>209</real>
 		<key>Frame</key>
-		<string>{{-0, -0}, {1607, 1038}}</string>
+		<string>{{-0, 1}, {1607, 1037}}</string>
 		<key>VisibleRegion</key>
-		<string>{{-247.99998, -12.999995}, {1648.2051, 939.48724}}</string>
+		<string>{{-247.99998, -12.000012}, {1648.2051, 937.43591}}</string>
 		<key>Zoom</key>
 		<real>1.5</real>
 	</dict>
