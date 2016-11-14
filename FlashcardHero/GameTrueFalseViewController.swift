@@ -33,6 +33,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
         
         
         setupNewQuestion()
+        //TODO: Check for case where no set contains more than 1 term.
         
     }
     
@@ -41,115 +42,199 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
     /*******************///MARK: Game Functions
     /******************************************************/
 
+    func getRandomSet(sets: [QuizletSet]) -> QuizletSet {
+        let numberOfSets = sets.count
+        
+        //get random number between 0 and count-1
+        let randSetIndex = Int(arc4random_uniform(UInt32(numberOfSets)))
+        
+        //get a random set
+        let quizletSet = sets[randSetIndex] 
+        
+        return quizletSet
+    }
+    
+    func getRandomSetWithMultipleTerms(sets: [QuizletSet]) -> QuizletSet {
+        
+        //make sure this set has more than 1 term before continuting
+        var numberOfTerms = 0
+        var quizletSet: QuizletSet
+        var tfc: NSFetchedResultsController<NSFetchRequestResult>
+        repeat {
+            quizletSet = getRandomSet(sets: sets)
+            //fetch terms from the given set
+            setupTermDefinitionFetchedResultsController(set: quizletSet)
+            
+            if let tempTfc = termFetchedResultsController {
+                
+                tfc = tempTfc
+                
+                if let terms = tfc.fetchedObjects {
+                    
+                    numberOfTerms = terms.count
+                } else {
+                    //TODO: handle nil tfc.fetchedObjects
+                }
+            } else {
+                //TODO: handle nil termFetchedResultsController
+            }
+        } while numberOfTerms <= 1
+        
+        return quizletSet
+    }
+    
+    func randTrueFalse() -> Bool {
+        let flip = Int(arc4random_uniform(UInt32(2)))
+        if flip == 1 {
+            return true
+        } else if flip == 0 {
+            return false
+        } else {
+            //unexpected flip
+            return false
+        }
+    }
+    
     func setupNewQuestion() {
-        //pick a random term
+        self.definitionText.text = ""
+        self.termText.text = ""
+        
+        //fetch sets
         if let fc = fetchedResultsController {
             print((fc.fetchedObjects?.count)!)
             
-            if (fc.fetchedObjects?.count)! > 0 {
+            guard (fc.fetchedObjects?.count)! > 0 else {
+                //TODO: handle zero sets returned with message to user
+                return
+            }
+  
+            
+            //get an array of sets
+            if let sets = fc.fetchedObjects as? [QuizletSet] {
                 
-                let numberOfTerms = fc.fetchedObjects?.count
+                //get a quizlet set that has more than 1 term
+                let quizletSet = getRandomSetWithMultipleTerms(sets: sets)
+
+                //now get a random question from the set
+                //fetch terms from the given set
+                setupTermDefinitionFetchedResultsController(set: quizletSet)
                 
-                let randIndex = 0
-                
-                if let sets = fc.fetchedObjects {
-                    let quizletSet = sets[randIndex] as! QuizletSet
+                if let tfc = termFetchedResultsController {
                     
-                    //now get a random question from the set
+                    guard (tfc.fetchedObjects?.count)! > 0 else {
+                        //TODO: handle zero terms returned with alert to user
+                        return
+                    }
                     
-                    let randTermIndex = 0
-                    
-                    setupTermDefinitionFetchedResultsController(set: quizletSet)
-                    
-                    if let tfc = termFetchedResultsController {
-                        if (tfc.fetchedObjects?.count)! > 0 {
-                             if let terms = tfc.fetchedObjects {
-                                
-                                let quizletTermDefinition = terms[randTermIndex] as! QuizletTermDefinition
-                                
-                                let question = quizletTermDefinition.term
-                                let correctAnswer = quizletTermDefinition.definition
-                                
-                                //get a random definition
-                                let randDefinitionIndex = 0
-                                let wrongQuizletTermDefinition = terms[randDefinitionIndex] as! QuizletTermDefinition
-                                
-                                let wrongAnswer = wrongQuizletTermDefinition.definition
-                                
-                                //set the question
-                                self.termText.text = question
-                                
-                                //determine if will show correct answer
-                                
-                                let willShowCorrect = true
-                                
-                                if willShowCorrect {
-                                    self.definitionText.text = correctAnswer
-                                    self.showingCorrectAnswer = willShowCorrect
-                                } else {
-                                    self.definitionText.text = wrongAnswer
-                                    self.showingCorrectAnswer = !willShowCorrect
-                                }
-                                
-                                
-                                
-                                
-                             } else {
-                                //TODO: Handle Error
-                            }
-                
-                            
-                        } else {
-                            //TODO: Handle Error
-                        }
+                     if let terms = tfc.fetchedObjects as? [QuizletTermDefinition] {
                         
-                    } else {
-                        //TODO: Handle Error
+                        let numberOfTerms = terms.count
+                        
+                        //get random number between 0 and count-1
+                        let randTermIndex = Int(arc4random_uniform(UInt32(numberOfTerms)))
+                        
+                        let quizletTermDefinition = terms[randTermIndex]
+                        
+                        let question = quizletTermDefinition.term
+                        let correctAnswer = quizletTermDefinition.definition
+                        
+                        //get a random definition as a wrong answer that isn't the same as the correct answer
+                        var randDefinitionIndex: Int
+                        repeat {
+                            randDefinitionIndex = Int(arc4random_uniform(UInt32(numberOfTerms)))
+                        } while randDefinitionIndex != randTermIndex
+                        
+                        
+                        let wrongQuizletTermDefinition = terms[randDefinitionIndex]
+                        
+                        let wrongAnswer = wrongQuizletTermDefinition.definition
+                        
+                        //set the question
+                        self.termText.text = question
+                        
+                        //determine if will show correct answer
+                        
+                        let willShowCorrect = randTrueFalse()
+                        
+                        if willShowCorrect {
+                            self.definitionText.text = correctAnswer
+                            self.showingCorrectAnswer = willShowCorrect
+                        } else {
+                            self.definitionText.text = wrongAnswer
+                            self.showingCorrectAnswer = willShowCorrect
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(700), execute: {self.setAnswerButtonsVisible(visible: true)})
+                     } else {
+                        //TODO: tfc.fetchedObjects nil or not array of quizletTermDefinitions
                     }
                     
                 } else {
-                    //TODO: Handle error
+                    //TODO: Handle termFetchedResultsController nil
                 }
                 
             } else {
-                //TODO: handle error
+                //TODO: handle fetchedResultsController nil
             }
         }
     }
     
     func answerQuestion(answer: Bool) {
         //check the correct answer
+        setAnswerButtonsVisible(visible: false)
         
         if (answer && showingCorrectAnswer) || (!answer && !showingCorrectAnswer) {
             //they answered correctly
-            setFeedbackVisible(visible: true, wasCorrect: true)
+            setFeedbackMessage(wasCorrect: true)
+            setFeedbackVisible(visible: true)
         } else {
             //answered incorrectly
-            setFeedbackVisible(visible: true, wasCorrect: false)
+            setFeedbackMessage(wasCorrect: false)
+            setFeedbackVisible(visible: true)
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {self.dismissFeedback()})
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(400), execute: {self.dismissFeedback()})
     }
     
     /******************************************************/
     /*******************///MARK: Feedback
     /******************************************************/
 
-    func setFeedbackVisible(visible: Bool, wasCorrect: Bool = false) {
+    func setFeedbackMessage(wasCorrect: Bool){
         if wasCorrect {
             self.feedbackLabel.text = "Correct!"
+            //set color to green
+            self.feedbackLabel.backgroundColor = UIColor.green
         } else {
             self.feedbackLabel.text = "Wrong!"
+            //set color to red
+            self.feedbackLabel.backgroundColor = UIColor.red
         }
-        
+    }
+    func setFeedbackVisible(visible: Bool) {
+  
         if visible {
-            UIView.animate(withDuration: 0.3, animations: {
+            UIView.animate(withDuration: 0.1, animations: {
                 self.feedbackLabel.alpha = 1.0
             })
         } else {
-            self.feedbackLabel.text = ""
-            UIView.animate(withDuration: 1.0, animations: {
+            //self.feedbackLabel.text = ""
+            UIView.animate(withDuration: 0.2, animations: {
                 self.feedbackLabel.alpha = 0.0
+            })
+        }
+    }
+    
+    func setAnswerButtonsVisible(visible: Bool) {
+        if visible {
+            UIView.animate(withDuration: 0.4, animations: {
+                self.trueButton.alpha = 1.0
+                self.falseButton.alpha = 1.0
+            })
+        } else {
+            //self.feedbackLabel.text = ""
+            UIView.animate(withDuration: 0.1, animations: {
+                self.trueButton.alpha = 0.0
+                self.falseButton.alpha = 0.0
             })
         }
     }
@@ -157,6 +242,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
     func dismissFeedback() {
         setFeedbackVisible(visible: false)
         setupNewQuestion()
+        
     }
     
     /******************************************************/
@@ -198,7 +284,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
         // only interested in those within the current notebook:
         // NSPredicate to the rescue!
         
-        //only get sets that are active
+        //TODO: only get sets that are active
         //let pred = NSPredicate(format: "isActive = %@", argumentArray: ["true"])
 
         //fr.predicate = pred
