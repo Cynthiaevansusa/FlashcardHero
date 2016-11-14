@@ -163,7 +163,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
                             self.definitionText.text = wrongAnswer
                             self.showingCorrectAnswer = willShowCorrect
                         }
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(700), execute: {self.setAnswerButtonsVisible(visible: true)})
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: {self.setAnswerButtonsVisible(visible: true)})
                      } else {
                         //TODO: tfc.fetchedObjects nil or not array of quizletTermDefinitions
                     }
