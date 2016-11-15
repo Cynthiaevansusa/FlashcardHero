@@ -49,7 +49,6 @@
         <attribute name="start" attributeType="Date" minDateTimeInterval="500930280" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
         <attribute name="stop" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="appSession" maxCount="1" deletionRule="Nullify" destinationEntity="AppSession" inverseName="studySession" inverseEntity="AppSession" syncable="YES"/>
-        <relationship name="performanceLog" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TDPerformanceLog" inverseName="studySession" inverseEntity="TDPerformanceLog" syncable="YES"/>
     </entity>
     <entity name="TDPerformanceLog" representedClassName=".TDPerformanceLog" syncable="YES">
         <attribute name="datetime" attributeType="Date" minDateTimeInterval="500911800" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
@@ -57,14 +56,14 @@
         <attribute name="wasCorrect" attributeType="Boolean" usesScalarValueType="YES" indexed="YES" syncable="YES"/>
         <attribute name="wrongAnswerFITB" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="quizletTD" maxCount="1" deletionRule="Nullify" destinationEntity="QuizletTermDefinition" inverseName="performanceLog" inverseEntity="QuizletTermDefinition" syncable="YES"/>
-        <relationship name="studySession" maxCount="1" deletionRule="Nullify" destinationEntity="StudySession" inverseName="performanceLog" inverseEntity="StudySession" syncable="YES"/>
+        <relationship name="studySession" maxCount="1" deletionRule="Nullify" destinationEntity="StudySession" syncable="YES"/>
         <relationship name="wrongAnswerTD" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QuizletTermDefinition" inverseName="performanceLogWrong" inverseEntity="QuizletTermDefinition" syncable="YES"/>
     </entity>
     <elements>
         <element name="QuizletSet" positionX="-216" positionY="-207" width="128" height="28"/>
         <element name="QuizletTermDefinition" positionX="18" positionY="171" width="128" height="28"/>
-        <element name="TDPerformanceLog" positionX="187" positionY="162" width="128" height="28"/>
+        <element name="TDPerformanceLog" positionX="187" positionY="162" width="128" height="148"/>
         <element name="AppSession" positionX="-9" positionY="-45" width="128" height="30"/>
-        <element name="StudySession" positionX="0" positionY="-36" width="128" height="30"/>
+        <element name="StudySession" positionX="0" positionY="-36" width="128" height="105"/>
     </elements>
 </model>

@@ -43,10 +43,17 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         dataChecks()
         
         
         setupNewQuestion()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        
     }
     
     /******************************************************/
@@ -302,6 +309,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
                                       quizletTD: self.correctTD!,
                                       wrongAnswerTD: self.wrongTD,
                                       wrongAnswerFITB: nil,
+                                      studySession: self.studySession!,
                                       context: self.performanceLogFetchedResultsController!.managedObjectContext)
     }
     
@@ -391,7 +399,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
     }
     
     func quit() {
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: {})
         
     }
 
@@ -427,29 +435,9 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
         
     }
     
-    func setupPerformanceLogFetchedResultsController(){
-        
-        //set up stack and fetchrequest
-        // Get the stack
-        let delegate = UIApplication.shared.delegate as! AppDelegate
-        let stack = delegate.stack
-        
-        // Create Fetch Request
-        let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "TDPerformanceLog")
-        
-        fr.sortDescriptors = [NSSortDescriptor(key: "datetime", ascending: false)]
-        
-        //only return where isActive is set to true
-        //let pred = NSPredicate(format: "isActive = %@", argumentArray: [true])
-        
-        //fr.predicate = pred
-        
-        // Create FetchedResultsController
-        let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
-        
-        self.performanceLogFetchedResultsController = fc
-        
-    }
+
+    
+
     
     func setupTermDefinitionFetchedResultsController(set: QuizletSet){
         

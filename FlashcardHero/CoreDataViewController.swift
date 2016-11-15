@@ -17,38 +17,29 @@ class CoreDataViewController: UIViewController {
     /******************************************************/
     //MARK: - Properties
     
+    var studySession: StudySession?
+    
     var fetchedResultsController : NSFetchedResultsController<NSFetchRequestResult>? {
         didSet {
-            // Whenever the frc changes, we execute the search and
-            // reload the table
             fetchedResultsController?.delegate = self
             executeSearch()
-            //TODO: Reload data
-            //coreMapView.reloadData()
         }
     }
     
     var performanceLogFetchedResultsController : NSFetchedResultsController<NSFetchRequestResult>? {
         didSet {
-            // Whenever the frc changes, we execute the search and
-            // reload the table
             performanceLogFetchedResultsController?.delegate = self
             executePerformanceLogSearch()
-            //TODO: Reload data
-            //coreMapView.reloadData()
         }
     }
     
-    //    var fetchedTextResultsController : NSFetchedResultsController<NSFetchRequestResult>? {
-    //        didSet {
-    //            // Whenever the frc changes, we execute the search and
-    //            // reload the table
-    //            fetchedTextResultsController?.delegate = self
-    //            executeTextSearch()
-    //            //TODO: Reload data
-    //            //coreMapView.reloadData()
-    //        }
-    //    }
+    var studySessionFetchedResultsController : NSFetchedResultsController<NSFetchRequestResult>? {
+        didSet {
+            studySessionFetchedResultsController?.delegate = self
+            executeStudySessionSearch()
+        }
+    }
+    
     
     
     var stack: CoreDataStack!
@@ -92,17 +83,98 @@ extension CoreDataViewController {
         }
     }
     
-    //    func executeTextSearch() {
-    //        if let fc = fetchedTextResultsController {
-    //            do {
-    //                try fc.performFetch()
-    //            } catch let e as NSError {
-    //                print("Error while trying to perform a search: \n\(e)\n\(fetchedTextResultsController)")
-    //            }
-    //        }
-    //    }
+    func executeStudySessionSearch() {
+        if let fc = studySessionFetchedResultsController {
+            do {
+                try fc.performFetch()
+            } catch let e as NSError {
+                print("Error while trying to perform a search: \n\(e)\n\(studySessionFetchedResultsController)")
+            }
+        }
+    }
     
     
+}
+
+//studySession functionality
+extension CoreDataTrueFalseGameController {
+    func setupStudySessionFetchedResultsController(){
+        
+        //set up stack and fetchrequest
+        // Get the stack
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        let stack = delegate.stack
+        
+        // Create Fetch Request
+        let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "StudySession")
+        
+        fr.sortDescriptors = [NSSortDescriptor(key: "start", ascending: true)]
+        
+        // So far we have a search that will match ALL notes. However, we're
+        // only interested in those within the current notebook:
+        // NSPredicate to the rescue!
+        
+        //only get sets that are active
+        //let pred = NSPredicate(format: "quizletSet = %@", argumentArray: [set])
+        
+        //fr.predicate = pred
+        
+        // Create FetchedResultsController
+        let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
+        
+        self.studySessionFetchedResultsController = fc
+        
+    }
+    
+    func startStudySession() {
+        //only create a new session if self.appsession is nil
+        if self.studySession != nil {
+            
+            print("Cannot create a new StudySession, another StudySession is in progress")
+            
+        } else {
+            
+            if self.studySessionFetchedResultsController == nil {
+                // Create Fetch Request
+                let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "StudySession")
+                
+                fr.sortDescriptors = [NSSortDescriptor(key: "start", ascending: true)]
+                
+                //only get sets that are active
+                //        let pred = NSPredicate(format: "quizletSet = %@", argumentArray: [set])
+                //
+                //        fr.predicate = pred
+                
+                // Create FetchedResultsController
+                let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
+                
+                self.studySessionFetchedResultsController = fc
+            }
+            
+            let delegate = UIApplication.shared.delegate as! AppDelegate
+            let appSession = delegate.appSession
+            
+            self.studySession = StudySession(start: NSDate(),
+                                             stop: nil,
+                                             gameId: 0,
+                                             appSession: appSession!,
+                                             context: self.studySessionFetchedResultsController!.managedObjectContext)
+        }
+    }
+    
+    func stopStudySession() {
+        //only stop a session if one is in progress
+        if let currentStudySession = self.studySession {
+            
+            //currentStudySession.setValue(NSDate(), forKey: "stop")
+            currentStudySession.stop = NSDate()
+            //remove the referece to the current session
+            self.studySession = nil
+            
+        } else {
+            print("Cannot stop the StudySession, there is no StudySession to stop")
+        }
+    }
 }
 
 // MARK: - CoreDataCollectionViewController: NSFetchedResultsControllerDelegate
@@ -144,8 +216,6 @@ extension CoreDataViewController: NSFetchedResultsControllerDelegate {
             //save
             stack.save()
             
-            //TODO: Persist the text box
-            
         } else if anObject is TDPerformanceLog {
             
             switch(type) {
@@ -167,9 +237,29 @@ extension CoreDataViewController: NSFetchedResultsControllerDelegate {
             //save
             stack.save()
             
-            //TODO: Persist the text box
+        } else if anObject is StudySession {
             
-        }else
+            switch(type) {
+            case .insert:
+                
+                
+                print("case insert StudySession")
+            case .delete:
+                
+                print("case delete StudySession")
+            case .update:
+                
+                print("case update StudySession")
+            case .move:
+                //TODO: move a cell... this may not be needed
+                print("case move StudySession")
+            }
+            
+            //save
+            stack.save()
+            
+            
+        } else
         {
             fatalError("Couldn't get a QuizletSet from anObject in didChange")
         }

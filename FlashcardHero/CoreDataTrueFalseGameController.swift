@@ -38,6 +38,33 @@ class CoreDataTrueFalseGameController: CoreDataViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        self.startStudySession()
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        self.stopStudySession()
+        
+    }
+    
+    override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
+        super.dismiss(animated: flag, completion: completion)
+        
+        self.stopStudySession()
     }
     
 }
@@ -56,6 +83,37 @@ extension CoreDataTrueFalseGameController {
         }
     }
     
+    
+}
+
+
+
+//performance log functionality
+extension CoreDataTrueFalseGameController {
+    
+    func setupPerformanceLogFetchedResultsController(){
+        
+        //set up stack and fetchrequest
+        // Get the stack
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        let stack = delegate.stack
+        
+        // Create Fetch Request
+        let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "TDPerformanceLog")
+        
+        fr.sortDescriptors = [NSSortDescriptor(key: "datetime", ascending: false)]
+        
+        //only return where isActive is set to true
+        //let pred = NSPredicate(format: "isActive = %@", argumentArray: [true])
+        
+        //fr.predicate = pred
+        
+        // Create FetchedResultsController
+        let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
+        
+        self.performanceLogFetchedResultsController = fc
+        
+    }
     
 }
 

@@ -12,7 +12,7 @@ import CoreData
 
 public class TDPerformanceLog: NSManagedObject {
 
-    convenience init(datetime: NSDate, questionTypeId: Int, wasCorrect: Bool, quizletTD: QuizletTermDefinition, wrongAnswerTD: QuizletTermDefinition?, wrongAnswerFITB: String?, context: NSManagedObjectContext){
+    convenience init(datetime: NSDate, questionTypeId: Int, wasCorrect: Bool, quizletTD: QuizletTermDefinition, wrongAnswerTD: QuizletTermDefinition?, wrongAnswerFITB: String?, studySession: StudySession, context: NSManagedObjectContext){
         
         if let ent = NSEntityDescription.entity(forEntityName: "TDPerformanceLog", in: context) {
             self.init(entity: ent, insertInto: context)
@@ -21,6 +21,7 @@ public class TDPerformanceLog: NSManagedObject {
             self.questionTypeId = Int64(questionTypeId)
             self.wasCorrect = wasCorrect
             self.quizletTD = quizletTD
+            self.studySession = studySession
             
             //optionals
             if let wrongAnswerTD = wrongAnswerTD {
