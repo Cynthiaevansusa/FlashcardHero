@@ -11847,11 +11847,11 @@ quizletSetId\
 									<key>Color</key>
 									<dict>
 										<key>b</key>
-										<string>0</string>
+										<string>0.25098</string>
 										<key>g</key>
-										<string>0</string>
+										<string>0.501961</string>
 										<key>r</key>
-										<string>1</string>
+										<string>0</string>
 									</dict>
 									<key>Width</key>
 									<real>2</real>
@@ -11905,11 +11905,11 @@ quizletSetId\
 									<key>Color</key>
 									<dict>
 										<key>b</key>
-										<string>0</string>
+										<string>0.25098</string>
 										<key>g</key>
-										<string>0</string>
+										<string>0.501961</string>
 										<key>r</key>
-										<string>1</string>
+										<string>0</string>
 									</dict>
 									<key>Width</key>
 									<real>2</real>
@@ -12429,7 +12429,7 @@ description}</string>
 						</dict>
 						<dict>
 							<key>Bounds</key>
-							<string>{{299, 275}, {142, 126}}</string>
+							<string>{{299, 275}, {142, 98}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
@@ -12506,12 +12506,12 @@ description}</string>
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
 \f0\fs24 \cf0 datetime\
-quizletTDId\
 questionTypeId\
-studySessionId\
 wasCorrect\
-wrongAnswerTDId\
 wrongAnswerFITB\
+
+\f1\i wrongAnswerTD
+\f0\i0 \
 
 \f1\i studySession\
 quizzletTD}</string>
@@ -13023,7 +13023,7 @@ quizzletTD}</string>
 {\*\expandedcolortbl;\csgray\c100000;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
 
-\f0\b\fs24 \cf0 Game}</string>
+\f0\b\fs24 \cf0 Games}</string>
 							</dict>
 							<key>TextPlacement</key>
 							<integer>0</integer>
@@ -19924,11 +19924,11 @@ costModifierId\
 			<key>OrthogonalBarAutomatic</key>
 			<false/>
 			<key>OrthogonalBarPosition</key>
-			<real>21.725128173828125</real>
+			<real>55.9671630859375</real>
 			<key>Points</key>
 			<array>
-				<string>{417.33325, 401}</string>
-				<string>{564.48413, 497.45181}</string>
+				<string>{417.33325, 373}</string>
+				<string>{566.81708, 497.36044}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -20672,8 +20672,8 @@ costModifierId\
 {\*\expandedcolortbl;\csgray\c100000;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\f0\b\fs24 \cf0 id
-\f1\b0 \
+\f0\b\fs24 \cf0 \strike \strikec0 id
+\f1\b0 \strike0\striked0 \
 term\
 definition\
 setId\
@@ -22025,7 +22025,7 @@ name}</string>
 		</dict>
 	</array>
 	<key>ModificationDate</key>
-	<string>2016-11-15 13:48:34 +0000</string>
+	<string>2016-11-15 14:03:35 +0000</string>
 	<key>Modifier</key>
 	<string>Jacob Foster Davis</string>
 	<key>NotesVisible</key>

@@ -11,7 +11,7 @@ struct GameDirectory {
     
     static var gameTrueFalse = Game(id: 0, name: "True or False", description: "This is the True or False description", storyboardId: "GameTrueFalse", isAvailable: true)
     
-    static var allGames = [gameTrueFalse]
+    static var allGames = [gameTrueFalse.id : gameTrueFalse]
     static var activeGames = [gameTrueFalse]
     
     
