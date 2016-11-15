@@ -142,7 +142,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
                         var randDefinitionIndex: Int
                         repeat {
                             randDefinitionIndex = Int(arc4random_uniform(UInt32(numberOfTerms)))
-                        } while randDefinitionIndex != randTermIndex
+                        } while randDefinitionIndex == randTermIndex
                         
                         
                         let wrongQuizletTermDefinition = terms[randDefinitionIndex]
@@ -155,13 +155,12 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
                         //determine if will show correct answer
                         
                         let willShowCorrect = randTrueFalse()
+                        self.showingCorrectAnswer = willShowCorrect
                         
                         if willShowCorrect {
                             self.definitionText.text = correctAnswer
-                            self.showingCorrectAnswer = willShowCorrect
                         } else {
                             self.definitionText.text = wrongAnswer
-                            self.showingCorrectAnswer = willShowCorrect
                         }
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: {self.setAnswerButtonsVisible(visible: true)})
                      } else {
@@ -182,14 +181,26 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
         //check the correct answer
         setAnswerButtonsVisible(visible: false)
         
-        if (answer && showingCorrectAnswer) || (!answer && !showingCorrectAnswer) {
+        let conditions = (answer, showingCorrectAnswer)
+        
+        switch conditions {
+        //player answered true, the answer showing is the correct answer
+        case (true, true):
             //they answered correctly
             setFeedbackMessage(wasCorrect: true)
             setFeedbackVisible(visible: true)
-        } else {
+        //player answered false, the answer showing is also false
+        case (false, false):
+            //they answered correctly
+            setFeedbackMessage(wasCorrect: true)
+            setFeedbackVisible(visible: true)
+        
+        //any other situation
+        default:
             //answered incorrectly
             setFeedbackMessage(wasCorrect: false)
             setFeedbackVisible(visible: true)
+            
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(400), execute: {self.dismissFeedback()})
