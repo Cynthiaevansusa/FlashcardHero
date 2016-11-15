@@ -37,8 +37,17 @@
         <attribute name="termId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="quizletSet" maxCount="1" deletionRule="Nullify" destinationEntity="QuizletSet" inverseName="quizletTermDefinition" inverseEntity="QuizletSet" syncable="YES"/>
     </entity>
+    <entity name="TDPerformanceLog" representedClassName=".TDPerformanceLog" syncable="YES">
+        <attribute name="datetime" attributeType="Date" minDateTimeInterval="500911800" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
+        <attribute name="questionTypeId" attributeType="Integer 64" minValueString="0" defaultValueString="0" usesScalarValueType="YES" indexed="YES" syncable="YES"/>
+        <attribute name="wasCorrect" attributeType="Boolean" usesScalarValueType="YES" indexed="YES" syncable="YES"/>
+        <attribute name="wrongAnswerFITB" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="quizletTD" maxCount="1" deletionRule="Nullify" destinationEntity="QuizletTermDefinition" syncable="YES"/>
+        <relationship name="wrongAnswerTD" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QuizletTermDefinition" syncable="YES"/>
+    </entity>
     <elements>
         <element name="QuizletSet" positionX="-216" positionY="-207" width="128" height="405"/>
         <element name="QuizletTermDefinition" positionX="18" positionY="171" width="128" height="180"/>
+        <element name="TDPerformanceLog" positionX="187" positionY="162" width="128" height="133"/>
     </elements>
 </model>

@@ -41,6 +41,8 @@
 		F67D158F1DD19DED00D9DD5C /* CoreDataTrueFalseGameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67D158E1DD19DED00D9DD5C /* CoreDataTrueFalseGameController.swift */; };
 		F67D15911DDB3E6E00D9DD5C /* GameDirectory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67D15901DDB3E6E00D9DD5C /* GameDirectory.swift */; };
 		F67D15941DDB4A4700D9DD5C /* QuestionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67D15931DDB4A4700D9DD5C /* QuestionType.swift */; };
+		F67D15A01DDB534500D9DD5C /* TDPerformanceLog+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67D159E1DDB534500D9DD5C /* TDPerformanceLog+CoreDataClass.swift */; };
+		F67D15A11DDB534500D9DD5C /* TDPerformanceLog+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67D159F1DDB534500D9DD5C /* TDPerformanceLog+CoreDataProperties.swift */; };
 		F67D15ED1DC938B9002975C7 /* CustomQuizletSearchBySetsResultsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67D15EC1DC938B9002975C7 /* CustomQuizletSearchBySetsResultsCell.swift */; };
 		F67D15F01DC97FCC002975C7 /* FlashcardHeroModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F67D15EE1DC97FCC002975C7 /* FlashcardHeroModel.xcdatamodeld */; };
 		F6FD10CD1DBEEAEB00B7E6EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FD10CC1DBEEAEB00B7E6EA /* AppDelegate.swift */; };
@@ -109,6 +111,8 @@
 		F67D158E1DD19DED00D9DD5C /* CoreDataTrueFalseGameController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataTrueFalseGameController.swift; sourceTree = "<group>"; };
 		F67D15901DDB3E6E00D9DD5C /* GameDirectory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameDirectory.swift; sourceTree = "<group>"; };
 		F67D15931DDB4A4700D9DD5C /* QuestionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionType.swift; sourceTree = "<group>"; };
+		F67D159E1DDB534500D9DD5C /* TDPerformanceLog+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TDPerformanceLog+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F67D159F1DDB534500D9DD5C /* TDPerformanceLog+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TDPerformanceLog+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F67D15EC1DC938B9002975C7 /* CustomQuizletSearchBySetsResultsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomQuizletSearchBySetsResultsCell.swift; sourceTree = "<group>"; };
 		F67D15EF1DC97FCC002975C7 /* FlashcardHeroModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FlashcardHeroModel.xcdatamodel; sourceTree = "<group>"; };
 		F6FD10C91DBEEAEB00B7E6EA /* FlashcardHero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlashcardHero.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -223,6 +227,7 @@
 		F63782CF1DC2E2BE0078FE7F /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				F67D15991DDB528F00D9DD5C /* User Performance */,
 				F63782D21DC2E3F50078FE7F /* CoreDataStack.swift */,
 				F66B5E471DC6D30500052B7F /* Quizlet */,
 			);
@@ -338,6 +343,15 @@
 				F67D15931DDB4A4700D9DD5C /* QuestionType.swift */,
 			);
 			name = "Hard Data";
+			sourceTree = "<group>";
+		};
+		F67D15991DDB528F00D9DD5C /* User Performance */ = {
+			isa = PBXGroup;
+			children = (
+				F67D159E1DDB534500D9DD5C /* TDPerformanceLog+CoreDataClass.swift */,
+				F67D159F1DDB534500D9DD5C /* TDPerformanceLog+CoreDataProperties.swift */,
+			);
+			name = "User Performance";
 			sourceTree = "<group>";
 		};
 		F6FD10C01DBEEAEB00B7E6EA = {
@@ -702,10 +716,12 @@
 				F67D15ED1DC938B9002975C7 /* CustomQuizletSearchBySetsResultsCell.swift in Sources */,
 				F614C3471DC9885A00E7D3C8 /* QuizletSet+CoreDataClass.swift in Sources */,
 				F63782D11DC2E3C00078FE7F /* GCDBlackBox.swift in Sources */,
+				F67D15A11DDB534500D9DD5C /* TDPerformanceLog+CoreDataProperties.swift in Sources */,
 				F67D15881DD18FB900D9DD5C /* CoreDataViewController.swift in Sources */,
 				F66B46E41DCBC5C000F2BC6E /* GemTermsCollectionViewController.swift in Sources */,
 				F67D158D1DD1933000D9DD5C /* BorderedButton.swift in Sources */,
 				F63782E51DC2F08F0078FE7F /* QuizletConvenience.swift in Sources */,
+				F67D15A01DDB534500D9DD5C /* TDPerformanceLog+CoreDataClass.swift in Sources */,
 				F63782E41DC2F08F0078FE7F /* QuizletClient.swift in Sources */,
 				F67D15F01DC97FCC002975C7 /* FlashcardHeroModel.xcdatamodeld in Sources */,
 				F614C34C1DC9A16A00E7D3C8 /* CustomGemManagerCell.swift in Sources */,
