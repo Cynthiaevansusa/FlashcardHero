@@ -31,12 +31,72 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
         
         setupFetchedResultsController()
         
-        
-        setupNewQuestion()
+        setupInitialPlayspace()
         //TODO: Check for case where no set contains more than 1 term.
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        dataChecks()
+        
+        
+        setupNewQuestion()
+    }
+    
+    /******************************************************/
+    /*******************///MARK: User Alerts
+    /******************************************************/
+
+    func alertUserNoGems() {
+        let title = "No Gems Available"
+        let message = "The game cannot find any Gems to load.  Either you do not have any Gems activated (the switch on the Gems screen) or you have not downloaded any Sets from Quizlet.  Go to your Gems page and then try playing again!"
+        
+        let alert = UIAlertController(title: title,
+                                      message: message,
+                                      preferredStyle: UIAlertControllerStyle.alert)
+        
+        let defaultAction = UIAlertAction(title: "Quit",
+                                          style: UIAlertActionStyle.default,
+                                          handler: {(action:UIAlertAction) in self.quit()})
+        
+        alert.addAction(defaultAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    /******************************************************/
+    /*******************///MARK: Data Checks Validations
+    /******************************************************/
+
+    func dataChecks() {
+        checkForCompatableGems()
+    }
+    
+    /**
+     Checks the gems in the query to see if they are suitable for this game
+     */
+    func checkForCompatableGems() {
+        //fetch sets
+        if let fc = fetchedResultsController {
+            print((fc.fetchedObjects?.count)!)
+            
+            guard (fc.fetchedObjects?.count)! > 0 else {
+                alertUserNoGems()
+                return
+            }
+        }
+    }
+    
+    /******************************************************/
+    /*******************///MARK: Misc
+    /******************************************************/
+
+    func setupInitialPlayspace() {
+        setFeedbackVisible(visible: false)
+        setAnswerButtonsVisible(visible: false)
+        self.definitionText.alpha = 0
+        self.termText.alpha = 0
+    }
     
     /******************************************************/
     /*******************///MARK: Game Functions
@@ -162,7 +222,8 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
                         } else {
                             self.definitionText.text = wrongAnswer
                         }
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: {self.setAnswerButtonsVisible(visible: true)})
+                        self.setQuestionVisible(visible: true);
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: { self.setAnswerButtonsVisible(visible: true)})
                      } else {
                         //TODO: tfc.fetchedObjects nil or not array of quizletTermDefinitions
                     }
@@ -180,6 +241,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
     func answerQuestion(answer: Bool) {
         //check the correct answer
         setAnswerButtonsVisible(visible: false)
+        setQuestionVisible(visible: false)
         
         let conditions = (answer, showingCorrectAnswer)
         
@@ -207,7 +269,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
     }
     
     /******************************************************/
-    /*******************///MARK: Feedback
+    /*******************///MARK: Feedback and Display
     /******************************************************/
 
     func setFeedbackMessage(wasCorrect: Bool){
@@ -250,6 +312,21 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
         }
     }
     
+    func setQuestionVisible(visible: Bool) {
+        if visible {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.termText.alpha = 1
+                self.definitionText.alpha = 1
+            })
+        } else {
+            //self.feedbackLabel.text = ""
+            UIView.animate(withDuration: 0.1, animations: {
+                self.termText.alpha = 0
+                self.definitionText.alpha = 0
+            })
+        }
+    }
+    
     func dismissFeedback() {
         setFeedbackVisible(visible: false)
         setupNewQuestion()
@@ -261,7 +338,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
     /******************************************************/
 
     @IBAction func quitButtonPressed(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        quit()
     }
     
     @IBAction func trueButtonPressed(_ sender: Any) {
@@ -271,6 +348,12 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
     @IBAction func falseButtonPressed(_ sender: Any) {
         answerQuestion(answer: false)
     }
+    
+    func quit() {
+        self.dismiss(animated: true, completion: nil)
+        
+    }
+
     
     
 
@@ -290,15 +373,11 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
         let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "QuizletSet")
         
         fr.sortDescriptors = [NSSortDescriptor(key: "title", ascending: false),NSSortDescriptor(key: "id", ascending: true)]
-        
-        // So far we have a search that will match ALL notes. However, we're
-        // only interested in those within the current notebook:
-        // NSPredicate to the rescue!
-        
-        //TODO: only get sets that are active
-        //let pred = NSPredicate(format: "isActive = %@", argumentArray: ["true"])
 
-        //fr.predicate = pred
+        //only return where isActive is set to true
+        let pred = NSPredicate(format: "isActive = %@", argumentArray: [true])
+
+        fr.predicate = pred
         
         // Create FetchedResultsController
         let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)

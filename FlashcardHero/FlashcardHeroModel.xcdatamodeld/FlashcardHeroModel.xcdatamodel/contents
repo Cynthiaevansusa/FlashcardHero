@@ -11,7 +11,7 @@
         <attribute name="hasImages" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="imageData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
-        <attribute name="isActive" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="isActive" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="langDefinitions" attributeType="String" syncable="YES"/>
         <attribute name="langTerms" attributeType="String" syncable="YES"/>
         <attribute name="modifiedDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -38,7 +38,7 @@
         <relationship name="quizletSet" maxCount="1" deletionRule="Nullify" destinationEntity="QuizletSet" inverseName="quizletTermDefinition" inverseEntity="QuizletSet" syncable="YES"/>
     </entity>
     <elements>
-        <element name="QuizletSet" positionX="-216" positionY="-207" width="128" height="403"/>
+        <element name="QuizletSet" positionX="-216" positionY="-207" width="128" height="405"/>
         <element name="QuizletTermDefinition" positionX="18" positionY="171" width="128" height="180"/>
     </elements>
 </model>
