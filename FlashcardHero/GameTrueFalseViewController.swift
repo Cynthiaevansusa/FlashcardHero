@@ -21,6 +21,9 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
 
     @IBOutlet weak var feedbackLabel: UILabel!
     
+    @IBOutlet weak var pointsLabel: UILabel!
+    var points = 0
+    
     var showingCorrectAnswer: Bool = false
     
     /******************************************************/
@@ -96,12 +99,23 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
         setAnswerButtonsVisible(visible: false)
         self.definitionText.alpha = 0
         self.termText.alpha = 0
+        self.points = 0
+        refreshPoints()
     }
     
     /******************************************************/
     /*******************///MARK: Game Functions
     /******************************************************/
 
+    func addRefreshPoints(_ newPoints: Int) {
+        awardPoints(newPoints)
+        refreshPoints()
+    }
+    
+    func awardPoints(_ newPoints: Int) {
+        self.points += newPoints
+    }
+    
     func getRandomSet(sets: [QuizletSet]) -> QuizletSet {
         let numberOfSets = sets.count
         
@@ -250,20 +264,21 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
         case (true, true):
             //they answered correctly
             setFeedbackMessage(wasCorrect: true)
-            setFeedbackVisible(visible: true)
+            addRefreshPoints(1)
         //player answered false, the answer showing is also false
         case (false, false):
             //they answered correctly
             setFeedbackMessage(wasCorrect: true)
-            setFeedbackVisible(visible: true)
+            addRefreshPoints(1)
         
         //any other situation
         default:
             //answered incorrectly
             setFeedbackMessage(wasCorrect: false)
-            setFeedbackVisible(visible: true)
+            addRefreshPoints(-1)
             
         }
+        setFeedbackVisible(visible: true)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(400), execute: {self.dismissFeedback()})
     }
@@ -272,6 +287,10 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
     /*******************///MARK: Feedback and Display
     /******************************************************/
 
+    func refreshPoints() {
+        pointsLabel.text = String(points)
+    }
+    
     func setFeedbackMessage(wasCorrect: Bool){
         if wasCorrect {
             self.feedbackLabel.text = "Correct!"
