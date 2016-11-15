@@ -16,9 +16,7 @@ public class TDPerformanceLog: NSManagedObject {
         
         if let ent = NSEntityDescription.entity(forEntityName: "TDPerformanceLog", in: context) {
             self.init(entity: ent, insertInto: context)
-            
 
-                
             self.datetime = datetime
             self.questionTypeId = Int64(questionTypeId)
             self.wasCorrect = wasCorrect
@@ -37,7 +35,7 @@ public class TDPerformanceLog: NSManagedObject {
             }
             
         } else {
-            fatalError("Unable to find Entity name! (QuizletTermDefinition)")
+            fatalError("Unable to find Entity name! (TDPerformanceLog)")
         }
         
     }

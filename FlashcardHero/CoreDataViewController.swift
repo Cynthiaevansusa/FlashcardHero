@@ -28,6 +28,17 @@ class CoreDataViewController: UIViewController {
         }
     }
     
+    var performanceLogFetchedResultsController : NSFetchedResultsController<NSFetchRequestResult>? {
+        didSet {
+            // Whenever the frc changes, we execute the search and
+            // reload the table
+            performanceLogFetchedResultsController?.delegate = self
+            executePerformanceLogSearch()
+            //TODO: Reload data
+            //coreMapView.reloadData()
+        }
+    }
+    
     //    var fetchedTextResultsController : NSFetchedResultsController<NSFetchRequestResult>? {
     //        didSet {
     //            // Whenever the frc changes, we execute the search and
@@ -67,6 +78,16 @@ extension CoreDataViewController {
                 try fc.performFetch()
             } catch let e as NSError {
                 print("Error while trying to perform a search: \n\(e)\n\(fetchedResultsController)")
+            }
+        }
+    }
+    
+    func executePerformanceLogSearch() {
+        if let fc = performanceLogFetchedResultsController {
+            do {
+                try fc.performFetch()
+            } catch let e as NSError {
+                print("Error while trying to perform a search: \n\(e)\n\(performanceLogFetchedResultsController)")
             }
         }
     }
@@ -125,7 +146,30 @@ extension CoreDataViewController: NSFetchedResultsControllerDelegate {
             
             //TODO: Persist the text box
             
-        } else
+        } else if anObject is TDPerformanceLog {
+            
+            switch(type) {
+            case .insert:
+
+                
+                print("case insert TDPerformanceLog")
+            case .delete:
+                
+                print("case delete TDPerformanceLog")
+            case .update:
+
+                print("case update TDPerformanceLog")
+            case .move:
+                //TODO: move a cell... this may not be needed
+                print("case move TDPerformanceLog")
+            }
+            
+            //save
+            stack.save()
+            
+            //TODO: Persist the text box
+            
+        }else
         {
             fatalError("Couldn't get a QuizletSet from anObject in didChange")
         }

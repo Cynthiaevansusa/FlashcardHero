@@ -25,6 +25,8 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
     var points = 0
     
     var showingCorrectAnswer: Bool = false
+    var correctTD: QuizletTermDefinition?
+    var wrongTD: QuizletTermDefinition?
     
     /******************************************************/
     /*******************///MARK: Life Cycle
@@ -33,6 +35,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
         super.viewDidLoad()
         
         setupFetchedResultsController()
+        setupPerformanceLogFetchedResultsController()
         
         setupInitialPlayspace()
         //TODO: Check for case where no set contains more than 1 term.
@@ -211,6 +214,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
                         
                         let question = quizletTermDefinition.term
                         let correctAnswer = quizletTermDefinition.definition
+                        correctTD = quizletTermDefinition
                         
                         //get a random definition as a wrong answer that isn't the same as the correct answer
                         var randDefinitionIndex: Int
@@ -233,8 +237,10 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
                         
                         if willShowCorrect {
                             self.definitionText.text = correctAnswer
+                            wrongTD = nil
                         } else {
                             self.definitionText.text = wrongAnswer
+                            wrongTD = wrongQuizletTermDefinition
                         }
                         self.setQuestionVisible(visible: true);
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: { self.setAnswerButtonsVisible(visible: true)})
@@ -257,23 +263,29 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
         setAnswerButtonsVisible(visible: false)
         setQuestionVisible(visible: false)
         
+        let datetime = NSDate()
+        var wasCorrect: Bool
+        
         let conditions = (answer, showingCorrectAnswer)
         
         switch conditions {
         //player answered true, the answer showing is the correct answer
         case (true, true):
             //they answered correctly
+            wasCorrect = true
             setFeedbackMessage(wasCorrect: true)
             addRefreshPoints(1)
         //player answered false, the answer showing is also false
         case (false, false):
             //they answered correctly
+            wasCorrect = true
             setFeedbackMessage(wasCorrect: true)
             addRefreshPoints(1)
         
         //any other situation
         default:
             //answered incorrectly
+            wasCorrect = false
             setFeedbackMessage(wasCorrect: false)
             addRefreshPoints(-1)
             
@@ -281,6 +293,16 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
         setFeedbackVisible(visible: true)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(400), execute: {self.dismissFeedback()})
+        
+        //log the activity
+        
+        let newLog = TDPerformanceLog(datetime: datetime,
+                                      questionTypeId: 0,
+                                      wasCorrect: wasCorrect,
+                                      quizletTD: self.correctTD!,
+                                      wrongAnswerTD: self.wrongTD,
+                                      wrongAnswerFITB: nil,
+                                      context: self.performanceLogFetchedResultsController!.managedObjectContext)
     }
     
     /******************************************************/
@@ -402,6 +424,30 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
         let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
         
         self.fetchedResultsController = fc
+        
+    }
+    
+    func setupPerformanceLogFetchedResultsController(){
+        
+        //set up stack and fetchrequest
+        // Get the stack
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        let stack = delegate.stack
+        
+        // Create Fetch Request
+        let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "TDPerformanceLog")
+        
+        fr.sortDescriptors = [NSSortDescriptor(key: "datetime", ascending: false)]
+        
+        //only return where isActive is set to true
+        //let pred = NSPredicate(format: "isActive = %@", argumentArray: [true])
+        
+        //fr.predicate = pred
+        
+        // Create FetchedResultsController
+        let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
+        
+        self.performanceLogFetchedResultsController = fc
         
     }
     
