@@ -9,9 +9,12 @@
 import UIKit
 //import Charts
 
-class CommandCenterViewController: UIViewController {
+class CommandCenterViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
 
+    @IBOutlet weak var missionsTableView: UITableView!
+    
+    
     @IBOutlet weak var playTrueFalseButton: UIButton!
     
     override func viewDidLoad() {
@@ -21,6 +24,65 @@ class CommandCenterViewController: UIViewController {
 
     }
     
+    
+    /******************************************************/
+    /*******************///MARK: UITableViewDelegate
+    /******************************************************/
+    //when a row is selected
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+        let gameStoryboardId = GameDirectory.games[indexPath.row].storyboardId
+        
+        let vc = storyboard?.instantiateViewController(withIdentifier: gameStoryboardId)
+        //vc.quizletIngestDelegate = self
+        
+        present(vc!, animated: true, completion: nil)
+    }
+    
+    /******************************************************/
+    /*******************///MARK: UITableViewDataSource
+    /******************************************************/
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //print("There are ", String(self.setsToDisplay.count), " sets to display")
+        //return self.setsToDisplay.count
+        return GameDirectory.games.count
+        
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        //TODO: replace as! UITAbleViewCell witha  custom cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GameCell", for: indexPath as IndexPath)
+        
+        //associate the photo with this cell, which will set all parts of image view
+        cell.textLabel!.text = GameDirectory.games[indexPath.row].title
+        if let subtitle = GameDirectory.games[indexPath.row].subtitle {
+            cell.detailTextLabel!.text = subtitle
+        } else {
+            cell.detailTextLabel!.text = ""
+        }
+        
+        return cell
+    }
+    
+    //editing is not allowed
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+    
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+//        if (editingStyle == UITableViewCellEditingStyle.delete) {
+//            if let context = fetchedResultsController?.managedObjectContext {
+//                
+//                context.delete(self.fetchedResultsController!.object(at: indexPath) as! QuizletSet)
+//                
+//            }
+//        }
+//    }
+    
+    
+    
+    
     @IBAction func playTrueFalseButtonPressed(_ sender: Any) {
         
         let vc = storyboard?.instantiateViewController(withIdentifier: "GameTrueFalse")
@@ -28,6 +90,8 @@ class CommandCenterViewController: UIViewController {
         
         present(vc!, animated: true, completion: nil)
     }
+    
+    
     
 
     override func didReceiveMemoryWarning() {

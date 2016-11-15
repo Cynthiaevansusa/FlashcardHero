@@ -73,25 +73,55 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j9r-kV-Dyt">
-                                <rect key="frame" x="16" y="276" width="343" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Play True False"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="L8U-qa-gfu">
+                                <rect key="frame" x="0.0" y="64" width="375" height="570"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GameCell" textLabel="e03-bA-gnp" detailTextLabel="Yqs-8h-Z5f" style="IBUITableViewCellStyleSubtitle" id="BuA-G8-ZsP">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BuA-G8-ZsP" id="t0p-j8-nGp">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="e03-bA-gnp">
+                                                    <rect key="frame" x="15" y="4" width="34" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Yqs-8h-Z5f">
+                                                    <rect key="frame" x="15" y="25" width="33" height="15"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
                                 <connections>
-                                    <action selector="playTrueFalseButtonPressed:" destination="yf9-Ks-dTC" eventType="touchUpInside" id="87H-4h-Dyn"/>
+                                    <outlet property="dataSource" destination="yf9-Ks-dTC" id="uva-od-kOP"/>
+                                    <outlet property="delegate" destination="yf9-Ks-dTC" id="Tum-0b-M6b"/>
                                 </connections>
-                            </button>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="WrB-6q-ofl" secondAttribute="trailing" id="5t2-nc-dHe"/>
+                            <constraint firstAttribute="bottom" secondItem="L8U-qa-gfu" secondAttribute="bottom" constant="33" id="8ZJ-pR-lyI"/>
                             <constraint firstItem="WrB-6q-ofl" firstAttribute="top" secondItem="vGo-Vd-pgo" secondAttribute="top" id="CTe-dl-SiB"/>
+                            <constraint firstItem="L8U-qa-gfu" firstAttribute="leading" secondItem="vGo-Vd-pgo" secondAttribute="leading" id="Ohp-8A-psC"/>
+                            <constraint firstAttribute="trailing" secondItem="L8U-qa-gfu" secondAttribute="trailing" id="gmA-Pk-6V6"/>
+                            <constraint firstItem="L8U-qa-gfu" firstAttribute="top" secondItem="WrB-6q-ofl" secondAttribute="bottom" id="pi0-58-9go"/>
                             <constraint firstItem="WrB-6q-ofl" firstAttribute="leading" secondItem="vGo-Vd-pgo" secondAttribute="leading" id="xoN-bB-IZw"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="HQ" id="ad3-9p-pHl"/>
                     <connections>
-                        <outlet property="playTrueFalseButton" destination="j9r-kV-Dyt" id="3Ou-wR-e0q"/>
+                        <outlet property="missionsTableView" destination="L8U-qa-gfu" id="6DX-1Z-fpm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IRv-Wx-ZBp" userLabel="First Responder" sceneMemberID="firstResponder"/>
