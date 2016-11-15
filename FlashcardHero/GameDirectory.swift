@@ -9,26 +9,30 @@
 import Foundation
 struct GameDirectory {
     
-    static var gameTrueFalse = Game(title: "True or False", subtitle: "This is the True or False Subtitle", storyboardId: "GameTrueFalse", isAvailable: true)
+    static var gameTrueFalse = Game(id: 0, name: "True or False", description: "This is the True or False description", storyboardId: "GameTrueFalse", isAvailable: true)
     
-    static var games = [gameTrueFalse]
+    static var allGames = [gameTrueFalse]
+    static var activeGames = [gameTrueFalse]
     
     
 }
 
 //A Game struct is an object that tracks a Game that may or may not be available to the player.  These are placed in the GameDirectory.
 struct Game {
-    var title: String
-    var subtitle: String?
+    let id: Int
+    var name: String
+    var description: String?
     var storyboardId: String
     var isAvailable: Bool
     
-    init(title: String, subtitle: String? = nil, storyboardId: String, isAvailable: Bool) {
-        self.title = title
-        if let subtitle = subtitle {
-            self.subtitle = subtitle
+    init(id: Int, name: String, description: String? = nil, storyboardId: String, isAvailable: Bool) {
+        self.id = id
+        
+        self.name = name
+        if let description = description {
+            self.description = description
         } else {
-            self.subtitle = nil
+            self.description = nil
         }
         
         self.storyboardId = storyboardId

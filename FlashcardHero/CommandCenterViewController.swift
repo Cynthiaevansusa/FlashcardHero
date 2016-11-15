@@ -30,7 +30,7 @@ class CommandCenterViewController: UIViewController, UITableViewDataSource, UITa
     /******************************************************/
     //when a row is selected
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
-        let gameStoryboardId = GameDirectory.games[indexPath.row].storyboardId
+        let gameStoryboardId = GameDirectory.activeGames[indexPath.row].storyboardId
         
         let vc = storyboard?.instantiateViewController(withIdentifier: gameStoryboardId)
         //vc.quizletIngestDelegate = self
@@ -45,7 +45,7 @@ class CommandCenterViewController: UIViewController, UITableViewDataSource, UITa
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //print("There are ", String(self.setsToDisplay.count), " sets to display")
         //return self.setsToDisplay.count
-        return GameDirectory.games.count
+        return GameDirectory.activeGames.count
         
     }
     
@@ -55,9 +55,9 @@ class CommandCenterViewController: UIViewController, UITableViewDataSource, UITa
         let cell = tableView.dequeueReusableCell(withIdentifier: "GameCell", for: indexPath as IndexPath)
         
         //associate the photo with this cell, which will set all parts of image view
-        cell.textLabel!.text = GameDirectory.games[indexPath.row].title
-        if let subtitle = GameDirectory.games[indexPath.row].subtitle {
-            cell.detailTextLabel!.text = subtitle
+        cell.textLabel!.text = GameDirectory.activeGames[indexPath.row].name
+        if let description = GameDirectory.activeGames[indexPath.row].description {
+            cell.detailTextLabel!.text = description
         } else {
             cell.detailTextLabel!.text = ""
         }
