@@ -22,5 +22,6 @@ extension TDPerformanceLog {
     @NSManaged public var wrongAnswerFITB: String?
     @NSManaged public var wrongAnswerTD: QuizletTermDefinition?
     @NSManaged public var quizletTD: QuizletTermDefinition
+    @NSManaged public var studySession: StudySession
 
 }

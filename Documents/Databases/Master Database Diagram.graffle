@@ -12403,11 +12403,11 @@ description}</string>
 									<key>Color</key>
 									<dict>
 										<key>b</key>
-										<string>0</string>
+										<string>0.25098</string>
 										<key>g</key>
-										<string>0</string>
+										<string>0.501961</string>
 										<key>r</key>
-										<string>1</string>
+										<string>0</string>
 									</dict>
 									<key>Width</key>
 									<real>2</real>
@@ -12484,11 +12484,11 @@ description}</string>
 									<key>Color</key>
 									<dict>
 										<key>b</key>
-										<string>0</string>
+										<string>0.25098</string>
 										<key>g</key>
-										<string>0</string>
+										<string>0.501961</string>
 										<key>r</key>
-										<string>1</string>
+										<string>0</string>
 									</dict>
 									<key>Width</key>
 									<real>2</real>
@@ -13579,11 +13579,11 @@ isAvailable}</string>
 									<key>Color</key>
 									<dict>
 										<key>b</key>
-										<string>0</string>
+										<string>0.25098</string>
 										<key>g</key>
-										<string>0</string>
+										<string>0.501961</string>
 										<key>r</key>
-										<string>1</string>
+										<string>0</string>
 									</dict>
 									<key>Width</key>
 									<real>2</real>
@@ -13637,11 +13637,11 @@ isAvailable}</string>
 									<key>Color</key>
 									<dict>
 										<key>b</key>
-										<string>0</string>
+										<string>0.25098</string>
 										<key>g</key>
-										<string>0</string>
+										<string>0.501961</string>
 										<key>r</key>
-										<string>1</string>
+										<string>0</string>
 									</dict>
 									<key>Width</key>
 									<real>2</real>
@@ -14129,11 +14129,11 @@ gameId\
 									<key>Color</key>
 									<dict>
 										<key>b</key>
-										<string>0</string>
+										<string>0.25098</string>
 										<key>g</key>
-										<string>0</string>
+										<string>0.501961</string>
 										<key>r</key>
-										<string>1</string>
+										<string>0</string>
 									</dict>
 									<key>Width</key>
 									<real>2</real>
@@ -14210,11 +14210,11 @@ gameId\
 									<key>Color</key>
 									<dict>
 										<key>b</key>
-										<string>0</string>
+										<string>0.25098</string>
 										<key>g</key>
-										<string>0</string>
+										<string>0.501961</string>
 										<key>r</key>
-										<string>1</string>
+										<string>0</string>
 									</dict>
 									<key>Width</key>
 									<real>2</real>
@@ -21236,8 +21236,8 @@ imageData\
 {\*\expandedcolortbl;\csgray\c100000;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\f0\b\fs24 \cf0 id
-\f1\b0 \
+\f0\b\fs24 \cf0 \strike \strikec0 id
+\f1\b0 \strike0\striked0 \
 title\
 description\
 ...\
@@ -21789,8 +21789,8 @@ description\
 {\*\expandedcolortbl;\csgray\c100000;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\f0\b\fs24 \cf0 id
-\f1\b0 \
+\f0\b\fs24 \cf0 \strike \strikec0 id
+\f1\b0 \strike0\striked0 \
 name}</string>
 							</dict>
 							<key>TextPlacement</key>
@@ -22025,7 +22025,7 @@ name}</string>
 		</dict>
 	</array>
 	<key>ModificationDate</key>
-	<string>2016-11-15 14:03:35 +0000</string>
+	<string>2016-11-15 20:10:27 +0000</string>
 	<key>Modifier</key>
 	<string>Jacob Foster Davis</string>
 	<key>NotesVisible</key>
@@ -22093,7 +22093,7 @@ name}</string>
 		<key>DrawerWidth</key>
 		<real>209</real>
 		<key>Frame</key>
-		<string>{{0, 1}, {1607, 1037}}</string>
+		<string>{{-1690, 21}, {1607, 1037}}</string>
 		<key>VisibleRegion</key>
 		<string>{{-247.99998, -12.000012}, {1648.2051, 937.43591}}</string>
 		<key>Zoom</key>
