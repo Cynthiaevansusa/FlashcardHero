@@ -195,6 +195,8 @@ class CommandCenterViewController: CoreDataViewController, UITableViewDataSource
             self.missionsTableView.alpha = 0.0
             self.missionsTableView.isHidden = true
             
+            
+            self.refreshStats()
             self.statsView.alpha = 1.0
             self.statsView.isHidden = false
         })
@@ -208,6 +210,11 @@ class CommandCenterViewController: CoreDataViewController, UITableViewDataSource
             self.statsView.alpha = 0.0
             self.statsView.isHidden = true
         })
+    }
+    
+    func refreshStats() {
+        setStatsNumAppSessions()
+        setStatsNumStudySessions()
     }
     
     
