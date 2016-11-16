@@ -7,22 +7,209 @@
 //
 
 import UIKit
+import CoreData
 //import Charts
 
-class CommandCenterViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class CommandCenterViewController: CoreDataViewController, UITableViewDataSource, UITableViewDelegate {
 
 
     @IBOutlet weak var missionsTableView: UITableView!
     
     
-    @IBOutlet weak var playTrueFalseButton: UIButton!
+    @IBOutlet weak var statsView: UIView!
+    @IBOutlet weak var statsCollectionView: UICollectionView!
+    @IBOutlet weak var statsOverviewView: UIView!
+    @IBOutlet weak var statsNumAppSessions: UILabel!
+    var statsNumAppSessionsFetchedResultsController : NSFetchedResultsController<NSFetchRequestResult>? {
+        didSet {
+            statsNumAppSessionsFetchedResultsController?.delegate = self
+            executeStatsNumAppSessionsSearch()
+        }
+    }
+    @IBOutlet weak var statsNumStudySessions: UILabel!
+    var statsNumStudySessionsFetchedResultsController : NSFetchedResultsController<NSFetchRequestResult>? {
+        didSet {
+            statsNumStudySessionsFetchedResultsController?.delegate = self
+            executeStatsNumAppSessionsSearch()
+        }
+    }
+    
+    
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
+        showMissionsSegment()
+        setupAppSessionsAndSet()
+        setupStudySessionsAndSet()
 
     }
+    
+    /******************************************************/
+    /*******************///MARK: NumStudySessions
+    /******************************************************/
+    
+    func setupStudySessionsAndSet(){
+        setupStatsNumStudySessionsFetchedResultsController()
+        setStatsNumStudySessions()
+    }
+    
+    func executeStatsNumStudySessionsSearch() {
+        if let fc = statsNumStudySessionsFetchedResultsController {
+            do {
+                try fc.performFetch()
+            } catch let e as NSError {
+                print("Error while trying to perform a search: \n\(e)\n\(statsNumStudySessionsFetchedResultsController)")
+            }
+        }
+    }
+    
+    func setupStatsNumStudySessionsFetchedResultsController(){
+        
+        //set up stack and fetchrequest
+        // Get the stack
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        let stack = delegate.stack
+        
+        // Create Fetch Request
+        let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "StudySession")
+        
+        fr.sortDescriptors = [NSSortDescriptor(key: "start", ascending: false)]
+        
+        //only return where isActive is set to true
+        //let pred = NSPredicate(format: "isActive = %@", argumentArray: [true])
+        
+        //fr.predicate = pred
+        
+        // Create FetchedResultsController
+        let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
+        
+        self.statsNumStudySessionsFetchedResultsController = fc
+        
+    }
+    
+    func setStatsNumStudySessions() {
+        
+        if let studySessions = self.statsNumStudySessionsFetchedResultsController?.fetchedObjects {
+            
+            self.statsNumStudySessions.text = String(studySessions.count)
+            
+        } else {
+            //TODO: Handle no sessions returned
+            print("Found no studySessions, setting numStudySessions to zero")
+            self.statsNumStudySessions.text = String(0)
+        }
+    }
+
+    
+    /******************************************************/
+    /*******************///MARK: NumAppSessions
+    /******************************************************/
+
+    func setupAppSessionsAndSet(){
+        setupStatsNumAppSessionsFetchedResultsController()
+        setStatsNumAppSessions()
+    }
+    
+    func executeStatsNumAppSessionsSearch() {
+        if let fc = statsNumAppSessionsFetchedResultsController {
+            do {
+                try fc.performFetch()
+            } catch let e as NSError {
+                print("Error while trying to perform a search: \n\(e)\n\(statsNumAppSessionsFetchedResultsController)")
+            }
+        }
+    }
+    
+    func setupStatsNumAppSessionsFetchedResultsController(){
+        
+        //set up stack and fetchrequest
+        // Get the stack
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        let stack = delegate.stack
+        
+        // Create Fetch Request
+        let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "AppSession")
+        
+        fr.sortDescriptors = [NSSortDescriptor(key: "start", ascending: false)]
+        
+        //only return where isActive is set to true
+        //let pred = NSPredicate(format: "isActive = %@", argumentArray: [true])
+        
+        //fr.predicate = pred
+        
+        // Create FetchedResultsController
+        let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
+        
+        self.statsNumAppSessionsFetchedResultsController = fc
+        
+    }
+    
+    func setStatsNumAppSessions() {
+        
+        if let sessions = self.statsNumAppSessionsFetchedResultsController?.fetchedObjects {
+            
+            self.statsNumAppSessions.text = String(sessions.count)
+            
+        } else {
+            //TODO: Handle no sessions returned
+            print("Found no sessions, setting numAppSessions to zero")
+            self.statsNumAppSessions.text = String(0)
+        }
+    }
+    
+    
+    /******************************************************/
+    /*******************///MARK: Segmented Control
+    /******************************************************/
+
+    @IBAction func indexChanged(_ sender: UISegmentedControl) {
+        
+        switch segmentedControl.selectedSegmentIndex
+        {
+        case 0:
+            showMissionsSegment()
+        case 1:
+            showStatsSegment()
+        case 2:
+            showGoalsSegment()
+        default:
+            break; 
+        }
+    }
+    
+    func showMissionsSegment() {
+        UIView.animate(withDuration: 0.1, animations: {
+            self.missionsTableView.alpha = 1.0
+            self.missionsTableView.isHidden = false
+            
+            self.statsView.alpha = 0.0
+            self.statsView.isHidden = true
+        })
+    }
+    
+    func showStatsSegment() {
+        UIView.animate(withDuration: 0.1, animations: {
+            self.missionsTableView.alpha = 0.0
+            self.missionsTableView.isHidden = true
+            
+            self.statsView.alpha = 1.0
+            self.statsView.isHidden = false
+        })
+    }
+    
+    func showGoalsSegment() {
+        UIView.animate(withDuration: 0.1, animations: {
+            self.missionsTableView.alpha = 0.0
+            self.missionsTableView.isHidden = true
+            
+            self.statsView.alpha = 0.0
+            self.statsView.isHidden = true
+        })
+    }
+    
     
     
     /******************************************************/

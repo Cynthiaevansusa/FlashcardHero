@@ -135,6 +135,8 @@ extension CoreDataTrueFalseGameController {
         } else {
             
             if self.studySessionFetchedResultsController == nil {
+                print("studySessionFetchedResultsController is nil, creating")
+                
                 // Create Fetch Request
                 let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "StudySession")
                 
@@ -149,6 +151,8 @@ extension CoreDataTrueFalseGameController {
                 let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
                 
                 self.studySessionFetchedResultsController = fc
+            } else {
+                print("studySessionFetchedResultsController already exitsts, skipping creation")
             }
             
             let delegate = UIApplication.shared.delegate as! AppDelegate
@@ -253,6 +257,28 @@ extension CoreDataViewController: NSFetchedResultsControllerDelegate {
             case .move:
                 //TODO: move a cell... this may not be needed
                 print("case move StudySession")
+            }
+            
+            //save
+            stack.save()
+            
+            
+        } else if anObject is AppSession {
+            
+            switch(type) {
+            case .insert:
+                
+                
+                print("case insert AppSession")
+            case .delete:
+                
+                print("case delete AppSession")
+            case .update:
+                
+                print("case update AppSession")
+            case .move:
+                //TODO: move a cell... this may not be needed
+                print("case move AppSession")
             }
             
             //save
