@@ -185,7 +185,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
         
         //fetch sets
         if let fc = fetchedResultsController {
-            print((fc.fetchedObjects?.count)!)
+            //print((fc.fetchedObjects?.count)!)
             
             guard (fc.fetchedObjects?.count)! > 0 else {
                 //TODO: handle zero sets returned with message to user

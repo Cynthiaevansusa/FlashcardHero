@@ -173,7 +173,7 @@ extension CoreDataTrueFalseGameController {
             //currentStudySession.setValue(NSDate(), forKey: "stop")
             currentStudySession.stop = NSDate()
             //remove the referece to the current session
-            self.studySession = nil
+            //self.studySession = nil
             
         } else {
             print("Cannot stop the StudySession, there is no StudySession to stop")

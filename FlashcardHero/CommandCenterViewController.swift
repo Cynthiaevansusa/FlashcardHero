@@ -30,7 +30,7 @@ class CommandCenterViewController: CoreDataViewController, UITableViewDataSource
     var statsNumStudySessionsFetchedResultsController : NSFetchedResultsController<NSFetchRequestResult>? {
         didSet {
             statsNumStudySessionsFetchedResultsController?.delegate = self
-            executeStatsNumAppSessionsSearch()
+            executeStatsNumStudySessionsSearch()
         }
     }
     
