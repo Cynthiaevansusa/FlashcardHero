@@ -147,9 +147,9 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
         repeat {
             quizletSet = getRandomSet(sets: sets)
             //fetch terms from the given set
-            setupTermDefinitionFetchedResultsController(set: quizletSet)
+            setupTermFRC(set: quizletSet)
             
-            if let tempTfc = termFetchedResultsController {
+            if let tempTfc = frcDict[keyTerms] {
                 
                 tfc = tempTfc
                 
@@ -201,9 +201,9 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
 
                 //now get a random question from the set
                 //fetch terms from the given set
-                setupTermDefinitionFetchedResultsController(set: quizletSet)
+                setupTermFRC(set: quizletSet)
                 
-                if let tfc = termFetchedResultsController {
+                if let tfc = frcDict[keyTerms] {
                     
                     guard (tfc.fetchedObjects?.count)! > 0 else {
                         //TODO: handle zero terms returned with alert to user
@@ -439,33 +439,33 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
     
 
     
-    func setupTermDefinitionFetchedResultsController(set: QuizletSet){
-        
-        //set up stack and fetchrequest
-        // Get the stack
-        let delegate = UIApplication.shared.delegate as! AppDelegate
-        let stack = delegate.stack
-        
-        // Create Fetch Request
-        let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "QuizletTermDefinition")
-        
-        fr.sortDescriptors = [NSSortDescriptor(key: "rank", ascending: true)]
-        
-        // So far we have a search that will match ALL notes. However, we're
-        // only interested in those within the current notebook:
-        // NSPredicate to the rescue!
-        
-        //only get sets that are active
-        let pred = NSPredicate(format: "quizletSet = %@", argumentArray: [set])
-        
-        fr.predicate = pred
-        
-        // Create FetchedResultsController
-        let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
-        
-        self.termFetchedResultsController = fc
-        
-    }
+//    func setupTermDefinitionFetchedResultsController(set: QuizletSet){
+//        
+//        //set up stack and fetchrequest
+//        // Get the stack
+//        let delegate = UIApplication.shared.delegate as! AppDelegate
+//        let stack = delegate.stack
+//        
+//        // Create Fetch Request
+//        let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "QuizletTermDefinition")
+//        
+//        fr.sortDescriptors = [NSSortDescriptor(key: "rank", ascending: true)]
+//        
+//        // So far we have a search that will match ALL notes. However, we're
+//        // only interested in those within the current notebook:
+//        // NSPredicate to the rescue!
+//        
+//        //only get sets that are active
+//        let pred = NSPredicate(format: "quizletSet = %@", argumentArray: [set])
+//        
+//        fr.predicate = pred
+//        
+//        // Create FetchedResultsController
+//        let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
+//        
+//        self.termFetchedResultsController = fc
+//        
+//    }
     
     func fetchModelQuizletSets() -> [QuizletSet] {
         return frcDict[keySets]!.fetchedObjects as! [QuizletSet]
@@ -473,8 +473,8 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
     
     func fetchQuizletTermDefinitions(set: QuizletSet) -> [QuizletTermDefinition] {
         
-        setupTermDefinitionFetchedResultsController(set: set)
+        setupTermFRC(set: set)
         
-        return termFetchedResultsController!.fetchedObjects as! [QuizletTermDefinition]
+        return frcDict[keyTerms]!.fetchedObjects as! [QuizletTermDefinition]
     }
 }

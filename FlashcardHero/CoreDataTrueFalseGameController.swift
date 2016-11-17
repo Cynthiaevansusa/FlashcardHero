@@ -21,16 +21,16 @@ class CoreDataTrueFalseGameController: CoreDataViewController {
     let keySets = "TFSets"
     let keyPerformanceLog = "TFPerformanceLog"
     
-    var termFetchedResultsController : NSFetchedResultsController<NSFetchRequestResult>? {
-        didSet {
-            // Whenever the frc changes, we execute the search and
-            // reload the table
-            fetchedResultsController?.delegate = self
-            executeTermSearch()
-            //TODO: Reload data
-            //coreMapView.reloadData()
-        }
-    }
+//    var termFetchedResultsController : NSFetchedResultsController<NSFetchRequestResult>? {
+//        didSet {
+//            // Whenever the frc changes, we execute the search and
+//            // reload the table
+//            fetchedResultsController?.delegate = self
+//            executeTermSearch()
+//            //TODO: Reload data
+//            //coreMapView.reloadData()
+//        }
+//    }
     
    
     
@@ -42,6 +42,7 @@ class CoreDataTrueFalseGameController: CoreDataViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //create FRC for sets
         _ = setupFetchedResultsController(frcKey: "TFSets", entityName: "QuizletSet", sortDescriptors: [NSSortDescriptor(key: "title", ascending: false),NSSortDescriptor(key: "id", ascending: true)],  predicate: NSPredicate(format: "isActive = %@", argumentArray: [true]))
         
         self.startStudySession()
@@ -78,15 +79,15 @@ class CoreDataTrueFalseGameController: CoreDataViewController {
 
 extension CoreDataTrueFalseGameController {
     
-    func executeTermSearch() {
-        if let fc = termFetchedResultsController {
-            do {
-                try fc.performFetch()
-            } catch let e as NSError {
-                print("Error while trying to perform a search: \n\(e)\n\(termFetchedResultsController)")
-            }
-        }
-    }
+//    func executeTermSearch() {
+//        if let fc = termFetchedResultsController {
+//            do {
+//                try fc.performFetch()
+//            } catch let e as NSError {
+//                print("Error while trying to perform a search: \n\(e)\n\(termFetchedResultsController)")
+//            }
+//        }
+//    }
     
     
 }
@@ -95,6 +96,13 @@ extension CoreDataTrueFalseGameController {
 
 //performance log functionality
 extension CoreDataTrueFalseGameController {
+    
+    func setupTermFRC(set: QuizletSet) {
+        _ = setupFetchedResultsController(frcKey: keyTerms,
+                                          entityName: "QuizletTermDefinition",
+                                          sortDescriptors: [NSSortDescriptor(key: "rank", ascending: true)],
+                                          predicate: NSPredicate(format: "quizletSet = %@", argumentArray: [set]))
+    }
     
     func setupPerformanceLogFetchedResultsController(){
         
