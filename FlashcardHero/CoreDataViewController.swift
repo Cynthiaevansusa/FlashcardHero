@@ -28,22 +28,7 @@ class CoreDataViewController: UIViewController {
         }
     }
     
-//    var performanceLogFetchedResultsController : NSFetchedResultsController<NSFetchRequestResult>? {
-//        didSet {
-//            performanceLogFetchedResultsController?.delegate = self
-//            executePerformanceLogSearch()
-//        }
-//    }
-    
-//    var studySessionFetchedResultsController : NSFetchedResultsController<NSFetchRequestResult>? {
-//        didSet {
-//            studySessionFetchedResultsController?.delegate = self
-//            executeStudySessionSearch()
-//        }
-//    }
-    
-    
-    
+
     var stack: CoreDataStack!
     
     /******************************************************/
@@ -115,62 +100,10 @@ extension CoreDataViewController {
             }
         }
     }
-    
-//    func executePerformanceLogSearch() {
-//        if let fc = performanceLogFetchedResultsController {
-//            do {
-//                try fc.performFetch()
-//            } catch let e as NSError {
-//                print("Error while trying to perform a search: \n\(e)\n\(performanceLogFetchedResultsController)")
-//            }
-//        }
-//    }
-    
-//    func executeStudySessionSearch() {
-//        if let fc = studySessionFetchedResultsController {
-//            do {
-//                try fc.performFetch()
-//            } catch let e as NSError {
-//                print("Error while trying to perform a search: \n\(e)\n\(studySessionFetchedResultsController)")
-//            }
-//        }
-//    }
-    
+
     
 }
 
-//studySession functionality
-extension CoreDataTrueFalseGameController {
-//    func setupStudySessionFetchedResultsController(){
-//        
-//        //set up stack and fetchrequest
-//        // Get the stack
-//        let delegate = UIApplication.shared.delegate as! AppDelegate
-//        let stack = delegate.stack
-//        
-//        // Create Fetch Request
-//        let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "StudySession")
-//        
-//        fr.sortDescriptors = [NSSortDescriptor(key: "start", ascending: true)]
-//        
-//        // So far we have a search that will match ALL notes. However, we're
-//        // only interested in those within the current notebook:
-//        // NSPredicate to the rescue!
-//        
-//        //only get sets that are active
-//        //let pred = NSPredicate(format: "quizletSet = %@", argumentArray: [set])
-//        
-//        //fr.predicate = pred
-//        
-//        // Create FetchedResultsController
-//        let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
-//        
-//        self.studySessionFetchedResultsController = fc
-//        
-//    }
-    
-    
-}
 
 // MARK: - CoreDataCollectionViewController: NSFetchedResultsControllerDelegate
 
