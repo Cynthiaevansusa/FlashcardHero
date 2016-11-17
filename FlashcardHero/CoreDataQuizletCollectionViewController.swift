@@ -27,20 +27,7 @@ class CoreDataQuizletCollectionViewController: UIViewController, UICollectionVie
             //coreMapView.reloadData()
         }
     }
-    
-    //    var fetchedTextResultsController : NSFetchedResultsController<NSFetchRequestResult>? {
-    //        didSet {
-    //            // Whenever the frc changes, we execute the search and
-    //            // reload the table
-    //            fetchedTextResultsController?.delegate = self
-    //            executeTextSearch()
-    //            //TODO: Reload data
-    //            //coreMapView.reloadData()
-    //        }
-    //    }
-    
-    
-    
+
     var collectionView: UICollectionView!
     
     var stack: CoreDataStack!
@@ -89,16 +76,7 @@ extension CoreDataQuizletCollectionViewController {
             }
         }
     }
-    
-    //    func executeTextSearch() {
-    //        if let fc = fetchedTextResultsController {
-    //            do {
-    //                try fc.performFetch()
-    //            } catch let e as NSError {
-    //                print("Error while trying to perform a search: \n\(e)\n\(fetchedTextResultsController)")
-    //            }
-    //        }
-    //    }
+
     
     
 }
@@ -141,14 +119,14 @@ extension CoreDataQuizletCollectionViewController: NSFetchedResultsControllerDel
             }
             
             //save
-            stack.save()
-            
-            //TODO: Persist the text box
-            
-        } else
-        {
-            fatalError("Couldn't get a QuizletTermDefinition from anObject in didChange")
+
         }
+        
+        stack.save()
+//        else
+//        {
+//            fatalError("Couldn't get a \(anObject) from anObject in didChange")
+//        }
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
