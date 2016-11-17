@@ -19,6 +19,8 @@ class CoreDataViewController: UIViewController {
     
     var studySession: StudySession?
     
+    var frcDict : [String:NSFetchedResultsController<NSFetchRequestResult>] = [:]
+    
     var fetchedResultsController : NSFetchedResultsController<NSFetchRequestResult>? {
         didSet {
             fetchedResultsController?.delegate = self
@@ -56,6 +58,47 @@ class CoreDataViewController: UIViewController {
         let delegate = UIApplication.shared.delegate as! AppDelegate
         stack = delegate.stack
     }
+    
+    func executeSearch(frcKey: String) {
+        if let fc = frcDict[frcKey] {
+            do {
+                try fc.performFetch()
+            } catch let e as NSError {
+                print("Error while trying to perform a search: \n\(e)\n\(frcDict[frcKey])")
+            }
+        }
+    }
+    
+    func setupFetchedResultsController(entityName: String, sortKey: String, sortAscending: Bool = false, frcKey: String, predFormat: String? = nil, predArgumentArray: [Any]? = nil) -> NSFetchedResultsController<NSFetchRequestResult> {
+        
+        //set up stack and fetchrequest
+        // Get the stack
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        let stack = delegate.stack
+        
+        // Create Fetch Request
+        let fr = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        
+        fr.sortDescriptors = [NSSortDescriptor(key: sortKey, ascending: sortAscending)]
+        
+        if let predFormat = predFormat, let predArgumentArray = predArgumentArray {
+            //only return where isActive is set to true
+            let pred = NSPredicate(format: predFormat, argumentArray: predArgumentArray)
+            
+            fr.predicate = pred
+        }
+        
+        // Create FetchedResultsController
+        let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
+        
+        fc.delegate = self
+        frcDict[frcKey] = fc
+        executeSearch(frcKey: frcKey)
+        
+        return fc
+    }
+    
+    
     
 }
 

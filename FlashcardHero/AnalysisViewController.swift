@@ -15,30 +15,9 @@ class AnalysisViewController: CoreDataQuizletCollectionViewController, UICollect
     @IBOutlet weak var statsOverviewCollectionView: UICollectionView!
     
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
-
-//    var statsQuestionAttemptsFetchedResultsController : NSFetchedResultsController<NSFetchRequestResult>? {
-//        didSet {
-//            statsQuestionAttemptsFetchedResultsController?.delegate = self
-//            executeSearch(frcKey: keyQuestionAttempts)
-//        }
-//    }
+   
     
-    var statsNumAppSessionsFetchedResultsController : NSFetchedResultsController<NSFetchRequestResult>? {
-        didSet {
-            statsNumAppSessionsFetchedResultsController?.delegate = self
-            executeStatsNumAppSessionsSearch()
-        }
-    }
-    
-    var statsNumStudySessionsFetchedResultsController : NSFetchedResultsController<NSFetchRequestResult>? {
-        didSet {
-            statsNumStudySessionsFetchedResultsController?.delegate = self
-            executeStatsNumStudySessionsSearch()
-        }
-    }
-    
-    var frcDict : [String:NSFetchedResultsController<NSFetchRequestResult>] = [:]
-    let keyMissions = "Missions"
+    let keyStudySessions = "Missions"
     let keyAppSessions = "App Sessions"
     let keyQuestionAttempts = "Question Attempts"
     
@@ -48,8 +27,6 @@ class AnalysisViewController: CoreDataQuizletCollectionViewController, UICollect
     var statsOverviewCollectionData: [OverviewStatistic] = []
     
     var orderDict: [String:Int] = [:]
-    var entityDict: [String:String] = [:]
-    var searchDict: [String:String] = [:]
     
     let orderAppSessions = 0
     let orderStudySessions = 1
@@ -63,28 +40,20 @@ class AnalysisViewController: CoreDataQuizletCollectionViewController, UICollect
         // Do any additional setup after loading the view, typically from a nib.
         
         
-        orderDict = [keyMissions : 1,
+        orderDict = [keyStudySessions : 1,
         keyAppSessions : 0,
         keyQuestionAttempts : 2]
-//        
-//        entityDict = [keyMissions : "",
-//                     keyAppSessions : "",
-//                     keyQuestionAttempts : "TDPerformanceLog"]
-//        
-//        searchDict = [keyMissions : "",
-//                      keyAppSessions : "",
-//                      keyQuestionAttempts : "datetime"]
-        
-        self.setupAppSessionsAndSet()
-        self.setupStudySessionsAndSet()
-        
-        setupFetchedResultsController(entityName: "TDPerformanceLog", sortKey: "datetime", frcKey: keyQuestionAttempts)
+    
+        //setup the App Sessions Counter
+        _ = setupFetchedResultsController(entityName: "AppSession", sortKey: "start", frcKey: keyAppSessions)
         setStats(frcKey: keyQuestionAttempts)
         
-//        frcDict = [keyMissions: self.statsNumStudySessionsFetchedResultsController!,
-//        keyAppSessions: self.statsNumAppSessionsFetchedResultsController!,
-//        keyQuestionAttempts: self.statsQuestionAttemptsFetchedResultsController!]
-        
+        //Study Sessions Counter
+        _ = setupFetchedResultsController(entityName: "StudySession", sortKey: "start", frcKey: keyStudySessions)
+        setStats(frcKey: keyQuestionAttempts)
+        //Question Attempts counter
+        _ = setupFetchedResultsController(entityName: "TDPerformanceLog", sortKey: "datetime", frcKey: keyQuestionAttempts)
+        setStats(frcKey: keyQuestionAttempts)
         
         showOverviewSegment()
     }
@@ -143,50 +112,11 @@ class AnalysisViewController: CoreDataQuizletCollectionViewController, UICollect
     }
     
     /******************************************************/
-    /*******************///MARK: NumQuestionAttempts
+    /*******************///MARK: FetchedResultsControllers and Stats
     /******************************************************/
     
-//    func setupQuestionAttemptsAndSet(){
-//        setupFetchedResultsController(entityName: "TDPerformanceLog", sortKey: "datetime", frcKey: keyQuestionAttempts)
-//        setStats(frcKey: keyQuestionAttempts)
-//    }
     
-    func executeSearch(frcKey: String) {
-        if let fc = frcDict[frcKey] {
-            do {
-                try fc.performFetch()
-            } catch let e as NSError {
-                print("Error while trying to perform a search: \n\(e)\n\(frcDict[frcKey])")
-            }
-        }
-    }
     
-    func setupFetchedResultsController(entityName: String, sortKey: String, frcKey: String) -> NSFetchedResultsController<NSFetchRequestResult> {
-        
-        //set up stack and fetchrequest
-        // Get the stack
-        let delegate = UIApplication.shared.delegate as! AppDelegate
-        let stack = delegate.stack
-        
-        // Create Fetch Request
-        let fr = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
-        
-        fr.sortDescriptors = [NSSortDescriptor(key: sortKey, ascending: false)]
-        
-        //only return where isActive is set to true
-        //let pred = NSPredicate(format: "isActive = %@", argumentArray: [true])
-        
-        //fr.predicate = pred
-        
-        // Create FetchedResultsController
-        let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
-        
-        fc.delegate = self
-        frcDict[frcKey] = fc
-        executeSearch(frcKey: frcKey)
-
-        return fc
-    }
     
     func setStats(frcKey:String) {
         
@@ -198,125 +128,8 @@ class AnalysisViewController: CoreDataQuizletCollectionViewController, UICollect
             
         } else {
             //TODO: Handle no sessions returned
-            print("Found no studySessions, setting numStudySessions to zero")
+            print("Found no \(frcKey), setting to zero")
             let newOverviewStatistic = OverviewStatistic(order: orderDict[frcKey]!, description: frcKey, number: 0)
-            insertOverviewStatisticIntoStatsOverviewItems(newOverviewStatistic)
-        }
-    }
-    
-    /******************************************************/
-    /*******************///MARK: NumStudySessions
-    /******************************************************/
-    
-    func setupStudySessionsAndSet(){
-        setupStatsNumStudySessionsFetchedResultsController()
-        setStatsNumStudySessions()
-    }
-    
-    func executeStatsNumStudySessionsSearch() {
-        if let fc = statsNumStudySessionsFetchedResultsController {
-            do {
-                try fc.performFetch()
-            } catch let e as NSError {
-                print("Error while trying to perform a search: \n\(e)\n\(statsNumStudySessionsFetchedResultsController)")
-            }
-        }
-    }
-    
-    func setupStatsNumStudySessionsFetchedResultsController(){
-        
-        //set up stack and fetchrequest
-        // Get the stack
-        let delegate = UIApplication.shared.delegate as! AppDelegate
-        let stack = delegate.stack
-        
-        // Create Fetch Request
-        let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "StudySession")
-        
-        fr.sortDescriptors = [NSSortDescriptor(key: "start", ascending: false)]
-        
-        //only return where isActive is set to true
-        //let pred = NSPredicate(format: "isActive = %@", argumentArray: [true])
-        
-        //fr.predicate = pred
-        
-        // Create FetchedResultsController
-        let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
-        
-        self.statsNumStudySessionsFetchedResultsController = fc
-        
-    }
-    
-    func setStatsNumStudySessions() {
-        
-        if let studySessions = self.statsNumStudySessionsFetchedResultsController?.fetchedObjects {
-            let newOverviewStatistic = OverviewStatistic(order: orderStudySessions, description: "Mission", number: studySessions.count)
-            insertOverviewStatisticIntoStatsOverviewItems(newOverviewStatistic)
-            
-            
-        } else {
-            //TODO: Handle no sessions returned
-            print("Found no studySessions, setting numStudySessions to zero")
-            let newOverviewStatistic = OverviewStatistic(order: orderStudySessions, description: "Mission", number: 0)
-            insertOverviewStatisticIntoStatsOverviewItems(newOverviewStatistic)
-        }
-    }
-    
-    
-    /******************************************************/
-    /*******************///MARK: NumAppSessions
-    /******************************************************/
-    
-    func setupAppSessionsAndSet(){
-        setupStatsNumAppSessionsFetchedResultsController()
-        setStatsNumAppSessions()
-    }
-    
-    func executeStatsNumAppSessionsSearch() {
-        if let fc = statsNumAppSessionsFetchedResultsController {
-            do {
-                try fc.performFetch()
-            } catch let e as NSError {
-                print("Error while trying to perform a search: \n\(e)\n\(statsNumAppSessionsFetchedResultsController)")
-            }
-        }
-    }
-    
-    func setupStatsNumAppSessionsFetchedResultsController(){
-        
-        //set up stack and fetchrequest
-        // Get the stack
-        let delegate = UIApplication.shared.delegate as! AppDelegate
-        let stack = delegate.stack
-        
-        // Create Fetch Request
-        let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "AppSession")
-        
-        fr.sortDescriptors = [NSSortDescriptor(key: "start", ascending: false)]
-        
-        //only return where isActive is set to true
-        //let pred = NSPredicate(format: "isActive = %@", argumentArray: [true])
-        
-        //fr.predicate = pred
-        
-        // Create FetchedResultsController
-        let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
-        
-        self.statsNumAppSessionsFetchedResultsController = fc
-        
-    }
-    
-    func setStatsNumAppSessions() {
-        
-        if let sessions = self.statsNumAppSessionsFetchedResultsController?.fetchedObjects {
-            
-            let newOverviewStatistic = OverviewStatistic(order: orderAppSessions, description: "App Sessions", number: sessions.count)
-            insertOverviewStatisticIntoStatsOverviewItems(newOverviewStatistic)
-            
-        } else {
-            //TODO: Handle no sessions returned
-            print("Found no sessions, setting numAppSessions to zero")
-            let newOverviewStatistic = OverviewStatistic(order: orderAppSessions, description: "App Sessions", number: 0)
             insertOverviewStatisticIntoStatsOverviewItems(newOverviewStatistic)
         }
     }
@@ -359,8 +172,8 @@ class AnalysisViewController: CoreDataQuizletCollectionViewController, UICollect
     }
     
     func refreshStats() {
-        setStatsNumAppSessions()
-        setStatsNumStudySessions()
+        setStats(frcKey: keyAppSessions)
+        setStats(frcKey: keyStudySessions)
         setStats(frcKey: keyQuestionAttempts)
         collectionView.reloadData()
     }
