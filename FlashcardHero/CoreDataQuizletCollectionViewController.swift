@@ -10,27 +10,27 @@ import Foundation
 import CoreData
 import UIKit
 
-class CoreDataQuizletCollectionViewController: UIViewController, UICollectionViewDelegate {
+class CoreDataQuizletCollectionViewController: CoreDataViewController, UICollectionViewDelegate {
     
     /******************************************************/
     /******************* Properties **************/
     /******************************************************/
     //MARK: - Properties
     
-    var fetchedResultsController : NSFetchedResultsController<NSFetchRequestResult>? {
-        didSet {
-            // Whenever the frc changes, we execute the search and
-            // reload the table
-            fetchedResultsController?.delegate = self
-            executeSearch()
-            //TODO: Reload data
-            //coreMapView.reloadData()
-        }
-    }
+//    var fetchedResultsController : NSFetchedResultsController<NSFetchRequestResult>? {
+//        didSet {
+//            // Whenever the frc changes, we execute the search and
+//            // reload the table
+//            fetchedResultsController?.delegate = self
+//            executeSearch()
+//            //TODO: Reload data
+//            //coreMapView.reloadData()
+//        }
+//    }
 
     var collectionView: UICollectionView!
     
-    var stack: CoreDataStack!
+//    var stack: CoreDataStack!
     
     /******************************************************/
     /******************* Life Cycle **************/
@@ -40,9 +40,9 @@ class CoreDataQuizletCollectionViewController: UIViewController, UICollectionVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Get the stack
-        let delegate = UIApplication.shared.delegate as! AppDelegate
-        stack = delegate.stack
+//        // Get the stack
+//        let delegate = UIApplication.shared.delegate as! AppDelegate
+//        stack = delegate.stack
     }
     
     /******************************************************/
@@ -67,15 +67,15 @@ class CoreDataQuizletCollectionViewController: UIViewController, UICollectionVie
 
 extension CoreDataQuizletCollectionViewController {
     
-    func executeSearch() {
-        if let fc = fetchedResultsController {
-            do {
-                try fc.performFetch()
-            } catch let e as NSError {
-                print("Error while trying to perform a search: \n\(e)\n\(fetchedResultsController)")
-            }
-        }
-    }
+//    func executeSearch() {
+//        if let fc = fetchedResultsController {
+//            do {
+//                try fc.performFetch()
+//            } catch let e as NSError {
+//                print("Error while trying to perform a search: \n\(e)\n\(fetchedResultsController)")
+//            }
+//        }
+//    }
 
     
     
@@ -83,14 +83,14 @@ extension CoreDataQuizletCollectionViewController {
 
 // MARK: - CoreDataCollectionViewController: NSFetchedResultsControllerDelegate
 
-extension CoreDataQuizletCollectionViewController: NSFetchedResultsControllerDelegate {
+extension CoreDataQuizletCollectionViewController {
     
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    override func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         //about to make updates.  wrapping actions with updates will allow for animation and auto reloading
         //self.collectionView.beginUpdates()
     }
     
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+    override func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         
         if anObject is QuizletTermDefinition {
             
@@ -129,7 +129,7 @@ extension CoreDataQuizletCollectionViewController: NSFetchedResultsControllerDel
 //        }
     }
     
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    override func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         //finished with updates, allow table view to animate and reload
         //self.collectionView.endUpdates()
         self.collectionView!.reloadData()
