@@ -28,19 +28,19 @@ class CoreDataViewController: UIViewController {
         }
     }
     
-    var performanceLogFetchedResultsController : NSFetchedResultsController<NSFetchRequestResult>? {
-        didSet {
-            performanceLogFetchedResultsController?.delegate = self
-            executePerformanceLogSearch()
-        }
-    }
+//    var performanceLogFetchedResultsController : NSFetchedResultsController<NSFetchRequestResult>? {
+//        didSet {
+//            performanceLogFetchedResultsController?.delegate = self
+//            executePerformanceLogSearch()
+//        }
+//    }
     
-    var studySessionFetchedResultsController : NSFetchedResultsController<NSFetchRequestResult>? {
-        didSet {
-            studySessionFetchedResultsController?.delegate = self
-            executeStudySessionSearch()
-        }
-    }
+//    var studySessionFetchedResultsController : NSFetchedResultsController<NSFetchRequestResult>? {
+//        didSet {
+//            studySessionFetchedResultsController?.delegate = self
+//            executeStudySessionSearch()
+//        }
+//    }
     
     
     
@@ -116,112 +116,60 @@ extension CoreDataViewController {
         }
     }
     
-    func executePerformanceLogSearch() {
-        if let fc = performanceLogFetchedResultsController {
-            do {
-                try fc.performFetch()
-            } catch let e as NSError {
-                print("Error while trying to perform a search: \n\(e)\n\(performanceLogFetchedResultsController)")
-            }
-        }
-    }
+//    func executePerformanceLogSearch() {
+//        if let fc = performanceLogFetchedResultsController {
+//            do {
+//                try fc.performFetch()
+//            } catch let e as NSError {
+//                print("Error while trying to perform a search: \n\(e)\n\(performanceLogFetchedResultsController)")
+//            }
+//        }
+//    }
     
-    func executeStudySessionSearch() {
-        if let fc = studySessionFetchedResultsController {
-            do {
-                try fc.performFetch()
-            } catch let e as NSError {
-                print("Error while trying to perform a search: \n\(e)\n\(studySessionFetchedResultsController)")
-            }
-        }
-    }
+//    func executeStudySessionSearch() {
+//        if let fc = studySessionFetchedResultsController {
+//            do {
+//                try fc.performFetch()
+//            } catch let e as NSError {
+//                print("Error while trying to perform a search: \n\(e)\n\(studySessionFetchedResultsController)")
+//            }
+//        }
+//    }
     
     
 }
 
 //studySession functionality
 extension CoreDataTrueFalseGameController {
-    func setupStudySessionFetchedResultsController(){
-        
-        //set up stack and fetchrequest
-        // Get the stack
-        let delegate = UIApplication.shared.delegate as! AppDelegate
-        let stack = delegate.stack
-        
-        // Create Fetch Request
-        let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "StudySession")
-        
-        fr.sortDescriptors = [NSSortDescriptor(key: "start", ascending: true)]
-        
-        // So far we have a search that will match ALL notes. However, we're
-        // only interested in those within the current notebook:
-        // NSPredicate to the rescue!
-        
-        //only get sets that are active
-        //let pred = NSPredicate(format: "quizletSet = %@", argumentArray: [set])
-        
-        //fr.predicate = pred
-        
-        // Create FetchedResultsController
-        let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
-        
-        self.studySessionFetchedResultsController = fc
-        
-    }
+//    func setupStudySessionFetchedResultsController(){
+//        
+//        //set up stack and fetchrequest
+//        // Get the stack
+//        let delegate = UIApplication.shared.delegate as! AppDelegate
+//        let stack = delegate.stack
+//        
+//        // Create Fetch Request
+//        let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "StudySession")
+//        
+//        fr.sortDescriptors = [NSSortDescriptor(key: "start", ascending: true)]
+//        
+//        // So far we have a search that will match ALL notes. However, we're
+//        // only interested in those within the current notebook:
+//        // NSPredicate to the rescue!
+//        
+//        //only get sets that are active
+//        //let pred = NSPredicate(format: "quizletSet = %@", argumentArray: [set])
+//        
+//        //fr.predicate = pred
+//        
+//        // Create FetchedResultsController
+//        let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
+//        
+//        self.studySessionFetchedResultsController = fc
+//        
+//    }
     
-    func startStudySession() {
-        //only create a new session if self.appsession is nil
-        if self.studySession != nil {
-            
-            print("Cannot create a new StudySession, another StudySession is in progress")
-            
-        } else {
-            
-            if self.studySessionFetchedResultsController == nil {
-                print("studySessionFetchedResultsController is nil, creating")
-                
-                // Create Fetch Request
-                let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "StudySession")
-                
-                fr.sortDescriptors = [NSSortDescriptor(key: "start", ascending: true)]
-                
-                //only get sets that are active
-                //        let pred = NSPredicate(format: "quizletSet = %@", argumentArray: [set])
-                //
-                //        fr.predicate = pred
-                
-                // Create FetchedResultsController
-                let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
-                
-                self.studySessionFetchedResultsController = fc
-            } else {
-                print("studySessionFetchedResultsController already exitsts, skipping creation")
-            }
-            
-            let delegate = UIApplication.shared.delegate as! AppDelegate
-            let appSession = delegate.appSession
-            
-            self.studySession = StudySession(start: NSDate(),
-                                             stop: nil,
-                                             gameId: 0,
-                                             appSession: appSession!,
-                                             context: self.studySessionFetchedResultsController!.managedObjectContext)
-        }
-    }
     
-    func stopStudySession() {
-        //only stop a session if one is in progress
-        if let currentStudySession = self.studySession {
-            
-            //currentStudySession.setValue(NSDate(), forKey: "stop")
-            currentStudySession.stop = NSDate()
-            //remove the referece to the current session
-            //self.studySession = nil
-            
-        } else {
-            print("Cannot stop the StudySession, there is no StudySession to stop")
-        }
-    }
 }
 
 // MARK: - CoreDataCollectionViewController: NSFetchedResultsControllerDelegate

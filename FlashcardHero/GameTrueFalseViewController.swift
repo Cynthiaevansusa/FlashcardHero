@@ -35,7 +35,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
         super.viewDidLoad()
         
         //setupFetchedResultsController()
-        setupPerformanceLogFetchedResultsController()
+        //setupPerformanceLogFetchedResultsController()
         
         setupInitialPlayspace()
         //TODO: Check for case where no set contains more than 1 term.
@@ -310,7 +310,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
                                       wrongAnswerTD: self.wrongTD,
                                       wrongAnswerFITB: nil,
                                       studySession: self.studySession!,
-                                      context: self.performanceLogFetchedResultsController!.managedObjectContext)
+                                      context: self.frcDict[keyPerformanceLog]!.managedObjectContext)
     }
     
     /******************************************************/
@@ -410,62 +410,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
     /******************* Model Operations **************/
     /******************************************************/
     //MARK: - Model Operations
-    
-//    func setupFetchedResultsController(){
-//        
-//        //set up stack and fetchrequest
-//        // Get the stack
-//        let delegate = UIApplication.shared.delegate as! AppDelegate
-//        let stack = delegate.stack
-//        
-//        // Create Fetch Request
-//        let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "QuizletSet")
-//        
-//        fr.sortDescriptors = [NSSortDescriptor(key: "title", ascending: false),NSSortDescriptor(key: "id", ascending: true)]
-//
-//        //only return where isActive is set to true
-//        let pred = NSPredicate(format: "isActive = %@", argumentArray: [true])
-//
-//        fr.predicate = pred
-//        
-//        // Create FetchedResultsController
-//        let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
-//        
-//        self.fetchedResultsController = fc
-//        
-//    }
-    
 
-    
-
-    
-//    func setupTermDefinitionFetchedResultsController(set: QuizletSet){
-//        
-//        //set up stack and fetchrequest
-//        // Get the stack
-//        let delegate = UIApplication.shared.delegate as! AppDelegate
-//        let stack = delegate.stack
-//        
-//        // Create Fetch Request
-//        let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "QuizletTermDefinition")
-//        
-//        fr.sortDescriptors = [NSSortDescriptor(key: "rank", ascending: true)]
-//        
-//        // So far we have a search that will match ALL notes. However, we're
-//        // only interested in those within the current notebook:
-//        // NSPredicate to the rescue!
-//        
-//        //only get sets that are active
-//        let pred = NSPredicate(format: "quizletSet = %@", argumentArray: [set])
-//        
-//        fr.predicate = pred
-//        
-//        // Create FetchedResultsController
-//        let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
-//        
-//        self.termFetchedResultsController = fc
-//        
-//    }
     
     func fetchModelQuizletSets() -> [QuizletSet] {
         return frcDict[keySets]!.fetchedObjects as! [QuizletSet]
