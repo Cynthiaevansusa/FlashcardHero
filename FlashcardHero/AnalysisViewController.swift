@@ -16,6 +16,13 @@ class AnalysisViewController: CoreDataQuizletCollectionViewController, UICollect
     
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
 
+    var statsQuestionAttemptsFetchedResultsController : NSFetchedResultsController<NSFetchRequestResult>? {
+        didSet {
+            statsQuestionAttemptsFetchedResultsController?.delegate = self
+            executeStatsQuestionAttemptsSearch()
+        }
+    }
+    
     var statsNumAppSessionsFetchedResultsController : NSFetchedResultsController<NSFetchRequestResult>? {
         didSet {
             statsNumAppSessionsFetchedResultsController?.delegate = self
@@ -36,17 +43,19 @@ class AnalysisViewController: CoreDataQuizletCollectionViewController, UICollect
     var statsOverviewCollectionData: [OverviewStatistic] = []
     let orderAppSessions = 0
     let orderStudySessions = 1
+    let orderQuestionAttempts = 2
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView = statsOverviewCollectionView
+        //collectionView = statsOverviewCollectionView
         
         // Do any additional setup after loading the view, typically from a nib.
         showOverviewSegment()
         
         self.setupAppSessionsAndSet()
         self.setupStudySessionsAndSet()
+        self.setupQuestionAttemptsAndSet()
         
         
     }
@@ -102,6 +111,64 @@ class AnalysisViewController: CoreDataQuizletCollectionViewController, UICollect
         statsOverviewCollectionData = newArray.sorted(by: { $0.order < $1.order})
         //collectionView.reloadData()
         
+    }
+    
+    /******************************************************/
+    /*******************///MARK: NumQuestionAttempts
+    /******************************************************/
+    
+    func setupQuestionAttemptsAndSet(){
+        setupStatsQuestionAttemptsFetchedResultsController()
+        setStatsQuestionAttempts()
+    }
+    
+    func executeStatsQuestionAttemptsSearch() {
+        if let fc = statsQuestionAttemptsFetchedResultsController {
+            do {
+                try fc.performFetch()
+            } catch let e as NSError {
+                print("Error while trying to perform a search: \n\(e)\n\(statsQuestionAttemptsFetchedResultsController)")
+            }
+        }
+    }
+    
+    func setupStatsQuestionAttemptsFetchedResultsController(){
+        
+        //set up stack and fetchrequest
+        // Get the stack
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        let stack = delegate.stack
+        
+        // Create Fetch Request
+        let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "TDPerformanceLog")
+        
+        fr.sortDescriptors = [NSSortDescriptor(key: "datetime", ascending: false)]
+        
+        //only return where isActive is set to true
+        //let pred = NSPredicate(format: "isActive = %@", argumentArray: [true])
+        
+        //fr.predicate = pred
+        
+        // Create FetchedResultsController
+        let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
+        
+        self.statsQuestionAttemptsFetchedResultsController = fc
+        
+    }
+    
+    func setStatsQuestionAttempts() {
+        
+        if let questionAttempts = self.statsQuestionAttemptsFetchedResultsController?.fetchedObjects {
+            let newOverviewStatistic = OverviewStatistic(order: orderQuestionAttempts, description: "Questions Attempted", number: questionAttempts.count)
+            insertOverviewStatisticIntoStatsOverviewItems(newOverviewStatistic)
+            
+            
+        } else {
+            //TODO: Handle no sessions returned
+            print("Found no studySessions, setting numStudySessions to zero")
+            let newOverviewStatistic = OverviewStatistic(order: orderQuestionAttempts, description: "Questions Attempted", number: 0)
+            insertOverviewStatisticIntoStatsOverviewItems(newOverviewStatistic)
+        }
     }
     
     /******************************************************/
@@ -261,6 +328,7 @@ class AnalysisViewController: CoreDataQuizletCollectionViewController, UICollect
     func refreshStats() {
         setStatsNumAppSessions()
         setStatsNumStudySessions()
+        setStatsQuestionAttempts()
         collectionView.reloadData()
     }
 
