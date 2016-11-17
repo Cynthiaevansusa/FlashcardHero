@@ -36,8 +36,8 @@ class GemTermsCollectionViewController: CoreDataQuizletCollectionViewController,
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        //setupFetchedResultsController()
-        _ = setupFetchedResultsController(entityName: "QuizletTermDefinition", sortKey: "rank", sortAscending: true, frcKey: keyGemTerms, predFormat: "quizletSet = %@", predArgumentArray: [self.quizletSet])
+        //setupFetchedResultsController()      
+        _ = setupFetchedResultsController(frcKey: keyGemTerms, entityName: "QuizletTermDefinition", sortDescriptors: [NSSortDescriptor(key: "rank", ascending: true)],  predicate: NSPredicate(format: "quizletSet = %@", argumentArray: [self.quizletSet]))
 
         creatorName.text = quizletSet.createdBy
         setTitle.text = quizletSet.title

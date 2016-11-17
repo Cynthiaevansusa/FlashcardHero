@@ -45,14 +45,14 @@ class AnalysisViewController: CoreDataQuizletCollectionViewController, UICollect
         keyQuestionAttempts : 2]
     
         //setup the App Sessions Counter
-        _ = setupFetchedResultsController(entityName: "AppSession", sortKey: "start", frcKey: keyAppSessions)
+        _ = setupFetchedResultsController(frcKey: keyAppSessions, entityName: "AppSession", sortDescriptors: [NSSortDescriptor(key: "start", ascending: false)],  predicate: nil)
         setStats(frcKey: keyQuestionAttempts)
         
         //Study Sessions Counter
-        _ = setupFetchedResultsController(entityName: "StudySession", sortKey: "start", frcKey: keyStudySessions)
+        _ = setupFetchedResultsController(frcKey: keyStudySessions, entityName: "StudySession", sortDescriptors: [NSSortDescriptor(key: "start", ascending: false)],  predicate: nil)
         setStats(frcKey: keyQuestionAttempts)
         //Question Attempts counter
-        _ = setupFetchedResultsController(entityName: "TDPerformanceLog", sortKey: "datetime", frcKey: keyQuestionAttempts)
+        _ = setupFetchedResultsController(frcKey: keyQuestionAttempts, entityName: "TDPerformanceLog", sortDescriptors: [NSSortDescriptor(key: "datetime", ascending: false)],  predicate: nil)
         setStats(frcKey: keyQuestionAttempts)
         
         showOverviewSegment()

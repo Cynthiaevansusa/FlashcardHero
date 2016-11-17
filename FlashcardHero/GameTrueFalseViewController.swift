@@ -34,7 +34,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupFetchedResultsController()
+        //setupFetchedResultsController()
         setupPerformanceLogFetchedResultsController()
         
         setupInitialPlayspace()
@@ -90,7 +90,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
      */
     func checkForCompatableGems() {
         //fetch sets
-        if let fc = fetchedResultsController {
+        if let fc = frcDict[keySets] {
             print((fc.fetchedObjects?.count)!)
             
             guard (fc.fetchedObjects?.count)! > 0 else {
@@ -184,7 +184,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
         self.termText.text = ""
         
         //fetch sets
-        if let fc = fetchedResultsController {
+        if let fc = frcDict[keySets] {
             //print((fc.fetchedObjects?.count)!)
             
             guard (fc.fetchedObjects?.count)! > 0 else {
@@ -411,29 +411,29 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
     /******************************************************/
     //MARK: - Model Operations
     
-    func setupFetchedResultsController(){
-        
-        //set up stack and fetchrequest
-        // Get the stack
-        let delegate = UIApplication.shared.delegate as! AppDelegate
-        let stack = delegate.stack
-        
-        // Create Fetch Request
-        let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "QuizletSet")
-        
-        fr.sortDescriptors = [NSSortDescriptor(key: "title", ascending: false),NSSortDescriptor(key: "id", ascending: true)]
-
-        //only return where isActive is set to true
-        let pred = NSPredicate(format: "isActive = %@", argumentArray: [true])
-
-        fr.predicate = pred
-        
-        // Create FetchedResultsController
-        let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
-        
-        self.fetchedResultsController = fc
-        
-    }
+//    func setupFetchedResultsController(){
+//        
+//        //set up stack and fetchrequest
+//        // Get the stack
+//        let delegate = UIApplication.shared.delegate as! AppDelegate
+//        let stack = delegate.stack
+//        
+//        // Create Fetch Request
+//        let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "QuizletSet")
+//        
+//        fr.sortDescriptors = [NSSortDescriptor(key: "title", ascending: false),NSSortDescriptor(key: "id", ascending: true)]
+//
+//        //only return where isActive is set to true
+//        let pred = NSPredicate(format: "isActive = %@", argumentArray: [true])
+//
+//        fr.predicate = pred
+//        
+//        // Create FetchedResultsController
+//        let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
+//        
+//        self.fetchedResultsController = fc
+//        
+//    }
     
 
     
@@ -468,7 +468,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
     }
     
     func fetchModelQuizletSets() -> [QuizletSet] {
-        return fetchedResultsController!.fetchedObjects as! [QuizletSet]
+        return frcDict[keySets]!.fetchedObjects as! [QuizletSet]
     }
     
     func fetchQuizletTermDefinitions(set: QuizletSet) -> [QuizletTermDefinition] {

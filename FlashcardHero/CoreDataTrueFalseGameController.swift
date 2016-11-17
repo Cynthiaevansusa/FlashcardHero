@@ -17,6 +17,10 @@ class CoreDataTrueFalseGameController: CoreDataViewController {
     /******************************************************/
     //MARK: - Properties
     
+    let keyTerms = "TFTerms"
+    let keySets = "TFSets"
+    let keyPerformanceLog = "TFPerformanceLog"
+    
     var termFetchedResultsController : NSFetchedResultsController<NSFetchRequestResult>? {
         didSet {
             // Whenever the frc changes, we execute the search and
@@ -38,6 +42,7 @@ class CoreDataTrueFalseGameController: CoreDataViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        _ = setupFetchedResultsController(frcKey: "TFSets", entityName: "QuizletSet", sortDescriptors: [NSSortDescriptor(key: "title", ascending: false),NSSortDescriptor(key: "id", ascending: true)],  predicate: NSPredicate(format: "isActive = %@", argumentArray: [true]))
         
         self.startStudySession()
         

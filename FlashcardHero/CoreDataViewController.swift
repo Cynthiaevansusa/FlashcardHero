@@ -69,7 +69,7 @@ class CoreDataViewController: UIViewController {
         }
     }
     
-    func setupFetchedResultsController(entityName: String, sortKey: String, sortAscending: Bool = false, frcKey: String, predFormat: String? = nil, predArgumentArray: [Any]? = nil) -> NSFetchedResultsController<NSFetchRequestResult> {
+    func setupFetchedResultsController(frcKey: String, entityName: String, sortDescriptors: [NSSortDescriptor]? = nil,  predicate: NSPredicate? = nil) -> NSFetchedResultsController<NSFetchRequestResult> {
         
         //set up stack and fetchrequest
         // Get the stack
@@ -79,13 +79,13 @@ class CoreDataViewController: UIViewController {
         // Create Fetch Request
         let fr = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         
-        fr.sortDescriptors = [NSSortDescriptor(key: sortKey, ascending: sortAscending)]
+        if let sortDescriptors = sortDescriptors {
+            fr.sortDescriptors = sortDescriptors
+        }
         
-        if let predFormat = predFormat, let predArgumentArray = predArgumentArray {
-            //only return where isActive is set to true
-            let pred = NSPredicate(format: predFormat, argumentArray: predArgumentArray)
-            
-            fr.predicate = pred
+        if let predicate = predicate {
+          
+            fr.predicate = predicate
         }
         
         // Create FetchedResultsController
