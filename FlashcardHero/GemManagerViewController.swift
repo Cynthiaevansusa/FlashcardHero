@@ -19,6 +19,7 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
     @IBOutlet weak var gemTableView: UITableView!
     
     @IBOutlet weak var addButton: UIBarButtonItem!
+    @IBOutlet weak var loginQuizletButton: UIBarButtonItem!
 
     var gemInActiveFlux: QuizletSet?
     
@@ -140,6 +141,11 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         
         present(vc, animated: true, completion: nil)
     }
+    
+    @IBAction func loginQuizletButtonPressed(_ sender: AnyObject) {
+        QuizletClient.sharedInstance.sendUserToQuizletOAuth()
+    }
+    
 
     
     /******************************************************/
