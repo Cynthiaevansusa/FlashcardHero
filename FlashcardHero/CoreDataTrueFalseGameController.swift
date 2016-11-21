@@ -127,9 +127,6 @@ extension CoreDataTrueFalseGameController {
     
 }
 
-
-
-//performance log functionality
 extension CoreDataTrueFalseGameController {
     
     func setupTermFRC(set: QuizletSet) {

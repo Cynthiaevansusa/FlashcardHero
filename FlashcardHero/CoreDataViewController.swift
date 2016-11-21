@@ -21,12 +21,12 @@ class CoreDataViewController: UIViewController {
     
     var frcDict : [String:NSFetchedResultsController<NSFetchRequestResult>] = [:]
     
-    var fetchedResultsController : NSFetchedResultsController<NSFetchRequestResult>? {
-        didSet {
-            fetchedResultsController?.delegate = self
-            executeSearch()
-        }
-    }
+//    var fetchedResultsController : NSFetchedResultsController<NSFetchRequestResult>? {
+//        didSet {
+//            fetchedResultsController?.delegate = self
+//            executeSearch()
+//        }
+//    }
     
 
     var stack: CoreDataStack!
@@ -89,20 +89,20 @@ class CoreDataViewController: UIViewController {
 
 // MARK: - CoreDataCollectionViewController (Fetches)
 
-extension CoreDataViewController {
-    
-    func executeSearch() {
-        if let fc = fetchedResultsController {
-            do {
-                try fc.performFetch()
-            } catch let e as NSError {
-                print("Error while trying to perform a search: \n\(e)\n\(fetchedResultsController)")
-            }
-        }
-    }
-
-    
-}
+//extension CoreDataViewController {
+//    
+//    func executeSearch() {
+//        if let fc = fetchedResultsController {
+//            do {
+//                try fc.performFetch()
+//            } catch let e as NSError {
+//                print("Error while trying to perform a search: \n\(e)\n\(fetchedResultsController)")
+//            }
+//        }
+//    }
+//
+//    
+//}
 
 
 // MARK: - CoreDataCollectionViewController: NSFetchedResultsControllerDelegate

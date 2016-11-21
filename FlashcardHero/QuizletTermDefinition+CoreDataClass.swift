@@ -31,14 +31,14 @@ public class QuizletTermDefinition: QuizletSet {
                 self.rank = Int64(rank)
                 
                 //image is optional or blank
-                if let image = withQuizletTermResult.image {
-                    
-                    //TODO: add validation
-                    //TODO: Don't hard code this
-                    self.imageHeight = image["height"] as! Int64
-                    self.imageUrl = image["url"] as? String
-                    self.imageWidth = image["width"] as! Int64
-                }
+//                if let image = withQuizletTermResult.image {
+//                    
+//                    //TODO: add validation
+//                    //TODO: Don't hard code this
+//                    self.imageHeight = image["height"] as! Int64
+//                    self.imageUrl = image["url"] as? String
+//                    self.imageWidth = image["width"] as! Int64
+//                }
 
                 //add the related set
                 self.quizletSet = relatedSet
