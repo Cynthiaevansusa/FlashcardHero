@@ -165,7 +165,8 @@ extension QuizletClient {
         
         //state string for conter CRSF attacks
         let stateString = generateStateString()
-        //TODO: save state string for checking when user returns
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        delegate.oAuthState = stateString
         
         parameters[Constants.ParameterKeys.OAuth.State] = stateString
         
@@ -205,7 +206,7 @@ extension QuizletClient {
     }
     
     func generateStateString() -> String {
-        return randomString(length: 22)
+        return randomString(length: 28)
     }
     
     /******************************************************/

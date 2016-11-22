@@ -2,13 +2,16 @@ PODS:
   - Charts (3.0.0):
     - Charts/Core (= 3.0.0)
   - Charts/Core (3.0.0)
+  - KeychainSwift (7.0.0)
 
 DEPENDENCIES:
   - Charts (~> 3.0)
+  - KeychainSwift (~> 7.0)
 
 SPEC CHECKSUMS:
   Charts: beb341928d2135613b4325a6c6aff9f2f6de895e
+  KeychainSwift: b6947435dd78cc442c64a84ae648dd0e871cf448
 
-PODFILE CHECKSUM: b3adc65ed5a51efc195bf052668bf216a6f05f11
+PODFILE CHECKSUM: 0f71e8bc9c5ad6772bf7cfa829ef6faacc75c7e1
 
 COCOAPODS: 1.1.1

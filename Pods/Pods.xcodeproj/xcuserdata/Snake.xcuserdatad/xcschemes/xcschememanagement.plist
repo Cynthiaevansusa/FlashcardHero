@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>KeychainSwift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-FlashcardHero.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -27,12 +32,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1130841707BA34B4926DBB8E5E79F7D2</key>
+		<key>22662FCCD8875C4A93A248ADC853877A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>22662FCCD8875C4A93A248ADC853877A</key>
+		<key>4C698C648EE4D43C6B8BE0BE1FE91737</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>72FD425B478D447B07F1639C0E547B5D</key>
 		<dict>
 			<key>primary</key>
 			<true/>

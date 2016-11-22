@@ -7,6 +7,7 @@ target 'FlashcardHero' do
 
   # Pods for FlashcardHero
     pod 'Charts', '~> 3.0'
+    pod 'KeychainSwift', '~> 7.0'
 
   target 'FlashcardHeroTests' do
     inherit! :search_paths

@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import KeychainSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, NSFetchedResultsControllerDelegate {
@@ -72,25 +73,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSFetchedResultsControlle
                 print("Successfully got a code")
                 
                 //check that state is the same
-                //if state == oAuthState {
-                    self.oAuthCode = code
-                    
-                    //proceed to step 2 of Quizlet OAuth login
-                    QuizletClient.sharedInstance.getQuizletOAuthToken(with: code) { (results, error) in
-                        print("getQuizletOAuthToken completion")
-                        if let results = results {
-                            print("Got a token successfully: \(results)")
-                            
-                        } else if let error = error {
-                            print("Got an Error: \(error)")
-                        }
-                    
-                  //  }
-                    
-                    
-                    
+                guard state == oAuthState else {
+                    print("States don't match! \(state) vs \(oAuthState)")
+                    return false
                 }
                 
+                self.oAuthCode = code
+                
+                //proceed to step 2 of Quizlet OAuth login
+                QuizletClient.sharedInstance.getQuizletOAuthToken(with: code) { (results, error) in
+                    print("getQuizletOAuthToken completion")
+                    if let results = results {
+                        print("Got a token successfully: \(results)")
+                        
+                        //TODO: Save into keychain instead of plist
+                        
+                    } else if let error = error {
+                        print("Got an Error: \(error)")
+                    }
+                
+                }
+                
+            } else {
+                //TODO: Handle didn't get all expected parameters
             }
 
         }

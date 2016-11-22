@@ -99,6 +99,7 @@
 		F614C3591DCB216800E7D3C8 /* QuizletTermDefinition+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "QuizletTermDefinition+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F614C35A1DCB216800E7D3C8 /* QuizletTermDefinition+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "QuizletTermDefinition+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F61B5F551DE39DB1009126E7 /* QuizletOAuth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizletOAuth.swift; sourceTree = "<group>"; };
+		F61B5F571DE4AD6C009126E7 /* FlashcardHero.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FlashcardHero.entitlements; sourceTree = "<group>"; };
 		F63782C91DC2E1EC0078FE7F /* Documents */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Documents; path = FlashcardHero/Documents; sourceTree = "<group>"; };
 		F63782D01DC2E3C00078FE7F /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
 		F63782D21DC2E3F50078FE7F /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -413,6 +414,7 @@
 		F6FD10CB1DBEEAEB00B7E6EA /* FlashcardHero */ = {
 			isa = PBXGroup;
 			children = (
+				F61B5F571DE4AD6C009126E7 /* FlashcardHero.entitlements */,
 				F6FD10CC1DBEEAEB00B7E6EA /* AppDelegate.swift */,
 				F63782D01DC2E3C00078FE7F /* GCDBlackBox.swift */,
 				F63782CB1DC2E2380078FE7F /* Model */,
@@ -521,6 +523,11 @@
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 37R6UV3BWH;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					F6FD10DE1DBEEAEB00B7E6EA = {
 						CreatedOnToolsVersion = 8.0;
@@ -927,6 +934,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FlashcardHero/FlashcardHero.entitlements;
 				DEVELOPMENT_TEAM = 37R6UV3BWH;
 				INFOPLIST_FILE = FlashcardHero/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -942,6 +950,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FlashcardHero/FlashcardHero.entitlements;
 				DEVELOPMENT_TEAM = 37R6UV3BWH;
 				INFOPLIST_FILE = FlashcardHero/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
