@@ -54,7 +54,7 @@
                                             <color key="tintColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                         </barButtonItem>
                                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="mh8-3l-3Dd">
-                                            <rect key="frame" x="79" y="27" width="218" height="30"/>
+                                            <rect key="frame" x="78.5" y="27" width="218" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Missions"/>
@@ -78,18 +78,18 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BuA-G8-ZsP" id="t0p-j8-nGp">
-                                            <frame key="frameInset" width="375" height="43"/>
+                                            <frame key="frameInset" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="e03-bA-gnp">
-                                                    <frame key="frameInset" minX="15" minY="4" width="34" height="21"/>
+                                                    <frame key="frameInset" minX="15" minY="5" width="33.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Yqs-8h-Z5f">
-                                                    <frame key="frameInset" minX="15" minY="25" width="33" height="15"/>
+                                                    <frame key="frameInset" minX="15" minY="25.5" width="33" height="14.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
@@ -285,7 +285,7 @@
                                             </connections>
                                         </barButtonItem>
                                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="bXx-zd-oBl">
-                                            <rect key="frame" x="79" y="27" width="218" height="30"/>
+                                            <rect key="frame" x="78.5" y="27" width="218" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Tracked"/>
@@ -309,7 +309,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="61"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OJV-td-BV2" id="mid-7h-n0Y">
-                                            <frame key="frameInset" width="375" height="60"/>
+                                            <frame key="frameInset" width="375" height="61"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="second" translatesAutoresizingMaskIntoConstraints="NO" id="2OS-Wp-Cax">
@@ -651,7 +651,7 @@
                                             <color key="tintColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                         </barButtonItem>
                                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="Hgx-R9-3Zl">
-                                            <rect key="frame" x="79" y="27" width="218" height="30"/>
+                                            <rect key="frame" x="78.5" y="27" width="218" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Equipped"/>
@@ -695,10 +695,10 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="QuizletSearchCell" rowHeight="61" id="UaZ-r9-4vQ" customClass="CustomQuizletSearchBySetsResultsCell" customModule="FlashcardHero" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="61"/>
+                                        <rect key="frame" x="0.0" y="28" width="1000" height="61"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UaZ-r9-4vQ" id="FoE-tb-Dii">
-                                            <frame key="frameInset" width="375" height="60"/>
+                                            <frame key="frameInset" width="1000" height="61"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="second" translatesAutoresizingMaskIntoConstraints="NO" id="TDD-al-BTs">
@@ -884,7 +884,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Wir-xl-8Yg" id="YON-9P-Tlr">
-                                    <frame key="frameInset" width="375" height="43"/>
+                                    <frame key="frameInset" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -957,7 +957,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="statOverviewCell" id="1Lj-sp-vun" customClass="CustomStatsOverviewCell" customModule="FlashcardHero" customModuleProvider="target">
-                                        <rect key="frame" x="88" y="0.0" width="200" height="200"/>
+                                        <rect key="frame" x="87.5" y="0.0" width="200" height="200"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
@@ -1010,7 +1010,7 @@
                                             <color key="tintColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                         </barButtonItem>
                                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="Bk3-x7-1Nf">
-                                            <rect key="frame" x="79" y="27" width="218" height="30"/>
+                                            <rect key="frame" x="78.5" y="27" width="218" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Overview"/>

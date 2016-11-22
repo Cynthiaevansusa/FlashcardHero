@@ -43,6 +43,38 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         super.viewWillAppear(animated)
         
         self.tableView.reloadData()
+        
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        
+        setViewForLoginStatus(delegate.isUserLoggedIn())
+    }
+    
+    /******************************************************/
+    /*************///MARK: - Appearance
+    /******************************************************/
+    
+    func setViewForLoginStatus(_ loggedin: Bool) {
+        if loggedin {
+            UIView.animate(withDuration: 0.1, animations: {
+                self.setViewUserLoggedIn()
+            })
+        } else {
+            UIView.animate(withDuration: 0.1, animations: {
+                self.setVeiwUserLoggedOut()
+            })
+        }
+    }
+    
+    func setViewUserLoggedIn() {
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        let userId = delegate.getQuizletUserId()
+        self.navigationItem.title = "Logged in as " + String(describing: userId)
+        loginQuizletButton.title = "Log Out"
+    }
+    
+    func setVeiwUserLoggedOut() {
+        self.navigationItem.title = nil
+        loginQuizletButton.title = "Log In"
     }
     
     /******************************************************/

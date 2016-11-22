@@ -116,6 +116,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSFetchedResultsControlle
         return true
     }
     
+    func isUserLoggedIn() -> Bool {
+        //user is considered to be logged in if getQuizletUserId returns a userId, and if an oAuth token is returned
+        
+        if getQuizletUserId() != nil && getTokenFromKeychain() != nil {
+            print("User is logged in.")
+            return true
+        } else {
+            print("User is logged NOT in.")
+            return false
+        }
+    }
+    
+    func logUserOut() -> Bool {
+        //delete the userId and the token and make sure they are gone
+        let keychain = KeychainSwift()
+        
+        if keychain.delete(self.oAuthTokenKeychainKey) && keychain.delete(self.quizletUserIdKeychainKey) {
+            self.quizletUserId = nil
+            if !isUserLoggedIn() {
+                print("User successfully logged out.")
+                return true
+            } else {
+                //TODO: handle failing to log out
+                print("Failed to log user out... isUserLoggedIn is returning TRUE")
+                return false
+            }
+            
+        } else {
+            //TODO: properly handle not logging out
+            print("Failed to log user out")
+            return false
+        }
+    }
+    
     func setQuizletUserId(userId: String) -> Bool {
         let keychain = KeychainSwift()
         if keychain.set(userId, forKey: self.quizletUserIdKeychainKey) {
@@ -137,6 +171,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSFetchedResultsControlle
             return false
         }
     }
+    
+   
     
     //getting the userId
     func getQuizletUserId() -> String? {
