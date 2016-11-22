@@ -165,6 +165,14 @@ extension QuizletClient {
         }
         
         struct ResponseKeys {
+            struct OAuth {
+                static let AccessToken = "access_token"
+                static let ExpiresIn = "expires_in"
+                static let Scope = "scope"
+                static let TokenType = "token_type"
+                static let UserId = "user_id"
+            }
+            
             struct GetSets {
                 struct SingleSet {
                     static let Id = "id"

@@ -17,6 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSFetchedResultsControlle
     let stack = CoreDataStack(modelName: "FlashcardHeroModel")!
     var oAuthCode : String? = nil
     var oAuthState : String? = nil
+    let oAuthTokenKeychainKey = "FlashcardHeroOAuthToken"
+    let quizletUserIdKeychainKey = "FlashcardHeroQuizletUserId"
+    
+    fileprivate var quizletUserId: String? = nil
     
     
     /******************************************************/
@@ -42,18 +46,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSFetchedResultsControlle
 
         if (url.scheme == "flashcardheroapp" && url.host == "after_oauth") {
             
-            var code : String?
-            var state : String?
+            var tempCode : String?
+            var tempState : String?
             
             for parameter in parameters {
                 switch parameter.name {
                 case "code":
                     print("code is \(parameter.value)")
-                    code = parameter.value
+                    tempCode = parameter.value
                 case "state":
                     //check state against the code sent in request
                     print("state is \(parameter.value)")
-                    state = parameter.value
+                    tempState = parameter.value
                 case "expires_in":
                     print("expires_in is \(parameter.value)")
                 case "error":
@@ -68,39 +72,133 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSFetchedResultsControlle
                 }
             }
             
-            if wasSuccessful, let code = code, let state = state {
-                //got all the parameters expected for log in
-                print("Successfully got a code")
-                
-                //check that state is the same
-                guard state == oAuthState else {
-                    print("States don't match! \(state) vs \(oAuthState)")
-                    return false
-                }
-                
-                self.oAuthCode = code
-                
-                //proceed to step 2 of Quizlet OAuth login
-                QuizletClient.sharedInstance.getQuizletOAuthToken(with: code) { (results, error) in
-                    print("getQuizletOAuthToken completion")
-                    if let results = results {
-                        print("Got a token successfully: \(results)")
-                        
-                        //TODO: Save into keychain instead of plist
-                        
-                    } else if let error = error {
-                        print("Got an Error: \(error)")
-                    }
-                
-                }
-                
-            } else {
-                //TODO: Handle didn't get all expected parameters
+            guard wasSuccessful, let code = tempCode, let state = tempState else { return false }
+            
+            //got all the parameters expected for log in
+            print("Successfully got a code")
+            
+            //check that state is the same
+            guard state == oAuthState else {
+                print("States don't match! \(state) vs \(oAuthState)")
+                return false
             }
-
+            
+            self.oAuthCode = code
+            
+            //proceed to step 2 of Quizlet OAuth login
+            let _ = QuizletClient.sharedInstance.getQuizletOAuthToken(with: code) { (results, error) in
+                print("getQuizletOAuthToken completion")
+                guard let results = results else {
+                    print("Got an Error: \(error)")
+                    return
+                }
+                    
+                guard let token = results[QuizletClient.Constants.ResponseKeys.OAuth.AccessToken] as? String,
+                    let userId = results[QuizletClient.Constants.ResponseKeys.OAuth.UserId] as? String else {
+                        print("Couldn't obtain the token from \(results)")
+                        return
+                }
+                print("Got a token and userId successfully: \(token), \(userId)")
+                
+                guard self.setTokenToKeychain(token: token), self.setQuizletUserId(userId: userId) else { return }
+                
+                //got a token, user is logged in, do the login steps
+                guard token == self.getTokenFromKeychain() && userId == self.getQuizletUserId() else {
+                    print("Token we just tried to set doesn't match the token we got! \(token) doesn't match \(self.getTokenFromKeychain()) or \(userId) doesn't match \(self.getQuizletUserId())")
+                    return }
+                
+                //userId and token have been set and can be retrieved.
+                print("Userid and Token have been successfully set!")
+            }
+            
         }
         
         return true
+    }
+    
+    func setQuizletUserId(userId: String) -> Bool {
+        let keychain = KeychainSwift()
+        if keychain.set(userId, forKey: self.quizletUserIdKeychainKey) {
+            //put in memory
+            self.quizletUserId = userId
+            
+            if keychain.get(self.quizletUserIdKeychainKey) == userId && userId == self.quizletUserId {
+                print("Keychain userId set successful")
+                return true
+            } else {
+                print("Couldn't get the userId we just set! \(userId) \(self.quizletUserId)")
+                return false
+            }
+        } else {
+            print("Keychain userId set failed!")
+            if keychain.lastResultCode != noErr { /* //TODO: report error to set keychain */ }
+            
+            self.quizletUserId = nil
+            return false
+        }
+    }
+    
+    //getting the userId
+    func getQuizletUserId() -> String? {
+        let keychain = KeychainSwift()
+        //check that memory and keychain match
+        if let userId = self.quizletUserId, let kUserId = keychain.get(self.quizletUserIdKeychainKey), userId == kUserId {
+            //they are both set, so return
+            print("Keychain and local memory match.  UserId returned: \(userId)")
+            return userId
+        } else {
+            //one or more of them is not set
+            switch (self.quizletUserId == nil, keychain.get(self.quizletUserIdKeychainKey) == nil) {
+            case (true, true):
+                //neither is set, user is not logged in and must do so
+                print("No userId found in memory or in keychain. \(self.quizletUserId), \(keychain.get(self.quizletUserIdKeychainKey))")
+                return nil
+            case (false, true):
+                //in memory, but not in keychain
+                print("userId in memory but not in Keychain. Returning nil. \(self.quizletUserId), \(keychain.get(self.quizletUserIdKeychainKey))")
+                //for safety, will return nil
+                return nil
+            case (true, false):
+                //not in memory, but in keyChain
+                print("no userId in memory.  Setting. \(self.quizletUserId), \(keychain.get(self.quizletUserIdKeychainKey))")
+                //put into memory
+                self.quizletUserId = keychain.get(self.quizletUserIdKeychainKey)
+                return self.quizletUserId
+            case (false, false):
+                //they did not match
+                print("memory and keychain don't match. Overwriting memory. \(self.quizletUserId), \(keychain.get(self.quizletUserIdKeychainKey))")
+                //override in memory from keychain
+                self.quizletUserId = keychain.get(self.quizletUserIdKeychainKey)
+                return self.quizletUserId
+            }
+        }
+    }
+    
+    //set's the app's quizlet token into the keychain
+    func setTokenToKeychain(token: String) -> Bool {
+        let keychain = KeychainSwift()
+        if keychain.set(token, forKey: self.oAuthTokenKeychainKey) {
+            if keychain.get(self.oAuthTokenKeychainKey) == token {
+                print("Keychain token set successful")
+                return true
+            } else {
+                print("Couldn't get the key we just set! \(token)")
+                return false
+            }
+            
+        } else {
+            print("Keychain token set failed!")
+            if keychain.lastResultCode != noErr { /* //TODO: report error to set keychain */ }
+            return false
+        }
+    }
+    
+    //returns an optional string from the keychain for the app's Quizlet token
+    func getTokenFromKeychain() -> String? {
+        let keychain = KeychainSwift()
+        let gotKey = keychain.get(self.oAuthTokenKeychainKey)
+        print("Got token from keychain \(gotKey)")
+        return gotKey
     }
 
     
