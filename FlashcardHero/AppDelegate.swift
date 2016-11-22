@@ -14,6 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSFetchedResultsControlle
 
     var window: UIWindow?
     let stack = CoreDataStack(modelName: "FlashcardHeroModel")!
+    var oAuthCode : String? = nil
+    var oAuthState : String? = nil
     
     
     /******************************************************/
@@ -25,6 +27,75 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSFetchedResultsControlle
         didSet {
             appSessionFetchedResultsController?.delegate = self
         }
+    }
+    
+    // some code adapted from http://jayeshkawli.ghost.io/ios-custom-url-schemes/
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        
+        print("Received a URL: \(url)")
+        
+        let urlComponents = NSURLComponents(url: url, resolvingAgainstBaseURL: false)
+        let parameters = (urlComponents?.queryItems)! as [NSURLQueryItem]
+        
+        var wasSuccessful = true
+
+        if (url.scheme == "flashcardheroapp" && url.host == "after_oauth") {
+            
+            var code : String?
+            var state : String?
+            
+            for parameter in parameters {
+                switch parameter.name {
+                case "code":
+                    print("code is \(parameter.value)")
+                    code = parameter.value
+                case "state":
+                    //check state against the code sent in request
+                    print("state is \(parameter.value)")
+                    state = parameter.value
+                case "expires_in":
+                    print("expires_in is \(parameter.value)")
+                case "error":
+                    print("error is \(parameter.value)")
+                    wasSuccessful = false
+                case "error_description":
+                    print("error_description is \(parameter.value)")
+                    wasSuccessful = false
+                default:
+                    print("Recieved an unexpected item: \(parameter.name)")
+                    //TODO: handle unexpected parameter
+                }
+            }
+            
+            if wasSuccessful, let code = code, let state = state {
+                //got all the parameters expected for log in
+                print("Successfully got a code")
+                
+                //check that state is the same
+                //if state == oAuthState {
+                    self.oAuthCode = code
+                    
+                    //proceed to step 2 of Quizlet OAuth login
+                    QuizletClient.sharedInstance.getQuizletOAuthToken(with: code) { (results, error) in
+                        print("getQuizletOAuthToken completion")
+                        if let results = results {
+                            print("Got a token successfully: \(results)")
+                            
+                        } else if let error = error {
+                            print("Got an Error: \(error)")
+                        }
+                    
+                  //  }
+                    
+                    
+                    
+                }
+                
+            }
+
+        }
+        
+        return true
     }
 
     

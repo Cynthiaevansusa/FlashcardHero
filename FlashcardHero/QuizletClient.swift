@@ -40,7 +40,6 @@ class QuizletClient : NSObject {
         
         /* 2/3. Build the URL, Configure the request */
         let request = NSMutableURLRequest(url: QuizletURLFromParameters(passTheseParameters, withPathExtension: method))
-
         
         /* 4. Make the request */
         let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
@@ -151,7 +150,7 @@ class QuizletClient : NSObject {
     }
     
     // given raw JSON, return a usable Foundation object
-    fileprivate func convertDataWithCompletionHandler(_ data: Data, completionHandlerForConvertData: (_ result: AnyObject?, _ error: NSError?) -> Void) {
+    func convertDataWithCompletionHandler(_ data: Data, completionHandlerForConvertData: (_ result: AnyObject?, _ error: NSError?) -> Void) {
         
         var parsedResult: AnyObject!
         //let newData = data.subdataWithRange(NSMakeRange(5, data.length - 5)) //don't need to this for Parse
@@ -166,7 +165,7 @@ class QuizletClient : NSObject {
     }
     
     // create a URL from parameters
-    fileprivate func QuizletURLFromParameters(_ parameters: [String:Any]?, withPathExtension: String? = nil) -> URL {
+    func QuizletURLFromParameters(_ parameters: [String:Any]?, withPathExtension: String? = nil) -> URL {
         
         var components = URLComponents()
         components.scheme = Constants.ApiScheme
