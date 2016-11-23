@@ -279,32 +279,6 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         }
     }
     
-//    func setupFetchedResultsController(){
-//        
-//        //set up stack and fetchrequest
-//        // Get the stack
-//        let delegate = UIApplication.shared.delegate as! AppDelegate
-//        let stack = delegate.stack
-//        
-//        // Create Fetch Request
-//        let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "QuizletSet")
-//        
-//        fr.sortDescriptors = [NSSortDescriptor(key: "title", ascending: false),NSSortDescriptor(key: "id", ascending: true)]
-//        
-//        // So far we have a search that will match ALL notes. However, we're
-//        // only interested in those within the current notebook:
-//        // NSPredicate to the rescue!
-//        
-////        let pred = NSPredicate(format: "pin = %@", argumentArray: [self.pin!])
-////        
-////        fr.predicate = pred
-//        
-//        // Create FetchedResultsController
-//        let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
-//        
-//        self.fetchedResultsController = fc
-//        
-//    }
     
     func fetchModelQuizletSets() -> [QuizletSet] {
         let visibleFrcKey = getVisibleFrcKey()

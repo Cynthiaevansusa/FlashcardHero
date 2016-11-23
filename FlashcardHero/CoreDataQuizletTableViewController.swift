@@ -16,32 +16,7 @@ class CoreDataQuizletTableViewController: CoreDataViewController, UITableViewDel
     /******************* Properties **************/
     /******************************************************/
     //MARK: - Properties
-    
-//    var fetchedResultsController : NSFetchedResultsController<NSFetchRequestResult>? {
-//        didSet {
-//            // Whenever the frc changes, we execute the search and
-//            // reload the table
-//            fetchedResultsController?.delegate = self
-//            executeSearch()
-//            //TODO: Reload data
-//            //coreMapView.reloadData()
-//        }
-//    }
-    
-//    var fetchedTextResultsController : NSFetchedResultsController<NSFetchRequestResult>? {
-//        didSet {
-//            // Whenever the frc changes, we execute the search and
-//            // reload the table
-//            fetchedTextResultsController?.delegate = self
-//            executeTextSearch()
-//            //TODO: Reload data
-//            //coreMapView.reloadData()
-//        }
-//    }
-    
-    
-    
-    var tableView: UITableView!
+        var tableView: UITableView!
     
 //    var stack: CoreDataStack!
     
@@ -53,9 +28,7 @@ class CoreDataQuizletTableViewController: CoreDataViewController, UITableViewDel
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Get the stack
-//        let delegate = UIApplication.shared.delegate as! AppDelegate
-//        stack = delegate.stack
+        
     }
     
     /******************************************************/
@@ -73,33 +46,6 @@ class CoreDataQuizletTableViewController: CoreDataViewController, UITableViewDel
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         print("This stub should be implimented by a child class")
     }
-    
-}
-
-// MARK: - CoreDataCollectionViewController (Fetches)
-
-extension CoreDataQuizletTableViewController {
-    
-//    func executeSearch() {
-//        if let fc = fetchedResultsController {
-//            do {
-//                try fc.performFetch()
-//            } catch let e as NSError {
-//                print("Error while trying to perform a search: \n\(e)\n\(fetchedResultsController)")
-//            }
-//        }
-//    }
-    
-//    func executeTextSearch() {
-//        if let fc = fetchedTextResultsController {
-//            do {
-//                try fc.performFetch()
-//            } catch let e as NSError {
-//                print("Error while trying to perform a search: \n\(e)\n\(fetchedTextResultsController)")
-//            }
-//        }
-//    }
-    
     
 }
 
