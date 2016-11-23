@@ -82,16 +82,20 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
     
     func showTrackedGemsSegment() {
         UIView.animate(withDuration: 0.1, animations: {
-            self.gemTableView.alpha = 1.0
-            self.gemTableView.isHidden = false
+            //self.gemTableView.alpha = 1.0
+            //self.gemTableView.isHidden = false
+            
+            self.tableView.reloadData()
             
         })
     }
     
     func showUserGemsSegment() {
         UIView.animate(withDuration: 0.1, animations: {
-            self.gemTableView.alpha = 0.0
-            self.gemTableView.isHidden = true
+            //self.gemTableView.alpha = 0.0
+            //self.gemTableView.isHidden = true
+            
+            self.searchQuizletForUserSets()
             
         })
     }
@@ -266,6 +270,38 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
     /******************* Model Operations **************/
     /******************************************************/
     //MARK: - Model Operations
+    
+    func searchQuizletForUserSets() {
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        let userId = delegate.getQuizletUserId()
+        GCDBlackBox.runNetworkFunctionInBackground {
+            QuizletClient.sharedInstance.getQuizletSearchSetsBy(creator: userId) { (results, error) in
+                GCDBlackBox.performUIUpdatesOnMain {
+                    
+                    print("Reached CompletionHandler of getQuizletSearchSetsBy userId")
+                    //print("results: \(results)")
+                    //print("error: \(error)")
+                    
+                    
+                    
+                    if error == nil {
+                        print("Search success")
+                        var searchResults = [QuizletSetSearchResult]()
+                        for set in results! {
+                            searchResults.append(set)
+                        }
+                        
+                        self.addToDataModel(searchResults)
+                        
+                        //print("contents of search results: \(self.searchResults)")
+                        self.tableView.reloadData()
+                    } else {
+                        //TODO: handle error
+                    }
+                }//end of performUIUpdatesOnMain
+            } //end of getQuizletSearchSetsBy
+        }//end of runNetworkFunctionInBackground
+    }
     
     func setupUserGemsFRC() {
         
