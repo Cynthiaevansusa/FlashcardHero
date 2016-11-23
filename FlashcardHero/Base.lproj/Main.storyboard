@@ -78,18 +78,18 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BuA-G8-ZsP" id="t0p-j8-nGp">
-                                            <frame key="frameInset" width="375" height="43.5"/>
+                                            <frame key="frameInset" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="e03-bA-gnp">
-                                                    <frame key="frameInset" minX="15" minY="5" width="33.5" height="20.5"/>
+                                                    <frame key="frameInset" minX="15" minY="4" width="34" height="21"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Yqs-8h-Z5f">
-                                                    <frame key="frameInset" minX="15" minY="25.5" width="33" height="14.5"/>
+                                                    <frame key="frameInset" minX="15" minY="25" width="33" height="15"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
@@ -292,6 +292,9 @@
                                                 <segment title="Your Sets" enabled="NO"/>
                                             </segments>
                                             <color key="tintColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <action selector="indexChanged:" destination="8rJ-Kc-sve" eventType="valueChanged" id="d29-pG-dAI"/>
+                                            </connections>
                                         </segmentedControl>
                                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="xfm-b5-U0X">
                                             <color key="tintColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -434,6 +437,7 @@
                         <outlet property="addButton" destination="xfm-b5-U0X" id="ERW-Ns-Ahj"/>
                         <outlet property="gemTableView" destination="RTu-0k-8dt" id="fRq-GV-DkA"/>
                         <outlet property="loginQuizletButton" destination="rVF-yW-rdc" id="TmM-c1-eLK"/>
+                        <outlet property="segmentedControl" destination="bXx-zd-oBl" id="nMX-uy-5ND"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>

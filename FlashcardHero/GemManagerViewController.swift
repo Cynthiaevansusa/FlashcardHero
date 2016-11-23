@@ -20,7 +20,12 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
     
     @IBOutlet weak var addButton: UIBarButtonItem!
     @IBOutlet weak var loginQuizletButton: UIBarButtonItem!
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
 
+    //FRCs
+    let keyTrackedGems = "TrackedGems"
+    let keyUsersGems = "UserGems"
+    
     var gemInActiveFlux: QuizletSet?
     
     /******************************************************/
@@ -35,7 +40,16 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         tableView.delegate = self
         tableView.dataSource = self
         
-        setupFetchedResultsController()
+        //create FRC for TrackedGems
+        _ = setupFetchedResultsController(frcKey: keyTrackedGems, entityName: "QuizletSet",
+                                          sortDescriptors: [NSSortDescriptor(key: "title", ascending: false),NSSortDescriptor(key: "id", ascending: true)],
+                                          predicate: nil)
+        
+        //if user is logged in setup the UsersGems FRC
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        if delegate.isUserLoggedIn() {
+            self.setupUserGemsFRC()
+        }
         
     }
     
@@ -50,17 +64,66 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
     }
     
     /******************************************************/
+    /*******************///MARK: Segmented Control
+    /******************************************************/
+    
+    @IBAction func indexChanged(_ sender: UISegmentedControl) {
+        
+        switch segmentedControl.selectedSegmentIndex
+        {
+        case 0:
+            showTrackedGemsSegment()
+        case 1:
+            showUserGemsSegment()
+        default:
+            break;
+        }
+    }
+    
+    func showTrackedGemsSegment() {
+        UIView.animate(withDuration: 0.1, animations: {
+            self.gemTableView.alpha = 1.0
+            self.gemTableView.isHidden = false
+            
+        })
+    }
+    
+    func showUserGemsSegment() {
+        UIView.animate(withDuration: 0.1, animations: {
+            self.gemTableView.alpha = 0.0
+            self.gemTableView.isHidden = true
+            
+        })
+    }
+    
+    func getVisibleFrcKey() -> String{
+        
+        if segmentedControl.selectedSegmentIndex == 0 {
+            return self.keyTrackedGems
+        } else {
+            return self.keyUsersGems
+        }
+    }
+    
+    /******************************************************/
     /*************///MARK: - Appearance
     /******************************************************/
     
     func setViewForLoginStatus(_ loggedin: Bool) {
         if loggedin {
+            let delegate = UIApplication.shared.delegate as! AppDelegate
+            if delegate.isUserLoggedIn() {
+                self.setupUserGemsFRC()
+            }
+            
             UIView.animate(withDuration: 0.1, animations: {
                 self.setViewUserLoggedIn()
+                self.segmentedControl.setEnabled(true, forSegmentAt: 1)
             })
         } else {
             UIView.animate(withDuration: 0.1, animations: {
                 self.setVeiwUserLoggedOut()
+                self.segmentedControl.setEnabled(false, forSegmentAt: 1)
             })
         }
     }
@@ -83,14 +146,16 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
 
     func addToDataModel(_ QuizletSetSearchResults: [QuizletSetSearchResult]) {
         //take the array of QuizletSetSearchResults and add to CoreData
-        
+        let visibleFrcKey = getVisibleFrcKey()
         for searchResult in QuizletSetSearchResults {
             //TODO: add error checking
             
-            let newSet = QuizletSet(withQuizletSetSearchResult: searchResult, context: self.fetchedResultsController!.managedObjectContext)
+            //TODO: only add if not already in the model
+            
+            let newSet = QuizletSet(withQuizletSetSearchResult: searchResult, context: self.frcDict[visibleFrcKey]!.managedObjectContext)
             
             //download the terms
-            newSet.fetchTermsAndAddTo(context: self.fetchedResultsController!.managedObjectContext)
+            newSet.fetchTermsAndAddTo(context: self.frcDict[visibleFrcKey]!.managedObjectContext)
         }
         
     }
@@ -101,9 +166,9 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
     //when a row is selected
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         //present the collection view
-        
+        let visibleFrcKey = getVisibleFrcKey()
         let vc = storyboard?.instantiateViewController(withIdentifier: "GemTermsCollectionViewController") as! GemTermsCollectionViewController
-        let theQuizletSet = self.fetchedResultsController!.object(at: indexPath) as! QuizletSet
+        let theQuizletSet = self.frcDict[visibleFrcKey]!.object(at: indexPath) as! QuizletSet
         vc.quizletSet = theQuizletSet
         
         present(vc, animated: true, completion: nil)
@@ -116,7 +181,8 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //print("There are ", String(self.setsToDisplay.count), " sets to display")
         //return self.setsToDisplay.count
-        if let fc = fetchedResultsController {
+        let visibleFrcKey = getVisibleFrcKey()
+        if let fc = self.frcDict[visibleFrcKey] {
             if (fc.sections?.count)! > 0 {
                 let sectionInfo = fc.sections?[section]
                 return (sectionInfo?.numberOfObjects)!
@@ -133,7 +199,8 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         
         //TODO: replace as! UITAbleViewCell witha  custom cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "GemManagerCell", for: indexPath as IndexPath) as! CustomGemManagerCell
-        let set = self.fetchedResultsController!.object(at: indexPath) as! QuizletSet
+        let visibleFrcKey = getVisibleFrcKey()
+        let set = self.frcDict[visibleFrcKey]!.object(at: indexPath) as! QuizletSet
         
         //associate the photo with this cell, which will set all parts of image view
         cell.quizletSet = set
@@ -154,10 +221,13 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        guard self.segmentedControl.selectedSegmentIndex == 0 else {
+            return
+        }
         if (editingStyle == UITableViewCellEditingStyle.delete) {
-            if let context = fetchedResultsController?.managedObjectContext {
+            if let context = self.frcDict[self.keyTrackedGems]?.managedObjectContext {
                 
-                context.delete(self.fetchedResultsController!.object(at: indexPath) as! QuizletSet)
+                context.delete(self.frcDict[self.keyTrackedGems]!.object(at: indexPath) as! QuizletSet)
  
             }
         }
@@ -185,8 +255,9 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
     /******************************************************/
 
     func didChangeSwitchState(sender: CustomGemManagerCell, isOn: Bool) {
+        let visibleFrcKey = getVisibleFrcKey()
         let indexPath = self.tableView.indexPath(for: sender)
-        let quizletSet = self.fetchedResultsController!.object(at: indexPath!) as! QuizletSet
+        let quizletSet = self.frcDict[visibleFrcKey]!.object(at: indexPath!) as! QuizletSet
         quizletSet.isActive = sender.activeSwitch.isOn
     }
     
@@ -196,35 +267,48 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
     /******************************************************/
     //MARK: - Model Operations
     
-    func setupFetchedResultsController(){
+    func setupUserGemsFRC() {
         
-        //set up stack and fetchrequest
-        // Get the stack
         let delegate = UIApplication.shared.delegate as! AppDelegate
-        let stack = delegate.stack
+        let userId = delegate.getQuizletUserId()
         
-        // Create Fetch Request
-        let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "QuizletSet")
-        
-        fr.sortDescriptors = [NSSortDescriptor(key: "title", ascending: false),NSSortDescriptor(key: "id", ascending: true)]
-        
-        // So far we have a search that will match ALL notes. However, we're
-        // only interested in those within the current notebook:
-        // NSPredicate to the rescue!
-        
-//        let pred = NSPredicate(format: "pin = %@", argumentArray: [self.pin!])
-//        
-//        fr.predicate = pred
-        
-        // Create FetchedResultsController
-        let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
-        
-        self.fetchedResultsController = fc
-        
+        if let userId = userId {
+            _ = setupFetchedResultsController(frcKey: keyUsersGems, entityName: "QuizletSet",
+                                              sortDescriptors: [NSSortDescriptor(key: "title", ascending: false),NSSortDescriptor(key: "id", ascending: true)],
+                                              predicate: NSPredicate(format: "createdBy = %@", argumentArray: [userId]))
+        }
     }
     
+//    func setupFetchedResultsController(){
+//        
+//        //set up stack and fetchrequest
+//        // Get the stack
+//        let delegate = UIApplication.shared.delegate as! AppDelegate
+//        let stack = delegate.stack
+//        
+//        // Create Fetch Request
+//        let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "QuizletSet")
+//        
+//        fr.sortDescriptors = [NSSortDescriptor(key: "title", ascending: false),NSSortDescriptor(key: "id", ascending: true)]
+//        
+//        // So far we have a search that will match ALL notes. However, we're
+//        // only interested in those within the current notebook:
+//        // NSPredicate to the rescue!
+//        
+////        let pred = NSPredicate(format: "pin = %@", argumentArray: [self.pin!])
+////        
+////        fr.predicate = pred
+//        
+//        // Create FetchedResultsController
+//        let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
+//        
+//        self.fetchedResultsController = fc
+//        
+//    }
+    
     func fetchModelQuizletSets() -> [QuizletSet] {
-        return fetchedResultsController!.fetchedObjects as! [QuizletSet]
+        let visibleFrcKey = getVisibleFrcKey()
+        return self.frcDict[visibleFrcKey]!.fetchedObjects as! [QuizletSet]
     }
 
 }

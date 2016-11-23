@@ -10,23 +10,23 @@ import Foundation
 import CoreData
 import UIKit
 
-class CoreDataQuizletTableViewController: UIViewController, UITableViewDelegate {
+class CoreDataQuizletTableViewController: CoreDataViewController, UITableViewDelegate {
     
     /******************************************************/
     /******************* Properties **************/
     /******************************************************/
     //MARK: - Properties
     
-    var fetchedResultsController : NSFetchedResultsController<NSFetchRequestResult>? {
-        didSet {
-            // Whenever the frc changes, we execute the search and
-            // reload the table
-            fetchedResultsController?.delegate = self
-            executeSearch()
-            //TODO: Reload data
-            //coreMapView.reloadData()
-        }
-    }
+//    var fetchedResultsController : NSFetchedResultsController<NSFetchRequestResult>? {
+//        didSet {
+//            // Whenever the frc changes, we execute the search and
+//            // reload the table
+//            fetchedResultsController?.delegate = self
+//            executeSearch()
+//            //TODO: Reload data
+//            //coreMapView.reloadData()
+//        }
+//    }
     
 //    var fetchedTextResultsController : NSFetchedResultsController<NSFetchRequestResult>? {
 //        didSet {
@@ -43,7 +43,7 @@ class CoreDataQuizletTableViewController: UIViewController, UITableViewDelegate 
     
     var tableView: UITableView!
     
-    var stack: CoreDataStack!
+//    var stack: CoreDataStack!
     
     /******************************************************/
     /******************* Life Cycle **************/
@@ -54,8 +54,8 @@ class CoreDataQuizletTableViewController: UIViewController, UITableViewDelegate 
         super.viewDidLoad()
         
         // Get the stack
-        let delegate = UIApplication.shared.delegate as! AppDelegate
-        stack = delegate.stack
+//        let delegate = UIApplication.shared.delegate as! AppDelegate
+//        stack = delegate.stack
     }
     
     /******************************************************/
@@ -80,15 +80,15 @@ class CoreDataQuizletTableViewController: UIViewController, UITableViewDelegate 
 
 extension CoreDataQuizletTableViewController {
     
-    func executeSearch() {
-        if let fc = fetchedResultsController {
-            do {
-                try fc.performFetch()
-            } catch let e as NSError {
-                print("Error while trying to perform a search: \n\(e)\n\(fetchedResultsController)")
-            }
-        }
-    }
+//    func executeSearch() {
+//        if let fc = fetchedResultsController {
+//            do {
+//                try fc.performFetch()
+//            } catch let e as NSError {
+//                print("Error while trying to perform a search: \n\(e)\n\(fetchedResultsController)")
+//            }
+//        }
+//    }
     
 //    func executeTextSearch() {
 //        if let fc = fetchedTextResultsController {
@@ -105,14 +105,14 @@ extension CoreDataQuizletTableViewController {
 
 // MARK: - CoreDataCollectionViewController: NSFetchedResultsControllerDelegate
 
-extension CoreDataQuizletTableViewController: NSFetchedResultsControllerDelegate {
+extension CoreDataQuizletTableViewController {
     
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    override func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         //about to make updates.  wrapping actions with updates will allow for animation and auto reloading
         self.tableView.beginUpdates()
     }
     
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+    override func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         
         if anObject is QuizletSet {
             
@@ -150,7 +150,7 @@ extension CoreDataQuizletTableViewController: NSFetchedResultsControllerDelegate
         }
     }
     
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    override func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         //finished with updates, allow table view to animate and reload
         self.tableView.endUpdates()
     }
