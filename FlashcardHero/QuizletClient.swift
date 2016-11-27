@@ -31,6 +31,60 @@ class QuizletClient : NSObject {
     
     // MARK: GET
     
+    func taskForGETImage(filePath: String, completionHandlerForGETImage: @escaping (_ imageData: Data?, _ error: NSError?) -> Void) -> URLSessionDataTask {
+        
+        /* 1. Set the parameters */
+        //none
+        
+        var url = URL(string: filePath)
+        
+        /* 2/3. Build the URL, Configure the request */
+        let request = NSMutableURLRequest(url: url!)
+        //        request.addValue(Secrets.FlickrAPIKey, forHTTPHeaderField: "X-Parse-Application-Id")
+        //        request.addValue(Secrets.FlickrRESTAPIKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
+        
+        /* 4. Make the request */
+        print("Starting task for URL: \(request.url!)")
+        let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
+            
+            func sendError(_ error: String, code: Int) {
+                print(error)
+                let userInfo = [NSLocalizedDescriptionKey : error]
+                completionHandlerForGETImage(nil, NSError(domain: "taskForGETImage", code: code, userInfo: userInfo))
+            }
+            
+            /* GUARD: Was there an error? */
+            guard (error == nil) else {
+                sendError(error!.localizedDescription, code: 1)
+                return
+            }
+            
+            /* GUARD: Did we get a successful 2XX response? */
+            guard let statusCode = (response as? HTTPURLResponse)?.statusCode , statusCode >= 200 && statusCode <= 299 else {
+                switch (response as? HTTPURLResponse)!.statusCode {
+                default:
+                    sendError("Your request returned a status code other than 2xx! Status code \((response as? HTTPURLResponse)!.statusCode).", code: 2)
+                }
+                
+                return
+            }
+            
+            /* GUARD: Was there any data returned? */
+            guard let data = data else {
+                sendError("No data was returned by the request!", code: 3)
+                return
+            }
+            
+            /* 5/6. return data */
+            completionHandlerForGETImage(data, nil)
+        }
+        
+        /* 7. Start the request */
+        task.resume()
+        
+        return task
+    }
+    
     func taskForGETMethod(method: String, parameters: [String:Any], shouldUseAuthentication: Bool = false, completionHandlerForGET: @escaping (_ results: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
         
         /* 1. Set the parameters */

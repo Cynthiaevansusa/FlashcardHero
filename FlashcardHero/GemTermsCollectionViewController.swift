@@ -98,8 +98,7 @@ class GemTermsCollectionViewController: CoreDataQuizletCollectionViewController,
         //        } else {
         //            cell.stopActivityIndicator()
         //        }
-        cell.term.text = term.term
-        cell.definition.text = term.definition
+        cell.quizletTerm = term
         
         
         return cell

@@ -17,5 +17,22 @@ class CustomGemTermsCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView?
     
+    var quizletTerm: QuizletTermDefinition? {
+        didSet {
+            //try to set the label
+            if let term = quizletTerm?.term {
+                self.term.text = term
+            }
+            
+            //try to set the photo
+            if let imageData = quizletTerm?.imageData {
+                self.imageView?.image = UIImage(data:imageData as Data,scale:1.0)
+            } else {
+                self.imageView?.image = nil
+            }
+            
+        }
+    }
+    
     
 }

@@ -57,7 +57,7 @@
                                             <rect key="frame" x="78.5" y="27" width="218" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
-                                                <segment title="Missions"/>
+                                                <segment title="Activities"/>
                                                 <segment title="Goals"/>
                                             </segments>
                                             <color key="tintColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -116,7 +116,7 @@
                             <constraint firstItem="WrB-6q-ofl" firstAttribute="leading" secondItem="vGo-Vd-pgo" secondAttribute="leading" id="xoN-bB-IZw"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="HQ" id="ad3-9p-pHl"/>
+                    <tabBarItem key="tabBarItem" title="Study" id="ad3-9p-pHl"/>
                     <connections>
                         <outlet property="missionsTableView" destination="L8U-qa-gfu" id="6DX-1Z-fpm"/>
                         <outlet property="segmentedControl" destination="mh8-3l-3Dd" id="3bi-Rf-Xpb"/>
@@ -429,7 +429,7 @@
                             <constraint firstAttribute="bottom" secondItem="RTu-0k-8dt" secondAttribute="bottom" constant="36" id="qS7-7u-lsM"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Gems" id="pIX-Mc-5HS"/>
+                    <tabBarItem key="tabBarItem" title="Sets" id="pIX-Mc-5HS"/>
                     <navigationItem key="navigationItem" id="Aip-Xm-0IM">
                         <nil key="title"/>
                     </navigationItem>
@@ -867,7 +867,6 @@
                         <segue destination="yf9-Ks-dTC" kind="relationship" relationship="viewControllers" id="LAN-0K-1ly"/>
                         <segue destination="BST-cP-Q3W" kind="relationship" relationship="viewControllers" id="XOD-Le-aPP"/>
                         <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="kS1-O1-LfT"/>
-                        <segue destination="4Eo-hf-1Bb" kind="relationship" relationship="viewControllers" id="Fcn-NI-KWW"/>
                         <segue destination="HEG-qw-rRh" kind="relationship" relationship="viewControllers" id="qJk-l3-Zjy"/>
                     </connections>
                 </tabBarController>
@@ -938,6 +937,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dm9-nv-Ysf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-1" y="1093"/>
         </scene>
         <!--Analysis-->
         <scene sceneID="bhR-zc-aOw">
