@@ -27,7 +27,6 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
     let keyUsersGems = "UserGems"
     
     var gemInActiveFlux: QuizletSet?
-    var userSetsTemp: [QuizletGetSetTermsResult] = []
     
     /******************************************************/
     /*******************///MARK: Life Cycle
@@ -43,16 +42,9 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         
        
         
-        //if user is logged in setup the UsersGems FRC
-        let delegate = UIApplication.shared.delegate as! AppDelegate
-        if delegate.isUserLoggedIn() {
-            self.setupUserGemsFRC()
-        }
         
-         //create FRC for TrackedGems
-        _ = setupFetchedResultsController(frcKey: keyTrackedGems, entityName: "QuizletSet",
-                                          sortDescriptors: [NSSortDescriptor(key: "title", ascending: false),NSSortDescriptor(key: "id", ascending: true)],
-                                          predicate: NSPredicate(format: "createdBy != %@", argumentArray: [delegate.getQuizletUserId()!]))
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,6 +53,23 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         //self.tableView.reloadData()
         
         let delegate = UIApplication.shared.delegate as! AppDelegate
+        
+        //if user is logged in setup the UsersGems FRC
+        if delegate.isUserLoggedIn() {
+            self.setupUserGemsFRC()
+            
+            //create FRC for TrackedGems
+            _ = setupFetchedResultsController(frcKey: keyTrackedGems, entityName: "QuizletSet",
+                                              sortDescriptors: [NSSortDescriptor(key: "title", ascending: false),NSSortDescriptor(key: "id", ascending: true)],
+                                              predicate: NSPredicate(format: "createdBy != %@", argumentArray: [delegate.getQuizletUserId()!]))
+        } else {
+            //setup main table without userid
+            
+            //create FRC for TrackedGems
+            _ = setupFetchedResultsController(frcKey: keyTrackedGems, entityName: "QuizletSet",
+                                              sortDescriptors: [NSSortDescriptor(key: "title", ascending: false),NSSortDescriptor(key: "id", ascending: true)],
+                                              predicate: nil)
+        }
         
         setViewForLoginStatus(delegate.isUserLoggedIn())
     }
@@ -165,11 +174,26 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
             //TODO: add error checking
             
             //TODO: only add if not already in the model
+            if let fc = self.frcDict[visibleFrcKey] {
+                var didFindThisSet = false
+                for set in (fc.sections?[0].objects)! {
+                    let set = set as! QuizletSet
+                    if set.id == Int64(searchResult.id!) {
+                        didFindThisSet = true
+                    }
+                }
+                if !didFindThisSet { //only add if didn't find this set already in frc
+                    
+                    let newSet = QuizletSet(withQuizletSetSearchResult: searchResult, context: self.frcDict[visibleFrcKey]!.managedObjectContext)
+                    
+                    //download the terms
+                    newSet.fetchTermsAndAddTo(context: self.frcDict[visibleFrcKey]!.managedObjectContext)
+                } else {
+                    //TODO: tell user the set is already being tracked
+                }
+            }
             
-            let newSet = QuizletSet(withQuizletSetSearchResult: searchResult, context: self.frcDict[visibleFrcKey]!.managedObjectContext)
             
-            //download the terms
-            newSet.fetchTermsAndAddTo(context: self.frcDict[visibleFrcKey]!.managedObjectContext)
         }
     }
     
@@ -179,15 +203,26 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         for setTerm in QuizletGetSetTermsResults {
             //TODO: add error checking
             
-            //TODO: only add if not already in the model
-            
-            let newSet = QuizletSet(withQuizletSetSearchResult: setTerm.set!, context: self.frcDict[visibleFrcKey]!.managedObjectContext)
-            print("Added a new set: \(newSet) to context of \(visibleFrcKey)")
-            
-            //add the terms
-//            for term in setTerm.terms {
-//                _ = QuizletTermDefinition(withQuizletTermResult: term, relatedSet: newSet, context: self.frcDict[visibleFrcKey]!.managedObjectContext)
-//            }
+            //only add if not already in the model
+            if let fc = self.frcDict[visibleFrcKey] {
+                var didFindThisSet = false
+                for set in (fc.sections?[0].objects)! {
+                    let set = set as! QuizletSet
+                    if set.id == Int64(setTerm.set!.id!) {
+                        didFindThisSet = true
+                    }
+                }
+                if !didFindThisSet { //only add if didn't find this set already in frc
+                
+                    let newSet = QuizletSet(withQuizletSetSearchResult: setTerm.set!, context: self.frcDict[visibleFrcKey]!.managedObjectContext)
+                    print("Added a new set: \(newSet) to context of \(visibleFrcKey)")
+                    
+                    //add the terms
+                    for term in setTerm.terms {
+                        _ = QuizletTermDefinition(withQuizletTermResult: term, relatedSet: newSet, context: self.frcDict[visibleFrcKey]!.managedObjectContext)
+                    }
+                }
+            }
         }
     }
     
@@ -215,7 +250,7 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         //return self.setsToDisplay.count
         let visibleFrcKey = getVisibleFrcKey()
         if let fc = self.frcDict[visibleFrcKey] {
-            print("Showing this FRCKey \(visibleFrcKey) with \(fc.sections?.count) sections and \((fc.sections?[section].numberOfObjects)!) objects in this section.")
+            //print("Showing this FRCKey \(visibleFrcKey) with \(fc.sections?.count) sections and \((fc.sections?[section].numberOfObjects)!) objects in this section.")
             if (fc.sections?.count)! > 0 {
                 let sectionInfo = fc.sections?[section]
                 return (sectionInfo?.numberOfObjects)!
@@ -323,10 +358,10 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
                     if error == nil && results != nil {
                         print("User sets search success")
                         
-                        self.userSetsTemp = []
-                        self.userSetsTemp.append(contentsOf: results!)
-                        print("There are \(self.userSetsTemp.count) sets about to be added to the model")
-                        self.addToDataModel(QuizletGetSetTermsResults: self.userSetsTemp)
+                        //self.userSetsTemp = []
+                        //self.userSetsTemp.append(contentsOf: results!)
+                        //print("There are \(self.userSetsTemp.count) sets about to be added to the model")
+                        self.addToDataModel(QuizletGetSetTermsResults: results!)
                         
                         //print("contents of search results: \(self.searchResults)")
                         //self.tableView.reloadData()

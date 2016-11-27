@@ -42,6 +42,14 @@ class GemTermsCollectionViewController: CoreDataQuizletCollectionViewController,
         creatorName.text = quizletSet.createdBy
         setTitle.text = quizletSet.title
         
+        //check for no terms, if there are none, try to fetch
+//        if let fc = frcDict[keyGemTerms] {
+//            if (fc.sections?.count)! > 0 && (fc.sections?[0].numberOfObjects)! == 0 {
+//                print("This set doesn't have any terms! Attempting to fetch...")
+//                quizletSet.fetchTermsAndAddTo(context: fc.managedObjectContext)
+//            }
+//        }
+        
     }
     
     

@@ -98,7 +98,7 @@ extension CoreDataQuizletTableViewController {
     
     override func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         //finished with updates, allow table view to animate and reload
-        print("\(controller) didchangecontent")
+        //print("\(controller) didchangecontent")
         self.tableView.endUpdates()
         
     }
