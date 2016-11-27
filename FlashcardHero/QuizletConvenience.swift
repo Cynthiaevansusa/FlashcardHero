@@ -18,6 +18,117 @@ extension QuizletClient {
     /******************************************************/
 
     /**
+     Gets all the sets by the given user.
+     
+     - Parameters:
+     - userId: userId for the user you want sets for
+     - modifiedSince: filter for sets modified since this date
+
+     - Returns: Dictionary of sets and terms
+     */
+    func getQuizletSetTermsBy(userId: String, modifiedSince: NSDate? = nil, shouldUseAuthentication: Bool = true, completionHandlerGetQuizletSearchSetsBy: @escaping (_ result: [QuizletGetSetTermsResult]?, _ error: NSError?) -> Void) {
+        
+        //Date validation
+        if let modifiedSince = modifiedSince {
+            guard (modifiedSince.timeIntervalSince1970 < NSDate().timeIntervalSince1970) else {
+                //TODO: Notify user of error
+                return
+            }
+        }
+    
+        /* 1. Specify parameters, method (if has {key}), and HTTP body (if POST) */
+        var parameters = [String:Any]()
+        var mutableMethod: String = QuizletClient.Constants.Methods.GETUserSets
+        
+        mutableMethod = substituteKeyInMethod(mutableMethod, key: QuizletClient.Constants.MethodArgumentKeys.UserId, value: String(userId))!
+        
+        //modifiedSince parameter
+        if let modifiedSince = modifiedSince {
+            parameters[QuizletClient.Constants.ParameterKeys.Search.Sets.ModifiedSince] = modifiedSince.timeIntervalSince1970
+        }
+        
+        /* 2. Make the request */
+        let _ = taskForGETMethod(method: mutableMethod, parameters: parameters, shouldUseAuthentication: shouldUseAuthentication) { (result, error) in
+            
+            /* 3. Send the desired value(s) to completion handler */
+            if let error = error {
+                print(error)
+                completionHandlerGetQuizletSearchSetsBy(nil, error)
+            } else {
+           }
+            
+            if let resultsArray = result as? [[String:Any]] {//dig into the JSON response dictionary
+                    
+                    var returnResults = [QuizletGetSetTermsResult]()
+                    
+                    for set in resultsArray  {
+                    
+                        print("Unwrapped JSON response from getQuizletSetTermsBy userId:")
+                        print(set)
+                        
+                        //every key except for "terms" which holds the terms is a part of the set
+                        let termsDataArray = set[QuizletClient.Constants.ResponseKeys.GetSets.SingleSet.Terms] as? NSArray
+                        
+                        //pulled out the terms, now delete that part of the results
+                        var setData = set
+                        setData.removeValue(forKey: QuizletClient.Constants.ResponseKeys.GetSets.SingleSet.Terms)
+                        //TODO: remove hard coding and handle following
+                        setData.removeValue(forKey: "class_ids")
+                        setData.removeValue(forKey: "display_timestamp")
+                        //TODO: Add creator to the model
+                        //setData.removeValue(forKey: "creator")
+                        
+                        //take the raw set and make an object with it
+                        var setObject = QuizletSetSearchResult()
+                        do {
+                            //setObject = try QuizletSetSearchResult(fromDataSet: setData)
+                            if let quizletResult = try QuizletSetSearchResult(fromDataSet: setData) {
+                                setObject = quizletResult
+                            }
+                        }
+                        catch {
+                            //TODO: handle error
+                            print("This error needs to be handled")
+                        }
+                        
+                        var termObjectsArray = [QuizletGetTermResult]()
+                        //get an array of TermResult objects
+                        if let termsDataArray = termsDataArray {
+                            for termData in termsDataArray {
+                                if let termData = termData as? [String:Any] {
+                                    do {
+                                        if let termObject = try QuizletGetTermResult(fromDataSet: termData) {
+                                            termObjectsArray.append(termObject)
+                                        }
+                                        
+                                    }
+                                        
+                                    catch {
+                                        //TODO: handle error
+                                        print("This error needs to be handled")
+                                    }
+                                }
+                            }
+                        }
+                        
+                        //create a QuizletGetSetTermsResult to hold the set and terms
+                        
+                        let returnSetTerms = QuizletGetSetTermsResult(from: termObjectsArray, set: setObject)
+                        returnResults.append(returnSetTerms)
+                    }
+                
+                    completionHandlerGetQuizletSearchSetsBy(returnResults, nil)
+                    
+                } else {
+                    print("\nDATA ERROR: Could not find \(QuizletClient.Constants.ResponseKeys.Search.ForSets.Sets) in \(result)")
+                    completionHandlerGetQuizletSearchSetsBy(nil, NSError(domain: "getQuizletSearchSetsBy userId parsing", code: 4, userInfo: [NSLocalizedDescriptionKey: "DATA ERROR: Failed to interpret data returned from Quizlet server (getQuizletSearchSetsBy:userid)."]))
+                }
+            
+        } // end of taskForGetMethod Closure
+    } //end getQuizletSearchNearLatLong
+
+    
+    /**
      Connects to Quizlet and performs a search for sets based on given criteria.  Search must include searchTerm or creator or both.
      
      - Parameters:
@@ -31,7 +142,7 @@ extension QuizletClient {
      
      - Returns: An array of JSON sets
      */
-    func getQuizletSetTermsBy(_ setId: Int, termsOnly: Bool = true, usingPassword: String? = nil, modifiedSince: NSDate? = nil, completionHandlerGetQuizletSearchSetsBy: @escaping (_ result: QuizletGetSetTermsResult?, _ error: NSError?) -> Void) {
+    func getQuizletSetTermsBy(setId: Int, termsOnly: Bool = true, usingPassword: String? = nil, modifiedSince: NSDate? = nil, shouldUseAuthentication: Bool = true, completionHandlerGetQuizletSearchSetsBy: @escaping (_ result: QuizletGetSetTermsResult?, _ error: NSError?) -> Void) {
         
         //Date validation
         if let modifiedSince = modifiedSince {
@@ -84,7 +195,7 @@ extension QuizletClient {
         }
         
         /* 2. Make the request */
-        let _ = taskForGETMethod(method: mutableMethod, parameters: parameters) { (result, error) in
+        let _ = taskForGETMethod(method: mutableMethod, parameters: parameters, shouldUseAuthentication: shouldUseAuthentication) { (result, error) in
             
             /* 3. Send the desired value(s) to completion handler */
             if let error = error {
@@ -102,7 +213,7 @@ extension QuizletClient {
                 
          
                 
-                if let resultsArray = result as? [String:Any] { //dig into the JSON response dictionary to get the array at key "photos"
+                if let resultsArray = result as? [String:Any] { //dig into the JSON response dictionary
                     
                     print("Unwrapped JSON response from getQuizletSearchSetsBy:")
                     print(resultsArray)
@@ -236,7 +347,7 @@ extension QuizletClient {
      
      - Returns: An array of JSON sets
      */
-    func getQuizletSearchSetsBy(_ searchTerm: String? = nil, modifiedSince: NSDate? = nil, creator: String? = nil, imagesOnly: Bool? = nil, page: Int? = nil, perPage: Int? = nil, completionHandlerGetQuizletSearchSetsBy: @escaping (_ results: [QuizletSetSearchResult]?, _ error: NSError?) -> Void) {
+    func getQuizletSearchSetsBy(_ searchTerm: String? = nil, modifiedSince: NSDate? = nil, creator: String? = nil, imagesOnly: Bool? = nil, page: Int? = nil, perPage: Int? = nil, shouldUseAuthentication: Bool = true, completionHandlerGetQuizletSearchSetsBy: @escaping (_ results: [QuizletSetSearchResult]?, _ error: NSError?) -> Void) {
         
         //Date validation
         if let modifiedSince = modifiedSince {
@@ -308,7 +419,7 @@ extension QuizletClient {
 
         
         /* 2. Make the request */
-        let _ = taskForGETMethod(method: method, parameters: parameters) { (results, error) in
+        let _ = taskForGETMethod(method: method, parameters: parameters, shouldUseAuthentication: shouldUseAuthentication) { (results, error) in
             
             /* 3. Send the desired value(s) to completion handler */
             if let error = error {

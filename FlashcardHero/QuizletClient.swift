@@ -31,15 +31,32 @@ class QuizletClient : NSObject {
     
     // MARK: GET
     
-    func taskForGETMethod(method: String, parameters: [String:Any], completionHandlerForGET: @escaping (_ results: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
+    func taskForGETMethod(method: String, parameters: [String:Any], shouldUseAuthentication: Bool = false, completionHandlerForGET: @escaping (_ results: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
         
         /* 1. Set the parameters */
         var passTheseParameters = parameters
         //add the ClientId, required with every public request
         passTheseParameters[Constants.ParameterKeys.ClientId] = Constants.ClientID as AnyObject?
         
+        
+        
         /* 2/3. Build the URL, Configure the request */
         let request = NSMutableURLRequest(url: QuizletURLFromParameters(passTheseParameters, withPathExtension: method))
+        
+        //if using Authentication, add to header
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        if shouldUseAuthentication && delegate.isUserLoggedIn() {
+            let accessToken = delegate.getTokenFromKeychain()
+            if let accessToken = accessToken {
+                var AuthString = "Bearer \(accessToken)"
+                request.addValue(AuthString, forHTTPHeaderField: "Authorization")
+                print("Added authorization header to a request: \(AuthString)")
+            } else {
+                print("User is logged in but authentication token returned nil")
+            }
+        } else if shouldUseAuthentication {
+            print("Authentication was requested but the user is not logged in")
+        }
         
         /* 4. Make the request */
         let task = session.dataTask(with: request as URLRequest) { (data, response, error) in

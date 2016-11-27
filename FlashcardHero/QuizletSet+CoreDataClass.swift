@@ -103,7 +103,7 @@ public class QuizletSet: NSManagedObject {
     func fetchTermsAndAddTo(context: NSManagedObjectContext) {
         GCDBlackBox.runNetworkFunctionInBackground {
            
-            QuizletClient.sharedInstance.getQuizletSetTermsBy(Int(self.id), termsOnly: true) { (result, error) in
+            QuizletClient.sharedInstance.getQuizletSetTermsBy(setId: Int(self.id), termsOnly: true) { (result, error) in
                 
                 GCDBlackBox.performUIUpdatesOnMain {
                    //results should be a QuizletSetTermsResult

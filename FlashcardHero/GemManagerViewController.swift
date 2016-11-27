@@ -27,6 +27,7 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
     let keyUsersGems = "UserGems"
     
     var gemInActiveFlux: QuizletSet?
+    var userSetsTemp: [QuizletGetSetTermsResult] = []
     
     /******************************************************/
     /*******************///MARK: Life Cycle
@@ -40,10 +41,7 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         tableView.delegate = self
         tableView.dataSource = self
         
-        //create FRC for TrackedGems
-        _ = setupFetchedResultsController(frcKey: keyTrackedGems, entityName: "QuizletSet",
-                                          sortDescriptors: [NSSortDescriptor(key: "title", ascending: false),NSSortDescriptor(key: "id", ascending: true)],
-                                          predicate: nil)
+       
         
         //if user is logged in setup the UsersGems FRC
         let delegate = UIApplication.shared.delegate as! AppDelegate
@@ -51,12 +49,16 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
             self.setupUserGemsFRC()
         }
         
+         //create FRC for TrackedGems
+        _ = setupFetchedResultsController(frcKey: keyTrackedGems, entityName: "QuizletSet",
+                                          sortDescriptors: [NSSortDescriptor(key: "title", ascending: false),NSSortDescriptor(key: "id", ascending: true)],
+                                          predicate: NSPredicate(format: "createdBy != %@", argumentArray: [delegate.getQuizletUserId()!]))
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.tableView.reloadData()
+        //self.tableView.reloadData()
         
         let delegate = UIApplication.shared.delegate as! AppDelegate
         
@@ -81,21 +83,29 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
     }
     
     func showTrackedGemsSegment() {
+        print("Switching to Tracked Gem Segment")
+        
+        self.tableView.reloadData()
         UIView.animate(withDuration: 0.1, animations: {
             //self.gemTableView.alpha = 1.0
             //self.gemTableView.isHidden = false
             
-            self.tableView.reloadData()
+            
             
         })
     }
     
     func showUserGemsSegment() {
+        print("Switching to User Gems Segment")
+        
+        self.tableView.reloadData()
+        self.searchQuizletForUserSets()
+        
         UIView.animate(withDuration: 0.1, animations: {
             //self.gemTableView.alpha = 0.0
             //self.gemTableView.isHidden = true
             
-            self.searchQuizletForUserSets()
+            
             
         })
     }
@@ -148,7 +158,7 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
     /*******************///MARK: QuizletSetSearchResultIngesterDelegate
     /******************************************************/
 
-    func addToDataModel(_ QuizletSetSearchResults: [QuizletSetSearchResult]) {
+    func addToDataModel(QuizletSetSearchResults: [QuizletSetSearchResult]) {
         //take the array of QuizletSetSearchResults and add to CoreData
         let visibleFrcKey = getVisibleFrcKey()
         for searchResult in QuizletSetSearchResults {
@@ -161,7 +171,24 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
             //download the terms
             newSet.fetchTermsAndAddTo(context: self.frcDict[visibleFrcKey]!.managedObjectContext)
         }
-        
+    }
+    
+    func addToDataModel(QuizletGetSetTermsResults: [QuizletGetSetTermsResult]) {
+        //take the array of QuizletSetSearchResults and add to CoreData
+        let visibleFrcKey = getVisibleFrcKey()
+        for setTerm in QuizletGetSetTermsResults {
+            //TODO: add error checking
+            
+            //TODO: only add if not already in the model
+            
+            let newSet = QuizletSet(withQuizletSetSearchResult: setTerm.set!, context: self.frcDict[visibleFrcKey]!.managedObjectContext)
+            print("Added a new set: \(newSet) to context of \(visibleFrcKey)")
+            
+            //add the terms
+//            for term in setTerm.terms {
+//                _ = QuizletTermDefinition(withQuizletTermResult: term, relatedSet: newSet, context: self.frcDict[visibleFrcKey]!.managedObjectContext)
+//            }
+        }
     }
     
     /******************************************************/
@@ -171,6 +198,7 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         //present the collection view
         let visibleFrcKey = getVisibleFrcKey()
+
         let vc = storyboard?.instantiateViewController(withIdentifier: "GemTermsCollectionViewController") as! GemTermsCollectionViewController
         let theQuizletSet = self.frcDict[visibleFrcKey]!.object(at: indexPath) as! QuizletSet
         vc.quizletSet = theQuizletSet
@@ -187,6 +215,7 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         //return self.setsToDisplay.count
         let visibleFrcKey = getVisibleFrcKey()
         if let fc = self.frcDict[visibleFrcKey] {
+            print("Showing this FRCKey \(visibleFrcKey) with \(fc.sections?.count) sections and \((fc.sections?[section].numberOfObjects)!) objects in this section.")
             if (fc.sections?.count)! > 0 {
                 let sectionInfo = fc.sections?[section]
                 return (sectionInfo?.numberOfObjects)!
@@ -273,9 +302,16 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
     
     func searchQuizletForUserSets() {
         let delegate = UIApplication.shared.delegate as! AppDelegate
-        let userId = delegate.getQuizletUserId()
+        
+        guard delegate.isUserLoggedIn() else {
+            print("User is not logged in, cannot get the user's sets")
+            return
+        }
+        
+        let userId = delegate.getQuizletUserId()!
+        
         GCDBlackBox.runNetworkFunctionInBackground {
-            QuizletClient.sharedInstance.getQuizletSearchSetsBy(creator: userId) { (results, error) in
+            QuizletClient.sharedInstance.getQuizletSetTermsBy(userId: userId) { (results, error) in
                 GCDBlackBox.performUIUpdatesOnMain {
                     
                     print("Reached CompletionHandler of getQuizletSearchSetsBy userId")
@@ -284,17 +320,16 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
                     
                     
                     
-                    if error == nil {
-                        print("Search success")
-                        var searchResults = [QuizletSetSearchResult]()
-                        for set in results! {
-                            searchResults.append(set)
-                        }
+                    if error == nil && results != nil {
+                        print("User sets search success")
                         
-                        self.addToDataModel(searchResults)
+                        self.userSetsTemp = []
+                        self.userSetsTemp.append(contentsOf: results!)
+                        print("There are \(self.userSetsTemp.count) sets about to be added to the model")
+                        self.addToDataModel(QuizletGetSetTermsResults: self.userSetsTemp)
                         
                         //print("contents of search results: \(self.searchResults)")
-                        self.tableView.reloadData()
+                        //self.tableView.reloadData()
                     } else {
                         //TODO: handle error
                     }

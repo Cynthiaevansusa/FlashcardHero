@@ -11,7 +11,7 @@ import UIKit
 
 //this protocol allows the QuizletSearchResultsViewController to send results back without doing the CoreData stuff itself
 protocol QuizletSetSearchResultIngesterDelegate: class {
-    func addToDataModel(_ QuizletSetSearchResults: [QuizletSetSearchResult])
+    func addToDataModel(QuizletSetSearchResults: [QuizletSetSearchResult])
 }
 
 class QuizletSearchResultsViewController: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
@@ -123,7 +123,7 @@ class QuizletSearchResultsViewController: UIViewController, UISearchBarDelegate,
         
         //print("Done pressed.  Will pass these objects to CoreData: \(setsToSendToCoreData)")
         if let delegate = self.quizletIngestDelegate {
-            delegate.addToDataModel(setsToSendToCoreData)
+            delegate.addToDataModel(QuizletSetSearchResults: setsToSendToCoreData)
         } else {
             //TODO: Handle issue where there was no delegate
         }

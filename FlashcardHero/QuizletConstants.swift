@@ -81,6 +81,7 @@ extension QuizletClient {
         struct MethodArgumentKeys {
             static let SetId = "SET_ID"
             static let SetPassword = "SET_PASSWORD"
+            static let UserId = "USERNAME"
         }
         
         
