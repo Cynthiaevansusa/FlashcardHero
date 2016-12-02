@@ -1076,7 +1076,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Overview"/>
-                                                <segment title="Gems" enabled="NO"/>
+                                                <segment title="Sets" enabled="NO"/>
                                             </segments>
                                             <color key="tintColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
