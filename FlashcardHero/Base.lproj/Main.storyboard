@@ -121,7 +121,7 @@
                             <constraint firstItem="WrB-6q-ofl" firstAttribute="leading" secondItem="vGo-Vd-pgo" secondAttribute="leading" id="xoN-bB-IZw"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Study" id="ad3-9p-pHl"/>
+                    <tabBarItem key="tabBarItem" title="Study" image="StudyIcon" id="ad3-9p-pHl"/>
                     <connections>
                         <outlet property="missionsTableView" destination="L8U-qa-gfu" id="6DX-1Z-fpm"/>
                         <outlet property="segmentedControl" destination="mh8-3l-3Dd" id="3bi-Rf-Xpb"/>
@@ -302,7 +302,7 @@
                                 <items>
                                     <navigationItem id="3HM-On-VFY">
                                         <nil key="title"/>
-                                        <barButtonItem key="leftBarButtonItem" title="Login" id="rVF-yW-rdc">
+                                        <barButtonItem key="leftBarButtonItem" image="UserIcon" id="rVF-yW-rdc">
                                             <color key="tintColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
                                                 <action selector="loginQuizletButtonPressed:" destination="8rJ-Kc-sve" id="vZI-mf-Oyf"/>
@@ -1103,7 +1103,7 @@
                             <constraint firstItem="oDS-1y-uco" firstAttribute="top" secondItem="vIP-A0-VpP" secondAttribute="top" id="vVn-r7-eby"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Analysis" id="woe-0l-GHK"/>
+                    <tabBarItem key="tabBarItem" title="Analysis" image="AnalysisIcon" id="woe-0l-GHK"/>
                     <connections>
                         <outlet property="flowLayout" destination="OBu-eb-mgf" id="XuD-hL-CVm"/>
                         <outlet property="segmentedControl" destination="Bk3-x7-1Nf" id="w5C-Zj-RDa"/>
@@ -1116,7 +1116,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="AnalysisIcon" width="28" height="14"/>
         <image name="SetsIcon" width="28" height="22"/>
+        <image name="StudyIcon" width="28" height="28"/>
+        <image name="UserIcon" width="28" height="24"/>
         <image name="first" width="30" height="30"/>
         <image name="second" width="30" height="30"/>
     </resources>

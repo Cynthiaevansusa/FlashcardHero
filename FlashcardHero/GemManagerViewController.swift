@@ -155,12 +155,14 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         let delegate = UIApplication.shared.delegate as! AppDelegate
         let userId = delegate.getQuizletUserId()
         self.navigationItem.title = "Logged in as " + String(describing: userId)
-        loginQuizletButton.title = "Log Out"
+        //loginQuizletButton.title = "Log Out"
+        loginQuizletButton.image = UIImage(named:"UserSelectedIcon")
     }
     
     func setVeiwUserLoggedOut() {
         self.navigationItem.title = nil
-        loginQuizletButton.title = "Log In"
+        //loginQuizletButton.title = "Log In"
+        loginQuizletButton.image = UIImage(named:"UserIcon")
     }
     
     /******************************************************/
