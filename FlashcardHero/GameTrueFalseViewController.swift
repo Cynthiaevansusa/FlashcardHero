@@ -18,6 +18,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
 
     @IBOutlet weak var termText: UILabel!
     @IBOutlet weak var definitionText: UILabel!
+    @IBOutlet weak var imageView: UIImageView!
 
     @IBOutlet weak var feedbackLabel: UILabel!
     
@@ -109,6 +110,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
         setAnswerButtonsVisible(visible: false)
         self.definitionText.alpha = 0
         self.termText.alpha = 0
+        self.imageView.alpha = 0
         self.points = 0
         refreshPoints()
     }
@@ -221,6 +223,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
                         
                         let question = quizletTermDefinition.term
                         let correctAnswer = quizletTermDefinition.definition
+                        let correctImage = quizletTermDefinition.imageData
                         correctTD = quizletTermDefinition
                         
                         //get a random definition as a wrong answer that isn't the same as the correct answer
@@ -233,6 +236,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
                         let wrongQuizletTermDefinition = terms[randDefinitionIndex]
                         
                         let wrongAnswer = wrongQuizletTermDefinition.definition
+                        let wrongImage = wrongQuizletTermDefinition.imageData
                         
                         //set the question
                         self.termText.text = question
@@ -245,8 +249,14 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
                         if willShowCorrect {
                             self.definitionText.text = correctAnswer
                             wrongTD = nil
+                            if let imageData = correctImage {
+                                self.imageView?.image = UIImage(data:imageData as Data,scale:1.0)
+                            }
                         } else {
                             self.definitionText.text = wrongAnswer
+                            if let imageData = wrongImage {
+                                self.imageView?.image = UIImage(data:imageData as Data,scale:1.0)
+                            }
                             wrongTD = wrongQuizletTermDefinition
                         }
                         self.setQuestionVisible(visible: true);
@@ -366,12 +376,14 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
             UIView.animate(withDuration: 0.3, animations: {
                 self.termText.alpha = 1
                 self.definitionText.alpha = 1
+                self.imageView.alpha = 1
             })
         } else {
             //self.feedbackLabel.text = ""
             UIView.animate(withDuration: 0.1, animations: {
                 self.termText.alpha = 0
                 self.definitionText.alpha = 0
+                self.imageView.alpha = 0
             })
         }
     }
