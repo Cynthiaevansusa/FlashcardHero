@@ -10,16 +10,29 @@ import UIKit
 import CoreData
 //import Charts
 
-class CommandCenterViewController: CoreDataViewController, UITableViewDataSource, UITableViewDelegate {
+class CommandCenterViewController: CoreDataQuizletCollectionViewController, UICollectionViewDataSource {
 
 
-    @IBOutlet weak var missionsTableView: UITableView!
+    @IBOutlet weak var missionsCollectionView: UICollectionView!
     
+    @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
+    var keyGameLevel = "GameLevel"
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //link the collection view to the coredata class
+        self.collectionView = self.missionsCollectionView
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        
+        
+        _ = setupFetchedResultsController(frcKey: keyGameLevel, entityName: "GameLevel", sortDescriptors: [NSSortDescriptor(key: "gameId", ascending: true)],  predicate: nil)
+        
+        //set up the FRCs
+        
         // Do any additional setup after loading the view, typically from a nib.
         showMissionsSegment()
 
@@ -45,67 +58,44 @@ class CommandCenterViewController: CoreDataViewController, UITableViewDataSource
     }
     
     func showMissionsSegment() {
+        print("Showing the missions segment")
         UIView.animate(withDuration: 0.1, animations: {
-            self.missionsTableView.alpha = 1.0
-            self.missionsTableView.isHidden = false
+            self.missionsCollectionView.alpha = 1.0
+            self.missionsCollectionView.isHidden = false
 
         })
     }
     
     func showGoalsSegment() {
         UIView.animate(withDuration: 0.1, animations: {
-            self.missionsTableView.alpha = 0.0
-            self.missionsTableView.isHidden = true
+            self.missionsCollectionView.alpha = 0.0
+            self.missionsCollectionView.isHidden = true
  
         })
     }
-
-    
     
     
     /******************************************************/
-    /*******************///MARK: UITableViewDelegate
-    /******************************************************/
-    //when a row is selected
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
-        let gameStoryboardId = GameDirectory.activeGames[indexPath.row].storyboardId
-        
-        let vc = storyboard?.instantiateViewController(withIdentifier: gameStoryboardId)
-        //vc.quizletIngestDelegate = self
-        
-        present(vc!, animated: true, completion: nil)
-    }
-    
-    /******************************************************/
-    /*******************///MARK: UITableViewDataSource
+    /*******************///MARK: UICollectionViewDataSource
     /******************************************************/
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //print("There are ", String(self.setsToDisplay.count), " sets to display")
-        //return self.setsToDisplay.count
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print("The are \(GameDirectory.activeGames.count) active games that will be displayed")
         return GameDirectory.activeGames.count
         
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        //TODO: replace as! UITAbleViewCell witha  custom cell
-        let cell = tableView.dequeueReusableCell(withIdentifier: "GameCell", for: indexPath as IndexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MissionCell", for: indexPath as IndexPath) as! CustomMissionCollectionViewCell
+        
+        let game = GameDirectory.activeGames[indexPath.row]
+        print("Showing mission for game: \(game.name)")
         
         //associate the photo with this cell, which will set all parts of image view
-        cell.textLabel!.text = GameDirectory.activeGames[indexPath.row].name
-        if let description = GameDirectory.activeGames[indexPath.row].description {
-            cell.detailTextLabel!.text = description
-        } else {
-            cell.detailTextLabel!.text = ""
-        }
+        cell.game = game
         
         return cell
-    }
-    
-    //editing is not allowed
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return false
     }
    
     

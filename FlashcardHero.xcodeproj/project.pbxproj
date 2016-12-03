@@ -55,6 +55,7 @@
 		F67D15F01DC97FCC002975C7 /* FlashcardHeroModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F67D15EE1DC97FCC002975C7 /* FlashcardHeroModel.xcdatamodeld */; };
 		F6CD7EF41DF24668004A4A57 /* GameLevel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CD7EF21DF24668004A4A57 /* GameLevel+CoreDataClass.swift */; };
 		F6CD7EF51DF24668004A4A57 /* GameLevel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CD7EF31DF24668004A4A57 /* GameLevel+CoreDataProperties.swift */; };
+		F6CD7EFB1DF2639B004A4A57 /* CustomMissionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CD7EFA1DF2639A004A4A57 /* CustomMissionCollectionViewCell.swift */; };
 		F6FD10CD1DBEEAEB00B7E6EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FD10CC1DBEEAEB00B7E6EA /* AppDelegate.swift */; };
 		F6FD10CF1DBEEAEB00B7E6EA /* CommandCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FD10CE1DBEEAEB00B7E6EA /* CommandCenterViewController.swift */; };
 		F6FD10D11DBEEAEB00B7E6EA /* PerformanceStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FD10D01DBEEAEB00B7E6EA /* PerformanceStatisticsViewController.swift */; };
@@ -136,6 +137,7 @@
 		F67D15EF1DC97FCC002975C7 /* FlashcardHeroModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FlashcardHeroModel.xcdatamodel; sourceTree = "<group>"; };
 		F6CD7EF21DF24668004A4A57 /* GameLevel+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GameLevel+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F6CD7EF31DF24668004A4A57 /* GameLevel+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GameLevel+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F6CD7EFA1DF2639A004A4A57 /* CustomMissionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomMissionCollectionViewCell.swift; sourceTree = "<group>"; };
 		F6FD10C91DBEEAEB00B7E6EA /* FlashcardHero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlashcardHero.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6FD10CC1DBEEAEB00B7E6EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F6FD10CE1DBEEAEB00B7E6EA /* CommandCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandCenterViewController.swift; sourceTree = "<group>"; };
@@ -221,11 +223,9 @@
 			children = (
 				F6FD10D21DBEEAEB00B7E6EA /* Main.storyboard */,
 				F6FD10D71DBEEAEB00B7E6EA /* LaunchScreen.storyboard */,
-				F67D15EC1DC938B9002975C7 /* CustomQuizletSearchBySetsResultsCell.swift */,
-				F614C34B1DC9A16A00E7D3C8 /* CustomGemManagerCell.swift */,
-				F66B46E71DCBCC9100F2BC6E /* CustomGemTermsCollectionViewCell.swift */,
-				F67D15AD1DDD42B600D9DD5C /* CustomStatsOverviewCell.swift */,
-				F67D158C1DD1933000D9DD5C /* BorderedButton.swift */,
+				F6CD7EF81DF252C5004A4A57 /* Table View Cells */,
+				F6CD7EF71DF252BB004A4A57 /* Collection View Cells */,
+				F6CD7EF91DF252CE004A4A57 /* Buttons */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -399,6 +399,33 @@
 				F6CD7EF31DF24668004A4A57 /* GameLevel+CoreDataProperties.swift */,
 			);
 			name = "Game and Goals";
+			sourceTree = "<group>";
+		};
+		F6CD7EF71DF252BB004A4A57 /* Collection View Cells */ = {
+			isa = PBXGroup;
+			children = (
+				F66B46E71DCBCC9100F2BC6E /* CustomGemTermsCollectionViewCell.swift */,
+				F6CD7EFA1DF2639A004A4A57 /* CustomMissionCollectionViewCell.swift */,
+				F67D15AD1DDD42B600D9DD5C /* CustomStatsOverviewCell.swift */,
+			);
+			name = "Collection View Cells";
+			sourceTree = "<group>";
+		};
+		F6CD7EF81DF252C5004A4A57 /* Table View Cells */ = {
+			isa = PBXGroup;
+			children = (
+				F67D15EC1DC938B9002975C7 /* CustomQuizletSearchBySetsResultsCell.swift */,
+				F614C34B1DC9A16A00E7D3C8 /* CustomGemManagerCell.swift */,
+			);
+			name = "Table View Cells";
+			sourceTree = "<group>";
+		};
+		F6CD7EF91DF252CE004A4A57 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				F67D158C1DD1933000D9DD5C /* BorderedButton.swift */,
+			);
+			name = Buttons;
 			sourceTree = "<group>";
 		};
 		F6FD10C01DBEEAEB00B7E6EA = {
@@ -750,6 +777,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6CD7EFB1DF2639B004A4A57 /* CustomMissionCollectionViewCell.swift in Sources */,
 				F66B5E491DC6DA0200052B7F /* GemManagerViewController.swift in Sources */,
 				F67D15A71DDB97D600D9DD5C /* AppSession+CoreDataProperties.swift in Sources */,
 				F6FD10D11DBEEAEB00B7E6EA /* PerformanceStatisticsViewController.swift in Sources */,
