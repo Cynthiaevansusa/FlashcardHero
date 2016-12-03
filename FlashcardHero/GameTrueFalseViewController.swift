@@ -127,6 +127,9 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameObjectiv
         quitButton.layer.masksToBounds = true
         quitButton.layer.cornerRadius = CGFloat(4.0)
         
+        definitionText.layer.masksToBounds = true
+        definitionText.layer.cornerRadius = 5
+        
         refreshPoints()
     }
     
@@ -284,6 +287,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameObjectiv
         self.definitionText.text = ""
         self.termText.text = ""
         
+        
         //fetch sets
         if let fc = frcDict[keySets] {
             //print((fc.fetchedObjects?.count)!)
@@ -349,12 +353,16 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameObjectiv
                             self.definitionText.text = correctAnswer
                             wrongTD = nil
                             if let imageData = correctImage {
-                                self.imageView?.image = UIImage(data:imageData as Data,scale:1.0)
+                                self.imageView.image = UIImage(data:imageData as Data,scale:1.0)
+                            } else if self.imageView != nil {
+                                 self.imageView.image = nil
                             }
                         } else {
                             self.definitionText.text = wrongAnswer
                             if let imageData = wrongImage {
-                                self.imageView?.image = UIImage(data:imageData as Data,scale:1.0)
+                                self.imageView.image = UIImage(data:imageData as Data,scale:1.0)
+                            } else if self.imageView != nil {
+                                self.imageView.image = nil
                             }
                             wrongTD = wrongQuizletTermDefinition
                         }
