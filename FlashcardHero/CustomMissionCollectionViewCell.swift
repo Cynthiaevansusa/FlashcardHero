@@ -40,6 +40,10 @@ class CustomMissionCollectionViewCell: UICollectionViewCell {
             }
             
             self.name.text = game?.name
+            
+            //button styling
+            startMissionButton.layer.masksToBounds = true
+            startMissionButton.layer.cornerRadius = CGFloat(6.0)
         }
     }
     

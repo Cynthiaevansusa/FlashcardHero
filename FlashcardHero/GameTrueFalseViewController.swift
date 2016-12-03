@@ -116,6 +116,17 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameObjectiv
         self.imageView.alpha = 0
         self.quizletAttributionImage.alpha = 0
         self.points = 0
+        
+        //setup button corners
+        trueButton.layer.masksToBounds = true
+        trueButton.layer.cornerRadius = CGFloat(4.0)
+        
+        falseButton.layer.masksToBounds = true
+        falseButton.layer.cornerRadius = CGFloat(4.0)
+        
+        quitButton.layer.masksToBounds = true
+        quitButton.layer.cornerRadius = CGFloat(4.0)
+        
         refreshPoints()
     }
     

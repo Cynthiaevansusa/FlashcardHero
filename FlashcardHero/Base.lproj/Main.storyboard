@@ -295,23 +295,31 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NNh-cS-tGg" customClass="BorderedButton" customModule="FlashcardHero" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NNh-cS-tGg">
                                 <rect key="frame" x="142" y="535" width="91" height="48"/>
+                                <color key="backgroundColor" red="0.1666679382" green="1" blue="0.2210872918" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="Cv2-bA-ibm"/>
                                 </constraints>
-                                <state key="normal" title="True"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="15"/>
+                                <state key="normal" title="True">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <action selector="trueButtonPressed:" destination="1e0-WT-vSs" eventType="touchUpInside" id="IH6-JV-JQL"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jjy-qE-pPI" customClass="BorderedButton" customModule="FlashcardHero" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jjy-qE-pPI">
                                 <rect key="frame" x="142" y="599" width="91" height="48"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="91" id="M83-NY-40h"/>
                                     <constraint firstAttribute="height" constant="48" id="uUG-lY-lML"/>
                                 </constraints>
-                                <state key="normal" title="False"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="15"/>
+                                <state key="normal" title="False">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <action selector="falseButtonPressed:" destination="1e0-WT-vSs" eventType="touchUpInside" id="aJm-xu-FDx"/>
                                 </connections>
@@ -323,9 +331,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mnt-ig-PxO" customClass="BorderedButton" customModule="FlashcardHero" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mnt-ig-PxO">
                                 <rect key="frame" x="16" y="28" width="126" height="30"/>
-                                <state key="normal" title="Quit"/>
+                                <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Quit">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <action selector="quitButtonPressed:" destination="1e0-WT-vSs" eventType="touchUpInside" id="GzB-i8-eny"/>
                                 </connections>
@@ -402,6 +414,11 @@
                             <constraint firstItem="oTd-uT-4hW" firstAttribute="trailing" secondItem="fe9-g0-aJ7" secondAttribute="trailingMargin" id="qua-cg-UOd"/>
                             <constraint firstItem="yzv-BC-Fky" firstAttribute="leading" secondItem="fe9-g0-aJ7" secondAttribute="leadingMargin" id="xnO-hM-C83"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="v45-xZ-zLn"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="definitionText" destination="oTd-uT-4hW" id="J84-ss-Ihm"/>
@@ -641,7 +658,7 @@
                                                 <action selector="backButtonPressed:" destination="ovt-QC-8IL" id="r2C-Pp-qqI"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="z0L-N5-ox9">
+                                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="refresh" id="z0L-N5-ox9">
                                             <color key="tintColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
                                                 <action selector="refreshButtonPressed:" destination="ovt-QC-8IL" id="oQq-dA-NMI"/>
@@ -767,9 +784,7 @@
                             </collectionView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dvr-WF-aYx">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
-                                <items>
-                                    <barButtonItem title="Item" id="SWo-Wy-3te"/>
-                                </items>
+                                <items/>
                             </toolbar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Creator" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gqb-Nr-fSm">
                                 <rect key="frame" x="72.5" y="43" width="230" height="16"/>

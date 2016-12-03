@@ -31,7 +31,7 @@ class CommandCenterViewController: CoreDataQuizletCollectionViewController, UICo
         
         _ = setupFetchedResultsController(frcKey: keyGameLevel, entityName: "GameLevel", sortDescriptors: [NSSortDescriptor(key: "level", ascending: false)],  predicate: nil)
         
-        //set up the FRCs
+        
         
         // Do any additional setup after loading the view, typically from a nib.
         showMissionsSegment()
