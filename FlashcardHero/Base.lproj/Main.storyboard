@@ -290,7 +290,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="Term Text" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="wbd-Va-hL4" userLabel="Term Text">
-                                <rect key="frame" x="16" y="98" width="343" height="28.5"/>
+                                <rect key="frame" x="16" y="98" width="343" height="29"/>
                                 <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -356,9 +356,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yzv-BC-Fky">
-                                <rect key="frame" x="16" y="166" width="343" height="343"/>
+                                <rect key="frame" x="16" y="167" width="343" height="343"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="yzv-BC-Fky" secondAttribute="height" multiplier="1:1" id="j32-mn-2Mb"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="QuizletAttributionDark" translatesAutoresizingMaskIntoConstraints="NO" id="e2r-MS-dg1">
+                                <rect key="frame" x="16" y="490" width="67" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="Ime-2H-OnE"/>
+                                    <constraint firstAttribute="width" constant="67" id="fpP-cV-7FU"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -367,6 +374,7 @@
                             <constraint firstItem="wbd-Va-hL4" firstAttribute="top" secondItem="oL6-vl-zim" secondAttribute="bottom" constant="18" id="3eT-YW-T1H"/>
                             <constraint firstItem="oTd-uT-4hW" firstAttribute="top" secondItem="Uvq-zd-ca3" secondAttribute="bottom" constant="66" id="7Rh-jK-DjU"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Mnt-ig-PxO" secondAttribute="trailing" constant="217" id="9KT-fp-KNo"/>
+                            <constraint firstItem="e2r-MS-dg1" firstAttribute="bottom" secondItem="yzv-BC-Fky" secondAttribute="bottom" id="BHI-Ik-Xjz"/>
                             <constraint firstItem="oL6-vl-zim" firstAttribute="trailing" secondItem="fe9-g0-aJ7" secondAttribute="trailingMargin" id="Dnf-I8-RR2"/>
                             <constraint firstItem="oTd-uT-4hW" firstAttribute="top" secondItem="Uvq-zd-ca3" secondAttribute="bottom" constant="66" id="FpF-bH-i6k"/>
                             <constraint firstItem="Uvq-zd-ca3" firstAttribute="trailing" secondItem="fe9-g0-aJ7" secondAttribute="trailingMargin" id="Ifj-f4-RVF"/>
@@ -381,6 +389,7 @@
                             <constraint firstItem="NNh-cS-tGg" firstAttribute="centerX" secondItem="oTd-uT-4hW" secondAttribute="centerX" id="Wfj-d1-A3L"/>
                             <constraint firstItem="NNh-cS-tGg" firstAttribute="leading" secondItem="Jjy-qE-pPI" secondAttribute="leading" id="XsT-i9-Srh"/>
                             <constraint firstItem="NNh-cS-tGg" firstAttribute="top" secondItem="oTd-uT-4hW" secondAttribute="bottom" constant="27" id="Z0B-Fb-kCM"/>
+                            <constraint firstItem="e2r-MS-dg1" firstAttribute="leading" secondItem="yzv-BC-Fky" secondAttribute="leading" id="c7Y-1l-dyX"/>
                             <constraint firstItem="Mnt-ig-PxO" firstAttribute="leading" secondItem="fe9-g0-aJ7" secondAttribute="leadingMargin" id="h9o-3r-hFe"/>
                             <constraint firstItem="oL6-vl-zim" firstAttribute="top" secondItem="LPO-Hu-2Jt" secondAttribute="bottom" constant="46" id="hFy-vM-xoU"/>
                             <constraint firstItem="yzv-BC-Fky" firstAttribute="top" secondItem="wbd-Va-hL4" secondAttribute="bottom" constant="39.5" id="iqE-Wl-LDX"/>
@@ -401,13 +410,14 @@
                         <outlet property="imageView" destination="yzv-BC-Fky" id="XmZ-kK-qFp"/>
                         <outlet property="pointsLabel" destination="Uvq-zd-ca3" id="iQ2-x3-65N"/>
                         <outlet property="quitButton" destination="Mnt-ig-PxO" id="cmv-i3-O7g"/>
+                        <outlet property="quizletAttributionImage" destination="e2r-MS-dg1" id="7lE-wo-jjM"/>
                         <outlet property="termText" destination="wbd-Va-hL4" id="J9Q-O9-ZiN"/>
                         <outlet property="trueButton" destination="NNh-cS-tGg" id="y8P-Bk-4J6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2rz-mx-gBa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2276" y="-1671.8140929535234"/>
+            <point key="canvasLocation" x="2281" y="-1610"/>
         </scene>
         <!--Gems-->
         <scene sceneID="wg7-f3-ORb">
@@ -707,7 +717,6 @@
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hNj-8x-d3L" userLabel="Definition Image">
                                                             <rect key="frame" x="2" y="2" width="100" height="100"/>
-                                                            <color key="backgroundColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="hNj-8x-d3L" secondAttribute="height" multiplier="22:25" constant="12" id="S2S-Lk-Pws"/>
                                                                 <constraint firstAttribute="width" constant="100" id="UeW-JB-OFG"/>
@@ -727,10 +736,19 @@
                                                         <constraint firstAttribute="height" constant="104" id="zjf-3o-EjM"/>
                                                     </constraints>
                                                 </view>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="QuizletAttributionLight" translatesAutoresizingMaskIntoConstraints="NO" id="wo5-Rs-hCx">
+                                                    <rect key="frame" x="258" y="188" width="67" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="CkF-2P-hv6"/>
+                                                        <constraint firstAttribute="width" constant="67" id="QWv-mg-h84"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="wo5-Rs-hCx" secondAttribute="trailing" constant="8" id="2hq-zZ-w9A"/>
+                                            <constraint firstAttribute="bottom" secondItem="wo5-Rs-hCx" secondAttribute="bottom" id="6KF-Qr-VyX"/>
                                             <constraint firstItem="3xP-Oe-Wgw" firstAttribute="top" secondItem="QZW-4j-PSS" secondAttribute="bottom" id="8o3-As-5ud"/>
                                             <constraint firstItem="3xP-Oe-Wgw" firstAttribute="leading" secondItem="frQ-Ay-pgv" secondAttribute="leadingMargin" id="aKT-XF-zk5"/>
                                             <constraint firstItem="3xP-Oe-Wgw" firstAttribute="bottom" secondItem="frQ-Ay-pgv" secondAttribute="bottomMargin" id="f9G-mG-0gF"/>
@@ -972,7 +990,7 @@
                             <searchBar contentMode="redraw" placeholder="Search Quizlet for Sets to Add as Gems" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eu5-Sr-6v1">
                                 <rect key="frame" x="0.0" y="60" width="375" height="44"/>
                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="barTintColor" red="0.37365677780299933" green="0.29639541351511012" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="barTintColor" red="0.23529411764705882" green="0.36470588235294116" blue="0.68627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="search"/>
                                 <connections>
                                     <outlet property="delegate" destination="Ork-Iu-8br" id="smJ-bx-BFU"/>
@@ -994,7 +1012,7 @@
                                     </barButtonItem>
                                 </items>
                                 <color key="tintColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="barTintColor" red="0.37365677780000001" green="0.29639541349999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="barTintColor" red="0.23529411764705882" green="0.36470588235294116" blue="0.68627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </toolbar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Gems" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eaX-z8-4Ng">
                                 <rect key="frame" x="140.5" y="30" width="94" height="24"/>
@@ -1243,6 +1261,8 @@
         <image name="AnalysisIcon" width="28" height="14"/>
         <image name="GemGeneric" width="28" height="28"/>
         <image name="MissionIcon" width="14" height="28"/>
+        <image name="QuizletAttributionDark" width="67" height="20"/>
+        <image name="QuizletAttributionLight" width="67" height="20"/>
         <image name="SetsIcon" width="28" height="22"/>
         <image name="UserIcon" width="28" height="24"/>
         <image name="first" width="30" height="30"/>

@@ -19,6 +19,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameObjectiv
     @IBOutlet weak var termText: UILabel!
     @IBOutlet weak var definitionText: UILabel!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var quizletAttributionImage: UIImageView!
 
     @IBOutlet weak var feedbackLabel: UILabel!
     
@@ -113,6 +114,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameObjectiv
         self.definitionText.alpha = 0
         self.termText.alpha = 0
         self.imageView.alpha = 0
+        self.quizletAttributionImage.alpha = 0
         self.points = 0
         refreshPoints()
     }
@@ -146,7 +148,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameObjectiv
     
     func finishGame(_ didPlayerSucceed: Bool) {
         if let gameDelegate = self.gameCallerDelegate {
-           self.dismiss(animated: true, completion: {gameDelegate.gameFinished(didPlayerSucceed)})
+            self.dismiss(animated: true, completion: {gameDelegate.gameFinished(didPlayerSucceed, forGame: GameDirectory.gameTrueFalse)})
         } else {
             //TODO: Handle problem
         }
@@ -463,6 +465,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameObjectiv
                 self.termText.alpha = 1
                 self.definitionText.alpha = 1
                 self.imageView.alpha = 1
+                self.quizletAttributionImage.alpha = 1
             })
         } else {
             //self.feedbackLabel.text = ""
@@ -470,6 +473,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameObjectiv
                 self.termText.alpha = 0
                 self.definitionText.alpha = 0
                 self.imageView.alpha = 0
+                self.quizletAttributionImage.alpha = 0
             })
         }
     }

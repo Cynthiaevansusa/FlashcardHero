@@ -29,7 +29,7 @@ class CommandCenterViewController: CoreDataQuizletCollectionViewController, UICo
         collectionView.dataSource = self
         
         
-        _ = setupFetchedResultsController(frcKey: keyGameLevel, entityName: "GameLevel", sortDescriptors: [NSSortDescriptor(key: "gameId", ascending: true)],  predicate: nil)
+        _ = setupFetchedResultsController(frcKey: keyGameLevel, entityName: "GameLevel", sortDescriptors: [NSSortDescriptor(key: "level", ascending: false)],  predicate: nil)
         
         //set up the FRCs
         
@@ -50,9 +50,15 @@ class CommandCenterViewController: CoreDataQuizletCollectionViewController, UICo
             
             print("You pushed button for game \(gameId)")
             
-            let vc = storyboard?.instantiateViewController(withIdentifier: game.storyboardId) as! GameTrueFalseViewController
+            let vc = storyboard?.instantiateViewController(withIdentifier: game.storyboardId)
             
-            present(vc, animated: true, completion: {vc.playGameUntil(playerScoreIs: 5, unlessPlayerScoreReaches: -5, sender: self)})
+            if let trueFalseVc = vc as? GameTrueFalseViewController { //if it is a true false game
+                
+                //set the level
+                let objective = getGameObjective(game: game)
+                
+                present(trueFalseVc, animated: true, completion: {trueFalseVc.playGameUntil(playerScoreIs: objective.maxPoints, unlessPlayerScoreReaches: objective.minPoints, sender: self)})
+            }
         }
         
     }
@@ -94,8 +100,20 @@ class CommandCenterViewController: CoreDataQuizletCollectionViewController, UICo
     /*******************///MARK: GameCaller
     /******************************************************/
 
-    func gameFinished(_ wasObjectiveAchieved: Bool) {
+    func gameFinished(_ wasObjectiveAchieved: Bool, forGame sender: Game) {
         print("Game finished.  Player success? \(wasObjectiveAchieved)")
+        
+        //if they succeeded award reward and increase level. If they lost, decrease by 2
+        
+        if wasObjectiveAchieved {
+            //increase level
+            increaseGameLevel(of: sender)
+            
+        } else {
+            decreaseGameLevel(of: sender)
+        }
+        
+        collectionView.reloadData()
     }
     
     
@@ -119,10 +137,109 @@ class CommandCenterViewController: CoreDataQuizletCollectionViewController, UICo
         //associate the photo with this cell, which will set all parts of image view
         cell.game = game
         
+        //set the level
+        let level = getGameLevel(game: game)
+        let objective = getGameObjective(game: game)
+        cell.level.text = String(describing: level)
+        cell.objective.text = objective.description
+        cell.reward.text = "\(objective.reward) Essence"
+        
         return cell
     }
    
+    /******************************************************/
+    /*******************///MARK: Game level and objectives
+    /******************************************************/
+
+    func increaseGameLevel(of game: Game) {
+        if let fc = frcDict[keyGameLevel] {
+            
+            if (fc.sections?.count)! > 0, let gameLevels = fc.fetchedObjects as? [GameLevel]{
+                for gameLevel in gameLevels {
+                    if gameLevel.gameId == Int64(game.id) {
+                        //update this record to the next game level and return
+                        gameLevel.level += 1
+                        return
+                    }
+                }
+                
+                //if didn't find at end of loop, must not be an entry, so create one at level 1
+                _ = GameLevel(gameId: game.id, level: 1, context: fc.managedObjectContext)
+                return
+            } else {
+                return
+            }
+        } else {
+            return
+        }
+    }
     
+    func decreaseGameLevel(of game: Game) {
+        if let fc = frcDict[keyGameLevel] {
+            
+            if (fc.sections?.count)! > 0, let gameLevels = fc.fetchedObjects as? [GameLevel]{
+                for gameLevel in gameLevels {
+                    if gameLevel.gameId == Int64(game.id) {
+                        //update this record to the next game level and return
+                        gameLevel.level -= 2
+                        //don't let level go below 0
+                        if gameLevel.level < 0 {
+                            gameLevel.level = 0
+                        }
+                        return
+                    }
+                }
+                //if didn't find at end of loop, must not be an entry, so create one at level 0
+                _ = GameLevel(gameId: game.id, level: 0, context: fc.managedObjectContext)
+                return
+            } else {
+                return
+            }
+        } else {
+            return
+        }
+    }
+    
+    /** 
+     check records to see if this game has an indicated level and return it or 0
+     */
+    func getGameLevel(game: Game) -> Int {
+        if let fc = frcDict[keyGameLevel] {
+        
+            if (fc.sections?.count)! > 0, let gameLevels = fc.fetchedObjects as? [GameLevel]{
+                for gameLevel in gameLevels {
+                    if gameLevel.gameId == Int64(game.id) {
+                        return Int(gameLevel.level)
+                    }
+                }
+                
+                //if didn't find at end of loop, must not be an entry, so level 0
+                return 0
+            } else {
+                return 0
+            }
+        } else {
+            return 0
+        }
+    }
+    
+    /**
+     Based on the level of the game, develop some objectives and return
+     */
+    func getGameObjective(game: Game) -> GameObjectiveRewardStructMaxPoints {
+        
+        //TODO: Impliment fibonnaci method
+        
+        let gameLevel = getGameLevel(game: game)
+        
+        let maxPoints = gameLevel + 5
+        let minPoints = -5
+        let description = "Achieve a score of \(maxPoints) points."
+        let reward = gameLevel + 1
+        
+        let objective = GameObjectiveRewardStructMaxPoints(maxPoints: maxPoints, minPoints: minPoints, description: description, reward: reward)
+        return objective
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -133,3 +250,9 @@ class CommandCenterViewController: CoreDataQuizletCollectionViewController, UICo
 
 }
 
+struct GameObjectiveRewardStructMaxPoints {
+    var maxPoints: Int
+    var minPoints: Int
+    var description: String
+    var reward: Int
+}

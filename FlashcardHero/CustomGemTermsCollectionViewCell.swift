@@ -22,6 +22,15 @@ class CustomGemTermsCollectionViewCell: UICollectionViewCell {
             //try to set the label
             if let term = quizletTerm?.term {
                 self.term.text = term
+            } else {
+                self.term.text = ""
+            }
+            
+            //try to set the label
+            if let definition = quizletTerm?.definition {
+                self.definition.text = definition
+            } else {
+                self.definition.text = ""
             }
             
             //try to set the photo

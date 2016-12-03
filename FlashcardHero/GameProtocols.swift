@@ -31,5 +31,5 @@ protocol GameObjectivePerfectGame: GameObjectiveBase {
 
 //classes that call games to be played must conform to the following
 protocol GameCaller: class {
-    func gameFinished(_ wasObjectiveAchieved: Bool)
+    func gameFinished(_ wasObjectiveAchieved: Bool, forGame sender: Game)
 }
