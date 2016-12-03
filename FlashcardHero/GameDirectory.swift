@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 struct GameDirectory {
     
-    static var gameTrueFalse = Game(id: 0, name: "True or False", description: "This is the True or False description", iconImage: #imageLiteral(resourceName: "TrueFalseGameIcon"), storyboardId: "GameTrueFalse", isAvailable: true)
+    static var gameTrueFalse = Game(id: 0, name: "True or False", description: "Decide if the given text and image correspond to the given term.", iconImage: #imageLiteral(resourceName: "TrueFalseGameIcon"), storyboardId: "GameTrueFalse", isAvailable: true)
     
     static var allGames = [gameTrueFalse.id : gameTrueFalse]
     static var activeGames = [gameTrueFalse]

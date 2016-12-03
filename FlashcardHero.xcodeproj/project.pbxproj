@@ -56,6 +56,7 @@
 		F6CD7EF41DF24668004A4A57 /* GameLevel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CD7EF21DF24668004A4A57 /* GameLevel+CoreDataClass.swift */; };
 		F6CD7EF51DF24668004A4A57 /* GameLevel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CD7EF31DF24668004A4A57 /* GameLevel+CoreDataProperties.swift */; };
 		F6CD7EFB1DF2639B004A4A57 /* CustomMissionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CD7EFA1DF2639A004A4A57 /* CustomMissionCollectionViewCell.swift */; };
+		F6CD7EFD1DF27E48004A4A57 /* GameProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CD7EFC1DF27E48004A4A57 /* GameProtocols.swift */; };
 		F6FD10CD1DBEEAEB00B7E6EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FD10CC1DBEEAEB00B7E6EA /* AppDelegate.swift */; };
 		F6FD10CF1DBEEAEB00B7E6EA /* CommandCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FD10CE1DBEEAEB00B7E6EA /* CommandCenterViewController.swift */; };
 		F6FD10D11DBEEAEB00B7E6EA /* PerformanceStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FD10D01DBEEAEB00B7E6EA /* PerformanceStatisticsViewController.swift */; };
@@ -138,6 +139,7 @@
 		F6CD7EF21DF24668004A4A57 /* GameLevel+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GameLevel+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F6CD7EF31DF24668004A4A57 /* GameLevel+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GameLevel+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F6CD7EFA1DF2639A004A4A57 /* CustomMissionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomMissionCollectionViewCell.swift; sourceTree = "<group>"; };
+		F6CD7EFC1DF27E48004A4A57 /* GameProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameProtocols.swift; sourceTree = "<group>"; };
 		F6FD10C91DBEEAEB00B7E6EA /* FlashcardHero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlashcardHero.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6FD10CC1DBEEAEB00B7E6EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F6FD10CE1DBEEAEB00B7E6EA /* CommandCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandCenterViewController.swift; sourceTree = "<group>"; };
@@ -356,6 +358,7 @@
 			isa = PBXGroup;
 			children = (
 				F67D158E1DD19DED00D9DD5C /* CoreDataTrueFalseGameController.swift */,
+				F6CD7EFC1DF27E48004A4A57 /* GameProtocols.swift */,
 				F67D158A1DD190C200D9DD5C /* GameTrueFalseViewController.swift */,
 			);
 			name = Games;
@@ -781,6 +784,7 @@
 				F66B5E491DC6DA0200052B7F /* GemManagerViewController.swift in Sources */,
 				F67D15A71DDB97D600D9DD5C /* AppSession+CoreDataProperties.swift in Sources */,
 				F6FD10D11DBEEAEB00B7E6EA /* PerformanceStatisticsViewController.swift in Sources */,
+				F6CD7EFD1DF27E48004A4A57 /* GameProtocols.swift in Sources */,
 				F66B5E4B1DC6DA5400052B7F /* QuizletSearchResultsViewController.swift in Sources */,
 				F61B5F561DE39DB1009126E7 /* QuizletOAuth.swift in Sources */,
 				F63782E01DC2EDFD0078FE7F /* Secrets.swift in Sources */,

@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 //import Charts
 
-class CommandCenterViewController: CoreDataQuizletCollectionViewController, UICollectionViewDataSource {
+class CommandCenterViewController: CoreDataQuizletCollectionViewController, UICollectionViewDataSource, GameCaller {
 
 
     @IBOutlet weak var missionsCollectionView: UICollectionView!
@@ -39,7 +39,23 @@ class CommandCenterViewController: CoreDataQuizletCollectionViewController, UICo
     }
 
     
-    
+    //adapted from http://stackoverflow.com/questions/28347878/ios8-swift-buttons-inside-uicollectionview-cell
+    @IBAction func startMissionButtonPressed(_ sender: UIButton) {
+        let touchPoint = collectionView.convert(CGPoint.zero, from: sender)
+        if let indexPath = collectionView.indexPathForItem(at: touchPoint) {
+            // now you know indexPath. You can get data or cell from here.
+            let game = GameDirectory.activeGames[indexPath.row]
+            
+            let gameId = game.name
+            
+            print("You pushed button for game \(gameId)")
+            
+            let vc = storyboard?.instantiateViewController(withIdentifier: game.storyboardId) as! GameTrueFalseViewController
+            
+            present(vc, animated: true, completion: {vc.playGameUntil(playerScoreIs: 5, unlessPlayerScoreReaches: -5, sender: self)})
+        }
+        
+    }
     /******************************************************/
     /*******************///MARK: Segmented Control
     /******************************************************/
@@ -72,6 +88,14 @@ class CommandCenterViewController: CoreDataQuizletCollectionViewController, UICo
             self.missionsCollectionView.isHidden = true
  
         })
+    }
+    
+    /******************************************************/
+    /*******************///MARK: GameCaller
+    /******************************************************/
+
+    func gameFinished(_ wasObjectiveAchieved: Bool) {
+        print("Game finished.  Player success? \(wasObjectiveAchieved)")
     }
     
     

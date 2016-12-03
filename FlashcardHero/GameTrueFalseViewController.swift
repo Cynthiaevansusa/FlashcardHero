@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import CoreData
 
-class GameTrueFalseViewController: CoreDataTrueFalseGameController {
+class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameObjectiveMaxPoints {
 
     @IBOutlet weak var quitButton: UIButton!
     @IBOutlet weak var trueButton: UIButton!
@@ -28,6 +28,8 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
     var showingCorrectAnswer: Bool = false
     var correctTD: QuizletTermDefinition?
     var wrongTD: QuizletTermDefinition?
+    
+    var objective: String?
     
     /******************************************************/
     /*******************///MARK: Life Cycle
@@ -116,12 +118,96 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
     }
     
     /******************************************************/
+    /*******************///MARK: Objectives
+    /******************************************************/
+
+    func didPlayerCompleteMission() -> Bool {
+        switch self.objective {
+        case ("MaxPoints")?:
+            return didPlayerReachMaxPoints()
+        default:
+            return false
+        }
+    }
+    
+    func didPlayerFailMission() -> Bool {
+        switch self.objective {
+        case ("MaxPoints")?:
+            return didPlayerReachMinPoints()
+        default:
+            return false
+        }
+    }
+    
+    /******************************************************/
+    /*******************///MARK: GameObjectiveBase
+    /******************************************************/
+    var gameCallerDelegate: GameCaller? = nil
+    
+    func finishGame(_ didPlayerSucceed: Bool) {
+        if let gameDelegate = self.gameCallerDelegate {
+           self.dismiss(animated: true, completion: {gameDelegate.gameFinished(didPlayerSucceed)})
+        } else {
+            //TODO: Handle problem
+        }
+        
+    }
+    
+    /******************************************************/
+    /*******************///MARK: GameObjectiveMaxPoints
+    /******************************************************/
+
+
+    var objectiveMaxPoints: Int = 0
+    var objectiveMinPoints: Int = -1
+    
+    //allow this game to be played until a max score is reached
+    func playGameUntil(playerScoreIs maxPoints: Int, unlessPlayerScoreReaches minPoints: Int? = -10, sender: GameCaller) {
+        print("playGameUntil was called")
+        self.objective = "MaxPoints"
+        self.gameCallerDelegate = sender
+        
+        //points needed to meet the objective
+        self.objectiveMaxPoints = maxPoints
+        
+        //score where objective will fail
+        if let minPoints = minPoints {
+            self.objectiveMinPoints = minPoints
+        } else {
+            self.objectiveMinPoints = -1
+        }
+    }
+    
+    func didPlayerReachMaxPoints() -> Bool{
+        if self.points >= self.objectiveMaxPoints {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func didPlayerReachMinPoints() -> Bool{
+        if self.points <= self.objectiveMinPoints {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    /******************************************************/
     /*******************///MARK: Game Functions
     /******************************************************/
 
     func addRefreshPoints(_ newPoints: Int) {
         awardPoints(newPoints)
         refreshPoints()
+        
+        //check to see if the player met objectives or failed
+        if didPlayerCompleteMission() {
+            finishGame(true)
+        } else if didPlayerFailMission() {
+            finishGame(false)
+        }
     }
     
     func awardPoints(_ newPoints: Int) {
@@ -411,8 +497,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController {
     }
     
     func quit() {
-        self.dismiss(animated: true, completion: {})
-        
+        finishGame(false)
     }
 
     
