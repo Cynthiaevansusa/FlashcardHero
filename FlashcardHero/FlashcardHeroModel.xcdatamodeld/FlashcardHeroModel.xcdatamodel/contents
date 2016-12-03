@@ -5,6 +5,10 @@
         <attribute name="stop" optional="YES" attributeType="Date" minDateTimeInterval="500930220" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="studySession" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="StudySession" inverseName="appSession" inverseEntity="StudySession" syncable="YES"/>
     </entity>
+    <entity name="GameLevel" representedClassName=".GameLevel" syncable="YES">
+        <attribute name="gameId" attributeType="Integer 64" minValueString="0" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="level" attributeType="Integer 64" minValueString="0" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
     <entity name="QuizletSet" representedClassName=".QuizletSet" syncable="YES">
         <attribute name="accessType" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="canEdit" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
@@ -60,10 +64,11 @@
         <relationship name="wrongAnswerTD" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QuizletTermDefinition" inverseName="performanceLogWrong" inverseEntity="QuizletTermDefinition" syncable="YES"/>
     </entity>
     <elements>
+        <element name="AppSession" positionX="-9" positionY="-45" width="128" height="30"/>
         <element name="QuizletSet" positionX="-216" positionY="-207" width="128" height="28"/>
         <element name="QuizletTermDefinition" positionX="18" positionY="171" width="128" height="28"/>
-        <element name="TDPerformanceLog" positionX="187" positionY="162" width="128" height="148"/>
-        <element name="AppSession" positionX="-9" positionY="-45" width="128" height="30"/>
         <element name="StudySession" positionX="0" positionY="-36" width="128" height="105"/>
+        <element name="TDPerformanceLog" positionX="187" positionY="162" width="128" height="148"/>
+        <element name="GameLevel" positionX="-18" positionY="-54" width="128" height="75"/>
     </elements>
 </model>

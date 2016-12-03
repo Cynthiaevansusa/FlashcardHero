@@ -7,9 +7,10 @@
 //
 
 import Foundation
+import UIKit
 struct GameDirectory {
     
-    static var gameTrueFalse = Game(id: 0, name: "True or False", description: "This is the True or False description", storyboardId: "GameTrueFalse", isAvailable: true)
+    static var gameTrueFalse = Game(id: 0, name: "True or False", description: "This is the True or False description", iconImage: #imageLiteral(resourceName: "TrueFalseGameIcon"), storyboardId: "GameTrueFalse", isAvailable: true)
     
     static var allGames = [gameTrueFalse.id : gameTrueFalse]
     static var activeGames = [gameTrueFalse]
@@ -24,8 +25,9 @@ struct Game {
     var description: String?
     var storyboardId: String
     var isAvailable: Bool
+    var icon: UIImage?
     
-    init(id: Int, name: String, description: String? = nil, storyboardId: String, isAvailable: Bool) {
+    init(id: Int, name: String, description: String? = nil, iconImage: UIImage? = nil, storyboardId: String, isAvailable: Bool) {
         self.id = id
         
         self.name = name
@@ -33,6 +35,12 @@ struct Game {
             self.description = description
         } else {
             self.description = nil
+        }
+        
+        if let image = iconImage {
+            self.icon = image
+        } else {
+            self.icon = nil
         }
         
         self.storyboardId = storyboardId

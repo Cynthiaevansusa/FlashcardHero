@@ -53,6 +53,8 @@
 		F67D15B01DDD4C0100D9DD5C /* OverviewStatistic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67D15AF1DDD4C0100D9DD5C /* OverviewStatistic.swift */; };
 		F67D15ED1DC938B9002975C7 /* CustomQuizletSearchBySetsResultsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67D15EC1DC938B9002975C7 /* CustomQuizletSearchBySetsResultsCell.swift */; };
 		F67D15F01DC97FCC002975C7 /* FlashcardHeroModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F67D15EE1DC97FCC002975C7 /* FlashcardHeroModel.xcdatamodeld */; };
+		F6CD7EF41DF24668004A4A57 /* GameLevel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CD7EF21DF24668004A4A57 /* GameLevel+CoreDataClass.swift */; };
+		F6CD7EF51DF24668004A4A57 /* GameLevel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CD7EF31DF24668004A4A57 /* GameLevel+CoreDataProperties.swift */; };
 		F6FD10CD1DBEEAEB00B7E6EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FD10CC1DBEEAEB00B7E6EA /* AppDelegate.swift */; };
 		F6FD10CF1DBEEAEB00B7E6EA /* CommandCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FD10CE1DBEEAEB00B7E6EA /* CommandCenterViewController.swift */; };
 		F6FD10D11DBEEAEB00B7E6EA /* PerformanceStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FD10D01DBEEAEB00B7E6EA /* PerformanceStatisticsViewController.swift */; };
@@ -132,6 +134,8 @@
 		F67D15AF1DDD4C0100D9DD5C /* OverviewStatistic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverviewStatistic.swift; sourceTree = "<group>"; };
 		F67D15EC1DC938B9002975C7 /* CustomQuizletSearchBySetsResultsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomQuizletSearchBySetsResultsCell.swift; sourceTree = "<group>"; };
 		F67D15EF1DC97FCC002975C7 /* FlashcardHeroModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FlashcardHeroModel.xcdatamodel; sourceTree = "<group>"; };
+		F6CD7EF21DF24668004A4A57 /* GameLevel+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GameLevel+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F6CD7EF31DF24668004A4A57 /* GameLevel+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GameLevel+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F6FD10C91DBEEAEB00B7E6EA /* FlashcardHero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlashcardHero.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6FD10CC1DBEEAEB00B7E6EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F6FD10CE1DBEEAEB00B7E6EA /* CommandCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandCenterViewController.swift; sourceTree = "<group>"; };
@@ -245,6 +249,7 @@
 		F63782CF1DC2E2BE0078FE7F /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				F6CD7EF61DF2466F004A4A57 /* Game and Goals */,
 				F67D15991DDB528F00D9DD5C /* User Performance */,
 				F63782D21DC2E3F50078FE7F /* CoreDataStack.swift */,
 				F66B5E471DC6D30500052B7F /* Quizlet */,
@@ -385,6 +390,15 @@
 				F67D15AB1DDD1AE900D9DD5C /* AnalysisViewController.swift */,
 			);
 			name = "Analysis Tab";
+			sourceTree = "<group>";
+		};
+		F6CD7EF61DF2466F004A4A57 /* Game and Goals */ = {
+			isa = PBXGroup;
+			children = (
+				F6CD7EF21DF24668004A4A57 /* GameLevel+CoreDataClass.swift */,
+				F6CD7EF31DF24668004A4A57 /* GameLevel+CoreDataProperties.swift */,
+			);
+			name = "Game and Goals";
 			sourceTree = "<group>";
 		};
 		F6FD10C01DBEEAEB00B7E6EA = {
@@ -776,8 +790,10 @@
 				F614C34A1DC999FC00E7D3C8 /* CoreDataQuizletTableViewController.swift in Sources */,
 				F67D15911DDB3E6E00D9DD5C /* GameDirectory.swift in Sources */,
 				F614C35B1DCB216800E7D3C8 /* QuizletTermDefinition+CoreDataClass.swift in Sources */,
+				F6CD7EF51DF24668004A4A57 /* GameLevel+CoreDataProperties.swift in Sources */,
 				F67D15941DDB4A4700D9DD5C /* QuestionType.swift in Sources */,
 				F614C3481DC9885A00E7D3C8 /* QuizletSet+CoreDataProperties.swift in Sources */,
+				F6CD7EF41DF24668004A4A57 /* GameLevel+CoreDataClass.swift in Sources */,
 				F67D15B01DDD4C0100D9DD5C /* OverviewStatistic.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -906,7 +922,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;

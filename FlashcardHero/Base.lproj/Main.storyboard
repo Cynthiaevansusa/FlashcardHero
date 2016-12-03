@@ -118,7 +118,7 @@
                             <constraint firstItem="WrB-6q-ofl" firstAttribute="leading" secondItem="vGo-Vd-pgo" secondAttribute="leading" id="xoN-bB-IZw"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Study" image="StudyIcon" id="ad3-9p-pHl"/>
+                    <tabBarItem key="tabBarItem" title="Missions" image="MissionIcon" id="ad3-9p-pHl"/>
                     <connections>
                         <outlet property="missionsTableView" destination="L8U-qa-gfu" id="6DX-1Z-fpm"/>
                         <outlet property="segmentedControl" destination="mh8-3l-3Dd" id="3bi-Rf-Xpb"/>
@@ -262,11 +262,6 @@
                             <constraint firstItem="oTd-uT-4hW" firstAttribute="trailing" secondItem="fe9-g0-aJ7" secondAttribute="trailingMargin" id="qua-cg-UOd"/>
                             <constraint firstItem="yzv-BC-Fky" firstAttribute="leading" secondItem="fe9-g0-aJ7" secondAttribute="leadingMargin" id="xnO-hM-C83"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="v45-xZ-zLn"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
                         <outlet property="definitionText" destination="oTd-uT-4hW" id="J84-ss-Ihm"/>
@@ -1115,8 +1110,8 @@
     </scenes>
     <resources>
         <image name="AnalysisIcon" width="28" height="14"/>
+        <image name="MissionIcon" width="14" height="28"/>
         <image name="SetsIcon" width="28" height="22"/>
-        <image name="StudyIcon" width="28" height="28"/>
         <image name="UserIcon" width="28" height="24"/>
         <image name="first" width="30" height="30"/>
         <image name="second" width="30" height="30"/>
