@@ -10,21 +10,39 @@ import Foundation
 import UIKit
 struct GameDirectory {
     
-    static var gameTrueFalse = Game(id: 0, name: "True or False", description: "Decide if the given text and image correspond to the given term.", iconImage: #imageLiteral(resourceName: "TrueFalseGameIcon"), storyboardId: "GameTrueFalse", isAvailable: true)
+    static let GameTrueFalse = Game(id: 0, name: "True or False", description: "Decide if the given text and image correspond to the given term.", iconImage: #imageLiteral(resourceName: "TrueFalseGameIcon"), storyboardId: "GameTrueFalse", isAvailable: true)
     
-    static var allGames = [gameTrueFalse.id : gameTrueFalse]
-    static var activeGames = [gameTrueFalse]
+    static let allGames = [GameTrueFalse.id : GameTrueFalse]
+    static let activeGames = [GameTrueFalse]
+    
+    static let activeGameVariants = [GameVariant(game: GameTrueFalse, gameProtocol: GameVariantProtocols.MaxPoints),
+                                     GameVariant(game: GameTrueFalse, gameProtocol: GameVariantProtocols.PerfectGame)]
     
     
+}
+
+struct GameVariant {
+    let game: Game
+    let gameProtocol: String
+    
+    init(game: Game, gameProtocol: String) {
+        guard GameVariantProtocols.protocols.contains(gameProtocol) else {
+            fatalError("couldn't set a GameVariant")
+        }
+        
+        self.game = game
+        self.gameProtocol = gameProtocol
+        
+    }
 }
 
 //A Game struct is an object that tracks a Game that may or may not be available to the player.  These are placed in the GameDirectory.
 struct Game {
     let id: Int
-    var name: String
-    var description: String?
-    var storyboardId: String
-    var isAvailable: Bool
+    let name: String
+    let description: String?
+    let storyboardId: String
+    let isAvailable: Bool
     var icon: UIImage?
     
     init(id: Int, name: String, description: String? = nil, iconImage: UIImage? = nil, storyboardId: String, isAvailable: Bool) {
@@ -49,3 +67,4 @@ struct Game {
     }
     
 }
+

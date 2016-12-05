@@ -18,28 +18,29 @@ class CustomMissionCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var gameTypeIcon: UIImageView!
     @IBOutlet weak var level: UILabel!
     
+    
     @IBOutlet weak var gemSectionsExercised: UIImageView!
     
     @IBOutlet weak var startMissionButton: UIButton!
     
-    var game: Game? {
+    var gameVariant: GameVariant? {
         didSet {
             
             //try to set the photo
-            if let image = game?.icon {
+            if let image = gameVariant?.game.icon {
                 self.gameTypeIcon?.image = image
             } else {
                 self.gameTypeIcon?.image = nil
             }
             
             //subtitle
-            if let subtitle = game?.description {
+            if let subtitle = gameVariant?.game.description {
                 self.subtitle?.text = subtitle
             } else {
                 self.subtitle?.text = nil
             }
             
-            self.name.text = game?.name
+            self.name.text = gameVariant?.game.name
             
             //button styling
             startMissionButton.layer.masksToBounds = true

@@ -44,8 +44,8 @@ class CommandCenterViewController: CoreDataQuizletCollectionViewController, UICo
         let touchPoint = collectionView.convert(CGPoint.zero, from: sender)
         if let indexPath = collectionView.indexPathForItem(at: touchPoint) {
             // now you know indexPath. You can get data or cell from here.
-            let game = GameDirectory.activeGames[indexPath.row]
-            
+            let gameVariant = GameDirectory.activeGameVariants[indexPath.row]
+            let game = gameVariant.game
             let gameId = game.name
             
             print("You pushed button for game \(gameId)")
@@ -55,10 +55,16 @@ class CommandCenterViewController: CoreDataQuizletCollectionViewController, UICo
             if let trueFalseVc = vc as? GameTrueFalseViewController { //if it is a true false game
                 
                 //set the level
-                let objective = getGameObjective(game: game)
+                //let objective =
                 
-                present(trueFalseVc, animated: true, completion: {trueFalseVc.playGameUntil(playerScoreIs: objective.maxPoints, unlessPlayerScoreReaches: objective.minPoints, sender: self)})
+                //check for the variant
+                if let objective = getGameObjective(gameVariant: gameVariant) as? GameObjectiveMaxPoints {
+                        present(trueFalseVc, animated: true, completion: {trueFalseVc.playGameUntil(playerScoreIs: objective.maxPoints, unlessPlayerScoreReaches: objective.minPoints, sender: self)})
+                } else if let objective = getGameObjective(gameVariant: gameVariant) as? GameObjectivePerfectScore {
+                        present(trueFalseVc, animated: true, completion: {trueFalseVc.playGameUntil(playerReaches: objective.maxPoints, unlessPlayerMisses: objective.missedPoints, sender: self)})
+                }
             }
+            
         }
         
     }
@@ -123,7 +129,8 @@ class CommandCenterViewController: CoreDataQuizletCollectionViewController, UICo
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         print("The are \(GameDirectory.activeGames.count) active games that will be displayed")
-        return GameDirectory.activeGames.count
+        
+        return GameDirectory.activeGameVariants.count
         
     }
     
@@ -131,15 +138,16 @@ class CommandCenterViewController: CoreDataQuizletCollectionViewController, UICo
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MissionCell", for: indexPath as IndexPath) as! CustomMissionCollectionViewCell
         
-        let game = GameDirectory.activeGames[indexPath.row]
+        let gameVariant = GameDirectory.activeGameVariants[indexPath.row]
+        let game = gameVariant.game
         print("Showing mission for game: \(game.name)")
         
         //associate the photo with this cell, which will set all parts of image view
-        cell.game = game
+        cell.gameVariant = gameVariant
         
         //set the level
         let level = getGameLevel(game: game)
-        let objective = getGameObjective(game: game)
+        let objective = getGameObjective(gameVariant: gameVariant)
         cell.level.text = String(describing: level)
         cell.objective.text = objective.description
         cell.reward.text = "\(objective.reward) Essence"
@@ -223,10 +231,26 @@ class CommandCenterViewController: CoreDataQuizletCollectionViewController, UICo
         }
     }
     
+    //TODO: make following function return something that conforms with GameObjective protocol
+    
+    func getGameObjective(gameVariant: GameVariant) -> GameObjective {
+        //check for the variant
+            
+        switch gameVariant.gameProtocol {
+        case GameVariantProtocols.MaxPoints:
+            return getGameObjectiveMaxPoints(game: gameVariant.game)
+        case GameVariantProtocols.PerfectGame:
+            return getGameObjectivePerfectScore(game: gameVariant.game)
+        default:
+            fatalError("Asked for a game variant that doesn't exist")
+        }
+    
+    }
+    
     /**
      Based on the level of the game, develop some objectives and return
      */
-    func getGameObjective(game: Game) -> GameObjectiveRewardStructMaxPoints {
+    func getGameObjectiveMaxPoints(game: Game) -> GameObjectiveMaxPoints {
         
         //TODO: Impliment fibonnaci method
         
@@ -237,9 +261,36 @@ class CommandCenterViewController: CoreDataQuizletCollectionViewController, UICo
         let description = "Achieve a score of \(maxPoints) points."
         let reward = gameLevel + 1
         
-        let objective = GameObjectiveRewardStructMaxPoints(maxPoints: maxPoints, minPoints: minPoints, description: description, reward: reward)
+        let objective = GameObjectiveMaxPoints()
+        objective.maxPoints = maxPoints
+        objective.minPoints = minPoints
+        objective.description = description
+        objective.reward = reward
+        
         return objective
     }
+    
+    func getGameObjectivePerfectScore(game: Game) -> GameObjectivePerfectScore {
+        
+        //TODO: Impliment fibonnaci method
+        
+        let gameLevel = getGameLevel(game: game)
+        
+        let maxPoints = gameLevel + 5
+        var missedPointsAllowed = 15 - gameLevel
+        if missedPointsAllowed < 1 { missedPointsAllowed = 1 } //make sure missed points is greater than 1
+        let description = "Achieve a score of \(maxPoints) points without missing \(missedPointsAllowed) questions."
+        let reward = gameLevel + 2
+        
+        let objective = GameObjectivePerfectScore()
+        objective.maxPoints = maxPoints
+        objective.missedPoints = missedPointsAllowed
+        objective.description = description
+        objective.reward = reward
+        
+        return objective
+    }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -250,9 +301,28 @@ class CommandCenterViewController: CoreDataQuizletCollectionViewController, UICo
 
 }
 
-struct GameObjectiveRewardStructMaxPoints {
-    var maxPoints: Int
-    var minPoints: Int
-    var description: String
-    var reward: Int
+protocol GameObjectiveProtocol: class {
+    var maxPoints: Int {get set}
+    var description: String {get set}
+    var reward: Int {get set}
+}
+
+class GameObjective: GameObjectiveProtocol {
+    var maxPoints: Int = 0
+    var description: String = ""
+    var reward: Int = 0
+}
+
+class GameObjectiveMaxPoints: GameObjective {
+    //var maxPoints: Int = 0
+    var minPoints: Int = -1
+    //var description: String = ""
+    //var reward: Int = 0
+}
+
+class GameObjectivePerfectScore: GameObjective {
+    //var maxPoints: Int = 0
+    var missedPoints: Int = -1
+    //var description: String = ""
+    //var reward: Int = 0
 }

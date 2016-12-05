@@ -83,3 +83,39 @@ extension String {
         return Data(self.utf8).base64EncodedString()
     }
 }
+
+/******************************************************/
+/*******************///MARK: Looping over struct and class properties
+//http://stackoverflow.com/questions/27292255/how-to-loop-over-struct-properties-in-swift
+/******************************************************/
+
+//protocol PropertyLoopable
+//{
+//    func allProperties() throws -> [String: Any]
+//}
+//
+//extension PropertyLoopable
+//{
+//    func allProperties() throws -> [String: Any] {
+//        
+//        var result: [String: Any] = [:]
+//        
+//        let mirror = Mirror(reflecting: self)
+//        
+////        guard let style = mirror.displayStyle, (style == .Struct || style == .Class) else {
+////            //throw some error
+////            throw NSError(domain: "hris.to", code: 777, userInfo: nil)
+////        }
+//        
+//        for (labelMaybe, valueMaybe) in mirror.children {
+//            guard let label = labelMaybe else {
+//                continue
+//            }
+//            
+//            result[label] = valueMaybe
+//        }
+//        
+//        return result
+//    }
+//}
+

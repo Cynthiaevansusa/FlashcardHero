@@ -297,6 +297,8 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         if (editingStyle == UITableViewCellEditingStyle.delete) {
             if let context = self.frcDict[self.keyTrackedGems]?.managedObjectContext {
                 
+                //TODO: Warn use that all performance data will also be deleted.  If they accept, then delete.
+                
                 context.delete(self.frcDict[self.keyTrackedGems]!.object(at: indexPath) as! QuizletSet)
  
             }

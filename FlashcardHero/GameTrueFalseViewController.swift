@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import CoreData
 
-class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameObjectiveMaxPoints {
+class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantMaxPoints, GameVariantPerfectGame {
 
     @IBOutlet weak var quitButton: UIButton!
     @IBOutlet weak var trueButton: UIButton!
@@ -139,7 +139,9 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameObjectiv
 
     func didPlayerCompleteMission() -> Bool {
         switch self.objective {
-        case ("MaxPoints")?:
+        case (GameVariantProtocols.MaxPoints)?:
+            return didPlayerReachMaxPoints()
+        case (GameVariantProtocols.PerfectGame)?:
             return didPlayerReachMaxPoints()
         default:
             return false
@@ -148,8 +150,10 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameObjectiv
     
     func didPlayerFailMission() -> Bool {
         switch self.objective {
-        case ("MaxPoints")?:
+        case (GameVariantProtocols.MaxPoints)?:
             return didPlayerReachMinPoints()
+        case (GameVariantProtocols.PerfectGame)?:
+            return didPlayerReachQuestionsCanMiss()
         default:
             return false
         }
@@ -162,7 +166,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameObjectiv
     
     func finishGame(_ didPlayerSucceed: Bool) {
         if let gameDelegate = self.gameCallerDelegate {
-            self.dismiss(animated: true, completion: {gameDelegate.gameFinished(didPlayerSucceed, forGame: GameDirectory.gameTrueFalse)})
+            self.dismiss(animated: true, completion: {gameDelegate.gameFinished(didPlayerSucceed, forGame: GameDirectory.GameTrueFalse)})
         } else {
             //TODO: Handle problem
         }
@@ -180,7 +184,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameObjectiv
     //allow this game to be played until a max score is reached
     func playGameUntil(playerScoreIs maxPoints: Int, unlessPlayerScoreReaches minPoints: Int? = -10, sender: GameCaller) {
         print("playGameUntil was called")
-        self.objective = "MaxPoints"
+        self.objective = GameVariantProtocols.MaxPoints
         self.gameCallerDelegate = sender
         
         //points needed to meet the objective
@@ -211,18 +215,67 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameObjectiv
     }
     
     /******************************************************/
+    /*******************///MARK: GameObjectivePerfectGame
+    /******************************************************/
+    
+    var objectiveQuestionsCanMiss: Int = 1
+    var objectiveQuestionsMissed: Int = 0
+    
+    //allow this game to be played until a max score is reached, but player fails if they miss a certain amount of questions
+    func playGameUntil(playerReaches maxPoints: Int, unlessPlayerMisses missedPoints: Int, sender: GameCaller){
+        print("playGameUntil was called")
+        self.objective = GameVariantProtocols.PerfectGame
+        self.gameCallerDelegate = sender
+        
+        //points needed to meet the objective
+        self.objectiveMaxPoints = maxPoints
+        
+        //missedPoints must be greater than 0 or else the player has already lost!
+        guard missedPoints > 0 else {
+            return
+        }
+        
+        //points player cannot miss
+        self.objectiveQuestionsCanMiss = missedPoints
+
+        //lowest score allowed is the number of missed points
+        self.objectiveMinPoints = -1 * missedPoints
+        
+        //reset number of questions missed so far
+        self.objectiveQuestionsMissed = 0
+    }
+    
+    func didPlayerReachQuestionsCanMiss() -> Bool {
+        if self.objectiveQuestionsMissed >=  self.objectiveQuestionsCanMiss {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func playerMissedAQuestion() {
+        self.objectiveQuestionsMissed += 1
+    }
+ 
+    
+    /******************************************************/
     /*******************///MARK: Game Functions
     /******************************************************/
 
     func addRefreshPoints(_ newPoints: Int) {
+        //if points are less than 1, then the player missed the question
+        if newPoints < 1 {
+            playerMissedAQuestion()
+        }
+        
         awardPoints(newPoints)
         refreshPoints()
         
         //check to see if the player met objectives or failed
-        if didPlayerCompleteMission() {
-            finishGame(true)
-        } else if didPlayerFailMission() {
+        if didPlayerFailMission() {
             finishGame(false)
+        } else if didPlayerCompleteMission() {
+            finishGame(true)
         }
     }
     
