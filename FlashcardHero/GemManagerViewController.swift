@@ -28,6 +28,15 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
     
     var gemInActiveFlux: QuizletSet?
     
+    //pull to refresh
+    //adapted from https://www.andrewcbancroft.com/2015/03/17/basics-of-pull-to-refresh-for-swift-developers/#regular-view-controller
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(self.handleRefresh(refreshControl:)), for: UIControlEvents.valueChanged)
+        refreshControl.tag = 111
+        return refreshControl
+    }()
+    
     /******************************************************/
     /*******************///MARK: Life Cycle
     /******************************************************/
@@ -40,11 +49,8 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         tableView.delegate = self
         tableView.dataSource = self
         
-       
         
-        
-        
-        
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -94,6 +100,12 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
     func showTrackedGemsSegment() {
         print("Switching to Tracked Gem Segment")
         
+        //tagging and removing a subview
+        //adapted from http://stackoverflow.com/questions/28197079/swift-addsubview-and-remove-it
+        if let viewWithTag = self.view.viewWithTag(111) {
+            viewWithTag.removeFromSuperview()
+        }
+        
         self.tableView.reloadData()
         UIView.animate(withDuration: 0.1, animations: {
             //self.gemTableView.alpha = 1.0
@@ -106,6 +118,10 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
     
     func showUserGemsSegment() {
         print("Switching to User Gems Segment")
+        //add the pull to refresh subview
+        if self.view.viewWithTag(111) == nil {
+            self.tableView.addSubview(self.refreshControl)
+        }
         
         self.tableView.reloadData()
         self.searchQuizletForUserSets()
@@ -126,6 +142,21 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         } else {
             return self.keyUsersGems
         }
+    }
+    
+    /******************************************************/
+    /*******************///MARK: Pull to Refresh
+    /******************************************************/
+
+    /**
+     When user pulls down on the table
+     */
+    func handleRefresh(refreshControl: UIRefreshControl) {
+        
+        //search for sets again
+        self.searchQuizletForUserSets()
+        
+        refreshControl.endRefreshing()
     }
     
     /******************************************************/
@@ -159,6 +190,9 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         loginQuizletButton.image = UIImage(named:"UserSelectedIcon")
     }
     
+    /**
+     Handles housekeeping for when user is logged out
+     */
     func setVeiwUserLoggedOut() {
         self.navigationItem.title = nil
         //loginQuizletButton.title = "Log In"
@@ -195,6 +229,8 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
                 }
             }
             
+            //TODO: Remove sets that are not in this search result
+            
             
         }
     }
@@ -223,6 +259,9 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
                     for term in setTerm.terms {
                         _ = QuizletTermDefinition(withQuizletTermResult: term, relatedSet: newSet, context: self.frcDict[visibleFrcKey]!.managedObjectContext)
                     }
+                } else {
+                    //found the set, so check each term
+                    //TODO: check each term to see if it needs to be replaced or updated
                 }
             }
         }
@@ -285,9 +324,14 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         return cell
     }
     
-    //editing is allowed
+    //editing is allowed for anonymous sets
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
+        let visibleFrcKey = getVisibleFrcKey()
+        if visibleFrcKey == self.keyUsersGems {
+            return false
+        } else {
+            return true
+        }
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {

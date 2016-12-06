@@ -150,7 +150,12 @@ class CommandCenterViewController: CoreDataQuizletCollectionViewController, UICo
         let objective = getGameObjective(gameVariant: gameVariant)
         cell.level.text = String(describing: level)
         cell.objective.text = objective.description
-        cell.reward.text = "\(objective.reward) Essence"
+        
+        if objective.reward < 1 {
+            cell.reward.text = "Unlockable at higher level!"
+        } else {
+            cell.reward.text = "\(objective.reward) Essence"
+        }
         
         return cell
     }
@@ -259,7 +264,7 @@ class CommandCenterViewController: CoreDataQuizletCollectionViewController, UICo
         let maxPoints = gameLevel + 5
         let minPoints = -5
         let description = "Achieve a score of \(maxPoints) points!"
-        let reward = gameLevel + 1
+        let reward = 0
         
         let objective = GameObjectiveMaxPoints()
         objective.maxPoints = maxPoints
@@ -280,7 +285,7 @@ class CommandCenterViewController: CoreDataQuizletCollectionViewController, UICo
         var missedPointsAllowed = 15 - gameLevel
         if missedPointsAllowed < 1 { missedPointsAllowed = 1 } //make sure missed points is greater than 1
         let description = "Achieve a score of \(maxPoints) points... but don't get \(missedPointsAllowed) wrong!"
-        let reward = gameLevel + 2
+        let reward = 0
         
         let objective = GameObjectivePerfectScore()
         objective.maxPoints = maxPoints
