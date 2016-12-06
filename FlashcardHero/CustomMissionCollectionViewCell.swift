@@ -17,6 +17,7 @@ class CustomMissionCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var reward: UILabel!
     @IBOutlet weak var gameTypeIcon: UIImageView!
     @IBOutlet weak var level: UILabel!
+    @IBOutlet weak var objectiveDescription: UILabel!
     
     
     @IBOutlet weak var gemSectionsExercised: UIImageView!
@@ -41,6 +42,7 @@ class CustomMissionCollectionViewCell: UICollectionViewCell {
             }
             
             self.name.text = gameVariant?.game.name
+            self.objectiveDescription.text = gameVariant?.description
             
             //button styling
             startMissionButton.layer.masksToBounds = true

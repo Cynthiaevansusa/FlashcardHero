@@ -97,7 +97,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mission Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="wfD-tN-2so">
-                                                    <rect key="frame" x="78" y="8" width="194" height="35"/>
+                                                    <rect key="frame" x="78" y="3" width="194" height="35"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="35" id="HVQ-Cl-m5G"/>
                                                     </constraints>
@@ -116,7 +116,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mission subtitle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="r3y-ZG-gZc">
-                                                    <rect key="frame" x="78" y="43" width="194" height="25"/>
+                                                    <rect key="frame" x="78" y="36" width="194" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="sSH-xT-G9p"/>
                                                     </constraints>
@@ -142,8 +142,8 @@
                                                         <constraint firstAttribute="width" constant="120" id="hFC-ad-bFD"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Objective:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pse-mU-faf">
-                                                    <rect key="frame" x="138" y="70" width="184" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Objective:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="Pse-mU-faf">
+                                                    <rect key="frame" x="138" y="76" width="184" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="1Rg-Qn-PI2"/>
                                                     </constraints>
@@ -199,7 +199,7 @@
                                             <constraint firstItem="72o-UK-IpX" firstAttribute="leading" secondItem="r3y-ZG-gZc" secondAttribute="trailing" constant="10" id="1uq-Ak-TDa"/>
                                             <constraint firstItem="iJG-RI-iwJ" firstAttribute="leading" secondItem="voy-Io-OS3" secondAttribute="leadingMargin" constant="10" id="3G9-2D-hD7"/>
                                             <constraint firstAttribute="trailing" secondItem="72o-UK-IpX" secondAttribute="trailing" constant="8" id="5au-Er-UWN"/>
-                                            <constraint firstItem="Pse-mU-faf" firstAttribute="top" secondItem="r3y-ZG-gZc" secondAttribute="bottom" constant="2" id="5gq-ex-TIL"/>
+                                            <constraint firstItem="Pse-mU-faf" firstAttribute="top" secondItem="r3y-ZG-gZc" secondAttribute="bottom" constant="15" id="5gq-ex-TIL"/>
                                             <constraint firstItem="r3y-ZG-gZc" firstAttribute="leading" secondItem="nxH-se-OCL" secondAttribute="trailing" constant="10" id="7W0-VL-JpV"/>
                                             <constraint firstAttribute="bottomMargin" secondItem="uz6-qh-e6b" secondAttribute="bottom" constant="6" id="7ZJ-eL-ZcN"/>
                                             <constraint firstItem="uz6-qh-e6b" firstAttribute="leading" secondItem="voy-Io-OS3" secondAttribute="leadingMargin" constant="20" id="7ek-Qa-OyM"/>
@@ -209,7 +209,7 @@
                                             <constraint firstAttribute="trailingMargin" secondItem="Pse-mU-faf" secondAttribute="trailing" id="LuQ-9i-I2P"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="TUa-Fd-eSc" secondAttribute="trailing" id="NIG-Gk-7P7"/>
                                             <constraint firstItem="iTb-49-52z" firstAttribute="leading" secondItem="voy-Io-OS3" secondAttribute="leadingMargin" id="SqF-TU-jas"/>
-                                            <constraint firstItem="r3y-ZG-gZc" firstAttribute="top" secondItem="wfD-tN-2so" secondAttribute="bottom" id="UIM-DK-8iE"/>
+                                            <constraint firstItem="r3y-ZG-gZc" firstAttribute="top" secondItem="wfD-tN-2so" secondAttribute="bottom" constant="-2" id="UIM-DK-8iE"/>
                                             <constraint firstItem="TUa-Fd-eSc" firstAttribute="leading" secondItem="iTb-49-52z" secondAttribute="trailing" constant="10" id="VUg-Dg-o0K"/>
                                             <constraint firstItem="nxH-se-OCL" firstAttribute="top" secondItem="voy-Io-OS3" secondAttribute="top" constant="8" id="Vt8-q0-5WZ"/>
                                             <constraint firstAttribute="trailing" secondItem="OwT-Oi-mfw" secondAttribute="trailing" constant="8" id="VzI-fE-iul"/>
@@ -219,9 +219,9 @@
                                             <constraint firstAttribute="trailingMargin" secondItem="pxF-Ru-yVP" secondAttribute="trailing" id="md3-cR-ITg"/>
                                             <constraint firstItem="Pse-mU-faf" firstAttribute="leading" secondItem="iTb-49-52z" secondAttribute="trailing" constant="10" id="mnD-MS-N8M"/>
                                             <constraint firstItem="72o-UK-IpX" firstAttribute="top" secondItem="voy-Io-OS3" secondAttribute="top" id="olW-ed-dSP"/>
-                                            <constraint firstItem="iTb-49-52z" firstAttribute="top" secondItem="r3y-ZG-gZc" secondAttribute="bottom" constant="8" id="p2x-BM-Vo2"/>
-                                            <constraint firstItem="wfD-tN-2so" firstAttribute="top" secondItem="voy-Io-OS3" secondAttribute="topMargin" id="tnJ-JQ-v5g"/>
-                                            <constraint firstItem="TUa-Fd-eSc" firstAttribute="top" secondItem="Pse-mU-faf" secondAttribute="bottom" constant="8" id="u7L-fo-Zzi"/>
+                                            <constraint firstItem="iTb-49-52z" firstAttribute="top" secondItem="r3y-ZG-gZc" secondAttribute="bottom" constant="15" id="p2x-BM-Vo2"/>
+                                            <constraint firstItem="wfD-tN-2so" firstAttribute="top" secondItem="voy-Io-OS3" secondAttribute="topMargin" constant="-5" id="tnJ-JQ-v5g"/>
+                                            <constraint firstItem="TUa-Fd-eSc" firstAttribute="top" secondItem="Pse-mU-faf" secondAttribute="bottom" constant="2" id="u7L-fo-Zzi"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="gameTypeIcon" destination="nxH-se-OCL" id="jqS-6V-7yf"/>
@@ -229,6 +229,7 @@
                                             <outlet property="level" destination="72o-UK-IpX" id="3G2-Hn-dac"/>
                                             <outlet property="name" destination="wfD-tN-2so" id="A06-kP-j0e"/>
                                             <outlet property="objective" destination="TUa-Fd-eSc" id="gAE-Mm-Q6f"/>
+                                            <outlet property="objectiveDescription" destination="Pse-mU-faf" id="NoA-Lk-U8q"/>
                                             <outlet property="reward" destination="pxF-Ru-yVP" id="mOl-iO-iFm"/>
                                             <outlet property="startMissionButton" destination="uz6-qh-e6b" id="XKJ-ZH-Z6L"/>
                                             <outlet property="subtitle" destination="r3y-ZG-gZc" id="wdw-1q-OVD"/>
