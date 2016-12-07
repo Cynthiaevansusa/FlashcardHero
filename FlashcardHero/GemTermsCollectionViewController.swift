@@ -93,11 +93,11 @@ class GemTermsCollectionViewController: CoreDataQuizletCollectionViewController,
         //cell.quizletSet = set
         //cell.cellDelegate = self
         
-        //        if photo.isTransitioningImage {
-        //            cell.startActivityIndicator()
-        //        } else {
-        //            cell.stopActivityIndicator()
-        //        }
+        if term.isTransitioningImage {
+            cell.startActivityIndicator()
+        } else {
+            cell.stopActivityIndicator()
+        }
         cell.quizletTerm = term
         
         

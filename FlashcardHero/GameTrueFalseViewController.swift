@@ -273,9 +273,18 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
         
         //check to see if the player met objectives or failed
         if didPlayerFailMission() {
-            finishGame(false)
+            setFeedbackMessage(wasCorrect: false, otherMessage: "Mission Failed!")
+            setFeedbackVisible(visible: true, duration: 0.01)
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
+                self.finishGame(false)
+                })
+            
         } else if didPlayerCompleteMission() {
-            finishGame(true)
+            setFeedbackMessage(wasCorrect: true, otherMessage: "Mission Complete!")
+            setFeedbackVisible(visible: true, duration: 0.01)
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
+                self.finishGame(true)
+            })
         }
     }
     
@@ -491,26 +500,36 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
         pointsLabel.text = String(points)
     }
     
-    func setFeedbackMessage(wasCorrect: Bool){
+    func setFeedbackMessage(wasCorrect: Bool, otherMessage: String? = nil){
+        
         if wasCorrect {
-            self.feedbackLabel.text = "Correct!"
+            if let otherMessage = otherMessage {
+                self.feedbackLabel.text = otherMessage
+            } else {
+                self.feedbackLabel.text = "Correct!"
+            }
+            
             //set color to green
             self.feedbackLabel.backgroundColor = UIColor.green
         } else {
-            self.feedbackLabel.text = "Wrong!"
+            if let otherMessage = otherMessage {
+                self.feedbackLabel.text = otherMessage
+            } else {
+                self.feedbackLabel.text = "Wrong!"
+            }
             //set color to red
             self.feedbackLabel.backgroundColor = UIColor.red
         }
     }
-    func setFeedbackVisible(visible: Bool) {
+    func setFeedbackVisible(visible: Bool, duration: Float = 0.1) {
   
         if visible {
-            UIView.animate(withDuration: 0.1, animations: {
+            UIView.animate(withDuration: TimeInterval(duration), animations: {
                 self.feedbackLabel.alpha = 1.0
             })
         } else {
             //self.feedbackLabel.text = ""
-            UIView.animate(withDuration: 0.2, animations: {
+            UIView.animate(withDuration: TimeInterval(duration * 2), animations: {
                 self.feedbackLabel.alpha = 0.0
             })
         }

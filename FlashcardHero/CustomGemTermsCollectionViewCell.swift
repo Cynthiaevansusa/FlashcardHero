@@ -16,6 +16,7 @@ class CustomGemTermsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var definition: UILabel!
     
     @IBOutlet weak var imageView: UIImageView?
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var quizletTerm: QuizletTermDefinition? {
         didSet {
@@ -41,6 +42,14 @@ class CustomGemTermsCollectionViewCell: UICollectionViewCell {
             }
             
         }
+    }
+    
+    func startActivityIndicator() {
+        self.activityIndicator!.startAnimating()
+    }
+    
+    func stopActivityIndicator() {
+        self.activityIndicator!.stopAnimating()
     }
     
     

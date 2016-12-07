@@ -89,9 +89,9 @@ public class QuizletTermDefinition: QuizletSet {
                         self.imageData = imageDataNS
                         print("Image data succesfully retireved and set")
                         
-                        let delegate = UIApplication.shared.delegate as! AppDelegate
-                        let stack = delegate.stack
-                        stack.save()
+                        //let delegate = UIApplication.shared.delegate as! AppDelegate
+                        //let stack = delegate.stack
+                        //stack.save()
                         
                     } else {
                         //there was an error

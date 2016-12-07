@@ -124,7 +124,12 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         }
         
         self.tableView.reloadData()
-        self.searchQuizletForUserSets()
+        
+        //if there are no rows in the table, search to see if the user has any
+        //TODO: Make a more sophisticated way to search every so often
+        if tableView(self.tableView, numberOfRowsInSection: 0) < 1 {
+            self.searchQuizletForUserSets()
+        }
         
         UIView.animate(withDuration: 0.1, animations: {
             //self.gemTableView.alpha = 0.0
