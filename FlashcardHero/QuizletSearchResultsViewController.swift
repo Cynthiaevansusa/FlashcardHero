@@ -25,6 +25,7 @@ class QuizletSearchResultsViewController: UIViewController, UISearchBarDelegate,
     @IBOutlet weak var toolbar: UIToolbar!
     @IBOutlet weak var doneButton: UIBarButtonItem!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var searchResults = [QuizletSetSearchResult]()
 
@@ -46,6 +47,17 @@ class QuizletSearchResultsViewController: UIViewController, UISearchBarDelegate,
         
         //put focus to the search bar
         searchBar.becomeFirstResponder()
+    }
+    
+    /******************************************************/
+    /*******************///MARK: Utilities
+    /******************************************************/
+    func startActivityIndicator() {
+        self.activityIndicator!.startAnimating()
+    }
+    
+    func stopActivityIndicator() {
+        self.activityIndicator!.stopAnimating()
     }
     
     /******************************************************/
@@ -153,6 +165,8 @@ class QuizletSearchResultsViewController: UIViewController, UISearchBarDelegate,
     /******************************************************/
 
     func searchQuizletFor(searchTerm: String) {
+        
+        self.startActivityIndicator()
         GCDBlackBox.runNetworkFunctionInBackground {
             QuizletClient.sharedInstance.getQuizletSearchSetsBy(searchTerm) { (results, error) in
                 GCDBlackBox.performUIUpdatesOnMain {
@@ -161,7 +175,7 @@ class QuizletSearchResultsViewController: UIViewController, UISearchBarDelegate,
                     //print("results: \(results)")
                     //print("error: \(error)")
                     
-                    
+                    self.stopActivityIndicator()
                     
                     if error == nil {
                         print("Search success")

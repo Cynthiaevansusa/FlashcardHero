@@ -693,7 +693,7 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="8Bg-d2-fxz">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="8Bg-d2-fxz">
                                                             <rect key="frame" x="10" y="4" width="35" height="20"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="35" id="g5d-EZ-Sro"/>
@@ -956,10 +956,10 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="61"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UaZ-r9-4vQ" id="FoE-tb-Dii">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="61"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="second" translatesAutoresizingMaskIntoConstraints="NO" id="TDD-al-BTs">
+                                                <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="second" translatesAutoresizingMaskIntoConstraints="NO" id="TDD-al-BTs">
                                                     <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="TDD-al-BTs" secondAttribute="height" multiplier="1:1" id="1qW-3J-cgD"/>
@@ -1049,7 +1049,10 @@
                                     <outlet property="delegate" destination="Ork-Iu-8br" id="kok-Lw-QAi"/>
                                 </connections>
                             </tableView>
-                            <searchBar contentMode="redraw" placeholder="Search Quizlet for Sets to Add as Gems" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eu5-Sr-6v1">
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="lQU-da-hNA">
+                                <rect key="frame" x="178" y="324" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <searchBar contentMode="redraw" placeholder="Search Quizlet for Sets to Add" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eu5-Sr-6v1">
                                 <rect key="frame" x="0.0" y="60" width="375" height="44"/>
                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="barTintColor" red="0.23529411764705882" green="0.36470588235294116" blue="0.68627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1076,8 +1079,8 @@
                                 <color key="tintColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="barTintColor" red="0.23529411764705882" green="0.36470588235294116" blue="0.68627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </toolbar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Gems" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eaX-z8-4Ng">
-                                <rect key="frame" x="140.5" y="30" width="94" height="24"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Sets" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eaX-z8-4Ng">
+                                <rect key="frame" x="147" y="30" width="81.5" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1087,6 +1090,7 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="eu5-Sr-6v1" secondAttribute="trailing" id="Cyp-wH-dbz"/>
                             <constraint firstItem="D1k-6Q-hhI" firstAttribute="top" secondItem="JWg-0n-YVg" secondAttribute="bottom" id="KaZ-dq-WWx"/>
+                            <constraint firstItem="lQU-da-hNA" firstAttribute="centerX" secondItem="Ys6-JA-lMh" secondAttribute="centerX" id="Lg1-mx-91Z"/>
                             <constraint firstItem="eaX-z8-4Ng" firstAttribute="top" secondItem="JWg-0n-YVg" secondAttribute="bottom" constant="10" id="P3e-rd-xjv"/>
                             <constraint firstItem="D1k-6Q-hhI" firstAttribute="leading" secondItem="Ys6-JA-lMh" secondAttribute="leading" id="RF0-3e-utA"/>
                             <constraint firstItem="eu5-Sr-6v1" firstAttribute="top" secondItem="D1k-6Q-hhI" secondAttribute="bottom" constant="-4" id="XNF-fI-rUL"/>
@@ -1096,11 +1100,13 @@
                             <constraint firstItem="eu5-Sr-6v1" firstAttribute="leading" secondItem="Ys6-JA-lMh" secondAttribute="leading" id="mfH-5N-Vhh"/>
                             <constraint firstItem="Rdh-rR-uwh" firstAttribute="top" secondItem="eu5-Sr-6v1" secondAttribute="bottom" id="oju-P8-WLJ"/>
                             <constraint firstAttribute="trailing" secondItem="D1k-6Q-hhI" secondAttribute="trailing" id="qIO-Km-im8"/>
+                            <constraint firstItem="lQU-da-hNA" firstAttribute="centerY" secondItem="Ys6-JA-lMh" secondAttribute="centerY" id="r7z-Xo-noh"/>
                             <constraint firstItem="eaX-z8-4Ng" firstAttribute="centerX" secondItem="Ys6-JA-lMh" secondAttribute="centerX" id="vqF-b8-tbj"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="lQU-da-hNA" id="GdW-qL-VHI"/>
                         <outlet property="cancelButton" destination="WXu-nO-phE" id="XD9-Yh-Mfa"/>
                         <outlet property="doneButton" destination="6f6-57-0lP" id="8fF-qf-k6Q"/>
                         <outlet property="searchBar" destination="eu5-Sr-6v1" id="4eU-QY-g5f"/>
