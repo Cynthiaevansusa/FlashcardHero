@@ -21,6 +21,8 @@ class GemTermsCollectionViewController: CoreDataQuizletCollectionViewController,
     @IBOutlet weak var creatorName: UILabel!
     @IBOutlet weak var setTitle: UILabel!
     @IBOutlet weak var backButton: UIBarButtonItem!
+    @IBOutlet weak var numTermsLabel: UILabel!
+    @IBOutlet weak var modifiedLabel: UILabel!
     
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var refreshButton: UIBarButtonItem!
@@ -41,14 +43,12 @@ class GemTermsCollectionViewController: CoreDataQuizletCollectionViewController,
 
         creatorName.text = quizletSet.createdBy
         setTitle.text = quizletSet.title
+        numTermsLabel.text = String(describing: quizletSet.termCount)
         
-        //check for no terms, if there are none, try to fetch
-//        if let fc = frcDict[keyGemTerms] {
-//            if (fc.sections?.count)! > 0 && (fc.sections?[0].numberOfObjects)! == 0 {
-//                print("This set doesn't have any terms! Attempting to fetch...")
-//                quizletSet.fetchTermsAndAddTo(context: fc.managedObjectContext)
-//            }
-//        }
+        //set date this was last modified
+        let formatter = DateFormatter()
+        formatter.dateStyle = DateFormatter.Style.medium
+        modifiedLabel.text = formatter.string(from: quizletSet.modifiedDate as Date)
         
     }
     

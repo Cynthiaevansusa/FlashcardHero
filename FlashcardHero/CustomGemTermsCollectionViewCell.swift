@@ -12,6 +12,7 @@ import UIKit
 class CustomGemTermsCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var term: UILabel!
+    @IBOutlet weak var rank: UILabel!
     
     @IBOutlet weak var definition: UILabel!
     
@@ -27,11 +28,18 @@ class CustomGemTermsCollectionViewCell: UICollectionViewCell {
                 self.term.text = ""
             }
             
-            //try to set the label
+            //try to set the definition
             if let definition = quizletTerm?.definition {
                 self.definition.text = definition
             } else {
                 self.definition.text = ""
+            }
+            
+            //try to set the definition
+            if let rank = quizletTerm?.rank {
+                self.rank.text = String(describing: (rank + 1))
+            } else {
+                self.rank.text = ""
             }
             
             //try to set the photo

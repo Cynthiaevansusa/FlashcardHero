@@ -50,7 +50,6 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         tableView.delegate = self
         tableView.dataSource = self
         
-        //autoRefresh(5)
 
     }
     
@@ -323,6 +322,8 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
     
     override func configureCell(cell: UITableViewCell, indexPath: IndexPath) {
         
+        //TODO: Fix bug where old images are present before loading new ones
+        
         let visibleFrcKey = getVisibleFrcKey()
 
         guard let set = self.frcDict[visibleFrcKey]!.object(at: indexPath) as? QuizletSet else { fatalError("Unexpected Object in FetchedResultsController") }
@@ -342,10 +343,18 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
             //if we found an image, set it or else hide the imageView
             if let foundData = set.thumbnailImageData as? Data {
                 cell.customImageView.image = UIImage(data: foundData)
-                cell.customImageView.isHidden = false
+                
             } else {
-                cell.customImageView.isHidden = true
+                cell.customImageView.image = nil
             }
+        }
+        
+        if cell.customImageView.image != nil {
+            cell.customImageView.isHidden = false
+            cell.customImageView.alpha = 1
+        } else {
+            cell.customImageView.isHidden = true
+            cell.customImageView.alpha = 0
         }
     }
     
@@ -374,19 +383,6 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         }
     }
     
-    func autoRefresh(_ delayInSeconds : Int) {
-        
-        if delayInSeconds > 0 {
-            self.tableView.reloadData()
-            
-            let delayInNanoSeconds = UInt64(delayInSeconds) * NSEC_PER_SEC
-            let time = DispatchTime.now() + Double(Int64(delayInNanoSeconds)) / Double(NSEC_PER_SEC)
-            
-            DispatchQueue.main.asyncAfter(deadline: time) {
-                self.autoRefresh(delayInSeconds)
-            }
-        }
-    }
     
     /******************************************************/
     /*******************///MARK: Actions

@@ -81,8 +81,9 @@ extension CoreDataQuizletTableViewController {
                 print("case delete")
             case .update:
                 //from apple documentation
-                
-                configureCell(cell: tableView.cellForRow(at: indexPath!)!, indexPath: indexPath!)
+                if let iP = indexPath, let cell = tableView.cellForRow(at: iP) {
+                    configureCell(cell: cell, indexPath: iP)
+                }
                 print("case update")
             case .move:
                 //TODO: move a cell... this may not be needed
