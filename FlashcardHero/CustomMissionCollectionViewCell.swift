@@ -27,11 +27,18 @@ class CustomMissionCollectionViewCell: UICollectionViewCell {
     var gameVariant: GameVariant? {
         didSet {
             
-            //try to set the photo
+            //try to set game type icon
             if let image = gameVariant?.game.icon {
                 self.gameTypeIcon?.image = image
             } else {
                 self.gameTypeIcon?.image = nil
+            }
+            
+            //try to set game gemSectionsExercised
+            if let image = gameVariant?.icon {
+                self.gemSectionsExercised?.image = image
+            } else {
+                self.gemSectionsExercised?.image = #imageLiteral(resourceName: "GemGeneric")
             }
             
             //subtitle

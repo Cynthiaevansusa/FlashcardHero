@@ -111,6 +111,7 @@ class AnalysisViewController: CoreDataQuizletCollectionViewController, UICollect
         
     }
     
+
     /******************************************************/
     /*******************///MARK: FetchedResultsControllers and Stats
     /******************************************************/

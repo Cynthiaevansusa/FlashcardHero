@@ -15,8 +15,8 @@ struct GameDirectory {
     static let allGames = [GameTrueFalse.id : GameTrueFalse]
     static let activeGames = [GameTrueFalse]
     
-    static let activeGameVariants = [GameVariant(game: GameTrueFalse, gameProtocol: GameVariantProtocols.MaxPoints, description: "Points Goal"),
-                                     GameVariant(game: GameTrueFalse, gameProtocol: GameVariantProtocols.PerfectGame, description: "Perfect Score")]
+    static let activeGameVariants = [GameVariant(game: GameTrueFalse, gameProtocol: GameVariantProtocols.MaxPoints, description: "Points Goal", icon: #imageLiteral(resourceName: "GemRed")),
+                                     GameVariant(game: GameTrueFalse, gameProtocol: GameVariantProtocols.PerfectGame, description: "Perfect Score", icon: #imageLiteral(resourceName: "GemBlue"))]
     
     
 }
@@ -25,8 +25,9 @@ struct GameVariant {
     let game: Game
     let gameProtocol: String
     let description: String
+    let icon: UIImage
     
-    init(game: Game, gameProtocol: String, description: String) {
+    init(game: Game, gameProtocol: String, description: String, icon: UIImage) {
         guard GameVariantProtocols.protocols.contains(gameProtocol) else {
             fatalError("couldn't set a GameVariant")
         }
@@ -34,6 +35,7 @@ struct GameVariant {
         self.game = game
         self.gameProtocol = gameProtocol
         self.description = description
+        self.icon = icon
         
     }
 }

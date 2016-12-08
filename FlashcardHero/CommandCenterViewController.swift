@@ -18,7 +18,11 @@ class CommandCenterViewController: CoreDataQuizletCollectionViewController, UICo
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
+    @IBOutlet weak var essenceLabel: UILabel!
+    @IBOutlet weak var termsLoadedLabel: UILabel!
     var keyGameLevel = "GameLevel"
+    
+    var keySets = "Sets"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,10 +36,24 @@ class CommandCenterViewController: CoreDataQuizletCollectionViewController, UICo
         _ = setupFetchedResultsController(frcKey: keyGameLevel, entityName: "GameLevel", sortDescriptors: [NSSortDescriptor(key: "level", ascending: false)],  predicate: nil)
         
         
+        //create FRC for sets
+        _ = setupFetchedResultsController(frcKey: keySets, entityName: "QuizletSet",
+                                          sortDescriptors: [NSSortDescriptor(key: "title", ascending: false),NSSortDescriptor(key: "id", ascending: true)],
+                                          predicate: NSPredicate(format: "isActive = %@", argumentArray: [true]))
         
+        
+        
+        //set up the status bar
+        refreshStatusBar()
         // Do any additional setup after loading the view, typically from a nib.
         showMissionsSegment()
 
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        refreshStatusBar()
     }
 
     
@@ -103,6 +121,38 @@ class CommandCenterViewController: CoreDataQuizletCollectionViewController, UICo
     }
     
     /******************************************************/
+    /*******************///MARK: Status Bar
+    /******************************************************/
+
+    func refreshStatusBar() {
+        termsLoadedLabel.text = String(describing: getNumTermsLoaded())
+    }
+    
+    
+    
+    /******************************************************/
+    /*******************///MARK: Model Operations
+    /******************************************************/
+    
+    /**
+     Returns number of terms whose sets are in an active state (selected by user switch)
+     */
+    func getNumTermsLoaded() -> Int {
+        var count: Int = 0
+        
+        guard let sets = frcDict[keySets]?.fetchedObjects as? [QuizletSet] else {
+            return 0
+        }
+        
+        for set in sets {
+            
+            count += Int(set.termCount)
+        }
+        
+        return count
+    }
+    
+    /******************************************************/
     /*******************///MARK: GameCaller
     /******************************************************/
 
@@ -157,8 +207,40 @@ class CommandCenterViewController: CoreDataQuizletCollectionViewController, UICo
             cell.reward.text = "\(objective.reward) Essence"
         }
         
+        //if numTermsLoaded is zero, make start mission button disabled
+        cell.startMissionButton.setTitleColor(UIColor.white, for: .normal)
+        cell.startMissionButton.setTitleColor(UIColor.gray, for: .disabled)
+        cell.startMissionButton.setTitle("Start Mission", for: .normal)
+        cell.startMissionButton.setTitle("Load Terms to Enable Mission", for: .disabled)
+        //this formatting approach adapted from http://stackoverflow.com/questions/6178545/adjust-uibutton-font-size-to-width
+        cell.startMissionButton.titleLabel?.numberOfLines = 2
+        cell.startMissionButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        cell.startMissionButton.titleLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
+        cell.startMissionButton.titleLabel?.textAlignment = NSTextAlignment.center
+        
+        if getNumTermsLoaded() < 1 {
+            cell.startMissionButton.isEnabled = false
+            cell.startMissionButton.alpha = 0.7
+            
+            
+        } else {
+            cell.startMissionButton.isEnabled = true
+            cell.startMissionButton.alpha = 1.0
+        }
+        
         return cell
     }
+    
+    //When a user selects an item from the collection
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        return
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        return
+    }
+    
    
     /******************************************************/
     /*******************///MARK: Game level and objectives
