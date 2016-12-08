@@ -53,6 +53,10 @@ class CoreDataQuizletTableViewController: CoreDataViewController, UITableViewDel
 
 extension CoreDataQuizletTableViewController {
     
+    func configureCell(cell: UITableViewCell, indexPath: IndexPath) {
+        print("Stub for configureCell should be implimented by a child class")
+    }
+    
     override func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         //about to make updates.  wrapping actions with updates will allow for animation and auto reloading
         self.tableView.beginUpdates()
@@ -78,7 +82,7 @@ extension CoreDataQuizletTableViewController {
             case .update:
                 //from apple documentation
                 
-                //nothing is needed here because when data is updated the tableView displays datas current state
+                configureCell(cell: tableView.cellForRow(at: indexPath!)!, indexPath: indexPath!)
                 print("case update")
             case .move:
                 //TODO: move a cell... this may not be needed

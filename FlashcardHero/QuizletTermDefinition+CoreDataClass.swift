@@ -89,10 +89,9 @@ public class QuizletTermDefinition: QuizletSet {
                         self.imageData = imageDataNS
                         print("Image data succesfully retireved and set")
                         
-                        //let delegate = UIApplication.shared.delegate as! AppDelegate
-                        //let stack = delegate.stack
-                        //stack.save()
-                        
+                        //try to set this image as the set thumbnail
+                        self.quizletSet?.setThumbnailImage(imageData: imageDataNS)
+                                                
                     } else {
                         //there was an error
                         //TODO: handle error

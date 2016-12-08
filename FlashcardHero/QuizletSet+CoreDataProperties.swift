@@ -38,5 +38,7 @@ extension QuizletSet {
     @NSManaged public var url: String
     @NSManaged public var visibility: String
     @NSManaged public var isActive: Bool
+    @NSManaged public var thumbnailImageData: NSData?
+    @NSManaged public var quizletTermDefinition: [QuizletTermDefinition]?
 
 }

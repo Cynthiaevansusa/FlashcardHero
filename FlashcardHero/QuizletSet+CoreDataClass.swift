@@ -12,6 +12,7 @@ import CoreData
 
 public class QuizletSet: NSManagedObject {
 
+    var isLoadingTerms = false
     
     convenience init(withQuizletSetSearchResult: QuizletSetSearchResult, context: NSManagedObjectContext){
         
@@ -100,7 +101,9 @@ public class QuizletSet: NSManagedObject {
     /******************************************************/
     //TODO: add password support
     //fetches terms, creates QuizletTermDefinitions in the given context
-    func fetchTermsAndAddTo(context: NSManagedObjectContext) {
+    func fetchTermsAndAddTo(context: NSManagedObjectContext, sender: GemManagerViewController? = nil) {
+        
+        isLoadingTerms = true
         GCDBlackBox.runNetworkFunctionInBackground {
            
             QuizletClient.sharedInstance.getQuizletSetTermsBy(setId: Int(self.id), termsOnly: true) { (result, error) in
@@ -119,12 +122,32 @@ public class QuizletSet: NSManagedObject {
                     } else {
                         //TODO: Handle empty response
                     }
+                    //done downloading terms
                     
+                    self.isLoadingTerms = false
+//                    
                     
                 }
-            
+                
             }
         }
+    }
+    
+    func setThumbnailImage(imageData: NSData, overwrite: Bool = false) {
+        
+        if overwrite {
+        
+            self.thumbnailImageData = imageData
+            print("Set thumbnail overwritten")
+            
+        } else if self.thumbnailImageData == nil {
+            
+            self.thumbnailImageData = imageData
+            print("Set thumbnail set")
+            
+        }
+        
+        
     }
     
 }

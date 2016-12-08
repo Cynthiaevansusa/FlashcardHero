@@ -25,6 +25,7 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
     //FRCs
     let keyTrackedGems = "TrackedGems"
     let keyUsersGems = "UserGems"
+    let keyPhotoSearchTermDefinitions = "PhotoSearchTermDefinitions"
     
     var gemInActiveFlux: QuizletSet?
     
@@ -49,7 +50,7 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         tableView.delegate = self
         tableView.dataSource = self
         
-        
+        //autoRefresh(5)
 
     }
     
@@ -228,7 +229,7 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
                     let newSet = QuizletSet(withQuizletSetSearchResult: searchResult, context: self.frcDict[visibleFrcKey]!.managedObjectContext)
                     
                     //download the terms
-                    newSet.fetchTermsAndAddTo(context: self.frcDict[visibleFrcKey]!.managedObjectContext)
+                    newSet.fetchTermsAndAddTo(context: self.frcDict[visibleFrcKey]!.managedObjectContext, sender: self)
                 } else {
                     //TODO: tell user the set is already being tracked
                 }
@@ -238,6 +239,7 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
             
             
         }
+        
     }
     
     func addToDataModel(QuizletGetSetTermsResults: [QuizletGetSetTermsResult]) {
@@ -313,20 +315,38 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         
         //TODO: replace as! UITAbleViewCell witha  custom cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "GemManagerCell", for: indexPath as IndexPath) as! CustomGemManagerCell
+        
+        configureCell(cell: cell, indexPath: indexPath)
+
+        return cell
+    }
+    
+    override func configureCell(cell: UITableViewCell, indexPath: IndexPath) {
+        
         let visibleFrcKey = getVisibleFrcKey()
-        let set = self.frcDict[visibleFrcKey]!.object(at: indexPath) as! QuizletSet
+
+        guard let set = self.frcDict[visibleFrcKey]!.object(at: indexPath) as? QuizletSet else { fatalError("Unexpected Object in FetchedResultsController") }
+        
+        guard let cell = cell as? CustomGemManagerCell else { fatalError("Unexpected Cell") }
+        // Populate cell from the NSManagedObject instance
+        
         
         //associate the photo with this cell, which will set all parts of image view
         cell.quizletSet = set
         cell.cellDelegate = self
         
-//        if photo.isTransitioningImage {
-//            cell.startActivityIndicator()
-//        } else {
-//            cell.stopActivityIndicator()
-//        }
-        
-        return cell
+        if set.isLoadingTerms {
+            cell.startActivityIndicator()
+        } else {
+            cell.stopActivityIndicator()
+            //if we found an image, set it or else hide the imageView
+            if let foundData = set.thumbnailImageData as? Data {
+                cell.customImageView.image = UIImage(data: foundData)
+                cell.customImageView.isHidden = false
+            } else {
+                cell.customImageView.isHidden = true
+            }
+        }
     }
     
     //editing is allowed for anonymous sets
@@ -350,6 +370,20 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
                 
                 context.delete(self.frcDict[self.keyTrackedGems]!.object(at: indexPath) as! QuizletSet)
  
+            }
+        }
+    }
+    
+    func autoRefresh(_ delayInSeconds : Int) {
+        
+        if delayInSeconds > 0 {
+            self.tableView.reloadData()
+            
+            let delayInNanoSeconds = UInt64(delayInSeconds) * NSEC_PER_SEC
+            let time = DispatchTime.now() + Double(Int64(delayInNanoSeconds)) / Double(NSEC_PER_SEC)
+            
+            DispatchQueue.main.asyncAfter(deadline: time) {
+                self.autoRefresh(delayInSeconds)
             }
         }
     }

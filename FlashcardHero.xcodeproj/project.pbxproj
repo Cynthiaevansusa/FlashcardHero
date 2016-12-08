@@ -251,9 +251,9 @@
 		F63782CF1DC2E2BE0078FE7F /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				F63782D21DC2E3F50078FE7F /* CoreDataStack.swift */,
 				F6CD7EF61DF2466F004A4A57 /* Game and Goals */,
 				F67D15991DDB528F00D9DD5C /* User Performance */,
-				F63782D21DC2E3F50078FE7F /* CoreDataStack.swift */,
 				F66B5E471DC6D30500052B7F /* Quizlet */,
 			);
 			name = CoreData;

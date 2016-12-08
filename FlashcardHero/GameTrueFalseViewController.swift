@@ -270,22 +270,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
         
         awardPoints(newPoints)
         refreshPoints()
-        
-        //check to see if the player met objectives or failed
-        if didPlayerFailMission() {
-            setFeedbackMessage(wasCorrect: false, otherMessage: "Mission Failed!")
-            setFeedbackVisible(visible: true, duration: 0.01)
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
-                self.finishGame(false)
-                })
-            
-        } else if didPlayerCompleteMission() {
-            setFeedbackMessage(wasCorrect: true, otherMessage: "Mission Complete!")
-            setFeedbackVisible(visible: true, duration: 0.01)
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
-                self.finishGame(true)
-            })
-        }
+
     }
     
     func awardPoints(_ newPoints: Int) {
@@ -476,9 +461,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
             addRefreshPoints(-1)
             
         }
-        setFeedbackVisible(visible: true)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(400), execute: {self.dismissFeedback()})
         
         //log the activity
         
@@ -490,6 +473,29 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
                                       wrongAnswerFITB: nil,
                                       studySession: self.studySession!,
                                       context: self.frcDict[keyPerformanceLog]!.managedObjectContext)
+    
+        
+        //check to see if the player met objectives or failed
+        if didPlayerFailMission() {
+            setFeedbackMessage(wasCorrect: false, otherMessage: "Mission Failed!")
+            setFeedbackVisible(visible: true, duration: 0.01)
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
+                self.finishGame(false)
+            })
+            
+        } else if didPlayerCompleteMission() {
+            setFeedbackMessage(wasCorrect: true, otherMessage: "Mission Complete!")
+            setFeedbackVisible(visible: true, duration: 0.01)
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
+                self.finishGame(true)
+            })
+        } else {
+        
+            setFeedbackVisible(visible: true)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(400), execute: {self.dismissFeedback()})
+        }
+    
     }
     
     /******************************************************/

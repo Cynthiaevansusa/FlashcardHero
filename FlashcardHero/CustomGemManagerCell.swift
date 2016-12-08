@@ -24,6 +24,7 @@ class CustomGemManagerCell: UITableViewCell {
     @IBOutlet weak var customImageView: UIImageView!
     @IBOutlet weak var activeSwitch: UISwitch!
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     weak var cellDelegate: SettingCellDelegate?
     
     //QuizletSetSearchResult
@@ -60,5 +61,13 @@ class CustomGemManagerCell: UITableViewCell {
     @IBAction func handledSwitchChange(sender: UISwitch) {
         self.cellDelegate?.didChangeSwitchState(sender: self, isOn: activeSwitch.isOn)
         
+    }
+    
+    func startActivityIndicator() {
+        self.activityIndicator!.startAnimating()
+    }
+    
+    func stopActivityIndicator() {
+        self.activityIndicator!.stopAnimating()
     }
 }
