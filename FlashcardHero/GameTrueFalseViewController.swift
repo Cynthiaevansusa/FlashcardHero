@@ -200,17 +200,20 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
     }
     
     func displayMissionFinishSummary(_ didPlayerSucceed: Bool) {
-        if didPlayerSucceed {
-            setFeedbackMessage(wasCorrect: false, otherMessage: "Mission Success!")
-        } else {
-            setFeedbackMessage(wasCorrect: false, otherMessage: "Mission Failed!")
+        
+        let stars = 3
+        
+        let dateInterval = DateInterval()
+        let totalPoints = points
+        
+        let vc = storyboard?.instantiateViewController(withIdentifier: "MissionFeedbackViewController")
+        
+        if let mFVC = vc as? MissionFeedbackViewController { //if it is a true false game
+            
+            present(mFVC, animated: true, completion: {mFVC.setupWith(wasSuccess: didPlayerSucceed, numStars: stars, timeElapsed: dateInterval, totalPoints: totalPoints, senderVC: self, destinationVC: nil, customStats: nil, destinationVCCompletion: {self.finishGame(didPlayerSucceed)})})
+   
         }
-        setFeedbackVisible(visible: true, duration: 0.01)
         
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
-            self.finishGame(didPlayerSucceed)
-        })
     }
     
     /******************************************************/

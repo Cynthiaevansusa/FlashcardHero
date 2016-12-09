@@ -21,6 +21,7 @@
 		F614C35B1DCB216800E7D3C8 /* QuizletTermDefinition+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F614C3591DCB216800E7D3C8 /* QuizletTermDefinition+CoreDataClass.swift */; };
 		F614C35C1DCB216800E7D3C8 /* QuizletTermDefinition+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F614C35A1DCB216800E7D3C8 /* QuizletTermDefinition+CoreDataProperties.swift */; };
 		F61B5F561DE39DB1009126E7 /* QuizletOAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61B5F551DE39DB1009126E7 /* QuizletOAuth.swift */; };
+		F63459671DFB399B00D257E5 /* MissionFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63459661DFB399B00D257E5 /* MissionFeedbackViewController.swift */; };
 		F63782CA1DC2E1EC0078FE7F /* Documents in Resources */ = {isa = PBXBuildFile; fileRef = F63782C91DC2E1EC0078FE7F /* Documents */; };
 		F63782D11DC2E3C00078FE7F /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63782D01DC2E3C00078FE7F /* GCDBlackBox.swift */; };
 		F63782D31DC2E3F50078FE7F /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63782D21DC2E3F50078FE7F /* CoreDataStack.swift */; };
@@ -104,6 +105,7 @@
 		F614C35A1DCB216800E7D3C8 /* QuizletTermDefinition+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "QuizletTermDefinition+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F61B5F551DE39DB1009126E7 /* QuizletOAuth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizletOAuth.swift; sourceTree = "<group>"; };
 		F61B5F571DE4AD6C009126E7 /* FlashcardHero.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FlashcardHero.entitlements; sourceTree = "<group>"; };
+		F63459661DFB399B00D257E5 /* MissionFeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MissionFeedbackViewController.swift; sourceTree = "<group>"; };
 		F63782C91DC2E1EC0078FE7F /* Documents */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Documents; path = FlashcardHero/Documents; sourceTree = "<group>"; };
 		F63782D01DC2E3C00078FE7F /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
 		F63782D21DC2E3F50078FE7F /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 			isa = PBXGroup;
 			children = (
 				F6FD10CE1DBEEAEB00B7E6EA /* CommandCenterViewController.swift */,
+				F63459661DFB399B00D257E5 /* MissionFeedbackViewController.swift */,
 			);
 			name = "HQ Tab";
 			sourceTree = "<group>";
@@ -357,8 +360,8 @@
 		F67D15891DD1908300D9DD5C /* Games */ = {
 			isa = PBXGroup;
 			children = (
-				F67D158E1DD19DED00D9DD5C /* CoreDataTrueFalseGameController.swift */,
 				F6CD7EFC1DF27E48004A4A57 /* GameProtocols.swift */,
+				F67D158E1DD19DED00D9DD5C /* CoreDataTrueFalseGameController.swift */,
 				F67D158A1DD190C200D9DD5C /* GameTrueFalseViewController.swift */,
 			);
 			name = Games;
@@ -800,6 +803,7 @@
 				F606B3751DBEED0000744EC7 /* README.md in Sources */,
 				F63782D31DC2E3F50078FE7F /* CoreDataStack.swift in Sources */,
 				F67D158F1DD19DED00D9DD5C /* CoreDataTrueFalseGameController.swift in Sources */,
+				F63459671DFB399B00D257E5 /* MissionFeedbackViewController.swift in Sources */,
 				F6FD10CF1DBEEAEB00B7E6EA /* CommandCenterViewController.swift in Sources */,
 				F63782D81DC2E4440078FE7F /* Utilities.swift in Sources */,
 				F67D15ED1DC938B9002975C7 /* CustomQuizletSearchBySetsResultsCell.swift in Sources */,

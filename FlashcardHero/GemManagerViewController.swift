@@ -323,6 +323,9 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         return cell
     }
     
+    /**
+     used to set up the way a cell will look in the tableView
+     */
     override func configureCell(cell: UITableViewCell, indexPath: IndexPath) {
         
         //TODO: Fix bug where old images are present before loading new ones
