@@ -24,7 +24,9 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
     @IBOutlet weak var feedbackLabel: UILabel!
     
     @IBOutlet weak var pointsLabel: UILabel!
+    @IBOutlet weak var livesLabel: UILabel!
     var points = 0
+    var lives = 1
     
     var showingCorrectAnswer: Bool = false
     var correctTD: QuizletTermDefinition?
@@ -81,6 +83,28 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
         present(alert, animated: true, completion: nil)
     }
     
+    func alertQuit() {
+        let title = "Quit?"
+        let message = "This will count as a Mission Failure!"
+        
+        let alert = UIAlertController(title: title,
+                                      message: message,
+                                      preferredStyle: UIAlertControllerStyle.alert)
+        
+        let quitAction = UIAlertAction(title: "Yes",
+                                          style: UIAlertActionStyle.default,
+                                          handler: {(action:UIAlertAction) in self.quit()})
+        
+        let stayAction = UIAlertAction(title: "No",
+                                       style: UIAlertActionStyle.default,
+                                       handler: nil)
+        
+        alert.addAction(quitAction)
+        alert.addAction(stayAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
     /******************************************************/
     /*******************///MARK: Data Checks Validations
     /******************************************************/
@@ -131,6 +155,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
         definitionText.layer.cornerRadius = 5
         
         refreshPoints()
+        refreshLives()
     }
     
     /******************************************************/
@@ -165,12 +190,27 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
     var gameCallerDelegate: GameCaller? = nil
     
     func finishGame(_ didPlayerSucceed: Bool) {
+
         if let gameDelegate = self.gameCallerDelegate {
             self.dismiss(animated: true, completion: {gameDelegate.gameFinished(didPlayerSucceed, forGame: GameDirectory.GameTrueFalse)})
         } else {
             //TODO: Handle problem
         }
         
+    }
+    
+    func displayMissionFinishSummary(_ didPlayerSucceed: Bool) {
+        if didPlayerSucceed {
+            setFeedbackMessage(wasCorrect: false, otherMessage: "Mission Success!")
+        } else {
+            setFeedbackMessage(wasCorrect: false, otherMessage: "Mission Failed!")
+        }
+        setFeedbackVisible(visible: true, duration: 0.01)
+        
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
+            self.finishGame(didPlayerSucceed)
+        })
     }
     
     /******************************************************/
@@ -237,6 +277,10 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
         
         //points player cannot miss
         self.objectiveQuestionsCanMiss = missedPoints
+        
+        //setup lives
+        lives = missedPoints
+        refreshLives()
 
         //lowest score allowed is the number of missed points
         self.objectiveMinPoints = -1 * missedPoints
@@ -255,6 +299,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
     
     func playerMissedAQuestion() {
         self.objectiveQuestionsMissed += 1
+        awardLives(-1)
     }
  
     
@@ -270,11 +315,16 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
         
         awardPoints(newPoints)
         refreshPoints()
+        refreshLives()
 
     }
     
     func awardPoints(_ newPoints: Int) {
         self.points += newPoints
+    }
+    
+    func awardLives(_ newLives: Int) {
+        self.lives += newLives
     }
     
     func getRandomSet(sets: [QuizletSet]) -> QuizletSet {
@@ -477,18 +527,10 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
         
         //check to see if the player met objectives or failed
         if didPlayerFailMission() {
-            setFeedbackMessage(wasCorrect: false, otherMessage: "Mission Failed!")
-            setFeedbackVisible(visible: true, duration: 0.01)
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
-                self.finishGame(false)
-            })
+            self.displayMissionFinishSummary(false)
             
         } else if didPlayerCompleteMission() {
-            setFeedbackMessage(wasCorrect: true, otherMessage: "Mission Complete!")
-            setFeedbackVisible(visible: true, duration: 0.01)
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
-                self.finishGame(true)
-            })
+            self.displayMissionFinishSummary(true)
         } else {
         
             setFeedbackVisible(visible: true)
@@ -504,6 +546,10 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
 
     func refreshPoints() {
         pointsLabel.text = String(points)
+    }
+    
+    func refreshLives() {
+        livesLabel.text = String(lives)
     }
     
     func setFeedbackMessage(wasCorrect: Bool, otherMessage: String? = nil){
@@ -586,7 +632,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
     /******************************************************/
 
     @IBAction func quitButtonPressed(_ sender: Any) {
-        quit()
+        alertQuit()
     }
     
     @IBAction func trueButtonPressed(_ sender: Any) {

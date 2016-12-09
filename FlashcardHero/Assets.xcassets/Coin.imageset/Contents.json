@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "object_06_coin.png",
+      "filename" : "object_06_coin no padding for dispay.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "object_06_coin-1.png",
+      "filename" : "object_06_coin no padding for dispay-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "object_06_coin-2.png",
+      "filename" : "object_06_coin no padding for dispay-2.png",
       "scale" : "3x"
     }
   ],
