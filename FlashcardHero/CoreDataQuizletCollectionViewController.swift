@@ -60,16 +60,17 @@ extension CoreDataQuizletCollectionViewController {
     
     override func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         
+        //stack.save()
+        
         if anObject is QuizletTermDefinition {
             
             switch(type) {
             case .insert:
                 //from apple documentation
-                
+                stack.save()
                 self.collectionView.insertItems(at: [newIndexPath!])
                 
                 //TODO: initiate download of terms?
-                
                 print("case insert")
             case .delete:
                 //from apple documentation
@@ -78,7 +79,7 @@ extension CoreDataQuizletCollectionViewController {
                 print("case delete")
             case .update:
                 //from apple documentation
-                
+                stack.save()
                 //nothing is needed here because when data is updated the collectionView displays datas current state
                 print("case update")
             case .move:
@@ -90,7 +91,7 @@ extension CoreDataQuizletCollectionViewController {
 
         }
         
-        stack.save()
+        //stack.save()
 //        else
 //        {
 //            fatalError("Couldn't get a \(anObject) from anObject in didChange")

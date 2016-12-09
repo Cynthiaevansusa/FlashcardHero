@@ -65,11 +65,14 @@ extension CoreDataQuizletTableViewController {
     override func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         
         print("\(controller) didChange anObject")
+        //save
+        //stack.save()
         
         if anObject is QuizletSet {
             
             switch(type) {
             case .insert:
+                stack.save()
                 //from apple documentation
                 self.tableView.insertRows(at: [newIndexPath!], with: UITableViewRowAnimation.automatic)
                 
@@ -77,34 +80,28 @@ extension CoreDataQuizletTableViewController {
             case .delete:
                 //from apple documentation
                 self.tableView.deleteRows(at: [indexPath!], with: UITableViewRowAnimation.automatic)
-                
                 print("case delete")
             case .update:
+                stack.save()
                 //from apple documentation
-                if let iP = indexPath, let cell = tableView.cellForRow(at: iP) {
-                    configureCell(cell: cell, indexPath: iP)
-                }
+                configureCell(cell: tableView.cellForRow(at: indexPath!)!, indexPath: indexPath!)
                 print("case update")
             case .move:
                 //TODO: move a cell... this may not be needed
                 print("case move")
             }
-            
-            
-            
+          
         } else
         {
             fatalError("Couldn't get a QuizletSet from anObject in didChange")
         }
         
-        //save
-        stack.save()
+        
     }
     
     override func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         //finished with updates, allow table view to animate and reload
         //print("\(controller) didchangecontent")
         self.tableView.endUpdates()
-        
     }
 }

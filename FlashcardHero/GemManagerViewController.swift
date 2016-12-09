@@ -50,17 +50,10 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         tableView.delegate = self
         tableView.dataSource = self
         
-
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        //self.tableView.reloadData()
-        
         let delegate = UIApplication.shared.delegate as! AppDelegate
         
         //if user is logged in setup the UsersGems FRC
+        //TODO: change this to always be
         if delegate.isUserLoggedIn() {
             self.setupUserGemsFRC()
             
@@ -76,6 +69,16 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
                                               sortDescriptors: [NSSortDescriptor(key: "title", ascending: false),NSSortDescriptor(key: "id", ascending: true)],
                                               predicate: nil)
         }
+        
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //self.tableView.reloadData()
+        
+        let delegate = UIApplication.shared.delegate as! AppDelegate
         
         setViewForLoginStatus(delegate.isUserLoggedIn())
     }
@@ -170,10 +173,10 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
     
     func setViewForLoginStatus(_ loggedin: Bool) {
         if loggedin {
-            let delegate = UIApplication.shared.delegate as! AppDelegate
-            if delegate.isUserLoggedIn() {
-                self.setupUserGemsFRC()
-            }
+//            let delegate = UIApplication.shared.delegate as! AppDelegate
+//            if delegate.isUserLoggedIn() {
+//                self.setupUserGemsFRC()
+//            }
             
             UIView.animate(withDuration: 0.1, animations: {
                 self.setViewUserLoggedIn()
@@ -296,18 +299,18 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         //print("There are ", String(self.setsToDisplay.count), " sets to display")
         //return self.setsToDisplay.count
         let visibleFrcKey = getVisibleFrcKey()
-        if let fc = self.frcDict[visibleFrcKey] {
-            //print("Showing this FRCKey \(visibleFrcKey) with \(fc.sections?.count) sections and \((fc.sections?[section].numberOfObjects)!) objects in this section.")
-            if (fc.sections?.count)! > 0 {
-                let sectionInfo = fc.sections?[section]
-                return (sectionInfo?.numberOfObjects)!
-            } else {
-                return 0
-            }
-        } else {
-            return 0
+        guard let fc = self.frcDict[visibleFrcKey] else {
+            fatalError("Couldn't get fetchedResultsController with key \(visibleFrcKey)")
         }
+        guard let sections = fc.sections else {
+            fatalError("No sections in fetchedResultsController")
+        }
+    
+        //print("Here is the frcDict \(frcDict)")
+        //print("Here are all of the sets \(frcDict[visibleFrcKey]!.sections![section].objects)")
         
+        let numRows = sections[section].numberOfObjects
+        return numRows
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -372,14 +375,23 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         guard self.segmentedControl.selectedSegmentIndex == 0 else {
             return
         }
-        if (editingStyle == UITableViewCellEditingStyle.delete) {
-            if let context = self.frcDict[self.keyTrackedGems]?.managedObjectContext {
+        switch editingStyle {
+        case .delete:
+            
+            let visibleFrcKey = getVisibleFrcKey()
+            if let context = self.frcDict[visibleFrcKey]?.managedObjectContext {
                 
                 //TODO: Warn use that all performance data will also be deleted.  If they accept, then delete.
                 
                 context.delete(self.frcDict[self.keyTrackedGems]!.object(at: indexPath) as! QuizletSet)
- 
+                // Get the stack
+                let delegate = UIApplication.shared.delegate as! AppDelegate
+                stack = delegate.stack
+                stack.save()
             }
+            
+        default:
+            return
         }
     }
     

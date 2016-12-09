@@ -3,7 +3,7 @@
     <entity name="AppSession" representedClassName=".AppSession" syncable="YES">
         <attribute name="start" attributeType="Date" minDateTimeInterval="500930220" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
         <attribute name="stop" optional="YES" attributeType="Date" minDateTimeInterval="500930220" usesScalarValueType="NO" syncable="YES"/>
-        <relationship name="studySession" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="StudySession" inverseName="appSession" inverseEntity="StudySession" syncable="YES"/>
+        <relationship name="studySession" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="StudySession" inverseName="appSession" inverseEntity="StudySession" syncable="YES"/>
     </entity>
     <entity name="GameLevel" representedClassName=".GameLevel" syncable="YES">
         <attribute name="gameId" attributeType="Integer 64" minValueString="0" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -45,7 +45,7 @@
         <attribute name="term" attributeType="String" syncable="YES"/>
         <attribute name="termId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="performanceLog" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TDPerformanceLog" inverseName="quizletTD" inverseEntity="TDPerformanceLog" syncable="YES"/>
-        <relationship name="performanceLogWrong" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TDPerformanceLog" inverseName="wrongAnswerTD" inverseEntity="TDPerformanceLog" syncable="YES"/>
+        <relationship name="performanceLogWrong" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TDPerformanceLog" inverseName="wrongAnswerTD" inverseEntity="TDPerformanceLog" syncable="YES"/>
         <relationship name="quizletSet" maxCount="1" deletionRule="Nullify" destinationEntity="QuizletSet" inverseName="quizletTermDefinition" inverseEntity="QuizletSet" syncable="YES"/>
     </entity>
     <entity name="StudySession" representedClassName=".StudySession" syncable="YES">
@@ -59,16 +59,16 @@
         <attribute name="questionTypeId" attributeType="Integer 64" minValueString="0" defaultValueString="0" usesScalarValueType="YES" indexed="YES" syncable="YES"/>
         <attribute name="wasCorrect" attributeType="Boolean" usesScalarValueType="YES" indexed="YES" syncable="YES"/>
         <attribute name="wrongAnswerFITB" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="quizletTD" maxCount="1" deletionRule="Nullify" destinationEntity="QuizletTermDefinition" inverseName="performanceLog" inverseEntity="QuizletTermDefinition" syncable="YES"/>
+        <relationship name="quizletTD" maxCount="1" deletionRule="Cascade" destinationEntity="QuizletTermDefinition" inverseName="performanceLog" inverseEntity="QuizletTermDefinition" syncable="YES"/>
         <relationship name="studySession" maxCount="1" deletionRule="Nullify" destinationEntity="StudySession" syncable="YES"/>
         <relationship name="wrongAnswerTD" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QuizletTermDefinition" inverseName="performanceLogWrong" inverseEntity="QuizletTermDefinition" syncable="YES"/>
     </entity>
     <elements>
-        <element name="AppSession" positionX="-9" positionY="-45" width="128" height="30"/>
+        <element name="AppSession" positionX="-9" positionY="-45" width="128" height="90"/>
         <element name="GameLevel" positionX="-18" positionY="-54" width="128" height="75"/>
         <element name="QuizletSet" positionX="-216" positionY="-207" width="128" height="405"/>
         <element name="QuizletTermDefinition" positionX="18" positionY="171" width="128" height="210"/>
         <element name="StudySession" positionX="0" positionY="-36" width="128" height="105"/>
-        <element name="TDPerformanceLog" positionX="187" positionY="162" width="128" height="148"/>
+        <element name="TDPerformanceLog" positionX="187" positionY="162" width="128" height="150"/>
     </elements>
 </model>
