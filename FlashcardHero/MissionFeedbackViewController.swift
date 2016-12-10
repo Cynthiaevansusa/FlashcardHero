@@ -123,8 +123,15 @@ class MissionFeedbackViewController: CoreDataQuizletCollectionViewController, Mi
         timeElapsedLabelText = time
         
         totalPointsLabelText = String(describing: points)
-        let aValue = Int(round(accurracy * 100))
-        accurracyLabelText = "\(aValue)%"
+        
+        
+        if accurracy.isNaN || accurracy.isFinite {
+            accurracyLabelText = "--"
+        } else {
+            let aValue = Int(round(accurracy * 100))
+            accurracyLabelText = "\(aValue)%"
+        }
+        
         senderVC = sender
         
         //if didn't supply a destination, then assume destination is back to sender

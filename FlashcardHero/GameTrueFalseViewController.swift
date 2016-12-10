@@ -238,6 +238,13 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
     func calculateNumStars() -> Int {
         //check stars and smooth input if needed
         var starsOutput = 3
+        
+        if didPlayerSucceed {
+            starsOutput = 3
+        } else {
+            starsOutput = 0
+        }
+        
         if starsOutput > 3 || starsOutput < 0 {
             starsOutput = 0
         }
@@ -871,7 +878,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
     
     func quit() {
         timer.invalidate() //stop timer
-        finishGame(false)
+        displayMissionFinishSummary(false)
     }
 
     
