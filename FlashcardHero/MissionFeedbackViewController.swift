@@ -125,8 +125,9 @@ class MissionFeedbackViewController: CoreDataQuizletCollectionViewController, Mi
         totalPointsLabelText = String(describing: points)
         
         
-        if accurracy.isNaN || accurracy.isFinite {
-            accurracyLabelText = "0%"
+        if accurracy.isNaN || accurracy.isInfinite {
+            print("Incoming accurracy was NaN or infinate. \(accurracy)")
+            accurracyLabelText = "--"
         } else {
             let aValue = Int(round(accurracy * 100))
             accurracyLabelText = "\(aValue)%"

@@ -287,6 +287,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
                 print("Error, accurracy calclated outside of bounds \(accurracy)")
                 return -1.0
             } else {
+                print("Calculated accurracy: \(accurracy)")
                 return accurracy
             }
             
