@@ -280,6 +280,13 @@
                                     <constraint firstItem="zFo-Ch-h8t" firstAttribute="leading" secondItem="axm-dM-EZQ" secondAttribute="leading" constant="11" id="iLs-sV-nrX"/>
                                     <constraint firstItem="Ma8-GW-7E2" firstAttribute="centerY" secondItem="zFo-Ch-h8t" secondAttribute="centerY" id="tLK-TT-PcA"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="d0q-ww-Unr"/>
+                                        <exclude reference="zFo-Ch-h8t"/>
+                                        <exclude reference="Ma8-GW-7E2"/>
+                                    </mask>
+                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1525,7 +1532,7 @@
                                         <rect key="frame" x="87.5" y="0.0" width="200" height="200"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="201" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sessions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="40" translatesAutoresizingMaskIntoConstraints="NO" id="Soz-sv-aQE">
