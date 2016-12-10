@@ -46,7 +46,7 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         //set tableView
         tableView = gemTableView
         tableView.delegate = self
@@ -73,6 +73,17 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         }
         
 
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        //load walkthrough
+        if !UserDefaults.standard.bool(forKey: "Walkthrough") {
+            print("Showing the Orientation now")
+            // Present Walkthrough
+            let vc = storyboard?.instantiateViewController(withIdentifier: "Orientation") as! OrientationViewController
+            
+            present(vc, animated: true, completion: nil)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

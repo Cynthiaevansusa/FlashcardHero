@@ -322,6 +322,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSFetchedResultsControlle
 //        }
         createNewAppSession()
         stack.save()
+        
+        //adapted from http://stackoverflow.com/questions/12878162/how-can-i-show-a-view-on-the-first-launch-only to show orientation
+        if !UserDefaults.standard.bool(forKey: "Walkthrough") {
+            print("User has not seen the walkthrough yet")
+            UserDefaults.standard.set(false, forKey: "Walkthrough")
+        }
         return true
     }
 

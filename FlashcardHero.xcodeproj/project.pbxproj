@@ -22,6 +22,8 @@
 		F614C35C1DCB216800E7D3C8 /* QuizletTermDefinition+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F614C35A1DCB216800E7D3C8 /* QuizletTermDefinition+CoreDataProperties.swift */; };
 		F61B5F561DE39DB1009126E7 /* QuizletOAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61B5F551DE39DB1009126E7 /* QuizletOAuth.swift */; };
 		F63459671DFB399B00D257E5 /* MissionFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63459661DFB399B00D257E5 /* MissionFeedbackViewController.swift */; };
+		F63459691DFCAAD200D257E5 /* LICENSEKeychainSwift.txt in Resources */ = {isa = PBXBuildFile; fileRef = F63459681DFCAAD200D257E5 /* LICENSEKeychainSwift.txt */; };
+		F634596B1DFCB48E00D257E5 /* OrientationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F634596A1DFCB48E00D257E5 /* OrientationViewController.swift */; };
 		F63782CA1DC2E1EC0078FE7F /* Documents in Resources */ = {isa = PBXBuildFile; fileRef = F63782C91DC2E1EC0078FE7F /* Documents */; };
 		F63782D11DC2E3C00078FE7F /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63782D01DC2E3C00078FE7F /* GCDBlackBox.swift */; };
 		F63782D31DC2E3F50078FE7F /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63782D21DC2E3F50078FE7F /* CoreDataStack.swift */; };
@@ -106,6 +108,8 @@
 		F61B5F551DE39DB1009126E7 /* QuizletOAuth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizletOAuth.swift; sourceTree = "<group>"; };
 		F61B5F571DE4AD6C009126E7 /* FlashcardHero.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FlashcardHero.entitlements; sourceTree = "<group>"; };
 		F63459661DFB399B00D257E5 /* MissionFeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MissionFeedbackViewController.swift; sourceTree = "<group>"; };
+		F63459681DFCAAD200D257E5 /* LICENSEKeychainSwift.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSEKeychainSwift.txt; sourceTree = SOURCE_ROOT; };
+		F634596A1DFCB48E00D257E5 /* OrientationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrientationViewController.swift; sourceTree = "<group>"; };
 		F63782C91DC2E1EC0078FE7F /* Documents */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Documents; path = FlashcardHero/Documents; sourceTree = "<group>"; };
 		F63782D01DC2E3C00078FE7F /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
 		F63782D21DC2E3F50078FE7F /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -267,6 +271,7 @@
 				F63782D61DC2E4440078FE7F /* Utilities.swift */,
 				F63782DF1DC2EDFD0078FE7F /* Secrets.swift */,
 				F606B3761DBEF2C600744EC7 /* LICENSE */,
+				F63459681DFCAAD200D257E5 /* LICENSEKeychainSwift.txt */,
 				F606B3741DBEED0000744EC7 /* README.md */,
 				F63782DD1DC2E9050078FE7F /* .gitignore */,
 			);
@@ -299,6 +304,7 @@
 			children = (
 				F6FD10CE1DBEEAEB00B7E6EA /* CommandCenterViewController.swift */,
 				F63459661DFB399B00D257E5 /* MissionFeedbackViewController.swift */,
+				F634596A1DFCB48E00D257E5 /* OrientationViewController.swift */,
 			);
 			name = "HQ Tab";
 			sourceTree = "<group>";
@@ -618,6 +624,7 @@
 				F6FD10D91DBEEAEB00B7E6EA /* LaunchScreen.storyboard in Resources */,
 				F63782DE1DC2E9050078FE7F /* .gitignore in Resources */,
 				F6FD10D61DBEEAEB00B7E6EA /* Assets.xcassets in Resources */,
+				F63459691DFCAAD200D257E5 /* LICENSEKeychainSwift.txt in Resources */,
 				F606B3771DBEF2C600744EC7 /* LICENSE in Resources */,
 				F6FD10D41DBEEAEB00B7E6EA /* Main.storyboard in Resources */,
 				F63782CA1DC2E1EC0078FE7F /* Documents in Resources */,
@@ -825,6 +832,7 @@
 				F67D15AC1DDD1AE900D9DD5C /* AnalysisViewController.swift in Sources */,
 				F614C34A1DC999FC00E7D3C8 /* CoreDataQuizletTableViewController.swift in Sources */,
 				F67D15911DDB3E6E00D9DD5C /* GameDirectory.swift in Sources */,
+				F634596B1DFCB48E00D257E5 /* OrientationViewController.swift in Sources */,
 				F614C35B1DCB216800E7D3C8 /* QuizletTermDefinition+CoreDataClass.swift in Sources */,
 				F6CD7EF51DF24668004A4A57 /* GameLevel+CoreDataProperties.swift in Sources */,
 				F67D15941DDB4A4700D9DD5C /* QuestionType.swift in Sources */,
