@@ -7,6 +7,7 @@
 // test
 
 import Foundation
+import UIKit
 
 /******************************************************/
 /******************* Shuffle Mutable Collections **************/
@@ -85,37 +86,69 @@ extension String {
 }
 
 /******************************************************/
-/*******************///MARK: Looping over struct and class properties
-//http://stackoverflow.com/questions/27292255/how-to-loop-over-struct-properties-in-swift
+/*******************///MARK: Getting strings of timer intervals
+//adapted from http://stackoverflow.com/questions/28872450/conversion-from-nstimeinterval-to-hour-minutes-seconds-milliseconds-in-swift
 /******************************************************/
 
-//protocol PropertyLoopable
-//{
-//    func allProperties() throws -> [String: Any]
-//}
-//
-//extension PropertyLoopable
-//{
-//    func allProperties() throws -> [String: Any] {
-//        
-//        var result: [String: Any] = [:]
-//        
-//        let mirror = Mirror(reflecting: self)
-//        
-////        guard let style = mirror.displayStyle, (style == .Struct || style == .Class) else {
-////            //throw some error
-////            throw NSError(domain: "hris.to", code: 777, userInfo: nil)
-////        }
-//        
-//        for (labelMaybe, valueMaybe) in mirror.children {
-//            guard let label = labelMaybe else {
-//                continue
-//            }
-//            
-//            result[label] = valueMaybe
-//        }
-//        
-//        return result
-//    }
-//}
+extension String {
+    /**
+     Replaces all occurances from string with replacement
+     */
+    public func replace(_ string:String, replacement:String) -> String {
+        return self.replacingOccurrences(of: string, with: replacement, options: NSString.CompareOptions.literal, range: nil)
+    }
+    
+}
 
+extension DateInterval {
+    
+    /**
+     returns a string based on given format.  Default is "hh:mm:ss:sss"
+     
+     - Parameters:
+        - hh: hours
+        - mm: minutes
+        - MM: minutes, including sum of all hours.  If used, assumes aren't using hh or MM when summing
+        - ss: whole seconds
+        - sss: miliseconds
+    
+     - Returns: String
+     */
+    func timeIntervalAsString(format : String = "hh:mm:ss:sss") -> String {
+        let ms      = Int((self.duration.truncatingRemainder(dividingBy: 1)) * 1000)
+        let asInt   = NSInteger(self.duration)
+        let s = asInt % 60
+        let m = (asInt / 60) % 60
+        let h = (asInt / 3600)
+        let MM = h * 60 + m
+        
+        var value = format
+        value = value.replace("hh",  replacement: String(format: "%0.2d", h))
+        value = value.replace("MM",  replacement: String(format: "%0.2d", MM))
+        value = value.replace("mm",  replacement: String(format: "%0.2d", m))
+        value = value.replace("sss", replacement: String(format: "%0.3d", ms))
+        value = value.replace("ss",  replacement: String(format: "%0.2d", s))
+        return value
+    }
+    
+}
+
+/******************************************************/
+/*******************///MARK: UIView Extensions
+/******************************************************/
+
+//adpated from https://www.andrewcbancroft.com/2014/07/27/fade-in-out-animations-as-class-extensions-with-swift/
+extension UIView {
+    func fadeIn() {
+        // Move our fade out code from earlier
+        UIView.animate(withDuration: 1.0, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+            self.alpha = 1.0 // Instead of a specific instance of, say, birdTypeLabel, we simply set [thisInstance] (ie, self)'s alpha
+        }, completion: nil)
+    }
+
+    func fadeOut() {
+        UIView.animate(withDuration: 1.0, delay: 0.0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+            self.alpha = 0.0
+        }, completion: nil)
+    }
+}

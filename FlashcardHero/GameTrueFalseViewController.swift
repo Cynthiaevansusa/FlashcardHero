@@ -25,10 +25,33 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
     
     @IBOutlet weak var pointsLabel: UILabel!
     @IBOutlet weak var livesLabel: UILabel!
+    @IBOutlet weak var timerLabel: UILabel!
+    
+    let missionFeedbackSegueIdentifier = "segueShowMissionFeedback"
+    
+    //general game variables
     var points = 0
     var lives = 1
     var questionsWrong = 0
     var questionsCorrect = 0
+    var didPlayerSucceed = false
+    
+    //timer variables
+    let startDateTime = {return Date() }() //to calculate duration and timer
+    var dateTimeNow: Date { //to calculate timer and final duration
+        get {
+            return Date()
+        }
+    }
+
+    var elapsedDateInterval: DateInterval {
+        get {
+            return DateInterval(start: startDateTime, end: dateTimeNow)}
+    }
+    var timer = Timer()
+    
+    //FC keys
+    let keyAccurracy = "Accurracy"
     
     var showingCorrectAnswer: Bool = false
     var correctTD: QuizletTermDefinition?
@@ -39,11 +62,20 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
     /******************************************************/
     /*******************///MARK: Life Cycle
     /******************************************************/
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //setupFetchedResultsController()
         //setupPerformanceLogFetchedResultsController()
+        
+       timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+        
+        //setup accurracy FRC
+        //create FRC for sets using the studySession created in the superclass
+        _ = setupFetchedResultsController(frcKey: keyAccurracy, entityName: "TDPerformanceLog",
+                                          sortDescriptors: [NSSortDescriptor(key: "datetime", ascending: false)],
+                                          predicate: NSPredicate(format: "studySession = %@", argumentArray: [self.studySession!]))
         
         setupInitialPlayspace()
         //TODO: Check for case where no set contains more than 1 term.
@@ -140,6 +172,18 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
     }
     
     /******************************************************/
+    /*******************///MARK: Timers and Clocks
+    /******************************************************/
+
+    func updateTimer() {
+        let timeString = elapsedDateInterval.timeIntervalAsString(format: "MM:ss")
+        
+        timerLabel.text = timeString
+        
+        print("Updated timer to \(timeString)")
+    }
+    
+    /******************************************************/
     /*******************///MARK: Misc
     /******************************************************/
 
@@ -171,6 +215,105 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
         refreshPoints()
         refreshLives()
     }
+    
+    /******************************************************/
+    /*******************///MARK: Finishing Mision, determining score
+    /******************************************************/
+    
+    
+    /**
+     Called when the game is over, sends player to the mission summary.  This function will end the game and call any closures.  The points delivered to this function should be the actual points, etc to be awarded to the player.
+     */
+    func displayMissionFinishSummary(_ wasSuccess: Bool) {
+        self.didPlayerSucceed = wasSuccess
+        
+        self.performSegue(withIdentifier: missionFeedbackSegueIdentifier, sender: self)
+        
+    }
+    
+    func calculateDidPlayerSucceed() -> Bool {
+        return didPlayerSucceed
+    }
+    
+    func calculateNumStars() -> Int {
+        //check stars and smooth input if needed
+        var starsOutput = 3
+        if starsOutput > 3 || starsOutput < 0 {
+            starsOutput = 0
+        }
+        
+        return starsOutput
+    }
+    
+    func calculateTimeElapsedString() -> String {
+        //time elapsed
+        let timeElapsedString = elapsedDateInterval.timeIntervalAsString(format: "MM:ss")
+        return timeElapsedString
+    }
+    
+    func calculateTotalPoints() -> Int {
+        return points
+    }
+    
+    /**
+     Returns a double between 0.0 and 1.0 (inclusive) describing the accurracy of correct vs incorrect answers during the active study session.  Returns -1.0 if detected error.
+     */
+    func calculateAccurracy() -> Double {
+        
+        var correct: Double = 0.0
+        var incorrect: Double = 0.0
+        
+        //get array of all performance objects
+        if let TDPerformanceLogs = frcDict[keyAccurracy]?.fetchedObjects as? [TDPerformanceLog] {
+            for log in TDPerformanceLogs {
+                if log.wasCorrect {
+                    correct += 1
+                } else {
+                    incorrect += 1
+                }
+            }
+            
+            //calculate accurracy
+            let accurracy: Double = correct/(correct+incorrect)
+            
+            if accurracy < 0.0 || accurracy > 1.0 {
+                print("Error, accurracy calclated outside of bounds \(accurracy)")
+                return -1.0
+            } else {
+                return accurracy
+            }
+            
+        } else {
+            print("Couldn't calculate accurracy")
+            return -1.0
+        }
+    }
+    
+    func calculateCustomStats() -> [String:Any] {
+        var customStats = [String:Any]()
+        
+        return customStats
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == missionFeedbackSegueIdentifier {
+            if let destination = segue.destination as? MissionFeedbackViewController {
+                
+                destination.setupWith(wasSuccess: calculateDidPlayerSucceed(),
+                               numStars: calculateNumStars(),
+                               timeElapsedString: calculateTimeElapsedString(),
+                               totalPoints: calculateTotalPoints(),
+                               accurracy: calculateAccurracy(),
+                               customStats: calculateCustomStats(),
+                               senderVC: self,
+                               destinationVC: nil,
+                               vCCompletion: {self.finishGame(self.calculateDidPlayerSucceed())})
+                
+            }
+        }
+    }
+    
     
     /******************************************************/
     /*******************///MARK: Objectives
@@ -222,45 +365,9 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
         
     }
     
-    
-    /**
-     Called when the game is over, sends player to the mission summary.  This function will end the game and call any closures.
-     */
-    func displayMissionFinishSummary(_ didPlayerSucceed: Bool) {
-        
-        let stars = 3
-        
-        let dateInterval = DateInterval()
-        let totalPoints = points
-        
-        let vc = storyboard?.instantiateViewController(withIdentifier: "MissionFeedbackViewController")
-        
-        if let mFVC = vc as? MissionFeedbackViewController { //if it is a true false game
-            
-            present(mFVC,
-                    animated: true,
-                    completion: {
-                        mFVC.setupWith(wasSuccess: didPlayerSucceed,
-                                                numStars: stars, timeElapsed: dateInterval,
-                                                totalPoints: totalPoints,
-                                                senderVC: self,
-                                                destinationVC: nil,
-                                                customStats: nil,
-                                                destinationVCCompletion: {
-                                                    self.finishGame(didPlayerSucceed)}
-                        )
-            })
-   
-        } else {
-            //TODO: Handle failure to get mFVC
-        }
-        
-    }
-    
     /******************************************************/
     /*******************///MARK: GameObjectiveMaxPoints
     /******************************************************/
-
 
     var objectiveMaxPoints: Int = 0
     var objectiveMinPoints: Int = -1
@@ -627,9 +734,11 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
         
         //check to see if the player met objectives or failed
         if didPlayerFailMission() {
+            timer.invalidate() //stop timer
             self.displayMissionFinishSummary(false)
             
         } else if didPlayerCompleteMission() {
+            timer.invalidate() //stop timer
             self.displayMissionFinishSummary(true)
         } else {
         
@@ -761,6 +870,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
     }
     
     func quit() {
+        timer.invalidate() //stop timer
         finishGame(false)
     }
 

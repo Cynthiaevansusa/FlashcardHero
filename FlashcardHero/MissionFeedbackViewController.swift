@@ -11,7 +11,7 @@ import CoreData
 import UIKit
 
 protocol MissionFeedbackDelegate {
-    func setupWith(wasSuccess: Bool, numStars: Int, timeElapsed time: DateInterval, totalPoints points: Int, senderVC sender: UIViewController, destinationVC:UIViewController?, customStats stats: [String:Any]?, destinationVCCompletion: (() -> Void)?)
+    func setupWith(wasSuccess: Bool, numStars: Int, timeElapsedString time: String, totalPoints points: Int, accurracy: Double, customStats stats: [String:Any]?, senderVC sender: UIViewController, destinationVC:UIViewController?,  vCCompletion: (() -> Void)?)
 }
 
 class MissionFeedbackViewController: CoreDataQuizletCollectionViewController, MissionFeedbackDelegate {
@@ -34,6 +34,16 @@ class MissionFeedbackViewController: CoreDataQuizletCollectionViewController, Mi
     var senderVC: UIViewController!
     var destinationVCCompletion: (() -> Void)?
     
+    var summaryLabelText = ""
+    var numStars = 0
+    var timeElapsedLabelText = ""
+    var totalPointsLabelText = ""
+    var accurracyLabelText = ""
+    var customLabel1Text = ""
+    var customLabel2Text = ""
+    var customStatLabel1Text = ""
+    var customStatLabel2Text = ""
+    
     /******************************************************/
     /*******************///MARK: Life Cycle
     /******************************************************/
@@ -41,23 +51,7 @@ class MissionFeedbackViewController: CoreDataQuizletCollectionViewController, Mi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-    }
-    
-    /******************************************************/
-    /*******************///MARK: MissionFeedbackDelegate
-    /******************************************************/
-
-    /**
-     Delegate method used by anything that calls this view, should do so with this method in closure.
-     */
-    func setupWith(wasSuccess: Bool, numStars: Int, timeElapsed time: DateInterval, totalPoints points: Int, senderVC sender: UIViewController, destinationVC:UIViewController? = nil, customStats stats: [String:Any]? = nil, destinationVCCompletion: (() -> Void)? = nil){
-        
-        if wasSuccess {
-            summaryLabel.text = "Success!"
-        } else {
-            summaryLabel.text = "Failed!"
-        }
+        summaryLabel.text = summaryLabelText
         
         switch numStars {
         case 0:
@@ -77,37 +71,16 @@ class MissionFeedbackViewController: CoreDataQuizletCollectionViewController, Mi
             starHighlighter(0)
         }
         
-        timeElapsedLabel.text = "01:01" //placeholder
+        timeElapsedLabel.text = timeElapsedLabelText
+        totalPointsLabel.text = totalPointsLabelText
+        accurracyLabel.text = accurracyLabelText
         
-        totalPointsLabel.text = String(describing: points)
-        senderVC = sender
         
-        //if didn't supply a destination, then assume destination is back to sender
-        if let destinationVC = destinationVC {
-            self.destinationVC = destinationVC
-        } else {
-            self.destinationVC = sender
-        }
+        customLabel1.text = customLabel1Text
+        customLabel2.text = customLabel2Text
+        customStatLabel1.text = customStatLabel1Text
+        customStatLabel2.text = customStatLabel2Text
         
-        self.destinationVCCompletion = destinationVCCompletion
-        
-        //handle the first two custom stats
-        if let stats = stats {
-            customLabel1.text = nil
-            customLabel2.text = nil
-            customStatLabel1.text = nil
-            customStatLabel2.text = nil
-            
-            for (statLabel, statValue) in stats {
-                if customLabel1 == nil {
-                    customLabel1.text = statLabel
-                    customStatLabel1.text = String(describing: statValue)
-                } else { //if the first label is nil, do the second label
-                    customLabel2.text = statLabel
-                    customStatLabel2.text = String(describing: statValue)
-                }
-            }
-        }
         
         //show or hide the custom stats
         if customLabel1.text != nil && customStatLabel1.text != nil {
@@ -125,6 +98,60 @@ class MissionFeedbackViewController: CoreDataQuizletCollectionViewController, Mi
             customLabel2.isHidden = true
             customStatLabel2.isHidden = true
         }
+    }
+    
+    
+   
+    
+    /******************************************************/
+    /*******************///MARK: MissionFeedbackDelegate
+    /******************************************************/
+
+    /**
+     Delegate method used by anything that calls this view, should do so with this method in closure.
+     */
+    func setupWith(wasSuccess: Bool, numStars: Int, timeElapsedString time: String, totalPoints points: Int, accurracy: Double, customStats stats: [String:Any]? = nil, senderVC sender: UIViewController, destinationVC:UIViewController? = nil,  vCCompletion: (() -> Void)? = nil){
+        
+        if wasSuccess {
+            summaryLabelText = "Success!"
+        } else {
+            summaryLabelText = "Failed!"
+        }
+        
+        self.numStars = numStars
+        
+        timeElapsedLabelText = time
+        
+        totalPointsLabelText = String(describing: points)
+        let aValue = Int(round(accurracy * 100))
+        accurracyLabelText = "\(aValue)%"
+        senderVC = sender
+        
+        //if didn't supply a destination, then assume destination is back to sender
+        if let destinationVC = destinationVC {
+            self.destinationVC = destinationVC
+        } else {
+            self.destinationVC = sender
+        }
+        
+        self.destinationVCCompletion = vCCompletion
+        
+        //handle the first two custom stats
+        if let stats = stats {
+            customLabel1Text = ""
+
+            for (statLabel, statValue) in stats {
+                if customLabel1Text == "" {
+                    customLabel1Text = statLabel
+                    customStatLabel1Text = String(describing: statValue)
+                } else { //if the first label is nil, do the second label
+                    customLabel2Text = statLabel
+                    customStatLabel2Text = String(describing: statValue)
+                }
+            }
+        }
+        
+
     }
     
     func starHighlighter(_ numStars: Int) {
