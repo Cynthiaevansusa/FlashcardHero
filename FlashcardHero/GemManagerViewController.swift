@@ -113,13 +113,6 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         }
         
         self.tableView.reloadData()
-        UIView.animate(withDuration: 0.1, animations: {
-            //self.gemTableView.alpha = 1.0
-            //self.gemTableView.isHidden = false
-            
-            
-            
-        })
     }
     
     func showUserGemsSegment() {
@@ -435,6 +428,7 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         
         //show the Your Sets tab
         segmentedControl.selectedSegmentIndex = 1
+        showUserGemsSegment()
         
         // Get the stack
         let delegate = UIApplication.shared.delegate as! AppDelegate
@@ -450,6 +444,7 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         }
         //show the Public tab
         segmentedControl.selectedSegmentIndex = 0
+        showTrackedGemsSegment()
     }
     
     
