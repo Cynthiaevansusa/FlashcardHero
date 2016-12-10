@@ -109,6 +109,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSFetchedResultsControlle
                 
                 //userId and token have been set and can be retrieved.
                 print("Userid and Token have been successfully set!")
+                
+                //refresh the Gems Manager, that is where users login
+                // switch root view controllers
+//                let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+//                let GM = storyboard.instantiateViewController(withIdentifier: "GemManagerViewController")
+//                GM.viewDidAppear(true)
             }
             
         }

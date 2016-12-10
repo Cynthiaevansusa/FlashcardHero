@@ -84,6 +84,7 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         
         setViewForLoginStatus(delegate.isUserLoggedIn())
     }
+
     
     /******************************************************/
     /*******************///MARK: Segmented Control
@@ -127,6 +128,14 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         if self.view.viewWithTag(111) == nil {
             self.tableView.addSubview(self.refreshControl)
         }
+        
+        
+        //check that user is logged in and set up FRC if appropriate
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        if delegate.isUserLoggedIn() && frcDict[keyUsersGems] == nil {
+            self.setupUserGemsFRC()
+        }
+        
         
         self.tableView.reloadData()
         
@@ -381,10 +390,10 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
                                           message: message,
                                           preferredStyle: UIAlertControllerStyle.alert)
             
-            let confirmAction = UIAlertAction(title: "Confirm",
+            let confirmAction = UIAlertAction(title: "Delete",
                                          style: UIAlertActionStyle.default,
                                          handler: { (action: UIAlertAction!) in
-                                            self.deleteSet(forRowAt: indexPath)
+                                            self.deletePublicSet(forRowAt: indexPath)
             })
             
             let cancelAction = UIAlertAction(title: "Cancel",
@@ -403,18 +412,44 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         }
     }
     
-    func deleteSet(forRowAt indexPath: IndexPath) {
-        let visibleFrcKey = getVisibleFrcKey()
-        if let context = self.frcDict[visibleFrcKey]?.managedObjectContext {
-            
-            //TODO: Warn use that all performance data will also be deleted.  If they accept, then delete.
-            
+    /**
+     Deletes a given set in the public list of sets
+     */
+    func deletePublicSet(forRowAt indexPath: IndexPath) {
+        //let visibleFrcKey = getVisibleFrcKey()
+        if let context = self.frcDict[keyTrackedGems]?.managedObjectContext {
+
             context.delete(self.frcDict[self.keyTrackedGems]!.object(at: indexPath) as! QuizletSet)
+            
             // Get the stack
             let delegate = UIApplication.shared.delegate as! AppDelegate
             stack = delegate.stack
             stack.save()
         }
+    }
+    
+    /**
+     Called to delete all of the Sets created by the user (where userid is same as logged in user)
+     */
+    func deleteUserSets() {
+        
+        //show the Your Sets tab
+        segmentedControl.selectedSegmentIndex = 1
+        
+        // Get the stack
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        stack = delegate.stack
+        
+        if let context = self.frcDict[keyUsersGems]?.managedObjectContext, let userSets = self.frcDict[self.keyUsersGems]?.fetchedObjects as? [QuizletSet] {
+            
+            for set in userSets {
+                context.delete(set)
+                stack.save()
+            }
+            
+        }
+        //show the Public tab
+        segmentedControl.selectedSegmentIndex = 0
     }
     
     
@@ -430,7 +465,39 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
     }
     
     @IBAction func loginQuizletButtonPressed(_ sender: AnyObject) {
-        QuizletClient.sharedInstance.sendUserToQuizletOAuth()
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        
+        if delegate.isUserLoggedIn() {
+            //ask if user wants to log out
+            
+            let title = "Log out?"
+            let message = "Are you sure you want to log out of Quizlet?  Your Sets and the performance statistics of those Sets will also be deleted.  You can log back in at any time."
+            
+            let alert = UIAlertController(title: title,
+                                          message: message,
+                                          preferredStyle: UIAlertControllerStyle.alert)
+            
+            let confirmAction = UIAlertAction(title: "Log Out & Delete",
+                                              style: UIAlertActionStyle.default,
+                                              handler: { (action: UIAlertAction!) in
+                                                self.deleteUserSets()
+                                                _ = delegate.logUserOut()
+                                                self.setViewForLoginStatus(delegate.isUserLoggedIn())
+                                                
+            })
+            
+            let cancelAction = UIAlertAction(title: "Cancel",
+                                             style: UIAlertActionStyle.default,
+                                             handler: nil)
+            
+            alert.addAction(confirmAction)
+            alert.addAction(cancelAction)
+            
+            present(alert, animated: true, completion: nil)
+            
+        } else {
+            QuizletClient.sharedInstance.sendUserToQuizletOAuth()
+        }
     }
     
 
