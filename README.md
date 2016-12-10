@@ -9,15 +9,14 @@ You download flashcards (sets) from Quizlet and then missions will be available 
 
 1. After downloading, you must create a file that contains the following Struct (usually Secrets.swift) that contains the following variables in a struct called "Secrets".  These are used by the QuizletAPI objects:
 
-```swift
-struct Secrets {
-//TODO: FILL IN YOUR CLIENT ID AND SECRET KEY
-static let QuizletClientID = "YOURQUIZLETCLIENTIDHERE"
-static let QuizletSecretKey = "YOURQUIZLETSECRETKEYHERE"
-}
-```
-
-Appropriately fill in the QuizletClientID and QuizletSecretKey with your ID and Key.  If you are a Udacity reviewer, the keys were posted when this app was submitted.
+  ```swift
+  struct Secrets {
+  //TODO: FILL IN YOUR CLIENT ID AND SECRET KEY
+  static let QuizletClientID = "YOURQUIZLETCLIENTIDHERE"
+  static let QuizletSecretKey = "YOURQUIZLETSECRETKEYHERE"
+  }
+  ```
+  Appropriately fill in the QuizletClientID and QuizletSecretKey with your ID and Key.  If you are a Udacity reviewer, the keys were posted when this app was submitted.
 
 2. Build and run.
 
