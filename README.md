@@ -34,6 +34,8 @@ Check out some analysis of your performance after missions and in the Analysis t
   1. Logging in via Quizlet
     * press the person outline to be taken to Quizlet.com where you can log in.  Once you are logged, the "Your Sets" segment will be active, and you can see your sets there.
     * To refresh your sets, pull and release the table
+    * Your login credentials are not stored in the app, nor does the app ever see them
+    * Your tokens are securely saved to your keychain, and you should only ever have to log in once.
 
 2. "Missions" Tab
   * Select which mission you wish you play.  There are variants of different games, depending on what has been unlocked by the developer.  If a mission is available, a large "Start Mission" button can be pressed to launch the game
