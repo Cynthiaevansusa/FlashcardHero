@@ -374,21 +374,46 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         }
         switch editingStyle {
         case .delete:
+            let title = "Delete this Set?"
+            let message = "Are you sure you want to delete this Set?  All performance data collected will also be deleted."
             
-            let visibleFrcKey = getVisibleFrcKey()
-            if let context = self.frcDict[visibleFrcKey]?.managedObjectContext {
-                
-                //TODO: Warn use that all performance data will also be deleted.  If they accept, then delete.
-                
-                context.delete(self.frcDict[self.keyTrackedGems]!.object(at: indexPath) as! QuizletSet)
-                // Get the stack
-                let delegate = UIApplication.shared.delegate as! AppDelegate
-                stack = delegate.stack
-                stack.save()
-            }
+            let alert = UIAlertController(title: title,
+                                          message: message,
+                                          preferredStyle: UIAlertControllerStyle.alert)
             
+            let confirmAction = UIAlertAction(title: "Confirm",
+                                         style: UIAlertActionStyle.default,
+                                         handler: { (action: UIAlertAction!) in
+                                            self.deleteSet(forRowAt: indexPath)
+            })
+            
+            let cancelAction = UIAlertAction(title: "Cancel",
+                                              style: UIAlertActionStyle.default,
+                                              handler: { (action: UIAlertAction!) in
+                                                self.tableView.isEditing = false
+            })
+            
+            alert.addAction(confirmAction)
+            alert.addAction(cancelAction)
+            
+            present(alert, animated: true, completion: nil)
+
         default:
             return
+        }
+    }
+    
+    func deleteSet(forRowAt indexPath: IndexPath) {
+        let visibleFrcKey = getVisibleFrcKey()
+        if let context = self.frcDict[visibleFrcKey]?.managedObjectContext {
+            
+            //TODO: Warn use that all performance data will also be deleted.  If they accept, then delete.
+            
+            context.delete(self.frcDict[self.keyTrackedGems]!.object(at: indexPath) as! QuizletSet)
+            // Get the stack
+            let delegate = UIApplication.shared.delegate as! AppDelegate
+            stack = delegate.stack
+            stack.save()
         }
     }
     
