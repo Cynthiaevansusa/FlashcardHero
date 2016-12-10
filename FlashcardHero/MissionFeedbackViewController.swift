@@ -11,7 +11,7 @@ import CoreData
 import UIKit
 
 protocol MissionFeedbackDelegate {
-    func setupWith(wasSuccess: Bool, numStars: Int, timeElapsedString time: String, totalPoints points: Int, accurracy: Double, customStats stats: [String:Any]?, senderVC sender: UIViewController, destinationVC:UIViewController?,  vCCompletion: (() -> Void)?)
+    func setupWith(wasSuccess: Bool, numStars: Int, timeElapsedString time: String, totalPoints points: Int, accuracy: Double, customStats stats: [String:Any]?, senderVC sender: UIViewController, destinationVC:UIViewController?,  vCCompletion: (() -> Void)?)
 }
 
 class MissionFeedbackViewController: CoreDataQuizletCollectionViewController, MissionFeedbackDelegate {
@@ -21,7 +21,7 @@ class MissionFeedbackViewController: CoreDataQuizletCollectionViewController, Mi
     @IBOutlet weak var star2: UIImageView!
     @IBOutlet weak var star3: UIImageView!
     @IBOutlet weak var timeElapsedLabel: UILabel!
-    @IBOutlet weak var accurracyLabel: UILabel!
+    @IBOutlet weak var accuracyLabel: UILabel!
     @IBOutlet weak var customLabel1: UILabel!
     @IBOutlet weak var customLabel2: UILabel!
     @IBOutlet weak var customStatLabel1: UILabel!
@@ -38,7 +38,7 @@ class MissionFeedbackViewController: CoreDataQuizletCollectionViewController, Mi
     var numStars = 0
     var timeElapsedLabelText = ""
     var totalPointsLabelText = ""
-    var accurracyLabelText = ""
+    var accuracyLabelText = ""
     var customLabel1Text = ""
     var customLabel2Text = ""
     var customStatLabel1Text = ""
@@ -73,7 +73,7 @@ class MissionFeedbackViewController: CoreDataQuizletCollectionViewController, Mi
         
         timeElapsedLabel.text = timeElapsedLabelText
         totalPointsLabel.text = totalPointsLabelText
-        accurracyLabel.text = accurracyLabelText
+        accuracyLabel.text = accuracyLabelText
         
         
         customLabel1.text = customLabel1Text
@@ -110,7 +110,7 @@ class MissionFeedbackViewController: CoreDataQuizletCollectionViewController, Mi
     /**
      Delegate method used by anything that calls this view, should do so with this method in closure.
      */
-    func setupWith(wasSuccess: Bool, numStars: Int, timeElapsedString time: String, totalPoints points: Int, accurracy: Double, customStats stats: [String:Any]? = nil, senderVC sender: UIViewController, destinationVC:UIViewController? = nil,  vCCompletion: (() -> Void)? = nil){
+    func setupWith(wasSuccess: Bool, numStars: Int, timeElapsedString time: String, totalPoints points: Int, accuracy: Double, customStats stats: [String:Any]? = nil, senderVC sender: UIViewController, destinationVC:UIViewController? = nil,  vCCompletion: (() -> Void)? = nil){
         
         if wasSuccess {
             summaryLabelText = "Success!"
@@ -125,12 +125,12 @@ class MissionFeedbackViewController: CoreDataQuizletCollectionViewController, Mi
         totalPointsLabelText = String(describing: points)
         
         
-        if accurracy.isNaN || accurracy.isInfinite {
-            print("Incoming accurracy was NaN or infinate. \(accurracy)")
-            accurracyLabelText = "--"
+        if accuracy.isNaN || accuracy.isInfinite {
+            print("Incoming accuracy was NaN or infinate. \(accuracy)")
+            accuracyLabelText = "--"
         } else {
-            let aValue = Int(round(accurracy * 100))
-            accurracyLabelText = "\(aValue)%"
+            let aValue = Int(round(accuracy * 100))
+            accuracyLabelText = "\(aValue)%"
         }
         
         senderVC = sender

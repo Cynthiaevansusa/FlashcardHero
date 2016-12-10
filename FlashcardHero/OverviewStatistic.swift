@@ -12,9 +12,9 @@ struct OverviewStatistic {
     
     var order: Int
     var description: String
-    var number: Int
+    var number: String
     
-    init(order: Int, description: String, number: Int) {
+    init(order: Int, description: String, number: String) {
         self.order = order
         self.description = description
         self.number = number

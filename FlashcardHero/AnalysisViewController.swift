@@ -17,9 +17,13 @@ class AnalysisViewController: CoreDataQuizletCollectionViewController, UICollect
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
    
     
-    let keyStudySessions = "Missions"
+    let keyStudySessions = "Lifetime Missions"
+    let keyStudySessionsToday = "Missions Today"
     let keyAppSessions = "App Sessions"
-    let keyQuestionAttempts = "Question Attempts"
+    let keyQuestionAttemptsToday = "Questions Attempted Today"
+    let keyQuestionAttempts = "Lifetime Questions Attempted"
+    let keyAccuracy = "Lifetime Accuracy"
+    let keyAccuracyToday = "Accuracy Today"
     
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
@@ -40,20 +44,47 @@ class AnalysisViewController: CoreDataQuizletCollectionViewController, UICollect
         // Do any additional setup after loading the view, typically from a nib.
         
         
-        orderDict = [keyStudySessions : 1,
-        keyAppSessions : 0,
-        keyQuestionAttempts : 2]
+        orderDict = [keyStudySessions : 5,
+        keyAppSessions : 6,
+        keyQuestionAttempts : 4,
+        keyQuestionAttemptsToday: 1,
+        keyAccuracy: 3,
+        keyAccuracyToday: 0,
+        keyStudySessionsToday: 2]
+        
+        let date = Date()
+        let cal = Calendar(identifier: .gregorian)
+        let newDate = cal.startOfDay(for: date)
     
         //setup the App Sessions Counter
         _ = setupFetchedResultsController(frcKey: keyAppSessions, entityName: "AppSession", sortDescriptors: [NSSortDescriptor(key: "start", ascending: false)],  predicate: nil)
-        setStats(frcKey: keyQuestionAttempts)
+        setBasicCountingStat(frcKey: keyAppSessions)
         
         //Study Sessions Counter
         _ = setupFetchedResultsController(frcKey: keyStudySessions, entityName: "StudySession", sortDescriptors: [NSSortDescriptor(key: "start", ascending: false)],  predicate: nil)
-        setStats(frcKey: keyQuestionAttempts)
+        setBasicCountingStat(frcKey: keyStudySessions)
+        
+        //Study Sessions Today Counter
+        _ = setupFetchedResultsController(frcKey: keyStudySessionsToday, entityName: "StudySession", sortDescriptors: [NSSortDescriptor(key: "start", ascending: false)],  predicate: NSPredicate(format: "start > %@", argumentArray: [newDate]))
+        setBasicCountingStat(frcKey: keyStudySessionsToday)
+        
+        
         //Question Attempts counter
         _ = setupFetchedResultsController(frcKey: keyQuestionAttempts, entityName: "TDPerformanceLog", sortDescriptors: [NSSortDescriptor(key: "datetime", ascending: false)],  predicate: nil)
-        setStats(frcKey: keyQuestionAttempts)
+        setBasicCountingStat(frcKey: keyQuestionAttempts)
+        
+        //Question Attempts Today counter
+        
+        _ = setupFetchedResultsController(frcKey: keyQuestionAttemptsToday, entityName: "TDPerformanceLog", sortDescriptors: [NSSortDescriptor(key: "datetime", ascending: false)],  predicate: NSPredicate(format: "datetime > %@", argumentArray: [newDate]))
+        setBasicCountingStat(frcKey: keyQuestionAttemptsToday)
+        
+        //accuracy
+        _ = setupFetchedResultsController(frcKey: keyAccuracy, entityName: "TDPerformanceLog", sortDescriptors: [NSSortDescriptor(key: "datetime", ascending: false)],  predicate: nil)
+        setAccuracyStat(frcKey: keyAccuracy)
+        
+        //accuracy Today
+        _ = setupFetchedResultsController(frcKey: keyAccuracyToday, entityName: "TDPerformanceLog", sortDescriptors: [NSSortDescriptor(key: "datetime", ascending: false)],  predicate: NSPredicate(format: "datetime > %@", argumentArray: [newDate]))
+        setAccuracyStat(frcKey: keyAccuracyToday)
         
         showOverviewSegment()
     }
@@ -111,26 +142,72 @@ class AnalysisViewController: CoreDataQuizletCollectionViewController, UICollect
         
     }
     
+    /******************************************************/
+    /*******************///MARK: Accuracy
+    /******************************************************/
+
+    func calculateAccuracyString(frcKey: String) -> String {
+        
+        var correct: Double = 0.0
+        var incorrect: Double = 0.0
+        
+        //get array of all performance objects
+        if let TDPerformanceLogs = frcDict[frcKey]?.fetchedObjects as? [TDPerformanceLog] {
+            for log in TDPerformanceLogs {
+                if log.wasCorrect {
+                    correct += 1
+                } else {
+                    incorrect += 1
+                }
+            }
+            
+            //calculate accuracy
+            let accuracy: Double = correct/(correct+incorrect)
+            
+            if accuracy < 0.0 || accuracy > 1.0 {
+                print("Error, accuracy calclated outside of bounds \(accuracy)")
+                return "-1"
+            } else {
+                print("Calculated accuracy: \(accuracy)")
+                
+                if accuracy.isNaN || accuracy.isInfinite {
+                    return "--"
+                } else {
+                    let aValue = Int(round(accuracy * 100))
+                    return "\(aValue)%"
+                }
+            }
+            
+        } else {
+            print("Couldn't calculate accuracy")
+            return "-1"
+        }
+    }
+    
 
     /******************************************************/
     /*******************///MARK: FetchedResultsControllers and Stats
     /******************************************************/
     
+    func setAccuracyStat(frcKey: String) {
+        let accuracy = calculateAccuracyString(frcKey: frcKey)
+        
+        let newOverviewStatistic = OverviewStatistic(order: orderDict[frcKey]!, description: frcKey, number: accuracy)
+        insertOverviewStatisticIntoStatsOverviewItems(newOverviewStatistic)
+    }
     
-    
-    
-    func setStats(frcKey:String) {
+    func setBasicCountingStat(frcKey:String) {
         
         if let occurrences = frcDict[frcKey]?.fetchedObjects {
             
-            let newOverviewStatistic = OverviewStatistic(order: orderDict[frcKey]!, description: frcKey, number: occurrences.count)
+            let newOverviewStatistic = OverviewStatistic(order: orderDict[frcKey]!, description: frcKey, number: String(describing: occurrences.count))
             insertOverviewStatisticIntoStatsOverviewItems(newOverviewStatistic)
             
             
         } else {
             //TODO: Handle no sessions returned
             print("Found no \(frcKey), setting to zero")
-            let newOverviewStatistic = OverviewStatistic(order: orderDict[frcKey]!, description: frcKey, number: 0)
+            let newOverviewStatistic = OverviewStatistic(order: orderDict[frcKey]!, description: frcKey, number: "0")
             insertOverviewStatisticIntoStatsOverviewItems(newOverviewStatistic)
         }
     }
@@ -173,9 +250,13 @@ class AnalysisViewController: CoreDataQuizletCollectionViewController, UICollect
     }
     
     func refreshStats() {
-        setStats(frcKey: keyAppSessions)
-        setStats(frcKey: keyStudySessions)
-        setStats(frcKey: keyQuestionAttempts)
+        setBasicCountingStat(frcKey: keyAppSessions)
+        setBasicCountingStat(frcKey: keyStudySessions)
+        setBasicCountingStat(frcKey: keyQuestionAttempts)
+        setBasicCountingStat(frcKey: keyQuestionAttemptsToday)
+        setBasicCountingStat(frcKey: keyStudySessionsToday)
+        setAccuracyStat(frcKey: keyAccuracy)
+        setAccuracyStat(frcKey: keyAccuracyToday)
         collectionView.reloadData()
     }
 

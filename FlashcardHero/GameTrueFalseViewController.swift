@@ -51,7 +51,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
     var timer = Timer()
     
     //FC keys
-    let keyAccurracy = "Accurracy"
+    let keyAccuracy = "Accuracy"
     
     var showingCorrectAnswer: Bool = false
     var correctTD: QuizletTermDefinition?
@@ -71,9 +71,9 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
         
        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
         
-        //setup accurracy FRC
+        //setup accuracy FRC
         //create FRC for sets using the studySession created in the superclass
-        _ = setupFetchedResultsController(frcKey: keyAccurracy, entityName: "TDPerformanceLog",
+        _ = setupFetchedResultsController(frcKey: keyAccuracy, entityName: "TDPerformanceLog",
                                           sortDescriptors: [NSSortDescriptor(key: "datetime", ascending: false)],
                                           predicate: NSPredicate(format: "studySession = %@", argumentArray: [self.studySession!]))
         
@@ -263,15 +263,15 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
     }
     
     /**
-     Returns a double between 0.0 and 1.0 (inclusive) describing the accurracy of correct vs incorrect answers during the active study session.  Returns -1.0 if detected error.
+     Returns a double between 0.0 and 1.0 (inclusive) describing the accuracy of correct vs incorrect answers during the active study session.  Returns -1.0 if detected error.
      */
-    func calculateAccurracy() -> Double {
+    func calculateAccuracy() -> Double {
         
         var correct: Double = 0.0
         var incorrect: Double = 0.0
         
         //get array of all performance objects
-        if let TDPerformanceLogs = frcDict[keyAccurracy]?.fetchedObjects as? [TDPerformanceLog] {
+        if let TDPerformanceLogs = frcDict[keyAccuracy]?.fetchedObjects as? [TDPerformanceLog] {
             for log in TDPerformanceLogs {
                 if log.wasCorrect {
                     correct += 1
@@ -280,19 +280,19 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
                 }
             }
             
-            //calculate accurracy
-            let accurracy: Double = correct/(correct+incorrect)
+            //calculate accuracy
+            let accuracy: Double = correct/(correct+incorrect)
             
-            if accurracy < 0.0 || accurracy > 1.0 {
-                print("Error, accurracy calclated outside of bounds \(accurracy)")
+            if accuracy < 0.0 || accuracy > 1.0 {
+                print("Error, accuracy calclated outside of bounds \(accuracy)")
                 return -1.0
             } else {
-                print("Calculated accurracy: \(accurracy)")
-                return accurracy
+                print("Calculated accuracy: \(accuracy)")
+                return accuracy
             }
             
         } else {
-            print("Couldn't calculate accurracy")
+            print("Couldn't calculate accuracy")
             return -1.0
         }
     }
@@ -312,7 +312,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
                                numStars: calculateNumStars(),
                                timeElapsedString: calculateTimeElapsedString(),
                                totalPoints: calculateTotalPoints(),
-                               accurracy: calculateAccurracy(),
+                               accuracy: calculateAccuracy(),
                                customStats: calculateCustomStats(),
                                senderVC: self,
                                destinationVC: nil,
