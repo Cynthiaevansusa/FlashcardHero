@@ -509,7 +509,10 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
      */
     func playerGotQuestionWrong() {
         self.objectiveQuestionsMissed += 1
-        awardLives(-1)
+        
+        if self.objective == GameVariantProtocols.PerfectGame {
+            awardLives(-1)
+        }
         questionsWrong += 1
     }
     

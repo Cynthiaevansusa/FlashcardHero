@@ -11,28 +11,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Statistics-->
-        <scene sceneID="hNz-n2-bh7">
-            <objects>
-                <viewController id="9pv-A4-QxB" userLabel="Statistics" customClass="CommandCenterViewController" customModule="FlashcardHero" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Ia1-K6-d13"/>
-                        <viewControllerLayoutGuide type="bottom" id="4ug-Mw-9AY"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="tsR-hK-woN" customClass="BarChartView" customModule="Charts">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Command Center" image="first" id="acW-dT-cKf"/>
-                    <connections>
-                        <outlet property="barChartView" destination="tsR-hK-woN" id="BeN-n5-Vrp"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2281" y="-918"/>
-        </scene>
         <!--Headquarters-->
         <scene sceneID="cEP-PS-eAC">
             <objects>
@@ -73,7 +51,7 @@
                                 </items>
                             </navigationBar>
                             <collectionView clipsSubviews="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="TWy-L4-WBL">
-                                <rect key="frame" x="0.0" y="128" width="375" height="490"/>
+                                <rect key="frame" x="0.0" y="120" width="375" height="498"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="20" id="QTu-ck-NFJ">
                                     <size key="itemSize" width="330" height="300"/>
@@ -89,7 +67,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="330" height="300"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nxH-se-OCL">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TrueFalseGameIcon" translatesAutoresizingMaskIntoConstraints="NO" id="nxH-se-OCL">
                                                     <rect key="frame" x="8" y="8" width="50" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="UVs-cT-fGZ"/>
@@ -306,12 +284,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="TWy-L4-WBL" firstAttribute="top" secondItem="axm-dM-EZQ" secondAttribute="bottom" constant="8" id="0PK-bz-2W9"/>
+                            <constraint firstItem="TWy-L4-WBL" firstAttribute="top" secondItem="axm-dM-EZQ" secondAttribute="bottom" id="0PK-bz-2W9"/>
                             <constraint firstAttribute="trailing" secondItem="TWy-L4-WBL" secondAttribute="trailing" id="1TV-Fa-7Ne"/>
                             <constraint firstItem="Tu5-Pb-tJM" firstAttribute="top" secondItem="TWy-L4-WBL" secondAttribute="bottom" id="1kD-0h-KxK"/>
                             <constraint firstAttribute="trailing" secondItem="WrB-6q-ofl" secondAttribute="trailing" id="5t2-nc-dHe"/>
                             <constraint firstItem="WrB-6q-ofl" firstAttribute="top" secondItem="vGo-Vd-pgo" secondAttribute="top" id="CTe-dl-SiB"/>
-                            <constraint firstItem="TWy-L4-WBL" firstAttribute="top" secondItem="WrB-6q-ofl" secondAttribute="bottom" constant="64" id="Hp8-n3-Cah"/>
+                            <constraint firstItem="TWy-L4-WBL" firstAttribute="top" secondItem="WrB-6q-ofl" secondAttribute="bottom" constant="56" id="Hp8-n3-Cah"/>
                             <constraint firstItem="axm-dM-EZQ" firstAttribute="top" secondItem="WrB-6q-ofl" secondAttribute="bottom" id="LCx-em-hlD"/>
                             <constraint firstItem="TWy-L4-WBL" firstAttribute="leading" secondItem="vGo-Vd-pgo" secondAttribute="leading" id="fWy-4b-gfJ"/>
                             <constraint firstAttribute="trailing" secondItem="axm-dM-EZQ" secondAttribute="trailing" id="qNP-uc-gJa"/>
@@ -331,24 +309,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IRv-Wx-ZBp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="821.60000000000002" y="-1564.7676161919042"/>
-        </scene>
-        <!--Game Selection-->
-        <scene sceneID="PLA-li-Ylw">
-            <objects>
-                <viewController id="tcL-pq-zCo" userLabel="Game Selection" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="uof-dU-Nel"/>
-                        <viewControllerLayoutGuide type="bottom" id="82Y-Vs-J9P"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="NYs-sz-Caf">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rge-Jk-fAk" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1636" y="-1039"/>
         </scene>
         <!--Game True False View Controller-->
         <scene sceneID="Ohr-lx-gda">
@@ -1458,7 +1418,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OyB-xu-kIP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3220" y="-225.33733133433284"/>
+            <point key="canvasLocation" x="2337" y="-231"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -1475,8 +1435,8 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="yf9-Ks-dTC" kind="relationship" relationship="viewControllers" id="LAN-0K-1ly"/>
                         <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="kS1-O1-LfT"/>
+                        <segue destination="yf9-Ks-dTC" kind="relationship" relationship="viewControllers" id="LAN-0K-1ly"/>
                         <segue destination="BST-cP-Q3W" kind="relationship" relationship="viewControllers" id="XOD-Le-aPP"/>
                         <segue destination="0fA-pq-cgN" kind="relationship" relationship="viewControllers" id="MMi-oW-iTv"/>
                     </connections>
@@ -1538,42 +1498,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Ra-aQ-LhS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="808.79999999999995" y="1074.5127436281859"/>
-        </scene>
-        <!--Quizlet Login-->
-        <scene sceneID="LbL-I8-qrO">
-            <objects>
-                <viewController id="8Z1-jP-Tmr" userLabel="Quizlet Login" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ivl-6X-cGv"/>
-                        <viewControllerLayoutGuide type="bottom" id="fX7-Dw-2t6"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="zgb-8b-VnJ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="NZg-2h-O2X" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1551" y="1073"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="qqj-rv-ziR">
-            <objects>
-                <viewController id="5Ba-r3-CJ9" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="zee-ea-YFH"/>
-                        <viewControllerLayoutGuide type="bottom" id="6x1-WN-QpU"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Dfa-qP-it8">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Dm9-nv-Ysf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1" y="1093"/>
         </scene>
         <!--Analysis-->
         <scene sceneID="bhR-zc-aOw">
@@ -1703,8 +1627,8 @@
         <image name="QuizletAttributionLight" width="67" height="20"/>
         <image name="SetsIcon" width="28" height="22"/>
         <image name="Star" width="200" height="200"/>
+        <image name="TrueFalseGameIcon" width="22" height="22"/>
         <image name="UserIcon" width="28" height="24"/>
-        <image name="first" width="30" height="30"/>
         <image name="second" width="30" height="30"/>
     </resources>
 </document>

@@ -126,7 +126,7 @@ class MissionFeedbackViewController: CoreDataQuizletCollectionViewController, Mi
         
         
         if accurracy.isNaN || accurracy.isFinite {
-            accurracyLabelText = "--"
+            accurracyLabelText = "0%"
         } else {
             let aValue = Int(round(accurracy * 100))
             accurracyLabelText = "\(aValue)%"

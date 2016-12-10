@@ -15,8 +15,8 @@ struct GameDirectory {
     static let allGames = [GameTrueFalse.id : GameTrueFalse]
     static let activeGames = [GameTrueFalse]
     
-    static let activeGameVariants = [GameVariant(game: GameTrueFalse, gameProtocol: GameVariantProtocols.MaxPoints, description: "Points Goal", icon: #imageLiteral(resourceName: "GemRed")),
-                                     GameVariant(game: GameTrueFalse, gameProtocol: GameVariantProtocols.PerfectGame, description: "Perfect Score", icon: #imageLiteral(resourceName: "GemBlue"))]
+    static let activeGameVariants = [GameVariant(game: GameTrueFalse, gameProtocol: GameVariantProtocols.MaxPoints, description: "Simple Goal", icon: #imageLiteral(resourceName: "GemRed")),
+                                     GameVariant(game: GameTrueFalse, gameProtocol: GameVariantProtocols.PerfectGame, description: "Limited Lives", icon: #imageLiteral(resourceName: "GemBlue"))]
     
     
 }
