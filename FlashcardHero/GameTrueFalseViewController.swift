@@ -180,7 +180,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
         
         timerLabel.text = timeString
         
-        print("Updated timer to \(timeString)")
+        //print("Updated timer to \(timeString)")
     }
     
     /******************************************************/
@@ -395,6 +395,8 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
         } else {
             self.objectiveMinPoints = -1
         }
+        
+        refreshLives()
     }
     
     /**
@@ -732,7 +734,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
         
         
         //log the activity
-        
+        print("Logging this performance:")
         let newLog = TDPerformanceLog(datetime: datetime,
                                       questionTypeId: 0,
                                       wasCorrect: wasCorrect,
@@ -775,7 +777,12 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
      Set the lives in the UI
      */
     func refreshLives() {
-        livesLabel.text = String(lives)
+        
+        if self.objective == GameVariantProtocols.MaxPoints {
+            self.livesLabel.text = "\u{221E}"   
+        } else {
+            livesLabel.text = String(lives)
+        }
     }
     
     /**

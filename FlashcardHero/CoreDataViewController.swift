@@ -209,9 +209,48 @@ extension CoreDataViewController: NSFetchedResultsControllerDelegate {
             stack.save()
             
             
+        } else if anObject is QuizletTermDefinition {
+            
+            switch(type) {
+            case .insert:
+             
+                print("case insert QuizletTermDefinition")
+            case .delete:
+                
+                print("case delete QuizletTermDefinition")
+            case .update:
+                
+                print("case update QuizletTermDefinition")
+            case .move:
+                //TODO: move a cell... this may not be needed
+                print("case move QuizletTermDefinition")
+            }
+            
+            //save
+            stack.save()
+            
+            
         } else
         {
-            fatalError("Couldn't get a QuizletSet from anObject in didChange")
+            
+            var doWhat = ""
+            switch(type) {
+            case .insert:
+                
+                
+                doWhat = "case insert"
+            case .delete:
+                
+                doWhat = "case delete"
+            case .update:
+                
+                doWhat = "case update"
+            case .move:
+                //TODO: move a cell... this may not be needed
+                doWhat = "case move"
+            }
+            
+            fatalError("Unexpected coreData object attempted to change: \(anObject).  Attempted to \(doWhat)")
         }
     }
     
