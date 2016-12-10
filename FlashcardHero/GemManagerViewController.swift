@@ -29,6 +29,8 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
     
     var gemInActiveFlux: QuizletSet?
     
+    var searchAttempts = 0 //manages retries to the network
+    
     //pull to refresh
     //adapted from https://www.andrewcbancroft.com/2015/03/17/basics-of-pull-to-refresh-for-swift-developers/#regular-view-controller
     lazy var refreshControl: UIRefreshControl = {
@@ -133,14 +135,6 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         if tableView(self.tableView, numberOfRowsInSection: 0) < 1 {
             self.searchQuizletForUserSets()
         }
-        
-        UIView.animate(withDuration: 0.1, animations: {
-            //self.gemTableView.alpha = 0.0
-            //self.gemTableView.isHidden = true
-            
-            
-            
-        })
     }
     
     func getVisibleFrcKey() -> String{
@@ -161,10 +155,10 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
      */
     func handleRefresh(refreshControl: UIRefreshControl) {
         
+        refreshControl.endRefreshing()
+        
         //search for sets again
         self.searchQuizletForUserSets()
-        
-        refreshControl.endRefreshing()
     }
     
     /******************************************************/
@@ -464,7 +458,11 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
                         //print("contents of search results: \(self.searchResults)")
                         //self.tableView.reloadData()
                     } else {
-                        //TODO: handle error
+                        self.searchAttempts = 0
+                        //tried twice, give user an error
+                        
+                        alertGenericNetworkError(vc: self, errorString: (error?.localizedDescription)!)
+                        
                     }
                 }//end of performUIUpdatesOnMain
             } //end of getQuizletSearchSetsBy

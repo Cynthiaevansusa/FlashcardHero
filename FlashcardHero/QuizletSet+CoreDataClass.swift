@@ -14,6 +14,8 @@ public class QuizletSet: NSManagedObject {
 
     var isLoadingTerms = false
     
+    var searchAttempts = 0 //tracks network attempts
+    
     convenience init(withQuizletSetSearchResult: QuizletSetSearchResult, context: NSManagedObjectContext){
         
         if let ent = NSEntityDescription.entity(forEntityName: "QuizletSet", in: context) {
@@ -101,7 +103,7 @@ public class QuizletSet: NSManagedObject {
     /******************************************************/
     //TODO: add password support
     //fetches terms, creates QuizletTermDefinitions in the given context
-    func fetchTermsAndAddTo(context: NSManagedObjectContext, sender: GemManagerViewController? = nil) {
+    func fetchTermsAndAddTo(context: NSManagedObjectContext, sender: GemManagerViewController) {
         
         isLoadingTerms = true
         GCDBlackBox.runNetworkFunctionInBackground {
@@ -119,8 +121,17 @@ public class QuizletSet: NSManagedObject {
                         for term in result.terms {
                             _ = QuizletTermDefinition(withQuizletTermResult: term, relatedSet: self, context: context)
                         }
+                    } else if self.searchAttempts < 2 {
+                        //search again
+                        self.searchAttempts += 1
+                        print("Retrying search fetchTermsAndAddTo, search try \(self.searchAttempts)")
+                        self.fetchTermsAndAddTo(context: context, sender: sender)
                     } else {
-                        //TODO: Handle empty response
+                        self.searchAttempts = 0
+                        //tried twice, give user an error
+                        
+                        alertGenericNetworkError(vc: sender, errorString: (error?.localizedDescription)!)
+                        
                     }
                     //done downloading terms
                     

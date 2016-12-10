@@ -152,3 +152,24 @@ extension UIView {
         }, completion: nil)
     }
 }
+
+/******************************************************/
+/*******************///MARK: Useful Alerts
+/******************************************************/
+
+func alertGenericNetworkError(vc: UIViewController, errorString: String) {
+    let title = "Network Error"
+    let message = "\(errorString) Please try again later."
+    
+    let alert = UIAlertController(title: title,
+                                  message: message,
+                                  preferredStyle: UIAlertControllerStyle.alert)
+    
+    let okAction = UIAlertAction(title: "Ok",
+                                   style: UIAlertActionStyle.default,
+                                   handler: nil)
+    
+    alert.addAction(okAction)
+    
+    vc.present(alert, animated: true, completion: nil)
+}

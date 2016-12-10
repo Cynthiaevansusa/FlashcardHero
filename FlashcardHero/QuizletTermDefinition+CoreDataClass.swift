@@ -11,10 +11,12 @@ import CoreData
 import UIKit
 
 
-public class QuizletTermDefinition: QuizletSet {
+public class QuizletTermDefinition: NSManagedObject {
 
     //TODO: have this object load the image from url when imageUrl is set or changed
     var isTransitioningImage = false
+    
+    var searchAttempts = 0 //tracks network attempts
     
     convenience init(withQuizletTermResult: QuizletGetTermResult, relatedSet: QuizletSet, context: NSManagedObjectContext){
         
@@ -92,9 +94,17 @@ public class QuizletTermDefinition: QuizletSet {
                         //try to set this image as the set thumbnail
                         self.quizletSet?.setThumbnailImage(imageData: imageDataNS)
                                                 
+                    } else if self.searchAttempts < 2 {
+                        //search again
+                        self.searchAttempts += 1
+                        print("Retrying search for downloadImageData, search try \(self.searchAttempts)")
+                        self.downloadImageData()
                     } else {
-                        //there was an error
-                        //TODO: handle error
+                        self.searchAttempts = 0
+                        //tried twice, give user an error
+                        print("Problem downloading image data")
+                        //alertGenericNetworkError(vc: sender, errorString: (error?.localizedDescription)!)
+                        
                     }
                     
                     //TODO: stop activity spinner

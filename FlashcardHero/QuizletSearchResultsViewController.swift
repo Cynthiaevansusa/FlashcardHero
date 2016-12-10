@@ -31,6 +31,8 @@ class QuizletSearchResultsViewController: UIViewController, UISearchBarDelegate,
 
     var quizletIngestDelegate: QuizletSetSearchResultIngesterDelegate?
     
+    var searchAttempts = 0
+    
     /******************************************************/
     /*******************///MARK: Life Cycle
     /******************************************************/
@@ -185,11 +187,21 @@ class QuizletSearchResultsViewController: UIViewController, UISearchBarDelegate,
                         }
                         //print("contents of search results: \(self.searchResults)")
                         self.tableView.reloadData()
+                    } else if self.searchAttempts < 2 {
+                        //search again
+                        self.searchAttempts += 1
+                        print("Retrying search for quizlet results, search try \(self.searchAttempts)")
+                        self.searchQuizletFor(searchTerm: searchTerm)
                     } else {
-                        //TODO: handle error
+                        self.searchAttempts = 0
+                        //tried twice, give user an error
+                        
+                        alertGenericNetworkError(vc: self, errorString: (error?.localizedDescription)!)
+                        
                     }
                 }//end of performUIUpdatesOnMain
             } //end of getQuizletSearchSetsBy
         }//end of runNetworkFunctionInBackground
     }
+
 }
