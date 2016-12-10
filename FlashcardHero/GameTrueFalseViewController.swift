@@ -27,6 +27,8 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
     @IBOutlet weak var livesLabel: UILabel!
     var points = 0
     var lives = 1
+    var questionsWrong = 0
+    var questionsCorrect = 0
     
     var showingCorrectAnswer: Bool = false
     var correctTD: QuizletTermDefinition?
@@ -66,6 +68,9 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
     /*******************///MARK: User Alerts
     /******************************************************/
 
+    /**
+     Alert the user that there are no valid Sets (Gems) avilable to play with.  This shouldn't have to be called if the CommandCenter properly checks before the user wants to launch and disables the user's ability to launch the game.
+     */
     func alertUserNoGems() {
         let title = "No Gems Available"
         let message = "The game cannot find any Gems to load.  Either you do not have any Gems activated (the switch on the Gems screen) or you have not downloaded any Sets from Quizlet.  Go to your Gems page and then try playing again!"
@@ -83,6 +88,9 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
         present(alert, animated: true, completion: nil)
     }
     
+    /**
+     Alert the user of their request to quit, and find out if they want to quit.  Allow them to quit if the pick the appropriate response, dismiss otherwise.
+     */
     func alertQuit() {
         let title = "Quit?"
         let message = "This will count as a Mission Failure!"
@@ -109,6 +117,9 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
     /*******************///MARK: Data Checks Validations
     /******************************************************/
 
+    /**
+     Any data checks that need to be run before the game will start should be put in this function.
+     */
     func dataChecks() {
         checkForCompatableGems()
     }
@@ -132,6 +143,9 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
     /*******************///MARK: Misc
     /******************************************************/
 
+    /**
+     Does an initial setup of the playspace UI
+     */
     func setupInitialPlayspace() {
         setFeedbackVisible(visible: false)
         setAnswerButtonsVisible(visible: false)
@@ -162,6 +176,9 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
     /*******************///MARK: Objectives
     /******************************************************/
 
+    /**
+     Checks each game variant protocol to see if the game has been won.  All GameVariantProtocols should register a "win" criteria function here.
+     */
     func didPlayerCompleteMission() -> Bool {
         switch self.objective {
         case (GameVariantProtocols.MaxPoints)?:
@@ -173,6 +190,9 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
         }
     }
     
+    /**
+     Checks each game variant protocol to see if the game has been lost.  All GameVariantProtocols should register a "loss" criteria function here.
+     */
     func didPlayerFailMission() -> Bool {
         switch self.objective {
         case (GameVariantProtocols.MaxPoints)?:
@@ -189,6 +209,9 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
     /******************************************************/
     var gameCallerDelegate: GameCaller? = nil
     
+    /**
+     Required by GameObjectiveBase delegate, this is the actual function that ends the game and tells the CommandCenterViewController if the game was won or lost.
+     */
     func finishGame(_ didPlayerSucceed: Bool) {
 
         if let gameDelegate = self.gameCallerDelegate {
@@ -199,6 +222,10 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
         
     }
     
+    
+    /**
+     Called when the game is over, sends player to the mission summary.  This function will end the game and call any closures.
+     */
     func displayMissionFinishSummary(_ didPlayerSucceed: Bool) {
         
         let stars = 3
@@ -210,8 +237,22 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
         
         if let mFVC = vc as? MissionFeedbackViewController { //if it is a true false game
             
-            present(mFVC, animated: true, completion: {mFVC.setupWith(wasSuccess: didPlayerSucceed, numStars: stars, timeElapsed: dateInterval, totalPoints: totalPoints, senderVC: self, destinationVC: nil, customStats: nil, destinationVCCompletion: {self.finishGame(didPlayerSucceed)})})
+            present(mFVC,
+                    animated: true,
+                    completion: {
+                        mFVC.setupWith(wasSuccess: didPlayerSucceed,
+                                                numStars: stars, timeElapsed: dateInterval,
+                                                totalPoints: totalPoints,
+                                                senderVC: self,
+                                                destinationVC: nil,
+                                                customStats: nil,
+                                                destinationVCCompletion: {
+                                                    self.finishGame(didPlayerSucceed)}
+                        )
+            })
    
+        } else {
+            //TODO: Handle failure to get mFVC
         }
         
     }
@@ -241,6 +282,9 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
         }
     }
     
+    /**
+     Detects if player has reached objectiveMaxPoints
+     */
     func didPlayerReachMaxPoints() -> Bool{
         if self.points >= self.objectiveMaxPoints {
             return true
@@ -249,6 +293,9 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
         }
     }
     
+    /**
+     Detects if player has reached objectiveMinPoints
+     */
     func didPlayerReachMinPoints() -> Bool{
         if self.points <= self.objectiveMinPoints {
             return true
@@ -292,6 +339,10 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
         self.objectiveQuestionsMissed = 0
     }
     
+    
+    /**
+     Checks to see if the player reached the objectiveQuestionsCanMiss
+     */
     func didPlayerReachQuestionsCanMiss() -> Bool {
         if self.objectiveQuestionsMissed >=  self.objectiveQuestionsCanMiss {
             return true
@@ -300,36 +351,64 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
         }
     }
     
-    func playerMissedAQuestion() {
-        self.objectiveQuestionsMissed += 1
-        awardLives(-1)
-    }
+
  
     
     /******************************************************/
-    /*******************///MARK: Game Functions
+    /*******************///MARK: General Game Functions
     /******************************************************/
 
+    /**
+     Awards the given amount of points and refreshes the UI.  Calls the playerGotQuestionWrong or playerGotQuestionCorrect function based on positive or negative integer input.
+     */
     func addRefreshPoints(_ newPoints: Int) {
         //if points are less than 1, then the player missed the question
         if newPoints < 1 {
-            playerMissedAQuestion()
+            playerGotQuestionWrong()
+        } else {
+            playerGotQuestionCorrect()
         }
         
         awardPoints(newPoints)
+        //UI refresh
         refreshPoints()
         refreshLives()
 
     }
     
+    /**
+     Gives or removes the given number of points
+     */
     func awardPoints(_ newPoints: Int) {
         self.points += newPoints
     }
     
+    /**
+     Gives or removes the given number of lives
+     */
     func awardLives(_ newLives: Int) {
         self.lives += newLives
     }
     
+    /**
+     Tells the game a palyer got a question wrong, and performs appropriate actions (lives, objectiveQuestionsMissed, questionsWrong)
+     */
+    func playerGotQuestionWrong() {
+        self.objectiveQuestionsMissed += 1
+        awardLives(-1)
+        questionsWrong += 1
+    }
+    
+    /**
+     Tells the game a palyer got a question correct, and performs appropriate actions (questionsCorrect)
+     */
+    func playerGotQuestionCorrect() {
+        questionsCorrect += 1
+    }
+    
+    /**
+     Returns a random set from the array of sets input.
+     */
     func getRandomSet(sets: [QuizletSet]) -> QuizletSet {
         let numberOfSets = sets.count
         
@@ -342,12 +421,18 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
         return quizletSet
     }
     
+    /**
+     From the given array of sets, returns a random set that contains more than 1 term.
+     */
     func getRandomSetWithMultipleTerms(sets: [QuizletSet]) -> QuizletSet {
         
         //make sure this set has more than 1 term before continuting
         var numberOfTerms = 0
         var quizletSet: QuizletSet
         var tfc: NSFetchedResultsController<NSFetchRequestResult>
+        
+        let onlyLoopThisManyTimes = 3 * sets.count //only loop through 3x the number of total sets to prevent infinate loop
+        var haveLoopedThisManyTimes = 0 //keep track of times looped
         repeat {
             quizletSet = getRandomSet(sets: sets)
             //fetch terms from the given set
@@ -366,11 +451,15 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
             } else {
                 //TODO: handle nil termFetchedResultsController
             }
-        } while numberOfTerms <= 1
+            haveLoopedThisManyTimes += 1
+        } while numberOfTerms <= 1 && haveLoopedThisManyTimes <= onlyLoopThisManyTimes
         
         return quizletSet
     }
     
+    /**
+     Returns true or false with even odds
+     */
     func randTrueFalse() -> Bool {
         let flip = Int(arc4random_uniform(UInt32(2)))
         if flip == 1 {
@@ -383,6 +472,10 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
         }
     }
     
+    
+    /**
+     Prepares the UI and presents a new question to the player
+     */
     func setupNewQuestion() {
         self.definitionText.text = ""
         self.termText.text = ""
@@ -482,6 +575,10 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
         }
     }
     
+    
+    /**
+     Function called to indicate the player has answered the question with the given input.
+     */
     func answerQuestion(answer: Bool) {
         //check the correct answer
         setAnswerButtonsVisible(visible: false)
@@ -547,14 +644,23 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
     /*******************///MARK: Feedback and Display
     /******************************************************/
 
+    /**
+     Set the points in the UI
+     */
     func refreshPoints() {
         pointsLabel.text = String(points)
     }
     
+    /**
+     Set the lives in the UI
+     */
     func refreshLives() {
         livesLabel.text = String(lives)
     }
     
+    /**
+     Initialize the feedback message for the user
+     */
     func setFeedbackMessage(wasCorrect: Bool, otherMessage: String? = nil){
         
         if wasCorrect {
@@ -576,6 +682,10 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
             self.feedbackLabel.backgroundColor = UIColor.red
         }
     }
+    
+    /**
+     Presents or hides the feedback message from the player over a period of the given duration
+     */
     func setFeedbackVisible(visible: Bool, duration: Float = 0.1) {
   
         if visible {
@@ -624,6 +734,10 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
         }
     }
     
+    
+    /**
+     Hides the feedback message and presents a new question
+     */
     func dismissFeedback() {
         setFeedbackVisible(visible: false)
         setupNewQuestion()
