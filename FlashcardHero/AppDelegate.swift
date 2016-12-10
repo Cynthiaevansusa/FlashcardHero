@@ -112,17 +112,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSFetchedResultsControlle
                 
                 //refresh the Gems Manager, that is where users login
                 // switch root view controllers
-                let vcArray = self.window?.rootViewController?.childViewControllers
-                var gemVC: GemManagerViewController
-                for vc in vcArray! {
-                    if let vc = vc as? GemManagerViewController {
-                        gemVC = vc
-                        print("VC is \(gemVC)")
-                        
-                        gemVC.viewWillAppear(true)
-                        break
-                    }
-                }
+//                let vcArray = self.window?.rootViewController?.childViewControllers
+//                var gemVC: GemManagerViewController
+//                for vc in vcArray! {
+//                    if let vc = vc as? GemManagerViewController {
+//                        gemVC = vc
+//                        print("VC is \(gemVC)")
+//                        
+//                        gemVC.viewWillAppear(true)
+//                        break
+//                    }
+//                }
             }
             
         }

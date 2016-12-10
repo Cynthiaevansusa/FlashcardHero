@@ -430,21 +430,27 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         segmentedControl.selectedSegmentIndex = 1
         showUserGemsSegment()
         
+        
+        
         // Get the stack
         let delegate = UIApplication.shared.delegate as! AppDelegate
-        stack = delegate.stack
+        self.stack = delegate.stack
         
         if let context = self.frcDict[keyUsersGems]?.managedObjectContext, let userSets = self.frcDict[self.keyUsersGems]?.fetchedObjects as? [QuizletSet] {
             
             for set in userSets {
                 context.delete(set)
-                stack.save()
+                self.stack.save()
             }
             
         }
+           
         //show the Public tab
+   
         segmentedControl.selectedSegmentIndex = 0
         showTrackedGemsSegment()
+        
+        
     }
     
     
