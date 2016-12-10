@@ -5,8 +5,10 @@ When you launch the app, you can log in to Quizlet, play anonymously with Public
 
 You download flashcards (sets) from Quizlet and then missions will be available for you to play, each mission with variations and rewards!
 
-## Installing
-After downloading, you must create a file that contains the following Struct, with at least the shown variables:
+## Installing, building, running
+
+Step 1. After downloading, you must create a file that contains the following Struct (usually Secrets.swift) that contains the following variables in a struct called "Secrets".  These are used by the QuizletAPI objects:
+
 
 struct Secrets {
 //TODO: FILL IN YOUR CLIENT ID AND SECRET KEY
@@ -14,7 +16,12 @@ static let QuizletClientID = "YOURQUIZLETCLIENTIDHERE"
 static let QuizletSecretKey = "YOURQUIZLETSECRETKEYHERE"
 }
 
-appropriately fill in the QuizletClientID and QuizletSecretKey with your ID and Key.  If you are a Udacity reviewer, the keys were posted when this app was submitted.
+Appropriately fill in the QuizletClientID and QuizletSecretKey with your ID and Key.  If you are a Udacity reviewer, the keys were posted when this app was submitted.
+
+Step 2. Build and run.
+
+## Documentation
+Check out the "Documents" directory.  It contains some supplimental documentation, like the "database" diagram. This can help you see the relationships in the data model, or other things.
 
 ## App Usage
 Download some sets, and start on your missions!
