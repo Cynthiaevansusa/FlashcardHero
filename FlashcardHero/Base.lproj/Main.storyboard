@@ -390,9 +390,12 @@
                                 </constraints>
                             </imageView>
                             <label userInteractionEnabled="NO" alpha="0.75" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="248" verticalCompressionResistancePriority="1000" text="Definition Text" lineBreakMode="middleTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="oTd-uT-4hW" userLabel="Definition Text">
-                                <rect key="frame" x="16" y="99" width="116" height="21.5"/>
+                                <rect key="frame" x="16" y="99" width="343" height="176"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="176" id="USz-k1-DcI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <nil key="textColor"/>
                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
@@ -474,6 +477,7 @@
                             <constraint firstItem="S4O-BJ-oF1" firstAttribute="centerY" secondItem="HrJ-Uf-50w" secondAttribute="centerY" constant="-2" id="5os-Qf-6Nl"/>
                             <constraint firstItem="NNh-cS-tGg" firstAttribute="top" secondItem="yzv-BC-Fky" secondAttribute="bottom" constant="7.5" id="Eur-dn-Vzn"/>
                             <constraint firstItem="Kqr-zI-bbW" firstAttribute="leading" secondItem="Mnt-ig-PxO" secondAttribute="trailing" constant="4" id="Fou-Te-HCp"/>
+                            <constraint firstItem="oTd-uT-4hW" firstAttribute="trailing" secondItem="fe9-g0-aJ7" secondAttribute="trailingMargin" id="GId-Lq-738"/>
                             <constraint firstItem="S4O-BJ-oF1" firstAttribute="centerX" secondItem="HrJ-Uf-50w" secondAttribute="centerX" id="HGu-YB-Ww8"/>
                             <constraint firstItem="HrJ-Uf-50w" firstAttribute="top" secondItem="LPO-Hu-2Jt" secondAttribute="bottom" constant="9" id="Hr3-cx-NOw"/>
                             <constraint firstItem="Uvq-zd-ca3" firstAttribute="centerX" secondItem="ts9-HU-NOk" secondAttribute="centerX" id="IXO-rZ-9fa"/>
