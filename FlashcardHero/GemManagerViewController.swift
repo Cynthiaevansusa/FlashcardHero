@@ -21,6 +21,7 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
     @IBOutlet weak var addButton: UIBarButtonItem!
     @IBOutlet weak var loginQuizletButton: UIBarButtonItem!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
+    @IBOutlet weak var noSetsLabel: UILabel!
 
     //FRCs
     let keyTrackedGems = "TrackedGems"
@@ -56,6 +57,7 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         
         //if user is logged in setup the UsersGems FRC
         //TODO: change this to always be
+        
         if delegate.isUserLoggedIn() {
             self.setupUserGemsFRC()
             
@@ -73,6 +75,9 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         }
         
 
+        //hide the help
+        noSetsLabel.isHidden = true
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -84,6 +89,8 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
             
             present(vc, animated: true, completion: nil)
         }
+        
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -91,9 +98,19 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         
         //self.tableView.reloadData()
         
-        let delegate = UIApplication.shared.delegate as! AppDelegate
+
         
+        
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+
         setViewForLoginStatus(delegate.isUserLoggedIn())
+        
+        //show help if no sets
+        if userHasSets() {
+            noSetsLabel.isHidden = true
+        } else {
+            noSetsLabel.isHidden = false
+        }
     }
 
     
@@ -117,6 +134,8 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
     func showTrackedGemsSegment() {
         print("Switching to Tracked Gem Segment")
         
+        
+        
         //tagging and removing a subview
         //adapted from http://stackoverflow.com/questions/28197079/swift-addsubview-and-remove-it
         if let viewWithTag = self.view.viewWithTag(111) {
@@ -124,6 +143,12 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         }
         
         self.tableView.reloadData()
+        
+        if userHasSets() {
+            noSetsLabel.isHidden = true
+        } else {
+            noSetsLabel.isHidden = false
+        }
     }
     
     func showUserGemsSegment() {
@@ -132,6 +157,7 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         if self.view.viewWithTag(111) == nil {
             self.tableView.addSubview(self.refreshControl)
         }
+        
         
         
         //check that user is logged in and set up FRC if appropriate
@@ -147,6 +173,13 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         //TODO: Make a more sophisticated way to search every so often
         if tableView(self.tableView, numberOfRowsInSection: 0) < 1 {
             self.searchQuizletForUserSets()
+        }
+        
+        //show help if no sets
+        if userHasSets() {
+            noSetsLabel.isHidden = true
+        } else {
+            noSetsLabel.isHidden = false
         }
     }
     
@@ -212,6 +245,39 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         self.navigationItem.title = nil
         //loginQuizletButton.title = "Log In"
         loginQuizletButton.image = UIImage(named:"UserIcon")
+    }
+    
+    /**
+     Returns true if the user has at least 1 set, false otherwise
+     */
+    func userHasSets() -> Bool {
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        
+        var countUserSets = 0
+        if delegate.isUserLoggedIn() {
+            if let fc = self.frcDict[keyUsersGems], let sections = fc.sections   {
+                countUserSets = sections[0].numberOfObjects
+            }
+        }
+        
+        guard let fc2 = self.frcDict[keyTrackedGems] else {
+            fatalError("Couldn't get fetchedResultsController with key \(keyTrackedGems)")
+        }
+        guard let sections2 = fc2.sections else {
+            fatalError("No sections in fetchedResultsController")
+        }
+        
+        let countPublicSets = sections2[0].numberOfObjects
+        
+        let totalSets = countUserSets + countPublicSets
+        
+        print("User has a total of \(totalSets)")
+        if totalSets < 1 {
+            
+            return false
+        } else {
+            return true
+        }
     }
     
     /******************************************************/
@@ -315,6 +381,13 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
     
         //print("Here is the frcDict \(frcDict)")
         //print("Here are all of the sets \(frcDict[visibleFrcKey]!.sections![section].objects)")
+        
+        //show help if no sets
+        if self.userHasSets() {
+            self.noSetsLabel.isHidden = true
+        } else {
+            self.noSetsLabel.isHidden = false
+        }
         
         let numRows = sections[section].numberOfObjects
         return numRows
@@ -483,7 +556,7 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
             //ask if user wants to log out
             
             let title = "Log out?"
-            let message = "Are you sure you want to log out of Quizlet?  Your Sets and the performance statistics of those Sets will also be deleted.  You can log back in at any time."
+            let message = "Are you sure you want to log out of Quizlet?  Your Sets and the performance statistics of those Sets will also be deleted.  You can log back in at any time, but your performance data cannot be recovered."
             
             let alert = UIAlertController(title: title,
                                           message: message,
@@ -561,6 +634,8 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
                         
                         //print("contents of search results: \(self.searchResults)")
                         //self.tableView.reloadData()
+                        
+                        
                     } else {
                         self.searchAttempts = 0
                         //tried twice, give user an error

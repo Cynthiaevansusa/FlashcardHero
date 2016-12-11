@@ -58,6 +58,11 @@ class OrientationViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             UIView.animate(withDuration: 3.0, animations: {
                 self.headingLabel.alpha = 1
+                
+                if UserDefaults.standard.bool(forKey: "Walkthrough") {
+                    //if user has seen this before, go ahead and give them the button
+                    self.dismissButton.alpha = 1
+                }
             })
             
         }

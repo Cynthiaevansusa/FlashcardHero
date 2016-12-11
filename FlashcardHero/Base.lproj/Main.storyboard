@@ -917,15 +917,27 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hero, you have no Sets.  Add Sets by logging in to Quizlet, or adding Public Sets." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="26J-8y-bVz">
+                                <rect key="frame" x="50" y="227" width="275" height="213"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="275" id="I7K-bU-0GQ"/>
+                                    <constraint firstAttribute="height" constant="213" id="dDN-BK-1ee"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="26"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="RTu-0k-8dt" firstAttribute="top" secondItem="QeZ-pa-g85" secondAttribute="bottom" id="99W-Bn-GSd"/>
                             <constraint firstAttribute="trailing" secondItem="RTu-0k-8dt" secondAttribute="trailing" id="B5N-cV-jfd"/>
                             <constraint firstAttribute="trailing" secondItem="QeZ-pa-g85" secondAttribute="trailing" id="LWL-BB-H49"/>
+                            <constraint firstItem="26J-8y-bVz" firstAttribute="centerY" secondItem="QS5-Rx-YEW" secondAttribute="centerY" id="QHA-tI-5Lm"/>
                             <constraint firstItem="RTu-0k-8dt" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leading" id="TiV-HH-b12"/>
                             <constraint firstItem="QeZ-pa-g85" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leading" id="XeI-Iw-8R7"/>
                             <constraint firstItem="QeZ-pa-g85" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="-20" id="YmR-EH-T9C"/>
+                            <constraint firstItem="26J-8y-bVz" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="Zjk-zL-H4P"/>
                             <constraint firstAttribute="bottom" secondItem="RTu-0k-8dt" secondAttribute="bottom" constant="36" id="qS7-7u-lsM"/>
                         </constraints>
                     </view>
@@ -937,6 +949,7 @@
                         <outlet property="addButton" destination="xfm-b5-U0X" id="ERW-Ns-Ahj"/>
                         <outlet property="gemTableView" destination="RTu-0k-8dt" id="fRq-GV-DkA"/>
                         <outlet property="loginQuizletButton" destination="rVF-yW-rdc" id="TmM-c1-eLK"/>
+                        <outlet property="noSetsLabel" destination="26J-8y-bVz" id="Fdk-bW-WmY"/>
                         <outlet property="segmentedControl" destination="bXx-zd-oBl" id="nMX-uy-5ND"/>
                     </connections>
                 </viewController>
