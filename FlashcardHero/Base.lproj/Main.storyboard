@@ -1484,7 +1484,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="438" id="2cx-9d-rE2"/>
                                 </constraints>
-                                <string key="text">In preparation for your long journey ahead, we have created this simulating device to aid you in gathering powerful, untapped knowledge.  Here are the basics of how you can use this simulating device to begin preparing your mind...</string>
+                                <string key="text">In preparation for your long journey ahead, we have created this simulating device to aid you in gathering powerful, untapped knowledge.  Here are the basics of how you can use this device to begin preparing your mind...</string>
                                 <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="27"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
