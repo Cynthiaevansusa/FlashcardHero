@@ -16,7 +16,7 @@ You download flashcards (sets) from Quizlet and then missions will be available 
   static let QuizletSecretKey = "YOURQUIZLETSECRETKEYHERE"
   }
   ```
-  Appropriately fill in the QuizletClientID and QuizletSecretKey with your ID and Key.  If you are a Udacity reviewer, the keys were posted when this app was submitted.
+  Appropriately fill in the QuizletClientID and QuizletSecretKey with your ID and Key.
 
 2. Build and run.
 
