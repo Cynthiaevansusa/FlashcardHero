@@ -51,3 +51,6 @@ Check out some analysis of your performance after missions and in the Analysis t
   * Find out some basic stats
   * See your performance for each set (later versions)
   * Find out where you need to focus on studying (later versions)
+
+5. "Settings" Tab
+  * Where you can set things
