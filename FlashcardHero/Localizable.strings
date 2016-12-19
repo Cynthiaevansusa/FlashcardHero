@@ -1,0 +1,26 @@
+/* 
+  Localizable.strings
+  FlashcardHero
+
+  Created by Jacob Foster Davis on 12/14/16.
+  Copyright © 2016 Zero Mu, LLC. All rights reserved.
+*/
+
+"app_name_long" = "Flashcard Hero: Ready Room"
+"app_name_short" = "Flashcard Hero"
+
+/*
+    Orientation
+*/
+
+"welcome_hero" = "Welcome, Hero"
+"orientation_narrative" = "This is talking about your long journey and stuff"
+
+"downloading_sets" = "Downloading Sets"
+"downloading_sets_narrative" = ""
+
+"completing_missions" = "Completing Missions"
+"completing_missions_narrative" = ""
+
+"analyzing_performance" = "Analyzing Performance"
+"analyzing_performance_narrative" =""

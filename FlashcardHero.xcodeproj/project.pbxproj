@@ -60,6 +60,9 @@
 		F6CD7EF51DF24668004A4A57 /* GameLevel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CD7EF31DF24668004A4A57 /* GameLevel+CoreDataProperties.swift */; };
 		F6CD7EFB1DF2639B004A4A57 /* CustomMissionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CD7EFA1DF2639A004A4A57 /* CustomMissionCollectionViewCell.swift */; };
 		F6CD7EFD1DF27E48004A4A57 /* GameProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CD7EFC1DF27E48004A4A57 /* GameProtocols.swift */; };
+		F6E4054A1E01CA6D0074912C /* PagedWalkthroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E405491E01CA6D0074912C /* PagedWalkthroughViewController.swift */; };
+		F6E4054D1E01DC8F0074912C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F6E4054C1E01DC8F0074912C /* Localizable.strings */; };
+		F6E4054F1E01DEC10074912C /* OrientationStandardStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E4054E1E01DEC10074912C /* OrientationStandardStepViewController.swift */; };
 		F6FD10CD1DBEEAEB00B7E6EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FD10CC1DBEEAEB00B7E6EA /* AppDelegate.swift */; };
 		F6FD10CF1DBEEAEB00B7E6EA /* CommandCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FD10CE1DBEEAEB00B7E6EA /* CommandCenterViewController.swift */; };
 		F6FD10D11DBEEAEB00B7E6EA /* PerformanceStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FD10D01DBEEAEB00B7E6EA /* PerformanceStatisticsViewController.swift */; };
@@ -146,6 +149,9 @@
 		F6CD7EF31DF24668004A4A57 /* GameLevel+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GameLevel+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F6CD7EFA1DF2639A004A4A57 /* CustomMissionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomMissionCollectionViewCell.swift; sourceTree = "<group>"; };
 		F6CD7EFC1DF27E48004A4A57 /* GameProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameProtocols.swift; sourceTree = "<group>"; };
+		F6E405491E01CA6D0074912C /* PagedWalkthroughViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagedWalkthroughViewController.swift; sourceTree = "<group>"; };
+		F6E4054C1E01DC8F0074912C /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		F6E4054E1E01DEC10074912C /* OrientationStandardStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrientationStandardStepViewController.swift; sourceTree = "<group>"; };
 		F6FD10C91DBEEAEB00B7E6EA /* FlashcardHero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlashcardHero.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6FD10CC1DBEEAEB00B7E6EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F6FD10CE1DBEEAEB00B7E6EA /* CommandCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandCenterViewController.swift; sourceTree = "<group>"; };
@@ -222,6 +228,7 @@
 				F63782CE1DC2E2A70078FE7F /* Network */,
 				F67D15921DDB4A0000D9DD5C /* Hard Data */,
 				F63782CF1DC2E2BE0078FE7F /* CoreData */,
+				F6E4054C1E01DC8F0074912C /* Localizable.strings */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -304,7 +311,6 @@
 			children = (
 				F6FD10CE1DBEEAEB00B7E6EA /* CommandCenterViewController.swift */,
 				F63459661DFB399B00D257E5 /* MissionFeedbackViewController.swift */,
-				F634596A1DFCB48E00D257E5 /* OrientationViewController.swift */,
 			);
 			name = "HQ Tab";
 			sourceTree = "<group>";
@@ -339,6 +345,7 @@
 			children = (
 				F67D15891DD1908300D9DD5C /* Games */,
 				F66B46E91DCD03AD00F2BC6E /* CoreData Parents */,
+				F6E4054B1E01CD800074912C /* Walkthrough */,
 				F66B46EB1DCD03CF00F2BC6E /* HQ Tab */,
 				F67D15AA1DDD1ACC00D9DD5C /* Analysis Tab */,
 				F66B46EA1DCD03C300F2BC6E /* Gem Manager Tab */,
@@ -438,6 +445,16 @@
 				F67D158C1DD1933000D9DD5C /* BorderedButton.swift */,
 			);
 			name = Buttons;
+			sourceTree = "<group>";
+		};
+		F6E4054B1E01CD800074912C /* Walkthrough */ = {
+			isa = PBXGroup;
+			children = (
+				F634596A1DFCB48E00D257E5 /* OrientationViewController.swift */,
+				F6E405491E01CA6D0074912C /* PagedWalkthroughViewController.swift */,
+				F6E4054E1E01DEC10074912C /* OrientationStandardStepViewController.swift */,
+			);
+			name = Walkthrough;
 			sourceTree = "<group>";
 		};
 		F6FD10C01DBEEAEB00B7E6EA = {
@@ -626,6 +643,7 @@
 				F6FD10D61DBEEAEB00B7E6EA /* Assets.xcassets in Resources */,
 				F63459691DFCAAD200D257E5 /* LICENSEKeychainSwift.txt in Resources */,
 				F606B3771DBEF2C600744EC7 /* LICENSE in Resources */,
+				F6E4054D1E01DC8F0074912C /* Localizable.strings in Resources */,
 				F6FD10D41DBEEAEB00B7E6EA /* Main.storyboard in Resources */,
 				F63782CA1DC2E1EC0078FE7F /* Documents in Resources */,
 			);
@@ -792,6 +810,7 @@
 			files = (
 				F6CD7EFB1DF2639B004A4A57 /* CustomMissionCollectionViewCell.swift in Sources */,
 				F66B5E491DC6DA0200052B7F /* GemManagerViewController.swift in Sources */,
+				F6E4054F1E01DEC10074912C /* OrientationStandardStepViewController.swift in Sources */,
 				F67D15A71DDB97D600D9DD5C /* AppSession+CoreDataProperties.swift in Sources */,
 				F6FD10D11DBEEAEB00B7E6EA /* PerformanceStatisticsViewController.swift in Sources */,
 				F6CD7EFD1DF27E48004A4A57 /* GameProtocols.swift in Sources */,
@@ -805,6 +824,7 @@
 				F63782E61DC2F08F0078FE7F /* QuizletConstants.swift in Sources */,
 				F614C3501DCA806F00E7D3C8 /* QuizletGetTermResult.swift in Sources */,
 				F67D15A91DDB97D600D9DD5C /* StudySession+CoreDataProperties.swift in Sources */,
+				F6E4054A1E01CA6D0074912C /* PagedWalkthroughViewController.swift in Sources */,
 				F66B46E81DCBCC9100F2BC6E /* CustomGemTermsCollectionViewCell.swift in Sources */,
 				F614C34E1DCA7FD100E7D3C8 /* QuizletGetSetTermsResult.swift in Sources */,
 				F606B3751DBEED0000744EC7 /* README.md in Sources */,

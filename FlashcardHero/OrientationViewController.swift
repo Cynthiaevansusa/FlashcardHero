@@ -14,8 +14,8 @@ class OrientationViewController: UIViewController {
     @IBOutlet weak var headingLabel: UILabel!
     @IBOutlet weak var dismissButton: UIButton!
     
-    @IBOutlet weak var gettingStartedHeadingLabel: UILabel!
-    @IBOutlet weak var gettingStartedBodyLabel: UILabel!
+    //@IBOutlet weak var gettingStartedHeadingLabel: UILabel!
+    //@IBOutlet weak var gettingStartedBodyLabel: UILabel!
     
     @IBOutlet weak var downloadHeadingLabel: UILabel!
     @IBOutlet weak var downloadBodyLabel: UILabel!
@@ -45,6 +45,9 @@ class OrientationViewController: UIViewController {
         
         makeEverything(alpha: 0.0)
         
+        view.layer.masksToBounds = true
+        view.layer.cornerRadius = CGFloat(50.0)
+        
         animatedSequence()
     }
     
@@ -57,7 +60,7 @@ class OrientationViewController: UIViewController {
         //heading
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             UIView.animate(withDuration: 3.0, animations: {
-                self.headingLabel.alpha = 1
+                //self.headingLabel.alpha = 1
                 
                 if UserDefaults.standard.bool(forKey: "Walkthrough") {
                     //if user has seen this before, go ahead and give them the button
@@ -70,14 +73,14 @@ class OrientationViewController: UIViewController {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
             UIView.animate(withDuration: 3.0, animations: {
-                self.gettingStartedHeadingLabel.alpha = 1
+                //self.gettingStartedHeadingLabel.alpha = 1
             })
 
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.7) {
             UIView.animate(withDuration: 4.0, animations: {
-                self.gettingStartedBodyLabel.alpha = 1
+                //self.gettingStartedBodyLabel.alpha = 1
             })
             
             
@@ -85,8 +88,8 @@ class OrientationViewController: UIViewController {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 18.7) {
             UIView.animate(withDuration: 5.0, animations: {
-                self.gettingStartedBodyLabel.alpha = 0
-                self.gettingStartedHeadingLabel.alpha = 0
+                //self.gettingStartedBodyLabel.alpha = 0
+                //self.gettingStartedHeadingLabel.alpha = 0
                 
             })
             
@@ -213,8 +216,8 @@ class OrientationViewController: UIViewController {
         headingLabel.alpha = alpha
         dismissButton.alpha = alpha
         
-        gettingStartedHeadingLabel.alpha = alpha
-        gettingStartedBodyLabel.alpha = alpha
+        //gettingStartedHeadingLabel.alpha = alpha
+        //gettingStartedBodyLabel.alpha = alpha
         
         downloadHeadingLabel.alpha = alpha
         downloadBodyLabel.alpha = alpha

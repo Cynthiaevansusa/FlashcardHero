@@ -85,7 +85,7 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
         if !UserDefaults.standard.bool(forKey: "Walkthrough") {
             print("Showing the Orientation now")
             // Present Walkthrough
-            let vc = storyboard?.instantiateViewController(withIdentifier: "Orientation") as! OrientationViewController
+            let vc = storyboard?.instantiateViewController(withIdentifier: "pagedWalkthrough") as! PagedWalkthroughViewController
             
             present(vc, animated: true, completion: nil)
         }
