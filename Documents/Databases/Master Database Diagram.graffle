@@ -529,11 +529,11 @@
 							<key>Color</key>
 							<dict>
 								<key>b</key>
-								<string>0</string>
+								<string>0.25098</string>
 								<key>g</key>
-								<string>0</string>
+								<string>0.501961</string>
 								<key>r</key>
-								<string>1</string>
+								<string>0</string>
 							</dict>
 							<key>Width</key>
 							<real>2</real>
@@ -587,11 +587,11 @@
 							<key>Color</key>
 							<dict>
 								<key>b</key>
-								<string>0</string>
+								<string>0.25098</string>
 								<key>g</key>
-								<string>0</string>
+								<string>0.501961</string>
 								<key>r</key>
-								<string>1</string>
+								<string>0</string>
 							</dict>
 							<key>Width</key>
 							<real>2</real>
@@ -11863,8 +11863,9 @@ Reference to another CoreData object}</string>
 
 \f0\fs24 \cf0 isActive\
 quizletSetId\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\f1\i quizletSet}</string>
+\f1\i \cf0 quizletSet}</string>
 							</dict>
 							<key>TextPlacement</key>
 							<integer>0</integer>
@@ -13101,8 +13102,9 @@ description}</string>
 questionTypeId\
 wasCorrect\
 wrongAnswerFITB\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\f1\i wrongAnswerTD
+\f1\i \cf0 wrongAnswerTD
 \f0\i0 \
 
 \f1\i studySession\
@@ -13676,9 +13678,8 @@ quizzletTD}</string>
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
 \f0\b\fs24 \cf0 id\
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\f1\b0 \cf0 name\
+\f1\b0 name\
 description\
 storyboardId\
 isAvailable}</string>
@@ -14253,8 +14254,9 @@ isAvailable}</string>
 \f0\fs24 \cf0 start\
 stop\
 gameId\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\f1\i appSession}</string>
+\f1\i \cf0 appSession}</string>
 							</dict>
 							<key>TextPlacement</key>
 							<integer>0</integer>
@@ -16761,8 +16763,9 @@ modifier}</string>
 \f0\fs24 \cf0 datetime\
 actualEssenceEarned\
 valueModifierId\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\f1\i achievementLog}</string>
+\f1\i \cf0 achievementLog}</string>
 							</dict>
 							<key>TextPlacement</key>
 							<integer>0</integer>
@@ -17329,8 +17332,9 @@ valueModifierId\
 
 \f0\fs24 \cf0 datetime\
 achievementId\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\f1\i appSession}</string>
+\f1\i \cf0 appSession}</string>
 							</dict>
 							<key>TextPlacement</key>
 							<integer>0</integer>
@@ -19104,8 +19108,9 @@ modifier}</string>
 
 \f0\fs24 \cf0 datetime\
 powerupId\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\f1\i appSession}</string>
+\f1\i \cf0 appSession}</string>
 							</dict>
 							<key>TextPlacement</key>
 							<integer>0</integer>
@@ -20204,8 +20209,9 @@ essenceBaseCost}</string>
 \f0\fs24 \cf0 datetime\
 actualEssenceSpent\
 costModifierId\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\f1\i powerupLog}</string>
+\f1\i \cf0 powerupLog}</string>
 							</dict>
 							<key>TextPlacement</key>
 							<integer>0</integer>
@@ -22619,7 +22625,7 @@ name}</string>
 		</dict>
 	</array>
 	<key>ModificationDate</key>
-	<string>2016-11-17 18:40:26 +0000</string>
+	<string>2016-12-03 00:10:59 +0000</string>
 	<key>Modifier</key>
 	<string>Jacob Foster Davis</string>
 	<key>NotesVisible</key>
@@ -22689,7 +22695,7 @@ name}</string>
 		<key>Frame</key>
 		<string>{{4, 21}, {1607, 1037}}</string>
 		<key>VisibleRegion</key>
-		<string>{{-247.99998, -12.000012}, {1648.2051, 937.43591}}</string>
+		<string>{{-494.99994, -35.999977}, {1648.2051, 985.64111}}</string>
 		<key>Zoom</key>
 		<real>1.5</real>
 	</dict>

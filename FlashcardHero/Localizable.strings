@@ -6,21 +6,21 @@
   Copyright © 2016 Zero Mu, LLC. All rights reserved.
 */
 
-"app_name_long" = "Flashcard Hero: Ready Room"
-"app_name_short" = "Flashcard Hero"
+"APP_NAME_LONG" = "Flashcard Hero: Ready Room";
+"APP_NAME_SHORT" = "Flashcard Hero";
 
 /*
     Orientation
 */
 
-"welcome_hero" = "Welcome, Hero"
-"orientation_narrative" = "This is talking about your long journey and stuff"
+"WELCOME_HERO_TITLE" = "Welcome, Hero";
+"ORIENTATION_NARRATIVE" = "In preparation for your long journey ahead, we have created this simulating device to aid you in gathering powerful, untapped knowledge.  Here are the basics of how you can use this device to begin preparing your mind...";
 
-"downloading_sets" = "Downloading Sets"
-"downloading_sets_narrative" = ""
+"DOWNLOADING_SETS_TITLE" = "Downloading Sets";
+"DOWNLOADING_SETS_NARRATIVE" = "All knowledge is stored at Quizlet.com.  You can download Public Sets or Log In to download all of your custom Sets.";
 
-"completing_missions" = "Completing Missions"
-"completing_missions_narrative" = ""
+"COMPLETING_MISSIONS_TITLE" = "Completing Missions";
+"COMPLETING_MISSIONS_NARRATIVE" = "Missions require the information contained in your Sets.  Activate the Sets you want to exercise before each mission.  Your performance will be rewarded.";
 
-"analyzing_performance" = "Analyzing Performance"
-"analyzing_performance_narrative" =""
+"ANALYZING_PERFORMANCE_TITLE" = "Analyzing Performance";
+"ANALYZING_PERFORMANCE_NARRATIVE" = "The advanced Analysis module shows you where you need to improve.  Use this information to hone your skills.  That which remains unchallenged grows weak.";
