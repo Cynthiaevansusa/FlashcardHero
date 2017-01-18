@@ -14,7 +14,7 @@ import UIKit
  Holds and manages the information for the standard orientation screens, where each screen has a title, a narrative, and three graphics.
  
  - Parameters:
- - Step: Integer from 0 - 2 to indicate which of the three standard orientation content sections to show.  Downloading Sets, Completing Missions, and Analyzing Performance.
+ - Assumes that screenObject is set before loading, set with the screenObjectForOrientation struct for the screen to be displayed.
  */
 class OrientationStandardStepViewController: UIViewController {
     

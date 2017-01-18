@@ -13,7 +13,7 @@ class PagedWalkthroughViewController : UIPageViewController {
     
     
     func getStepZero() -> UIViewController {
-        return storyboard!.instantiateViewController(withIdentifier: "Orientation0") as! UIViewController
+        return storyboard!.instantiateViewController(withIdentifier: "OrientationFirstStep") as! OrientationFirstStepViewController
     }
     
     func getStepOne() -> OrientationStandardStepViewController {
@@ -68,6 +68,10 @@ class PagedWalkthroughViewController : UIPageViewController {
         stepStoryboard.screenObject = screen
         
         return stepStoryboard
+    }
+    
+    func getStepFinal() -> UIViewController {
+        return storyboard!.instantiateViewController(withIdentifier: "OrientationFinalStep") as! OrientationFinalStepViewController
     }
     
     override func viewDidLoad() {
@@ -137,6 +141,9 @@ extension PagedWalkthroughViewController : UIPageViewControllerDataSource {
                 return nil
             }
             
+        } else if viewController is OrientationFinalStepViewController {
+            //Final -> 3
+            return getStepThree()
         } else {
             //end of the road.  It is the first view controller can't go left any more
             return nil
@@ -147,6 +154,9 @@ extension PagedWalkthroughViewController : UIPageViewControllerDataSource {
      Load the card after the one showing
      */
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        
+        
+        
         if let vC = viewController as? OrientationStandardStepViewController {
             if vC.screenObject.id == 1 {
                 //1 -> 2
@@ -155,12 +165,15 @@ extension PagedWalkthroughViewController : UIPageViewControllerDataSource {
                 //2 -> 3
                 return getStepThree()
             } else if vC.screenObject.id == 3 {
-                //3 -> 4
-                return nil
+                //3 -> Final
+                return getStepFinal()
             } else {
-                return nil
+                return getStepFinal()
             }
             
+        } else if viewController is OrientationFinalStepViewController {
+            //end of the line.  No cards after the final card.
+            return nil
         } else {
             //0 -> 1
             return getStepOne()
@@ -168,7 +181,7 @@ extension PagedWalkthroughViewController : UIPageViewControllerDataSource {
     }
     
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        return 4
+        return 5
     }
     
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {

@@ -17,10 +17,13 @@
 "ORIENTATION_NARRATIVE" = "In preparation for your long journey ahead, we have created this simulating device to aid you in gathering powerful, untapped knowledge.  Here are the basics of how you can use this device to begin preparing your mind...";
 
 "DOWNLOADING_SETS_TITLE" = "Downloading Sets";
-"DOWNLOADING_SETS_NARRATIVE" = "All knowledge is stored at Quizlet.com.  You can download Public Sets or Log In to download all of your custom Sets.";
+"DOWNLOADING_SETS_NARRATIVE" = "All knowledge is stored at Quizlet.com.  You can download Public Sets or Log In to download all of your custom Sets.  You don't need a Quizlet account to access Public Sets, but beware of false knowledge.";
 
 "COMPLETING_MISSIONS_TITLE" = "Completing Missions";
 "COMPLETING_MISSIONS_NARRATIVE" = "Missions require the information contained in your Sets.  Activate the Sets you want to exercise before each mission.  Your performance will be rewarded.";
 
 "ANALYZING_PERFORMANCE_TITLE" = "Analyzing Performance";
 "ANALYZING_PERFORMANCE_NARRATIVE" = "The advanced Analysis module shows you where you need to improve.  Use this information to hone your skills.  That which remains unchallenged grows weak.";
+
+"FAREWELL_TITLE" = "Good Luck!";
+"FAREWELL_NARRATIVE" = "In this simulator, you cannot suffer permenant loss.  So don't be afriad to jump right in. But you also cannot achieve permenant gains, so you must always be on guard...";
