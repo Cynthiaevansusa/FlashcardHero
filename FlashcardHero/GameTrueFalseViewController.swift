@@ -26,6 +26,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
     @IBOutlet weak var pointsLabel: UILabel!
     @IBOutlet weak var livesLabel: UILabel!
     @IBOutlet weak var timerLabel: UILabel!
+    @IBOutlet weak var progressView: UIProgressView! //shows the players progress to the goal
     
     let missionFeedbackSegueIdentifier = "segueShowMissionFeedback"
     
@@ -214,6 +215,9 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
         
         refreshPoints()
         refreshLives()
+        
+        //set the progress bar to zero
+        progressView.setProgress(0, animated: false)
     }
     
     /******************************************************/
@@ -490,7 +494,26 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
         //UI refresh
         refreshPoints()
         refreshLives()
-
+        refreshProgressBar(newPoints)
+    }
+    
+    /**
+     Updates the status bar based on the current score and objective
+     */
+    func refreshProgressBar(_ pointsEarned: Int) {
+        //set the progress bar to the new points
+        let newProgress = Float(self.points) / Float(self.objectiveMaxPoints)
+        
+        if newProgress < 0 {
+            progressView.tintColor = .red
+            progressView.setProgress(1, animated: false)
+        } else if pointsEarned > 0 && newProgress == 0 { //if the progress was just negative and it has set the progress back to 0, don't animate the change back to zero
+            progressView.tintColor = .green
+            progressView.setProgress(newProgress, animated: false)
+        } else {
+            progressView.tintColor = .green
+            progressView.setProgress(newProgress, animated: true)
+        }
     }
     
     /**

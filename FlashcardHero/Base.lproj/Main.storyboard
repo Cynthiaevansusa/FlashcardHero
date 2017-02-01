@@ -424,14 +424,17 @@
                                             </imageView>
                                         </subviews>
                                     </stackView>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="x8t-7n-gcb">
+                                        <rect key="frame" x="0.0" y="25" width="320" height="2"/>
+                                    </progressView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="Term Text" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="wbd-Va-hL4" userLabel="Term Text">
-                                        <rect key="frame" x="0.0" y="25" width="320" height="28.5"/>
+                                        <rect key="frame" x="0.0" y="32" width="320" height="28.5"/>
                                         <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="25"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label userInteractionEnabled="NO" alpha="0.75" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="247" text="Definition Text" lineBreakMode="middleTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="oTd-uT-4hW" userLabel="Definition Text">
-                                        <rect key="frame" x="0.0" y="58.5" width="320" height="44.5"/>
+                                        <rect key="frame" x="0.0" y="65.5" width="320" height="43"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="43" id="USz-k1-DcI"/>
@@ -441,7 +444,7 @@
                                         <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="yzv-BC-Fky">
-                                        <rect key="frame" x="0.0" y="108" width="320" height="320"/>
+                                        <rect key="frame" x="0.0" y="113.5" width="320" height="314.5"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NNh-cS-tGg">
                                         <rect key="frame" x="0.0" y="433" width="320" height="65"/>
@@ -495,6 +498,7 @@
                         <outlet property="imageView" destination="yzv-BC-Fky" id="XmZ-kK-qFp"/>
                         <outlet property="livesLabel" destination="S4O-BJ-oF1" id="2Fq-0n-AaE"/>
                         <outlet property="pointsLabel" destination="Uvq-zd-ca3" id="iQ2-x3-65N"/>
+                        <outlet property="progressView" destination="x8t-7n-gcb" id="knN-DR-QDP"/>
                         <outlet property="quitButton" destination="Mnt-ig-PxO" id="cmv-i3-O7g"/>
                         <outlet property="quizletAttributionImage" destination="e2r-MS-dg1" id="7lE-wo-jjM"/>
                         <outlet property="termText" destination="wbd-Va-hL4" id="J9Q-O9-ZiN"/>
