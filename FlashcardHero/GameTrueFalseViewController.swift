@@ -667,15 +667,19 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
                             wrongTD = nil
                             if let imageData = correctImage {
                                 self.imageView.image = UIImage(data:imageData as Data,scale:1.0)
+                                self.imageView.isHidden = false
                             } else if self.imageView != nil {
                                  self.imageView.image = nil
+                                self.imageView.isHidden = true
                             }
                         } else {
                             self.definitionText.text = wrongAnswer
                             if let imageData = wrongImage {
                                 self.imageView.image = UIImage(data:imageData as Data,scale:1.0)
+                                self.imageView.isHidden = false
                             } else if self.imageView != nil {
                                 self.imageView.image = nil
+                                self.imageView.isHidden = true
                             }
                             wrongTD = wrongQuizletTermDefinition
                         }
