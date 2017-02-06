@@ -712,11 +712,11 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
                         }
                         
                         //hide the definition text from the stack if it is empty, unhide if not empty
-                        if definitionText.text == nil || definitionText.text == "" {
-                            self.definitionText.isHidden = true
-                        } else {
-                            self.definitionText.isHidden = false
-                        }
+//                        if definitionText.text == nil || definitionText.text == "" {
+//                            self.definitionText.isHidden = true
+//                        } else {
+//                            self.definitionText.isHidden = false
+//                        }
                         
                         self.setQuestionVisible(visible: true);
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: { self.setAnswerButtonsVisible(visible: true)})
