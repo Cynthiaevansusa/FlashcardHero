@@ -200,18 +200,18 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
         self.quizletAttributionImage.alpha = 0
         self.points = 0
         
-        //setup button corners
-        trueButton.layer.masksToBounds = true
-        trueButton.layer.cornerRadius = CGFloat(4.0)
-        
-        falseButton.layer.masksToBounds = true
-        falseButton.layer.cornerRadius = CGFloat(4.0)
-        
-        quitButton.layer.masksToBounds = true
-        quitButton.layer.cornerRadius = CGFloat(4.0)
-        
-        definitionText.layer.masksToBounds = true
-        definitionText.layer.cornerRadius = 5
+//        //setup button corners
+//        trueButton.layer.masksToBounds = true
+//        trueButton.layer.cornerRadius = CGFloat(4.0)
+//        
+//        falseButton.layer.masksToBounds = true
+//        falseButton.layer.cornerRadius = CGFloat(4.0)
+//        
+//        quitButton.layer.masksToBounds = true
+//        quitButton.layer.cornerRadius = CGFloat(4.0)
+//        
+//        definitionText.layer.masksToBounds = true
+//        definitionText.layer.cornerRadius = 5
         
         refreshPoints()
         refreshLives()
@@ -711,12 +711,6 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
                             wrongTD = wrongQuizletTermDefinition
                         }
                         
-                        //hide the definition text from the stack if it is empty, unhide if not empty
-//                        if definitionText.text == nil || definitionText.text == "" {
-//                            self.definitionText.isHidden = true
-//                        } else {
-//                            self.definitionText.isHidden = false
-//                        }
                         
                         self.setQuestionVisible(visible: true);
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: { self.setAnswerButtonsVisible(visible: true)})
