@@ -509,7 +509,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
             progressView.setProgress(1, animated: false)
         } else if pointsEarned > 0 && newProgress == 0 { //if the progress was just negative and it has set the progress back to 0, don't animate the change back to zero
             progressView.tintColor = .green
-            progressView.setProgress(newProgress, animated: false)
+            progressView.setProgress(0, animated: false)
         } else {
             progressView.tintColor = .green
             progressView.setProgress(newProgress, animated: true)
@@ -687,7 +687,11 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
                         
                         if willShowCorrect {
                             self.definitionText.text = correctAnswer
+
+                            //this is the correct answer, so there is no wrong TermDefinition
                             wrongTD = nil
+                            
+                            //setup the image
                             if let imageData = correctImage {
                                 self.imageView.image = UIImage(data:imageData as Data,scale:1.0)
                                 self.imageView.isHidden = false
@@ -706,6 +710,14 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
                             }
                             wrongTD = wrongQuizletTermDefinition
                         }
+                        
+                        //hide the definition text from the stack if it is empty, unhide if not empty
+                        if definitionText.text == nil || definitionText.text == "" {
+                            self.definitionText.isHidden = true
+                        } else {
+                            self.definitionText.isHidden = false
+                        }
+                        
                         self.setQuestionVisible(visible: true);
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: { self.setAnswerButtonsVisible(visible: true)})
                      } else {
