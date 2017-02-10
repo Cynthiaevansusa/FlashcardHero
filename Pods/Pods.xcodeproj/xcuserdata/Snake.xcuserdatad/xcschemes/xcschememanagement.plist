@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>GoogleToolboxForMac.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>KeychainSwift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -32,7 +37,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>07C004EE9675A950E771D1109A09AE79</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>22662FCCD8875C4A93A248ADC853877A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3883F07D9099998ECFC85F222C39542A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -42,12 +57,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>72FD425B478D447B07F1639C0E547B5D</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>909ED2F977F88D9F0901710ADCA5B6EB</key>
+		<key>92BB131FA876445E027D20AE23EA7B5F</key>
 		<dict>
 			<key>primary</key>
 			<true/>

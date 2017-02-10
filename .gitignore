@@ -6,6 +6,9 @@
 FlashcardHero/Secrets.swift
 FlashcardHero/Assets.xcassets/glyphish-free
 
+## Google Ads
+FlashcardHero/GoogleService-Info.plist
+
 
 ## Build generated
 build/

@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import CoreData
+import GoogleMobileAds
 
 class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantMaxPoints, GameVariantPerfectGame {
 
@@ -29,6 +30,10 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
     @IBOutlet weak var progressView: UIProgressView! //shows the players progress to the goal
     
     let missionFeedbackSegueIdentifier = "segueShowMissionFeedback"
+    
+    //Google Ad Banner
+    @IBOutlet weak var gADBanner: GADBannerView!
+    
     
     //general game variables
     var points = 0
@@ -80,6 +85,12 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
         
         setupInitialPlayspace()
         //TODO: Check for case where no set contains more than 1 term.
+        
+        //Google Ad Setup
+        print("Google Mobile Ads SDK version: " + GADRequest.sdkVersion())
+        gADBanner.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        gADBanner.rootViewController = self
+        gADBanner.load(GADRequest())
         
     }
     

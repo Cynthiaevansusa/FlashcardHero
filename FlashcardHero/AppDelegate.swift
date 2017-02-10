@@ -9,6 +9,8 @@
 import UIKit
 import CoreData
 import KeychainSwift
+import GoogleMobileAds
+import FirebaseCore
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, NSFetchedResultsControllerDelegate {
@@ -328,6 +330,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSFetchedResultsControlle
             print("User has not seen the walkthrough yet")
             UserDefaults.standard.set(false, forKey: "Walkthrough")
         }
+        return true
+        
+        // Use Firebase library to configure APIs
+        FIRApp.configure()
+        GADMobileAds.configure(withApplicationID: "ca-app-pub-3940256099942544~1458002511")
         return true
     }
 

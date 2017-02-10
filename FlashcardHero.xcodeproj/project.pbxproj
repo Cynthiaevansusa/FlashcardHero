@@ -41,6 +41,9 @@
 		F66B5E491DC6DA0200052B7F /* GemManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66B5E481DC6DA0200052B7F /* GemManagerViewController.swift */; };
 		F66B5E4B1DC6DA5400052B7F /* QuizletSearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66B5E4A1DC6DA5400052B7F /* QuizletSearchResultsViewController.swift */; };
 		F66B5E4E1DC833C600052B7F /* QuizletSetSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66B5E4D1DC833C600052B7F /* QuizletSetSearchResult.swift */; };
+		F67916851E4E419000FC3598 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F67916841E4E419000FC3598 /* GoogleService-Info.plist */; };
+		F67916861E4E419000FC3598 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F67916841E4E419000FC3598 /* GoogleService-Info.plist */; };
+		F67916871E4E419000FC3598 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F67916841E4E419000FC3598 /* GoogleService-Info.plist */; };
 		F67D15881DD18FB900D9DD5C /* CoreDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67D15871DD18FB900D9DD5C /* CoreDataViewController.swift */; };
 		F67D158B1DD190C200D9DD5C /* GameTrueFalseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67D158A1DD190C200D9DD5C /* GameTrueFalseViewController.swift */; };
 		F67D158D1DD1933000D9DD5C /* BorderedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67D158C1DD1933000D9DD5C /* BorderedButton.swift */; };
@@ -132,6 +135,7 @@
 		F66B5E481DC6DA0200052B7F /* GemManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GemManagerViewController.swift; sourceTree = "<group>"; };
 		F66B5E4A1DC6DA5400052B7F /* QuizletSearchResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizletSearchResultsViewController.swift; sourceTree = "<group>"; };
 		F66B5E4D1DC833C600052B7F /* QuizletSetSearchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizletSetSearchResult.swift; sourceTree = "<group>"; };
+		F67916841E4E419000FC3598 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F67D15871DD18FB900D9DD5C /* CoreDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataViewController.swift; sourceTree = "<group>"; };
 		F67D158A1DD190C200D9DD5C /* GameTrueFalseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameTrueFalseViewController.swift; sourceTree = "<group>"; };
 		F67D158C1DD1933000D9DD5C /* BorderedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderedButton.swift; sourceTree = "<group>"; };
@@ -498,6 +502,7 @@
 				F63782CD1DC2E24A0078FE7F /* Controller */,
 				F6FD10D51DBEEAEB00B7E6EA /* Assets.xcassets */,
 				F6FD10DA1DBEEAEB00B7E6EA /* Info.plist */,
+				F67916841E4E419000FC3598 /* GoogleService-Info.plist */,
 			);
 			path = FlashcardHero;
 			sourceTree = "<group>";
@@ -646,6 +651,7 @@
 			files = (
 				F6FD10D91DBEEAEB00B7E6EA /* LaunchScreen.storyboard in Resources */,
 				F63782DE1DC2E9050078FE7F /* .gitignore in Resources */,
+				F67916851E4E419000FC3598 /* GoogleService-Info.plist in Resources */,
 				F6FD10D61DBEEAEB00B7E6EA /* Assets.xcassets in Resources */,
 				F63459691DFCAAD200D257E5 /* LICENSEKeychainSwift.txt in Resources */,
 				F606B3771DBEF2C600744EC7 /* LICENSE in Resources */,
@@ -659,6 +665,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F67916861E4E419000FC3598 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -666,6 +673,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F67916871E4E419000FC3598 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

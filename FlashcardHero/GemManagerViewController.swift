@@ -627,6 +627,8 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
                     if error == nil && results != nil {
                         print("User sets search success")
                         
+                        //TODO: compare the results with the local data.  Remove extra data and add new data.
+                        
                         //self.userSetsTemp = []
                         //self.userSetsTemp.append(contentsOf: results!)
                         //print("There are \(self.userSetsTemp.count) sets about to be added to the model")
