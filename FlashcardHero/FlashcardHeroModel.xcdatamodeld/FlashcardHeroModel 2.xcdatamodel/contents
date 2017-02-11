@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16D32" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="AchievementStepLog" representedClassName=".AchievementStepLog" syncable="YES">
+        <attribute name="achievementStepId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="datetime" attributeType="Date" minDateTimeInterval="508530300" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="appSession" maxCount="1" deletionRule="Nullify" destinationEntity="AppSession" inverseName="achievementStepLog" inverseEntity="AppSession" syncable="YES"/>
+        <relationship name="tdPerformanceLog" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TDPerformanceLog" syncable="YES"/>
+    </entity>
+    <entity name="AppSession" representedClassName=".AppSession" syncable="YES">
+        <attribute name="start" attributeType="Date" minDateTimeInterval="500930220" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
+        <attribute name="stop" optional="YES" attributeType="Date" minDateTimeInterval="500930220" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="achievementStepLog" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AchievementStepLog" inverseName="appSession" inverseEntity="AchievementStepLog" syncable="YES"/>
+        <relationship name="studySession" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="StudySession" inverseName="appSession" inverseEntity="StudySession" syncable="YES"/>
+    </entity>
+    <entity name="GameLevel" representedClassName=".GameLevel" syncable="YES">
+        <attribute name="gameId" attributeType="Integer 64" minValueString="0" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="level" attributeType="Integer 64" minValueString="0" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <entity name="QuizletSet" representedClassName=".QuizletSet" syncable="YES">
+        <attribute name="accessType" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="canEdit" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="createdBy" attributeType="String" syncable="YES"/>
+        <attribute name="createdDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="creatorId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="editable" attributeType="String" syncable="YES"/>
+        <attribute name="hasAccess" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="hasImages" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="isActive" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="langDefinitions" attributeType="String" syncable="YES"/>
+        <attribute name="langTerms" attributeType="String" syncable="YES"/>
+        <attribute name="modifiedDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="passwordEdit" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="passwordUse" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="publishedDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="setDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="subjects" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="termCount" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="thumbnailImageData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <attribute name="title" attributeType="String" syncable="YES"/>
+        <attribute name="url" attributeType="String" syncable="YES"/>
+        <attribute name="visibility" attributeType="String" syncable="YES"/>
+        <relationship name="quizletTermDefinition" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="QuizletTermDefinition" inverseName="quizletSet" inverseEntity="QuizletTermDefinition" syncable="YES"/>
+    </entity>
+    <entity name="QuizletTermDefinition" representedClassName=".QuizletTermDefinition" syncable="YES">
+        <attribute name="definition" attributeType="String" syncable="YES"/>
+        <attribute name="imageData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <attribute name="imageHeight" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="imageUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imageWidth" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="rank" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="term" attributeType="String" syncable="YES"/>
+        <attribute name="termId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="performanceLog" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TDPerformanceLog" inverseName="quizletTD" inverseEntity="TDPerformanceLog" syncable="YES"/>
+        <relationship name="performanceLogWrong" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TDPerformanceLog" inverseName="wrongAnswerTD" inverseEntity="TDPerformanceLog" syncable="YES"/>
+        <relationship name="quizletSet" maxCount="1" deletionRule="Nullify" destinationEntity="QuizletSet" inverseName="quizletTermDefinition" inverseEntity="QuizletSet" syncable="YES"/>
+    </entity>
+    <entity name="StudySession" representedClassName=".StudySession" syncable="YES">
+        <attribute name="gameId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="start" attributeType="Date" minDateTimeInterval="500930280" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
+        <attribute name="stop" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="appSession" maxCount="1" deletionRule="Nullify" destinationEntity="AppSession" inverseName="studySession" inverseEntity="AppSession" syncable="YES"/>
+    </entity>
+    <entity name="TDPerformanceLog" representedClassName=".TDPerformanceLog" syncable="YES">
+        <attribute name="datetime" attributeType="Date" minDateTimeInterval="500911800" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
+        <attribute name="questionTypeId" attributeType="Integer 64" minValueString="0" defaultValueString="0" usesScalarValueType="YES" indexed="YES" syncable="YES"/>
+        <attribute name="wasCorrect" attributeType="Boolean" usesScalarValueType="YES" indexed="YES" syncable="YES"/>
+        <attribute name="wrongAnswerFITB" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="quizletTD" maxCount="1" deletionRule="Cascade" destinationEntity="QuizletTermDefinition" inverseName="performanceLog" inverseEntity="QuizletTermDefinition" syncable="YES"/>
+        <relationship name="studySession" maxCount="1" deletionRule="Nullify" destinationEntity="StudySession" syncable="YES"/>
+        <relationship name="wrongAnswerTD" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QuizletTermDefinition" inverseName="performanceLogWrong" inverseEntity="QuizletTermDefinition" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="AppSession" positionX="-135" positionY="-15" width="128" height="105"/>
+        <element name="GameLevel" positionX="-135" positionY="-198" width="128" height="75"/>
+        <element name="QuizletSet" positionX="405" positionY="-621" width="128" height="405"/>
+        <element name="QuizletTermDefinition" positionX="421" positionY="-129" width="128" height="210"/>
+        <element name="StudySession" positionX="27" positionY="-51" width="128" height="105"/>
+        <element name="TDPerformanceLog" positionX="241" positionY="-99" width="128" height="148"/>
+        <element name="AchievementStepLog" positionX="277" positionY="257" width="128" height="103"/>
+    </elements>
+</model>

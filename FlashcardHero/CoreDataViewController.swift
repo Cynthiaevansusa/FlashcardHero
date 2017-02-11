@@ -230,6 +230,27 @@ extension CoreDataViewController: NSFetchedResultsControllerDelegate {
             stack.save()
             
             
+        } else if anObject is AchievementStepLog {
+            
+            switch(type) {
+            case .insert:
+                
+                print("case insert AchievementStepLog")
+            case .delete:
+                
+                print("case delete AchievementStepLog")
+            case .update:
+                
+                print("case update AchievementStepLog")
+            case .move:
+                //TODO: move a cell... this may not be needed
+                print("case move AchievementStepLog")
+            }
+            
+            //save
+            stack.save()
+            
+            
         } else
         {
             

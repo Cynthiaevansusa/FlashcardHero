@@ -9,11 +9,11 @@
 import Foundation
 
 struct QuestionTypes {
-    static let TrueFalse = QuestionType(id: 0,
+    static let TrueFalseQuestionType = QuestionType(id: 0,
                                         name: "TrueFalse",
                                         description: "A term and a possible correct answer definition are presented.  The player chooses whether the answer shown is the correct answer or not.")
     
-    static let types = [TrueFalse.id : TrueFalse]
+    static let types = [TrueFalseQuestionType.name : TrueFalseQuestionType]
 }
 
 

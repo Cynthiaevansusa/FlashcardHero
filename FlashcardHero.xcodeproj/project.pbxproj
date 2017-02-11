@@ -48,7 +48,7 @@
 		F67D158B1DD190C200D9DD5C /* GameTrueFalseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67D158A1DD190C200D9DD5C /* GameTrueFalseViewController.swift */; };
 		F67D158D1DD1933000D9DD5C /* BorderedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67D158C1DD1933000D9DD5C /* BorderedButton.swift */; };
 		F67D158F1DD19DED00D9DD5C /* CoreDataTrueFalseGameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67D158E1DD19DED00D9DD5C /* CoreDataTrueFalseGameController.swift */; };
-		F67D15911DDB3E6E00D9DD5C /* GameDirectory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67D15901DDB3E6E00D9DD5C /* GameDirectory.swift */; };
+		F67D15911DDB3E6E00D9DD5C /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67D15901DDB3E6E00D9DD5C /* Game.swift */; };
 		F67D15941DDB4A4700D9DD5C /* QuestionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67D15931DDB4A4700D9DD5C /* QuestionType.swift */; };
 		F67D15A01DDB534500D9DD5C /* TDPerformanceLog+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67D159E1DDB534500D9DD5C /* TDPerformanceLog+CoreDataClass.swift */; };
 		F67D15A11DDB534500D9DD5C /* TDPerformanceLog+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67D159F1DDB534500D9DD5C /* TDPerformanceLog+CoreDataProperties.swift */; };
@@ -61,6 +61,9 @@
 		F67D15B01DDD4C0100D9DD5C /* OverviewStatistic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67D15AF1DDD4C0100D9DD5C /* OverviewStatistic.swift */; };
 		F67D15ED1DC938B9002975C7 /* CustomQuizletSearchBySetsResultsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67D15EC1DC938B9002975C7 /* CustomQuizletSearchBySetsResultsCell.swift */; };
 		F67D15F01DC97FCC002975C7 /* FlashcardHeroModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F67D15EE1DC97FCC002975C7 /* FlashcardHeroModel.xcdatamodeld */; };
+		F685333D1E4F7A2700365144 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F685333C1E4F7A2700365144 /* Achievement.swift */; };
+		F68533411E4F8B0300365144 /* AchievementStepLog+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F685333F1E4F8B0300365144 /* AchievementStepLog+CoreDataClass.swift */; };
+		F68533421E4F8B0300365144 /* AchievementStepLog+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68533401E4F8B0300365144 /* AchievementStepLog+CoreDataProperties.swift */; };
 		F6CD7EF41DF24668004A4A57 /* GameLevel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CD7EF21DF24668004A4A57 /* GameLevel+CoreDataClass.swift */; };
 		F6CD7EF51DF24668004A4A57 /* GameLevel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CD7EF31DF24668004A4A57 /* GameLevel+CoreDataProperties.swift */; };
 		F6CD7EFB1DF2639B004A4A57 /* CustomMissionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CD7EFA1DF2639A004A4A57 /* CustomMissionCollectionViewCell.swift */; };
@@ -140,7 +143,7 @@
 		F67D158A1DD190C200D9DD5C /* GameTrueFalseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameTrueFalseViewController.swift; sourceTree = "<group>"; };
 		F67D158C1DD1933000D9DD5C /* BorderedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderedButton.swift; sourceTree = "<group>"; };
 		F67D158E1DD19DED00D9DD5C /* CoreDataTrueFalseGameController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataTrueFalseGameController.swift; sourceTree = "<group>"; };
-		F67D15901DDB3E6E00D9DD5C /* GameDirectory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameDirectory.swift; sourceTree = "<group>"; };
+		F67D15901DDB3E6E00D9DD5C /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		F67D15931DDB4A4700D9DD5C /* QuestionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionType.swift; sourceTree = "<group>"; };
 		F67D159E1DDB534500D9DD5C /* TDPerformanceLog+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TDPerformanceLog+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F67D159F1DDB534500D9DD5C /* TDPerformanceLog+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TDPerformanceLog+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -153,6 +156,10 @@
 		F67D15AF1DDD4C0100D9DD5C /* OverviewStatistic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverviewStatistic.swift; sourceTree = "<group>"; };
 		F67D15EC1DC938B9002975C7 /* CustomQuizletSearchBySetsResultsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomQuizletSearchBySetsResultsCell.swift; sourceTree = "<group>"; };
 		F67D15EF1DC97FCC002975C7 /* FlashcardHeroModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FlashcardHeroModel.xcdatamodel; sourceTree = "<group>"; };
+		F685333C1E4F7A2700365144 /* Achievement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
+		F685333E1E4F899100365144 /* FlashcardHeroModel 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "FlashcardHeroModel 2.xcdatamodel"; sourceTree = "<group>"; };
+		F685333F1E4F8B0300365144 /* AchievementStepLog+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AchievementStepLog+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F68533401E4F8B0300365144 /* AchievementStepLog+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AchievementStepLog+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F6CD7EF21DF24668004A4A57 /* GameLevel+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GameLevel+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F6CD7EF31DF24668004A4A57 /* GameLevel+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GameLevel+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F6CD7EFA1DF2639A004A4A57 /* CustomMissionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomMissionCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -272,6 +279,7 @@
 		F63782CF1DC2E2BE0078FE7F /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				F68533431E4F8B1500365144 /* Achievements and Essence */,
 				F63782D21DC2E3F50078FE7F /* CoreDataStack.swift */,
 				F6CD7EF61DF2466F004A4A57 /* Game and Goals */,
 				F67D15991DDB528F00D9DD5C /* User Performance */,
@@ -391,9 +399,8 @@
 		F67D15921DDB4A0000D9DD5C /* Hard Data */ = {
 			isa = PBXGroup;
 			children = (
-				F67D15901DDB3E6E00D9DD5C /* GameDirectory.swift */,
-				F67D15931DDB4A4700D9DD5C /* QuestionType.swift */,
-				F67D15AF1DDD4C0100D9DD5C /* OverviewStatistic.swift */,
+				F685333A1E4F798E00365144 /* Achievements and Essence */,
+				F685333B1E4F79E300365144 /* User Performance and Gems */,
 			);
 			name = "Hard Data";
 			sourceTree = "<group>";
@@ -417,6 +424,33 @@
 				F67D15AB1DDD1AE900D9DD5C /* AnalysisViewController.swift */,
 			);
 			name = "Analysis Tab";
+			sourceTree = "<group>";
+		};
+		F685333A1E4F798E00365144 /* Achievements and Essence */ = {
+			isa = PBXGroup;
+			children = (
+				F685333C1E4F7A2700365144 /* Achievement.swift */,
+			);
+			name = "Achievements and Essence";
+			sourceTree = "<group>";
+		};
+		F685333B1E4F79E300365144 /* User Performance and Gems */ = {
+			isa = PBXGroup;
+			children = (
+				F67D15901DDB3E6E00D9DD5C /* Game.swift */,
+				F67D15931DDB4A4700D9DD5C /* QuestionType.swift */,
+				F67D15AF1DDD4C0100D9DD5C /* OverviewStatistic.swift */,
+			);
+			name = "User Performance and Gems";
+			sourceTree = "<group>";
+		};
+		F68533431E4F8B1500365144 /* Achievements and Essence */ = {
+			isa = PBXGroup;
+			children = (
+				F685333F1E4F8B0300365144 /* AchievementStepLog+CoreDataClass.swift */,
+				F68533401E4F8B0300365144 /* AchievementStepLog+CoreDataProperties.swift */,
+			);
+			name = "Achievements and Essence";
 			sourceTree = "<group>";
 		};
 		F6CD7EF61DF2466F004A4A57 /* Game and Goals */ = {
@@ -597,7 +631,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Zero Mu, LLC";
 				TargetAttributes = {
 					F6FD10C81DBEEAEB00B7E6EA = {
@@ -822,6 +856,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F68533421E4F8B0300365144 /* AchievementStepLog+CoreDataProperties.swift in Sources */,
+				F68533411E4F8B0300365144 /* AchievementStepLog+CoreDataClass.swift in Sources */,
 				F6540F341E3013A500A9D6E0 /* OrientationButton.swift in Sources */,
 				F6CD7EFB1DF2639B004A4A57 /* CustomMissionCollectionViewCell.swift in Sources */,
 				F66B5E491DC6DA0200052B7F /* GemManagerViewController.swift in Sources */,
@@ -857,6 +893,7 @@
 				F67D15A81DDB97D600D9DD5C /* StudySession+CoreDataClass.swift in Sources */,
 				F67D158D1DD1933000D9DD5C /* BorderedButton.swift in Sources */,
 				F67D15AE1DDD42B600D9DD5C /* CustomStatsOverviewCell.swift in Sources */,
+				F685333D1E4F7A2700365144 /* Achievement.swift in Sources */,
 				F63782E51DC2F08F0078FE7F /* QuizletConvenience.swift in Sources */,
 				F67D15A01DDB534500D9DD5C /* TDPerformanceLog+CoreDataClass.swift in Sources */,
 				F6540F321E30103100A9D6E0 /* OrientationFinalStepViewController.swift in Sources */,
@@ -867,7 +904,7 @@
 				F66B5E4E1DC833C600052B7F /* QuizletSetSearchResult.swift in Sources */,
 				F67D15AC1DDD1AE900D9DD5C /* AnalysisViewController.swift in Sources */,
 				F614C34A1DC999FC00E7D3C8 /* CoreDataQuizletTableViewController.swift in Sources */,
-				F67D15911DDB3E6E00D9DD5C /* GameDirectory.swift in Sources */,
+				F67D15911DDB3E6E00D9DD5C /* Game.swift in Sources */,
 				F614C35B1DCB216800E7D3C8 /* QuizletTermDefinition+CoreDataClass.swift in Sources */,
 				F6CD7EF51DF24668004A4A57 /* GameLevel+CoreDataProperties.swift in Sources */,
 				F67D15941DDB4A4700D9DD5C /* QuestionType.swift in Sources */,
@@ -1163,9 +1200,10 @@
 		F67D15EE1DC97FCC002975C7 /* FlashcardHeroModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				F685333E1E4F899100365144 /* FlashcardHeroModel 2.xcdatamodel */,
 				F67D15EF1DC97FCC002975C7 /* FlashcardHeroModel.xcdatamodel */,
 			);
-			currentVersion = F67D15EF1DC97FCC002975C7 /* FlashcardHeroModel.xcdatamodel */;
+			currentVersion = F685333E1E4F899100365144 /* FlashcardHeroModel 2.xcdatamodel */;
 			path = FlashcardHeroModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

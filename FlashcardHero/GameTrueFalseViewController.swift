@@ -58,6 +58,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
     
     //FC keys
     let keyAccuracy = "Accuracy"
+    let keyAchievementStep = "AchievementStep"
     
     var showingCorrectAnswer: Bool = false
     var correctTD: QuizletTermDefinition?
@@ -82,6 +83,11 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
         _ = setupFetchedResultsController(frcKey: keyAccuracy, entityName: "TDPerformanceLog",
                                           sortDescriptors: [NSSortDescriptor(key: "datetime", ascending: false)],
                                           predicate: NSPredicate(format: "studySession = %@", argumentArray: [self.studySession!]))
+        
+        //create FRC for Achievements
+        _ = setupFetchedResultsController(frcKey: keyAchievementStep, entityName: "AchievementStepLog",
+                                          sortDescriptors: [NSSortDescriptor(key: "datetime", ascending: false)],
+                                          predicate: nil)
         
         setupInitialPlayspace()
         //TODO: Check for case where no set contains more than 1 term.
@@ -783,13 +789,31 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
         //log the activity
         print("Logging this performance:")
         let newLog = TDPerformanceLog(datetime: datetime,
-                                      questionTypeId: 0,
+                                      questionTypeId: QuestionTypes.types["TrueFalse"]!.id,
                                       wasCorrect: wasCorrect,
                                       quizletTD: self.correctTD!,
                                       wrongAnswerTD: self.wrongTD,
                                       wrongAnswerFITB: nil,
                                       studySession: self.studySession!,
                                       context: self.frcDict[keyPerformanceLog]!.managedObjectContext)
+        
+        //if the question was answered correctly, log this achievement
+        if wasCorrect {
+            //**********   add a CorrectAnswer achievement ************
+            
+            //set the performance log to the log created above if this is a performance-based achievement
+            var tdLog: [TDPerformanceLog]? = nil
+            if AchievementStepDirectory.CorrectAnswer.isPerformanceBased {
+                tdLog?.append(newLog)
+            }
+            
+            
+            let _ = AchievementStepLog(datetime: datetime,
+                                       achievementStepId: AchievementStepDirectory.CorrectAnswer.id,
+                                       appSession: self.studySession!.appSession,
+                                       tdPerformanceLog: tdLog,
+                                       context: self.frcDict[keyAchievementStep]!.managedObjectContext)
+        }
     
         
         //check to see if the player met objectives or failed
