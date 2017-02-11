@@ -54,3 +54,7 @@ Check out some analysis of your performance after missions and in the Analysis t
 
 5. "Settings" Tab
   * Where you can set things
+
+## Pre-Deployment Checklist
+  * Change test ads to live ads
+    * True False Game

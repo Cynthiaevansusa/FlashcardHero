@@ -88,7 +88,10 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
         
         //Google Ad Setup
         print("Google Mobile Ads SDK version: " + GADRequest.sdkVersion())
+        //test ad
         gADBanner.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        //live ad
+        //gADBanner.adUnitID = "ca-app-pub-9941800699071459/4911960541"
         gADBanner.rootViewController = self
         gADBanner.load(GADRequest())
         

@@ -133,7 +133,8 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
     
     func showTrackedGemsSegment() {
         print("Switching to Tracked Gem Segment")
-        
+        //disable the add button.
+        addButton.isEnabled = true
         
         
         //tagging and removing a subview
@@ -153,6 +154,9 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
     
     func showUserGemsSegment() {
         print("Switching to User Gems Segment")
+        //disable the add button.
+        addButton.isEnabled = false
+        
         //add the pull to refresh subview
         if self.view.viewWithTag(111) == nil {
             self.tableView.addSubview(self.refreshControl)
