@@ -41,6 +41,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
     var questionsWrong = 0
     var questionsCorrect = 0
     var didPlayerSucceed = false
+    var performanceLogs: [TDPerformanceLog]? = nil
     
     //timer variables
     let startDateTime = {return Date() }() //to calculate duration and timer
@@ -797,6 +798,9 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
                                       studySession: self.studySession!,
                                       context: self.frcDict[keyPerformanceLog]!.managedObjectContext)
         
+        //add this log to the array of logs for this session
+        performanceLogs?.append(newLog)
+        
         //if the question was answered correctly, log this achievement
         if wasCorrect {
             //**********   add a CorrectAnswer achievement ************
@@ -824,6 +828,17 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
         } else if didPlayerCompleteMission() {
             timer.invalidate() //stop timer
             self.displayMissionFinishSummary(true)
+            
+            //log this achievement
+            //**********   add a MissionComplete achievement ************
+            
+            
+            let _ = AchievementStepLog(datetime: datetime,
+                                       achievementStepId: AchievementStepDirectory.CompleteMission.id,
+                                       appSession: self.studySession!.appSession,
+                                       tdPerformanceLog: self.performanceLogs,
+                                       context: self.frcDict[keyAchievementStep]!.managedObjectContext)
+            
         } else {
         
             setFeedbackVisible(visible: true)

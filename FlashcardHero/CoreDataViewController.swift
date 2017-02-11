@@ -234,8 +234,8 @@ extension CoreDataViewController: NSFetchedResultsControllerDelegate {
             
             switch(type) {
             case .insert:
-                
-                print("case insert AchievementStepLog")
+                let tempId: Int = Int((anObject as! AchievementStepLog).achievementStepId)
+                print("case insert AchievementStepLog: \(AchievementStepDirectory.all[tempId]?.name)")
             case .delete:
                 
                 print("case delete AchievementStepLog")

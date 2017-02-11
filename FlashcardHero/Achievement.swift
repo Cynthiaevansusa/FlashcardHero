@@ -11,17 +11,28 @@ import UIKit
 
 ///Holds all Achivements.  Used by AchievementHandler (in addition to GameCenter) to determine if Achievements have been accomplished.
 struct AchievementDirectory {
-    static let AchievementCorrectAnswer = Achievement(id: 0,
-                                                    name: "CorrectAnswer",
-                                                    description: "Correctly answer a single question in any game.",
+    static let CorrectAnswer = Achievement(id: 0,
+                                                    name: AchievementStepDirectory.CorrectAnswer.name,
+                                                    description: AchievementStepDirectory.CorrectAnswer.description,
                                                     isGameCenter: false,
                                                     isRepeatable: true,
                                                     essenceBaseValue: 1,
                                                     icon: #imageLiteral(resourceName: "GemRed"),
                                                     steps: [AchievementStepDirectory.CorrectAnswer.name:1])
     
-    static let all = [AchievementCorrectAnswer.name:AchievementCorrectAnswer]
-    static let active = [AchievementCorrectAnswer.name:AchievementCorrectAnswer]
+    static let CompleteMission = Achievement(id: 1,
+                                                      name: AchievementStepDirectory.CompleteMission.name,
+                                                      description: AchievementStepDirectory.CompleteMission.description,
+                                                      isGameCenter: false,
+                                                      isRepeatable: true,
+                                                      essenceBaseValue: 10,
+                                                      icon: #imageLiteral(resourceName: "GemRed"),
+                                                      steps: [AchievementStepDirectory.CompleteMission.name:1])
+    
+    static let all = [CorrectAnswer.id:CorrectAnswer,
+                      CompleteMission.id:CompleteMission]
+    static let active = [CorrectAnswer.id:CorrectAnswer,
+                         CompleteMission.id:CompleteMission]
     
 }
 
@@ -47,7 +58,13 @@ struct AchievementStepDirectory {
                                                description: "Correctly answer a single question in any game.",
                                                isPerformanceBased: true)
     
-    static let all = [CorrectAnswer.name:CorrectAnswer]
+    static let CompleteMission = AchievementStep(id: 1,
+                                               name: "CompleteMission",
+                                               description: "Complete any mission successfully.",
+                                               isPerformanceBased: true)
+    
+    static let all = [CorrectAnswer.id:CorrectAnswer,
+                      CompleteMission.id:CompleteMission]
 }
 
 ///represents an Achievement the player can earn by accomplishing one or more AchievementSteps
