@@ -251,6 +251,27 @@ extension CoreDataViewController: NSFetchedResultsControllerDelegate {
             stack.save()
             
             
+        } else if anObject is EssenceIncomeLog {
+            
+            switch(type) {
+            case .insert:
+                let essence: Int = Int((anObject as! EssenceIncomeLog).actualEssenceEarned)
+                print("case insert EssenceIncomeLog.  Earned: \(essence) essence")
+            case .delete:
+                
+                print("case delete EssenceIncomeLog")
+            case .update:
+                
+                print("case update EssenceIncomeLog")
+            case .move:
+                //TODO: move a cell... this may not be needed
+                print("case move EssenceIncomeLog")
+            }
+            
+            //save
+            stack.save()
+            
+            
         } else
         {
             

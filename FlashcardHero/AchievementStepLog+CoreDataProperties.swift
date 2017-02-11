@@ -20,5 +20,6 @@ extension AchievementStepLog {
     @NSManaged public var achievementStepId: Int64
     @NSManaged public var appSession: AppSession
     @NSManaged public var tdPerformanceLog: [TDPerformanceLog]?
+    @NSManaged public var essenceIncomeLog: [EssenceIncomeLog]?
 
 }

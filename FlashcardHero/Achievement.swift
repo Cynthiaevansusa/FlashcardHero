@@ -18,7 +18,7 @@ struct AchievementDirectory {
                                                     isRepeatable: true,
                                                     essenceBaseValue: 1,
                                                     icon: #imageLiteral(resourceName: "GemRed"),
-                                                    steps: [AchievementStepDirectory.CorrectAnswer.name:1])
+                                                    steps: [AchievementStepDirectory.CorrectAnswer.id:1])
     
     static let CompleteMission = Achievement(id: 1,
                                                       name: AchievementStepDirectory.CompleteMission.name,
@@ -27,7 +27,7 @@ struct AchievementDirectory {
                                                       isRepeatable: true,
                                                       essenceBaseValue: 10,
                                                       icon: #imageLiteral(resourceName: "GemRed"),
-                                                      steps: [AchievementStepDirectory.CompleteMission.name:1])
+                                                      steps: [AchievementStepDirectory.CompleteMission.id:1])
     
     static let all = [CorrectAnswer.id:CorrectAnswer,
                       CompleteMission.id:CompleteMission]
@@ -76,9 +76,10 @@ struct Achievement {
     let isRepeatable: Bool
     let essenceBaseValue: Int
     let icon: UIImage
-    let steps: [String:Int] //an array of AchievementStep names, along with the number of each step needed
+    let steps: [Int:Int] //an array of AchievementStep Ids, along with the number of each step needed
+
     
-    init(id: Int, name: String, description: String, isGameCenter: Bool, isRepeatable: Bool, essenceBaseValue: Int, icon: UIImage, steps: [String:Int] ) {
+    init(id: Int, name: String, description: String, isGameCenter: Bool, isRepeatable: Bool, essenceBaseValue: Int, icon: UIImage, steps: [Int:Int] ) {
         self.id = id
         self.name = name
         self.description = description

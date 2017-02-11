@@ -21,6 +21,7 @@ class CommandCenterViewController: CoreDataQuizletCollectionViewController, UICo
     @IBOutlet weak var essenceLabel: UILabel!
     @IBOutlet weak var termsLoadedLabel: UILabel!
     var keyGameLevel = "GameLevel"
+    var keyEssenceIncome = "EssenceIncome"
     
     var keySets = "Sets"
     
@@ -40,6 +41,11 @@ class CommandCenterViewController: CoreDataQuizletCollectionViewController, UICo
         _ = setupFetchedResultsController(frcKey: keySets, entityName: "QuizletSet",
                                           sortDescriptors: [NSSortDescriptor(key: "title", ascending: false),NSSortDescriptor(key: "id", ascending: true)],
                                           predicate: NSPredicate(format: "isActive = %@", argumentArray: [true]))
+        
+        //create FRC for Essence Income
+        _ = setupFetchedResultsController(frcKey: keyEssenceIncome, entityName: "EssenceIncomeLog",
+                                          sortDescriptors: [NSSortDescriptor(key: "datetime", ascending: false)],
+                                          predicate: nil)
         
         
         
@@ -126,13 +132,32 @@ class CommandCenterViewController: CoreDataQuizletCollectionViewController, UICo
 
     func refreshStatusBar() {
         termsLoadedLabel.text = String(describing: getNumTermsLoaded())
+        essenceLabel.text = String(describing: getEssenceBalance())
     }
+    
+
     
     
     
     /******************************************************/
     /*******************///MARK: Model Operations
     /******************************************************/
+    
+    ///Returns the sum of all essence income and debts
+    func getEssenceBalance() -> Int {
+        var count: Int = 0
+        
+        guard let essenceLogs = frcDict[keyEssenceIncome]?.fetchedObjects as? [EssenceIncomeLog] else {
+            return 0
+        }
+        
+        for log in essenceLogs {
+            
+            count += Int(log.actualEssenceEarned)
+        }
+        
+        return count
+    }
     
     /**
      Returns number of terms whose sets are in an active state (selected by user switch)

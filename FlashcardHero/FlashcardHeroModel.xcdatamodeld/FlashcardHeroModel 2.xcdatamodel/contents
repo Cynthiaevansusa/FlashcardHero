@@ -4,6 +4,7 @@
         <attribute name="achievementStepId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="datetime" attributeType="Date" minDateTimeInterval="508530300" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="appSession" maxCount="1" deletionRule="Nullify" destinationEntity="AppSession" inverseName="achievementStepLog" inverseEntity="AppSession" syncable="YES"/>
+        <relationship name="essenceIncomeLog" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="EssenceIncomeLog" inverseName="achievementStepLog" inverseEntity="EssenceIncomeLog" syncable="YES"/>
         <relationship name="tdPerformanceLog" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TDPerformanceLog" syncable="YES"/>
     </entity>
     <entity name="AppSession" representedClassName=".AppSession" syncable="YES">
@@ -11,6 +12,12 @@
         <attribute name="stop" optional="YES" attributeType="Date" minDateTimeInterval="500930220" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="achievementStepLog" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AchievementStepLog" inverseName="appSession" inverseEntity="AchievementStepLog" syncable="YES"/>
         <relationship name="studySession" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="StudySession" inverseName="appSession" inverseEntity="StudySession" syncable="YES"/>
+    </entity>
+    <entity name="EssenceIncomeLog" representedClassName=".EssenceIncomeLog" syncable="YES">
+        <attribute name="actualEssenceEarned" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="datetime" attributeType="Date" minDateTimeInterval="508536840" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="valueModifierId" attributeType="Integer 64" minValueString="0" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="achievementStepLog" maxCount="1" deletionRule="Cascade" destinationEntity="AchievementStepLog" inverseName="essenceIncomeLog" inverseEntity="AchievementStepLog" syncable="YES"/>
     </entity>
     <entity name="GameLevel" representedClassName=".GameLevel" syncable="YES">
         <attribute name="gameId" attributeType="Integer 64" minValueString="0" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -73,10 +80,11 @@
     <elements>
         <element name="AppSession" positionX="-135" positionY="-15" width="128" height="105"/>
         <element name="GameLevel" positionX="-135" positionY="-198" width="128" height="75"/>
-        <element name="QuizletSet" positionX="405" positionY="-621" width="128" height="405"/>
+        <element name="QuizletSet" positionX="412" positionY="-256" width="128" height="58"/>
         <element name="QuizletTermDefinition" positionX="421" positionY="-129" width="128" height="210"/>
         <element name="StudySession" positionX="27" positionY="-51" width="128" height="105"/>
         <element name="TDPerformanceLog" positionX="241" positionY="-99" width="128" height="148"/>
-        <element name="AchievementStepLog" positionX="277" positionY="257" width="128" height="103"/>
+        <element name="AchievementStepLog" positionX="99" positionY="89" width="128" height="118"/>
+        <element name="EssenceIncomeLog" positionX="268" positionY="165" width="128" height="105"/>
     </elements>
 </model>

@@ -60,6 +60,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
     //FC keys
     let keyAccuracy = "Accuracy"
     let keyAchievementStep = "AchievementStep"
+    let keyEssenceIncome = "EssenceIncome"
     
     var showingCorrectAnswer: Bool = false
     var correctTD: QuizletTermDefinition?
@@ -87,6 +88,11 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
         
         //create FRC for Achievements
         _ = setupFetchedResultsController(frcKey: keyAchievementStep, entityName: "AchievementStepLog",
+                                          sortDescriptors: [NSSortDescriptor(key: "datetime", ascending: false)],
+                                          predicate: nil)
+        
+        //create FRC for Essence Income
+        _ = setupFetchedResultsController(frcKey: keyEssenceIncome, entityName: "EssenceIncomeLog",
                                           sortDescriptors: [NSSortDescriptor(key: "datetime", ascending: false)],
                                           predicate: nil)
         
@@ -812,11 +818,21 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
             }
             
             
-            let _ = AchievementStepLog(datetime: datetime,
+            let achievedLog = AchievementStepLog(datetime: datetime,
                                        achievementStepId: AchievementStepDirectory.CorrectAnswer.id,
                                        appSession: self.studySession!.appSession,
                                        tdPerformanceLog: tdLog,
                                        context: self.frcDict[keyAchievementStep]!.managedObjectContext)
+            
+            //award essence
+            let baseEssence = AchievementDirectory.CorrectAnswer.essenceBaseValue
+            //TODO: figure out which modifier to use when player can actually use this
+            let valueModifier = ValueModifierDirectory.None
+            let _ = EssenceIncomeLog(datetime: datetime,
+                                     baseEssenceEarned: baseEssence,
+                                     valueModifierId: valueModifier.id,
+                                     achievementStepLog: achievedLog,
+                                     context: self.frcDict[keyEssenceIncome]!.managedObjectContext)
         }
     
         
@@ -833,11 +849,21 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
             //**********   add a MissionComplete achievement ************
             
             
-            let _ = AchievementStepLog(datetime: datetime,
+            let achievedLog = AchievementStepLog(datetime: datetime,
                                        achievementStepId: AchievementStepDirectory.CompleteMission.id,
                                        appSession: self.studySession!.appSession,
                                        tdPerformanceLog: self.performanceLogs,
                                        context: self.frcDict[keyAchievementStep]!.managedObjectContext)
+            
+            //award essence
+            let baseEssence = AchievementDirectory.CompleteMission.essenceBaseValue
+            //TODO: figure out which modifier to use when player can actually use this
+            let valueModifier = ValueModifierDirectory.None
+            let _ = EssenceIncomeLog(datetime: datetime,
+                                     baseEssenceEarned: baseEssence,
+                                     valueModifierId: valueModifier.id,
+                                     achievementStepLog: achievedLog,
+                                     context: self.frcDict[keyEssenceIncome]!.managedObjectContext)
             
         } else {
         

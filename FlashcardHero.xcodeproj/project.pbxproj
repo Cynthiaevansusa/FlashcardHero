@@ -64,6 +64,9 @@
 		F685333D1E4F7A2700365144 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F685333C1E4F7A2700365144 /* Achievement.swift */; };
 		F68533411E4F8B0300365144 /* AchievementStepLog+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F685333F1E4F8B0300365144 /* AchievementStepLog+CoreDataClass.swift */; };
 		F68533421E4F8B0300365144 /* AchievementStepLog+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68533401E4F8B0300365144 /* AchievementStepLog+CoreDataProperties.swift */; };
+		F68533451E4FA6E300365144 /* ValueModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68533441E4FA6E300365144 /* ValueModifier.swift */; };
+		F68533481E4FAA8D00365144 /* EssenceIncomeLog+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68533461E4FAA8D00365144 /* EssenceIncomeLog+CoreDataClass.swift */; };
+		F68533491E4FAA8D00365144 /* EssenceIncomeLog+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68533471E4FAA8D00365144 /* EssenceIncomeLog+CoreDataProperties.swift */; };
 		F6CD7EF41DF24668004A4A57 /* GameLevel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CD7EF21DF24668004A4A57 /* GameLevel+CoreDataClass.swift */; };
 		F6CD7EF51DF24668004A4A57 /* GameLevel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CD7EF31DF24668004A4A57 /* GameLevel+CoreDataProperties.swift */; };
 		F6CD7EFB1DF2639B004A4A57 /* CustomMissionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CD7EFA1DF2639A004A4A57 /* CustomMissionCollectionViewCell.swift */; };
@@ -160,6 +163,9 @@
 		F685333E1E4F899100365144 /* FlashcardHeroModel 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "FlashcardHeroModel 2.xcdatamodel"; sourceTree = "<group>"; };
 		F685333F1E4F8B0300365144 /* AchievementStepLog+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AchievementStepLog+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F68533401E4F8B0300365144 /* AchievementStepLog+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AchievementStepLog+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F68533441E4FA6E300365144 /* ValueModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueModifier.swift; sourceTree = "<group>"; };
+		F68533461E4FAA8D00365144 /* EssenceIncomeLog+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EssenceIncomeLog+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F68533471E4FAA8D00365144 /* EssenceIncomeLog+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EssenceIncomeLog+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F6CD7EF21DF24668004A4A57 /* GameLevel+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GameLevel+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F6CD7EF31DF24668004A4A57 /* GameLevel+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GameLevel+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F6CD7EFA1DF2639A004A4A57 /* CustomMissionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomMissionCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -430,6 +436,7 @@
 			isa = PBXGroup;
 			children = (
 				F685333C1E4F7A2700365144 /* Achievement.swift */,
+				F68533441E4FA6E300365144 /* ValueModifier.swift */,
 			);
 			name = "Achievements and Essence";
 			sourceTree = "<group>";
@@ -447,6 +454,8 @@
 		F68533431E4F8B1500365144 /* Achievements and Essence */ = {
 			isa = PBXGroup;
 			children = (
+				F68533461E4FAA8D00365144 /* EssenceIncomeLog+CoreDataClass.swift */,
+				F68533471E4FAA8D00365144 /* EssenceIncomeLog+CoreDataProperties.swift */,
 				F685333F1E4F8B0300365144 /* AchievementStepLog+CoreDataClass.swift */,
 				F68533401E4F8B0300365144 /* AchievementStepLog+CoreDataProperties.swift */,
 			);
@@ -890,6 +899,7 @@
 				F67D15A11DDB534500D9DD5C /* TDPerformanceLog+CoreDataProperties.swift in Sources */,
 				F67D15881DD18FB900D9DD5C /* CoreDataViewController.swift in Sources */,
 				F66B46E41DCBC5C000F2BC6E /* GemTermsCollectionViewController.swift in Sources */,
+				F68533481E4FAA8D00365144 /* EssenceIncomeLog+CoreDataClass.swift in Sources */,
 				F67D15A81DDB97D600D9DD5C /* StudySession+CoreDataClass.swift in Sources */,
 				F67D158D1DD1933000D9DD5C /* BorderedButton.swift in Sources */,
 				F67D15AE1DDD42B600D9DD5C /* CustomStatsOverviewCell.swift in Sources */,
@@ -902,11 +912,13 @@
 				F614C34C1DC9A16A00E7D3C8 /* CustomGemManagerCell.swift in Sources */,
 				F614C35C1DCB216800E7D3C8 /* QuizletTermDefinition+CoreDataProperties.swift in Sources */,
 				F66B5E4E1DC833C600052B7F /* QuizletSetSearchResult.swift in Sources */,
+				F68533451E4FA6E300365144 /* ValueModifier.swift in Sources */,
 				F67D15AC1DDD1AE900D9DD5C /* AnalysisViewController.swift in Sources */,
 				F614C34A1DC999FC00E7D3C8 /* CoreDataQuizletTableViewController.swift in Sources */,
 				F67D15911DDB3E6E00D9DD5C /* Game.swift in Sources */,
 				F614C35B1DCB216800E7D3C8 /* QuizletTermDefinition+CoreDataClass.swift in Sources */,
 				F6CD7EF51DF24668004A4A57 /* GameLevel+CoreDataProperties.swift in Sources */,
+				F68533491E4FAA8D00365144 /* EssenceIncomeLog+CoreDataProperties.swift in Sources */,
 				F67D15941DDB4A4700D9DD5C /* QuestionType.swift in Sources */,
 				F614C3481DC9885A00E7D3C8 /* QuizletSet+CoreDataProperties.swift in Sources */,
 				F6CD7EF41DF24668004A4A57 /* GameLevel+CoreDataClass.swift in Sources */,
