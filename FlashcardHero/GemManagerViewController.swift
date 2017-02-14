@@ -446,6 +446,9 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
             cell.customImageView.isHidden = true
             cell.customImageView.alpha = 0
         }
+        
+        //set colors of the gem
+        cell.gemView.topState = GemView.High
     }
     
     //editing is allowed for anonymous sets
@@ -547,6 +550,8 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
     /******************************************************/
 
     @IBAction func addButtonPressed() {
+        //TODO: Only do this if user is viewing the Public Sets segment
+        
         let vc = storyboard?.instantiateViewController(withIdentifier: "QuizletSearchResultsViewController") as! QuizletSearchResultsViewController
         vc.quizletIngestDelegate = self
         

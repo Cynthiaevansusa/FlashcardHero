@@ -67,6 +67,7 @@
 		F68533451E4FA6E300365144 /* ValueModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68533441E4FA6E300365144 /* ValueModifier.swift */; };
 		F68533481E4FAA8D00365144 /* EssenceIncomeLog+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68533461E4FAA8D00365144 /* EssenceIncomeLog+CoreDataClass.swift */; };
 		F68533491E4FAA8D00365144 /* EssenceIncomeLog+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68533471E4FAA8D00365144 /* EssenceIncomeLog+CoreDataProperties.swift */; };
+		F685334C1E523C3500365144 /* GemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F685334B1E523C3500365144 /* GemView.swift */; };
 		F6CD7EF41DF24668004A4A57 /* GameLevel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CD7EF21DF24668004A4A57 /* GameLevel+CoreDataClass.swift */; };
 		F6CD7EF51DF24668004A4A57 /* GameLevel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CD7EF31DF24668004A4A57 /* GameLevel+CoreDataProperties.swift */; };
 		F6CD7EFB1DF2639B004A4A57 /* CustomMissionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CD7EFA1DF2639A004A4A57 /* CustomMissionCollectionViewCell.swift */; };
@@ -166,6 +167,7 @@
 		F68533441E4FA6E300365144 /* ValueModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueModifier.swift; sourceTree = "<group>"; };
 		F68533461E4FAA8D00365144 /* EssenceIncomeLog+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EssenceIncomeLog+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F68533471E4FAA8D00365144 /* EssenceIncomeLog+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EssenceIncomeLog+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F685334B1E523C3500365144 /* GemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GemView.swift; sourceTree = "<group>"; };
 		F6CD7EF21DF24668004A4A57 /* GameLevel+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GameLevel+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F6CD7EF31DF24668004A4A57 /* GameLevel+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GameLevel+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F6CD7EFA1DF2639A004A4A57 /* CustomMissionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomMissionCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 		F63782CC1DC2E2440078FE7F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F685334A1E523B8B00365144 /* Gems */,
 				F6FD10D21DBEEAEB00B7E6EA /* Main.storyboard */,
 				F6FD10D71DBEEAEB00B7E6EA /* LaunchScreen.storyboard */,
 				F6CD7EF81DF252C5004A4A57 /* Table View Cells */,
@@ -460,6 +463,14 @@
 				F68533401E4F8B0300365144 /* AchievementStepLog+CoreDataProperties.swift */,
 			);
 			name = "Achievements and Essence";
+			sourceTree = "<group>";
+		};
+		F685334A1E523B8B00365144 /* Gems */ = {
+			isa = PBXGroup;
+			children = (
+				F685334B1E523C3500365144 /* GemView.swift */,
+			);
+			name = Gems;
 			sourceTree = "<group>";
 		};
 		F6CD7EF61DF2466F004A4A57 /* Game and Goals */ = {
@@ -894,6 +905,7 @@
 				F6FD10CF1DBEEAEB00B7E6EA /* CommandCenterViewController.swift in Sources */,
 				F63782D81DC2E4440078FE7F /* Utilities.swift in Sources */,
 				F67D15ED1DC938B9002975C7 /* CustomQuizletSearchBySetsResultsCell.swift in Sources */,
+				F685334C1E523C3500365144 /* GemView.swift in Sources */,
 				F614C3471DC9885A00E7D3C8 /* QuizletSet+CoreDataClass.swift in Sources */,
 				F63782D11DC2E3C00078FE7F /* GCDBlackBox.swift in Sources */,
 				F67D15A11DDB534500D9DD5C /* TDPerformanceLog+CoreDataProperties.swift in Sources */,

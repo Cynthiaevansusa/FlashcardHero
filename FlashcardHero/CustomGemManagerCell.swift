@@ -24,6 +24,9 @@ class CustomGemManagerCell: UITableViewCell {
     @IBOutlet weak var customImageView: UIImageView!
     @IBOutlet weak var activeSwitch: UISwitch!
     
+    //Gem
+    @IBOutlet weak var gemView: GemView!
+    
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     weak var cellDelegate: SettingCellDelegate?
     
