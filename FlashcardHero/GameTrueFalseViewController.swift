@@ -796,7 +796,7 @@ class GameTrueFalseViewController: CoreDataTrueFalseGameController, GameVariantM
         //log the activity
         print("Logging this performance:")
         let newLog = TDPerformanceLog(datetime: datetime,
-                                      questionTypeId: QuestionTypes.types["TrueFalse"]!.id,
+                                      questionTypeId: QuestionTypes.TrueFalse.id,
                                       wasCorrect: wasCorrect,
                                       quizletTD: self.correctTD!,
                                       wrongAnswerTD: self.wrongTD,

@@ -27,6 +27,11 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
     let keyTrackedGems = "TrackedGems"
     let keyUsersGems = "UserGems"
     let keyPhotoSearchTermDefinitions = "PhotoSearchTermDefinitions"
+    //Gem FRCs
+    let keyGemTop = "GemTop"
+    let keyGemLeft = "GemLeft"
+    let keyGemRight = "GemRight"
+    let keyGemBottom = "GemBottom"
     
     var gemInActiveFlux: QuizletSet?
     
@@ -73,6 +78,11 @@ class GemManagerViewController: CoreDataQuizletTableViewController, UITableViewD
                                               sortDescriptors: [NSSortDescriptor(key: "title", ascending: false),NSSortDescriptor(key: "id", ascending: true)],
                                               predicate: nil)
         }
+        
+        //Setup Gem FRCs
+        _ = setupFetchedResultsController(frcKey: keyGemBottom, entityName: "TDPerformanceLog",
+                                          sortDescriptors: [NSSortDescriptor(key: "datetime", ascending: false),NSSortDescriptor(key: "id", ascending: true)],
+                                          predicate: NSPredicate(format: "questionTypeId == %@", argumentArray: [QuestionTypes.TrueFalse.id]))
         
 
         //hide the help

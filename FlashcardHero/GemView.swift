@@ -13,7 +13,7 @@ func radians(_ degrees: CGFloat) -> CGFloat {
     return (degrees * π/180)
 }
 
-@IBDesignable class GemView: UIView {
+class GemView: UIView {
 
     private var _topState: Int = 0
     private var _leftState: Int = 0
@@ -64,16 +64,22 @@ func radians(_ degrees: CGFloat) -> CGFloat {
         }
     }
     
-    static let None = 0
+    static let Worst = -3
+    static let VeryBad = -2
+    static let Bad = -1
+    static let Neutral = 0
     static let Low = 1
     static let Medium = 2
     static let High = 3
     static let Highest = 4
     
-    static let acceptableStates = [None, Low, Medium, High, Highest]
-    static let stateColors = [None: UIColor.gray.cgColor,
-                              Low: UIColor.red.cgColor,
-                              Medium: UIColor.yellow.cgColor,
+    static let acceptableStates = [Worst, VeryBad, Bad, Neutral, Low, Medium, High, Highest]
+    static let stateColors = [Worst: UIColor.red.cgColor,
+                              VeryBad: UIColor.orange.cgColor,
+                              Bad: UIColor.yellow.cgColor,
+                              Neutral: UIColor.gray.cgColor,
+                              Low: UIColor.cyan.cgColor,
+                              Medium: UIColor.blue.cgColor,
                               High: UIColor.green.cgColor,
                               Highest: UIColor.purple.cgColor]
     

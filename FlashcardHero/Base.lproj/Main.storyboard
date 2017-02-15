@@ -779,7 +779,7 @@
                                             </connections>
                                         </barButtonItem>
                                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="bXx-zd-oBl">
-                                            <rect key="frame" x="61" y="27" width="209" height="30"/>
+                                            <rect key="frame" x="61" y="27" width="208.5" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Public Sets"/>
@@ -807,7 +807,7 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="113"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OJV-td-BV2" id="mid-7h-n0Y">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="112"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="113"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="1aT-rr-GUR" userLabel="Cell Stack">
@@ -850,7 +850,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <stackView opaque="NO" contentMode="scaleAspectFit" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="w8R-9q-sWF" userLabel="Details Stack">
-                                                                    <rect key="frame" x="0.0" y="47" width="122" height="60"/>
+                                                                    <rect key="frame" x="0.0" y="47" width="164" height="60"/>
                                                                     <subviews>
                                                                         <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="y2p-ML-HG4" userLabel="Images Stack">
                                                                             <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -918,7 +918,7 @@
                                                                             </variation>
                                                                         </stackView>
                                                                         <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="600" image="second" translatesAutoresizingMaskIntoConstraints="NO" id="2OS-Wp-Cax">
-                                                                            <rect key="frame" x="122" y="0.0" width="0.0" height="60"/>
+                                                                            <rect key="frame" x="124" y="0.0" width="40" height="60"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="Dne-xd-Uk2"/>
                                                                                 <constraint firstAttribute="height" constant="60" id="lNU-LH-8D1"/>
@@ -1064,7 +1064,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GemTermsCell" id="frQ-Ay-pgv" customClass="CustomGemTermsCollectionViewCell" customModule="FlashcardHero" customModuleProvider="target">
-                                        <rect key="frame" x="-7" y="0.0" width="333" height="215"/>
+                                        <rect key="frame" x="-6.5" y="0.0" width="333" height="215"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="333" height="215"/>
@@ -1297,7 +1297,7 @@
                                             <color key="tintColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                         </barButtonItem>
                                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="Hgx-R9-3Zl">
-                                            <rect key="frame" x="57" y="27" width="214" height="30"/>
+                                            <rect key="frame" x="56" y="27" width="213.5" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Equipped"/>
@@ -1345,7 +1345,7 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="61"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UaZ-r9-4vQ" id="FoE-tb-Dii">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="61"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="second" translatesAutoresizingMaskIntoConstraints="NO" id="TDD-al-BTs">
@@ -1618,7 +1618,7 @@
                                 <rect key="frame" x="20" y="52.5" width="280" height="485.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All knowledge is stored at Quizlet.com.  You can download Public Sets or Log In to download all of your custom Sets." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ebf-2S-LR8">
-                                        <rect key="frame" x="140" y="0.0" width="0.0" height="332.5"/>
+                                        <rect key="frame" x="2.5" y="0.0" width="275" height="332.5"/>
                                         <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="24"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -1735,7 +1735,7 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="feD-UK-Ehy" id="fmx-lG-dOc">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
